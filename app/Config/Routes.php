@@ -33,6 +33,12 @@ $routes->setAutoRoute(true);
 // route since we don't have to scan directories.
 $routes->get('/', 'Home::index');
 
+$routes->get('/login', 'Auth::login');
+$routes->get('/register', 'Auth::register');
+$routes->get('/users/liste', 'User::liste');
+//$routes->get('news/(:segment)', 'News::view/$1');
+//$routes->get('news', 'News::index');
+
 /*
  * --------------------------------------------------------------------
  * Additional Routing

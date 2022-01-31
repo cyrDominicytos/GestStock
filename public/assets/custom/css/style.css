@@ -22,3 +22,15 @@
 .menu-title {
     color: #fff;
 }
+
+
+/* Menu styles */
+
+.menu-item {
+    color: #fff;
+}
+
+div.menu-item,
+div.menu-item>span {
+    color: #fff;
+}

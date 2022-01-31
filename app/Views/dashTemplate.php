@@ -13,6 +13,8 @@
 		<meta property="og:title" content="Metronic - Bootstrap 5 HTML, VueJS, React, Angular &amp; Laravel Admin Dashboard Theme" />
 		<meta property="og:url" content="https://keenthemes.com/metronic" />
 		<meta property="og:site_name" content="Keenthemes | Metronic" />
+		<link href="<?=  base_url(); ?>/assets/custom/css/style.css" rel="stylesheet" type="text/css" />
+
 		<link rel="canonical" href="https://preview.keenthemes.com/metronic8" />
 		<link rel="shortcut icon" href="<?= base_url(); ?>/assets/media/logos/favicon.ico" />
 		<!--begin::Fonts-->
@@ -25,25 +27,26 @@
 		<link href="<?= base_url(); ?>/assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css" />
 		<link href="<?= base_url(); ?>/assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
 		<!--end::Global Stylesheets Bundle--><!--end::Global Stylesheets Bundle-->
-		<link href="<?=  base_url(); ?>/assets/custom/css/style.css" rel="stylesheet" type="text/css" />
         <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200&display=swap" rel="stylesheet">
-<!--style="font-family: 'Montserrat', sans-serif;"-->
+        <!-- Font montserrat -->
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200&display=swap" rel="stylesheet">
+        <!--style="font-family: 'Montserrat', sans-serif;"-->
+
 	</head>
-	<body id="kt_body"  class="header-fixed header-tablet-and-mobile-fixed toolbar-enabled toolbar-fixed toolbar-tablet-and-mobile-fixed aside-enabled aside-fixed" style="--kt-toolbar-height:55px;--kt-toolbar-height-tablet-and-mobile:55px">
+	<body id="kt_body"   class="header-fixed header-tablet-and-mobile-fixed toolbar-enabled toolbar-fixed toolbar-tablet-and-mobile-fixed aside-enabled aside-fixed" style="--kt-toolbar-height:55px;--kt-toolbar-height-tablet-and-mobile:55px">
 		<!--begin::Main-->
 		<!--begin::Root-->
 		<div class="d-flex flex-column flex-root">
 			<!--begin::Page-->
 			<div class="page d-flex flex-row flex-column-fluid">
 				<!--begin::Aside-->
-                <?= $this->include('layouts/aside') ?>
+                <!-- <?= $this->include('layouts/aside') ?> -->
 				<!--end::Aside-->
 				<!--begin::Wrapper-->
 				<div class="wrapper d-flex flex-column flex-row-fluid" id="kt_wrapper">
 					<!--begin::Header-->
-                    <?= $this->include('layouts/header') ?>
+                    <!-- <?= $this->include('layouts/header') ?> -->
 					<!--end::Header-->
 					<!--begin::Content-->
                     <?= $this->renderSection('content') ?>
@@ -55,20 +58,18 @@
 							<!--begin::Copyright-->
 							<div class="text-dark order-2 order-md-1">
 								<span class="text-muted fw-bold me-1">2022</span>
-								<a href="" target="_blank" class="text-gray-800 text-hover-primary">Keenthemes</a>
+								<a href="" target="_blank" class="text-gray-800 text-hover-primary">MYAH IT COMPANY</a>
 							</div>
 							<!--end::Copyright-->
 							<!--begin::Menu-->
 							<ul class="menu menu-gray-600 menu-hover-primary fw-bold order-1">
 								<li class="menu-item">
-									<a href="https://keenthemes.com" target="_blank" class="menu-link px-2">About</a>
+									<a href="https://www.myahitcompany.com/" target="_blank" class="menu-link px-2">A propos de nous</a>
 								</li>
 								<li class="menu-item">
-									<a href="https://devs.keenthemes.com" target="_blank" class="menu-link px-2">Support</a>
+									<a href="mailto:cyrdominicytos@gmail.com" target="_blank" class="menu-link px-2">Contactez l'entreprise</a>
 								</li>
-								<li class="menu-item">
-									<a href="https://1.envato.market/EA4JP" target="_blank" class="menu-link px-2">Purchase</a>
-								</li>
+								
 							</ul>
 							<!--end::Menu-->
 						</div>

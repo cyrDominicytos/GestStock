@@ -1,5 +1,7 @@
 <?= $this->extend('authTempate') ?>
 <?= $title = getenv('APP_NAME')."| Login" ?>
+
+
 <?= $this->section('content') ?>
 		<!--begin::Root-->
 		<div class="d-flex flex-column flex-root">
@@ -26,7 +28,17 @@
 						</div>
 						<!--end::Content-->
 						<!--begin::Illustration-->
-						<div class="d-flex flex-row-auto bgi-no-repeat bgi-position-x-center bgi-size-contain bgi-position-y-bottom min-h-100px min-h-lg-350px" style="background-image: url( {{asset('src/media/illustrations/sigma-1/13.png')}} )"></div>
+						<div class="d-flex flex-row-auto bgi-no-repeat bgi-position-x-center bgi-size-contain bgi-position-y-bottom min-h-100px min-h-lg-350px">
+                             <!-- Owl-Carousel -->
+                            <div class="owl-carousel owl-theme">
+                                <img src="<?= base_url(); ?>/assets/media/presentation/pre1.png" alt="" class="login_img">
+                                <img src="<?= base_url(); ?>/assets/media/presentation/pre2.png" alt="" class="login_img">
+                                <img src="<?= base_url(); ?>/assets/media/presentation/pre3.png" alt="" class="login_img">
+                                <img src="<?= base_url(); ?>/assets/media/presentation/pre4.png" alt="" class="login_img">
+                                <img src="<?= base_url(); ?>/assets/media/presentation/pre5.png" alt="" class="login_img">                                
+                            </div>
+                            <!-- /Owl-Carousel -->
+                        </div>
 						<!--end::Illustration-->
 					</div>
 					<!--end::Wrapper-->
@@ -46,8 +58,8 @@
 									<h1 class="text-dark mb-3">Connexion à <?= getenv('APP_NAME') ?></h1>
 									<!--end::Title-->
 									<!--begin::Link-->
-									<div class="text-gray-400 fw-bold fs-4">Vous n'avez pas de compte?
-									<a href="<?=base_url(); ?>/register" class="link-primary fw-bolder">Inscrivez-vous</a></div>
+									<!-- <div class="text-gray-400 fw-bold fs-4">Vous n'avez pas de compte? -->
+									<!-- <a href="<?=base_url(); ?>/register" class="link-primary fw-bolder">Inscrivez-vous</a></div> -->
 									<!--end::Link-->
 								</div>
 								<!--begin::Heading-->

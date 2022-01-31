@@ -11,7 +11,7 @@
 							<!--end::Aside mobile toggle-->
 							<!--begin::Mobile logo-->
 							<div class="d-flex align-items-center flex-grow-1 flex-lg-grow-0">
-								<a href="../../demo13/dist/index.html" class="d-lg-none">
+								<a href="" class="d-lg-none">
 									<img alt="Logo" src="<?= base_url(); ?>/assets/media/logos/logo-demo13-compact.svg" class="h-25px" />
 								</a>
 							</div>

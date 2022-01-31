@@ -559,11 +559,11 @@
                                         <input class="form-check-input" type="checkbox" data-kt-check="true" data-kt-check-target="#kt_table_users .form-check-input" value="1" />
                                     </div>
                                 </th>
-                                <th class="min-w-125px">User</th>
-                                <th class="min-w-125px">Role</th>
-                                <th class="min-w-125px">Last login</th>
-                                <th class="min-w-125px">Two-step</th>
-                                <th class="min-w-125px">Joined Date</th>
+                                <th class="min-w-125px">Noms et Prénoms</th>
+                                <th class="min-w-125px">Profile</th>
+                                <th class="min-w-125px">Email</th>
+                                <th class="min-w-125px">Téléphone</th>
+                                <th class="min-w-125px">Créé le</th>
                                 <th class="text-end min-w-100px">Actions</th>
                             </tr>
                             <!--end::Table row-->
@@ -575,14 +575,15 @@
                             <tr>
                                 <!--begin::Checkbox-->
                                 <td>
-                                    <div class="form-check form-check-sm form-check-custom form-check-solid">
+                                    <!-- <div class="form-check form-check-sm form-check-custom form-check-solid">
                                         <input class="form-check-input" type="checkbox" value="1" />
-                                    </div>
+                                    </div> -->
+                                    1
                                 </td>
                                 <!--end::Checkbox-->
                                 <!--begin::User=-->
                                 <td class="d-flex align-items-center">
-                                    <!--begin:: Avatar -->
+                                    <!--begin:: 
                                     <div class="symbol symbol-circle symbol-50px overflow-hidden me-3">
                                         <a href="../../demo13/dist/apps/user-management/users/view.html">
                                             <div class="symbol-label">
@@ -590,28 +591,28 @@
                                             </div>
                                         </a>
                                     </div>
-                                    <!--end::Avatar-->
-                                    <!--begin::User details-->
+                                    
                                     <div class="d-flex flex-column">
                                         <a href="../../demo13/dist/apps/user-management/users/view.html" class="text-gray-800 text-hover-primary mb-1">Emma Smith</a>
                                         <span>e.smith@kpmg.com.au</span>
                                     </div>
-                                    <!--begin::User details-->
+                                    begin::User details-->
+                                    SOSSA Jacques
                                 </td>
                                 <!--end::User=-->
                                 <!--begin::Role=-->
-                                <td>Administrator</td>
+                                <td>Vendeur</td>
                                 <!--end::Role=-->
                                 <!--begin::Last login=-->
                                 <td>
-                                    <div class="badge badge-light fw-bolder">Yesterday</div>
+                                    <div class="badge badge-light fw-bolder">Actif</div>
                                 </td>
                                 <!--end::Last login=-->
                                 <!--begin::Two step=-->
                                 <td></td>
                                 <!--end::Two step=-->
                                 <!--begin::Joined-->
-                                <td>15 Apr 2021, 9:23 pm</td>
+                                <td>le 31/01/2020 à 12:20:5</td>
                                 <!--begin::Joined-->
                                 <!--begin::Action=-->
                                 <td class="text-end">

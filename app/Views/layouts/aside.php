@@ -205,7 +205,7 @@
                                     <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
                                         <span class="menu-link">
                                             <span class="menu-icon">
-                                                <i class="bi bi-archive fs-3"></i>
+                                                <i class="fa fa-user fs-3"></i>
                                             </span>
                                             <span class="menu-title">Utilisateurs</span>
                                             <span class="menu-arrow"></span>
@@ -230,7 +230,7 @@
                                     <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
                                         <span class="menu-link">
                                             <span class="menu-icon">
-                                                <i class="bi bi-archive fs-3"></i>
+                                                <i class="bi bi-gear fs-3"></i>
                                             </span>
                                             <span class="menu-title">Rôles et   Permissions </span>
                                             <span class="menu-arrow"></span>
@@ -254,7 +254,7 @@
                                         <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
                                         <span class="menu-link">
                                             <span class="menu-icon">
-                                                <i class="bi bi-grid fs-3"></i>
+                                                <i class="las la-tools fs-3"></i>
                                             </span>
                                             <span class="menu-title">Paramétrages</span>
                                         </span>

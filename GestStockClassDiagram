@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2022-01-31T08:44:41.961Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.99 Safari/537.36" etag="hV23OCJ7iHxBgHlN2rX1" version="16.5.2" type="github">
+<mxfile host="app.diagrams.net" modified="2022-01-31T08:49:36.666Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.99 Safari/537.36" etag="zYSehqkwq2P8jRvzv-EV" version="16.5.2" type="github">
   <diagram id="SNxLDH-zwpzUVUpwLmZn" name="Page-1">
     <mxGraphModel dx="1695" dy="1651" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -857,6 +857,9 @@
           <mxGeometry x="1" relative="1" as="geometry">
             <mxPoint x="-9" y="-2" as="offset" />
           </mxGeometry>
+        </mxCell>
+        <mxCell id="l3aP-J0svMVvc70fD0pR-238" value="InventoryManager Class Diagram" style="swimlane;startSize=40;fontStyle=1;fillColor=#dae8fc;strokeColor=#6C8EBF;gradientColor=#ffffff;rounded=1;shadow=0;strokeWidth=2;fontSize=20;" vertex="1" parent="1">
+          <mxGeometry x="-810" y="-640" width="2140" height="1530" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>

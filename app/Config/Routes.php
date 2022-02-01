@@ -36,6 +36,9 @@ $routes->get('/', 'Auth::login');
 $routes->get('/login', 'Auth::login');
 $routes->get('/register', 'Auth::register');
 $routes->get('/users/liste', 'User::liste');
+
+
+$routes->post('/sign_in', 'Auth::sign_in');
 //$routes->get('news/(:segment)', 'News::view/$1');
 //$routes->get('news', 'News::index');
 

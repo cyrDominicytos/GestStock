@@ -14,15 +14,15 @@
 		<meta property="og:url" content="https://keenthemes.com/metronic" />
 		<meta property="og:site_name" content="Keenthemes | Metronic" />
 		<link rel="canonical" href="https://preview.keenthemes.com/metronic8" />
-		<link rel="shortcut icon" href="<?=  base_url(); ?>/assets/media/logos/favicon.ico" />
+		<link rel="shortcut icon" href="<?=  base_url(); ?>/public/assets/media/logos/favicon.ico" />
 		<!--begin::Fonts-->
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" />
 		<!--end::Fonts-->
 		<!--begin::Global Stylesheets Bundle(used by all pages)-->
-		<link href="<?=  base_url(); ?>/assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css" />
-		<link href="<?=  base_url(); ?>/assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
+		<link href="<?=  base_url(); ?>/public/assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css" />
+		<link href="<?=  base_url(); ?>/public/assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
 		<!--end::Global Stylesheets Bundle-->
-		<link href="<?=  base_url(); ?>/assets/custom/css/style.css" rel="stylesheet" type="text/css" />
+		<link href="<?=  base_url(); ?>/public/assets/custom/css/style.css" rel="stylesheet" type="text/css" />
 		
 
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css"
@@ -37,11 +37,11 @@
 		<!--begin::Main-->
         <?= $this->renderSection('content') ?>
 
-		<script src="<?=  base_url(); ?>/assets/plugins/global/plugins.bundle.js"></script>
-		<script src="<?=  base_url(); ?>/assets/js/scripts.bundle.js"></script>
+		<script src="<?=  base_url(); ?>/public/assets/plugins/global/plugins.bundle.js"></script>
+		<script src="<?=  base_url(); ?>/public/assets/js/scripts.bundle.js"></script>
 		<!--end::Global Javascript Bundle-->
 		<!--begin::Page Custom Javascript(used by this page)-->
-		<script src="<?=  base_url(); ?>/assets/js/custom/authentication/sign-in/general.js"></script>
+		<script src="<?=  base_url(); ?>/public/assets/js/custom/authentication/sign-in/general.js"></script>
 	<!--end::Main-->
  	<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"
         integrity="sha256-pTxD+DSzIwmwhOqTFN+DB+nHjO4iAsbgfyFq5K5bcE0=" crossorigin="anonymous"></script>

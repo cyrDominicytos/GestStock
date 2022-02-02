@@ -12,7 +12,7 @@
 							<!--begin::Mobile logo-->
 							<div class="d-flex align-items-center flex-grow-1 flex-lg-grow-0">
 								<a href="" class="d-lg-none">
-									<img alt="Logo" src="<?= base_url(); ?>/assets/media/logos/logo-demo13-compact.svg" class="h-25px" />
+									<img alt="Logo" src="<?= base_url(); ?>/public/assets/media/logos/logo-demo13-compact.svg" class="h-25px" />
 								</a>
 							</div>
 							<!--end::Mobile logo-->
@@ -341,7 +341,7 @@
 														<!--end::Section-->
 														<!--begin::Illustration-->
 														<div class="text-center px-4">
-															<img class="mw-100 mh-200px" alt="image" src="<?= base_url(); ?>/assets/media/illustrations/unitedpalms-1/1.png" />
+															<img class="mw-100 mh-200px" alt="image" src="<?= base_url(); ?>/public/assets/media/illustrations/unitedpalms-1/1.png" />
 														</div>
 														<!--end::Illustration-->
 													</div>
@@ -586,7 +586,7 @@
 									<div class="d-flex align-items-stretch" id="kt_header_user_menu_toggle">
 										<!--begin::Menu wrapper-->
 										<div class="topbar-item cursor-pointer symbol px-3 px-lg-5 me-n3 me-lg-n5 symbol-30px symbol-md-35px" data-kt-menu-trigger="click" data-kt-menu-attach="parent" data-kt-menu-placement="bottom-end" data-kt-menu-flip="bottom">
-											<img src="<?= base_url(); ?>/assets/media/avatars/300-1.jpg" alt="metronic" />
+											<img src="<?= base_url(); ?>/public/assets/media/avatars/300-1.jpg" alt="metronic" />
 										</div>
 										<!--begin::User account menu-->
 										<div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-800 menu-state-bg menu-state-primary fw-bold py-4 fs-6 w-275px" data-kt-menu="true">
@@ -595,7 +595,7 @@
 												<div class="menu-content d-flex align-items-center px-3">
 													<!--begin::Avatar-->
 													<div class="symbol symbol-50px me-5">
-														<img alt="Logo" src="<?= base_url(); ?>/assets/media/avatars/300-1.jpg" />
+														<img alt="Logo" src="<?= base_url(); ?>/public/assets/media/avatars/300-1.jpg" />
 													</div>
 													<!--end::Avatar-->
 													<!--begin::Username-->

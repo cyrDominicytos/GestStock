@@ -13,19 +13,19 @@
 		<meta property="og:title" content="Metronic - Bootstrap 5 HTML, VueJS, React, Angular &amp; Laravel Admin Dashboard Theme" />
 		<meta property="og:url" content="https://keenthemes.com/metronic" />
 		<meta property="og:site_name" content="Keenthemes | Metronic" />
-		<link href="<?=  base_url(); ?>/assets/custom/css/style.css" rel="stylesheet" type="text/css" />
+		<link href="<?=  base_url(); ?>/public/assets/custom/css/style.css" rel="stylesheet" type="text/css" />
 
 		<link rel="canonical" href="https://preview.keenthemes.com/metronic8" />
-		<link rel="shortcut icon" href="<?= base_url(); ?>/assets/media/logos/favicon.ico" />
+		<link rel="shortcut icon" href="<?= base_url(); ?>/public/assets/media/logos/favicon.ico" />
 		<!--begin::Fonts-->
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" />
 		<!--end::Fonts-->
 		<!--begin::Page Vendor Stylesheets(used by this page)-->
-		<link href="<?= base_url(); ?>/assets/plugins/custom/datatables/datatables.bundle.css" rel="stylesheet" type="text/css" />
+		<link href="<?= base_url(); ?>/public/assets/plugins/custom/datatables/datatables.bundle.css" rel="stylesheet" type="text/css" />
 		<!--end::Page Vendor Stylesheets-->
 		<!--begin::Global Stylesheets Bundle(used by all pages)-->
-		<link href="<?= base_url(); ?>/assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css" />
-		<link href="<?= base_url(); ?>/assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
+		<link href="<?= base_url(); ?>/public/assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css" />
+		<link href="<?= base_url(); ?>/public/assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
 		<!--end::Global Stylesheets Bundle--><!--end::Global Stylesheets Bundle-->
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <!-- Font montserrat -->
@@ -142,7 +142,7 @@
 											<!--end::Info-->
 											<!--begin::User-->
 											<div class="symbol symbol-circle symbol-25px" data-bs-toggle="tooltip" data-bs-boundary="window" data-bs-placement="top" title="Nina Nilson">
-												<img src="<?= base_url(); ?>/assets/media/avatars/300-14.jpg" alt="img" />
+												<img src="<?= base_url(); ?>/public/assets/media/avatars/300-14.jpg" alt="img" />
 											</div>
 											<!--end::User-->
 										</div>
@@ -165,12 +165,12 @@
 											<div class="symbol-group symbol-hover flex-nowrap flex-grow-1 min-w-100px pe-2">
 												<!--begin::User-->
 												<div class="symbol symbol-circle symbol-25px">
-													<img src="<?= base_url(); ?>/assets/media/avatars/300-2.jpg" alt="img" />
+													<img src="<?= base_url(); ?>/public/assets/media/avatars/300-2.jpg" alt="img" />
 												</div>
 												<!--end::User-->
 												<!--begin::User-->
 												<div class="symbol symbol-circle symbol-25px">
-													<img src="<?= base_url(); ?>/assets/media/avatars/300-14.jpg" alt="img" />
+													<img src="<?= base_url(); ?>/public/assets/media/avatars/300-14.jpg" alt="img" />
 												</div>
 												<!--end::User-->
 												<!--begin::User-->
@@ -204,7 +204,7 @@
 											<div class="symbol-group symbol-hover flex-nowrap flex-grow-1 min-w-100px">
 												<!--begin::User-->
 												<div class="symbol symbol-circle symbol-25px">
-													<img src="<?= base_url(); ?>/assets/media/avatars/300-20.jpg" alt="img" />
+													<img src="<?= base_url(); ?>/public/assets/media/avatars/300-20.jpg" alt="img" />
 												</div>
 												<!--end::User-->
 												<!--begin::User-->
@@ -263,7 +263,7 @@
 											<!--end::Info-->
 											<!--begin::User-->
 											<div class="symbol symbol-circle symbol-25px" data-bs-toggle="tooltip" data-bs-boundary="window" data-bs-placement="top" title="Alan Nilson">
-												<img src="<?= base_url(); ?>/assets/media/avatars/300-1.jpg" alt="img" />
+												<img src="<?= base_url(); ?>/public/assets/media/avatars/300-1.jpg" alt="img" />
 											</div>
 											<!--end::User-->
 										</div>
@@ -307,7 +307,7 @@
 											<!--end::Info-->
 											<!--begin::User-->
 											<div class="symbol symbol-circle symbol-25px" data-bs-toggle="tooltip" data-bs-boundary="window" data-bs-placement="top" title="Jan Hummer">
-												<img src="<?= base_url(); ?>/assets/media/avatars/300-23.jpg" alt="img" />
+												<img src="<?= base_url(); ?>/public/assets/media/avatars/300-23.jpg" alt="img" />
 											</div>
 											<!--end::User-->
 										</div>
@@ -320,7 +320,7 @@
 											<!--begin::Item-->
 											<div class="d-flex flex-aligns-center pe-10 pe-lg-20">
 												<!--begin::Icon-->
-												<img alt="" class="w-30px me-3" src="<?= base_url(); ?>/assets/media/svg/files/pdf.svg" />
+												<img alt="" class="w-30px me-3" src="<?= base_url(); ?>/public/assets/media/svg/files/pdf.svg" />
 												<!--end::Icon-->
 												<!--begin::Info-->
 												<div class="ms-1 fw-bold">
@@ -337,7 +337,7 @@
 											<!--begin::Item-->
 											<div class="d-flex flex-aligns-center pe-10 pe-lg-20">
 												<!--begin::Icon-->
-												<img alt="../../demo13/dist/apps/projects/project.html" class="w-30px me-3" src="<?= base_url(); ?>/assets/media/svg/files/doc.svg" />
+												<img alt="../../demo13/dist/apps/projects/project.html" class="w-30px me-3" src="<?= base_url(); ?>/public/assets/media/svg/files/doc.svg" />
 												<!--end::Icon-->
 												<!--begin::Info-->
 												<div class="ms-1 fw-bold">
@@ -354,7 +354,7 @@
 											<!--begin::Item-->
 											<div class="d-flex flex-aligns-center">
 												<!--begin::Icon-->
-												<img alt="../../demo13/dist/apps/projects/project.html" class="w-30px me-3" src="<?= base_url(); ?>/assets/media/svg/files/css.svg" />
+												<img alt="../../demo13/dist/apps/projects/project.html" class="w-30px me-3" src="<?= base_url(); ?>/public/assets/media/svg/files/css.svg" />
 												<!--end::Icon-->
 												<!--begin::Info-->
 												<div class="ms-1 fw-bold">
@@ -410,7 +410,7 @@
 											<!--end::Info-->
 											<!--begin::User-->
 											<div class="symbol symbol-circle symbol-25px" data-bs-toggle="tooltip" data-bs-boundary="window" data-bs-placement="top" title="Nina Nilson">
-												<img src="<?= base_url(); ?>/assets/media/avatars/300-14.jpg" alt="img" />
+												<img src="<?= base_url(); ?>/public/assets/media/avatars/300-14.jpg" alt="img" />
 											</div>
 											<!--end::User-->
 										</div>
@@ -454,7 +454,7 @@
 											<!--end::Info-->
 											<!--begin::User-->
 											<div class="symbol symbol-circle symbol-25px" data-bs-toggle="tooltip" data-bs-boundary="window" data-bs-placement="top" title="Marcus Dotson">
-												<img src="<?= base_url(); ?>/assets/media/avatars/300-2.jpg" alt="img" />
+												<img src="<?= base_url(); ?>/public/assets/media/avatars/300-2.jpg" alt="img" />
 											</div>
 											<!--end::User-->
 										</div>
@@ -468,7 +468,7 @@
 											<div class="overlay me-10">
 												<!--begin::Image-->
 												<div class="overlay-wrapper">
-													<img alt="img" class="rounded w-150px" src="<?= base_url(); ?>/assets/media/stock/600x400/img-29.jpg" />
+													<img alt="img" class="rounded w-150px" src="<?= base_url(); ?>/public/assets/media/stock/600x400/img-29.jpg" />
 												</div>
 												<!--end::Image-->
 												<!--begin::Link-->
@@ -482,7 +482,7 @@
 											<div class="overlay me-10">
 												<!--begin::Image-->
 												<div class="overlay-wrapper">
-													<img alt="img" class="rounded w-150px" src="<?= base_url(); ?>/assets/media/stock/600x400/img-31.jpg" />
+													<img alt="img" class="rounded w-150px" src="<?= base_url(); ?>/public/assets/media/stock/600x400/img-31.jpg" />
 												</div>
 												<!--end::Image-->
 												<!--begin::Link-->
@@ -496,7 +496,7 @@
 											<div class="overlay">
 												<!--begin::Image-->
 												<div class="overlay-wrapper">
-													<img alt="img" class="rounded w-150px" src="<?= base_url(); ?>/assets/media/stock/600x400/img-40.jpg" />
+													<img alt="img" class="rounded w-150px" src="<?= base_url(); ?>/public/assets/media/stock/600x400/img-40.jpg" />
 												</div>
 												<!--end::Image-->
 												<!--begin::Link-->
@@ -593,7 +593,7 @@
 											<!--end::Info-->
 											<!--begin::User-->
 											<div class="symbol symbol-circle symbol-25px" data-bs-toggle="tooltip" data-bs-boundary="window" data-bs-placement="top" title="Robert Rich">
-												<img src="<?= base_url(); ?>/assets/media/avatars/300-4.jpg" alt="img" />
+												<img src="<?= base_url(); ?>/public/assets/media/avatars/300-4.jpg" alt="img" />
 											</div>
 											<!--end::User-->
 										</div>
@@ -811,7 +811,7 @@
 								<div class="d-flex align-items-center mb-2">
 									<!--begin::Avatar-->
 									<div class="symbol symbol-35px symbol-circle">
-										<img alt="Pic" src="<?= base_url(); ?>/assets/media/avatars/300-25.jpg" />
+										<img alt="Pic" src="<?= base_url(); ?>/public/assets/media/avatars/300-25.jpg" />
 									</div>
 									<!--end::Avatar-->
 									<!--begin::Details-->
@@ -843,7 +843,7 @@
 									<!--end::Details-->
 									<!--begin::Avatar-->
 									<div class="symbol symbol-35px symbol-circle">
-										<img alt="Pic" src="<?= base_url(); ?>/assets/media/avatars/300-1.jpg" />
+										<img alt="Pic" src="<?= base_url(); ?>/public/assets/media/avatars/300-1.jpg" />
 									</div>
 									<!--end::Avatar-->
 								</div>
@@ -863,7 +863,7 @@
 								<div class="d-flex align-items-center mb-2">
 									<!--begin::Avatar-->
 									<div class="symbol symbol-35px symbol-circle">
-										<img alt="Pic" src="<?= base_url(); ?>/assets/media/avatars/300-25.jpg" />
+										<img alt="Pic" src="<?= base_url(); ?>/public/assets/media/avatars/300-25.jpg" />
 									</div>
 									<!--end::Avatar-->
 									<!--begin::Details-->
@@ -895,7 +895,7 @@
 									<!--end::Details-->
 									<!--begin::Avatar-->
 									<div class="symbol symbol-35px symbol-circle">
-										<img alt="Pic" src="<?= base_url(); ?>/assets/media/avatars/300-1.jpg" />
+										<img alt="Pic" src="<?= base_url(); ?>/public/assets/media/avatars/300-1.jpg" />
 									</div>
 									<!--end::Avatar-->
 								</div>
@@ -915,7 +915,7 @@
 								<div class="d-flex align-items-center mb-2">
 									<!--begin::Avatar-->
 									<div class="symbol symbol-35px symbol-circle">
-										<img alt="Pic" src="<?= base_url(); ?>/assets/media/avatars/300-25.jpg" />
+										<img alt="Pic" src="<?= base_url(); ?>/public/assets/media/avatars/300-25.jpg" />
 									</div>
 									<!--end::Avatar-->
 									<!--begin::Details-->
@@ -948,7 +948,7 @@
 									<!--end::Details-->
 									<!--begin::Avatar-->
 									<div class="symbol symbol-35px symbol-circle">
-										<img alt="Pic" src="<?= base_url(); ?>/assets/media/avatars/300-1.jpg" />
+										<img alt="Pic" src="<?= base_url(); ?>/public/assets/media/avatars/300-1.jpg" />
 									</div>
 									<!--end::Avatar-->
 								</div>
@@ -968,7 +968,7 @@
 								<div class="d-flex align-items-center mb-2">
 									<!--begin::Avatar-->
 									<div class="symbol symbol-35px symbol-circle">
-										<img alt="Pic" src="<?= base_url(); ?>/assets/media/avatars/300-25.jpg" />
+										<img alt="Pic" src="<?= base_url(); ?>/public/assets/media/avatars/300-25.jpg" />
 									</div>
 									<!--end::Avatar-->
 									<!--begin::Details-->
@@ -1000,7 +1000,7 @@
 									<!--end::Details-->
 									<!--begin::Avatar-->
 									<div class="symbol symbol-35px symbol-circle">
-										<img alt="Pic" src="<?= base_url(); ?>/assets/media/avatars/300-1.jpg" />
+										<img alt="Pic" src="<?= base_url(); ?>/public/assets/media/avatars/300-1.jpg" />
 									</div>
 									<!--end::Avatar-->
 								</div>
@@ -1020,7 +1020,7 @@
 								<div class="d-flex align-items-center mb-2">
 									<!--begin::Avatar-->
 									<div class="symbol symbol-35px symbol-circle">
-										<img alt="Pic" src="<?= base_url(); ?>/assets/media/avatars/300-25.jpg" />
+										<img alt="Pic" src="<?= base_url(); ?>/public/assets/media/avatars/300-25.jpg" />
 									</div>
 									<!--end::Avatar-->
 									<!--begin::Details-->
@@ -1170,7 +1170,7 @@
 										<!--begin::Demo-->
 										<div class="overlay overflow-hidden position-relative border border-4 border-gray-200 rounded">
 											<div class="overlay-wrapper">
-												<img src="<?= base_url(); ?>/assets/media/demos/demo1.png" alt="demo" class="w-100" />
+												<img src="<?= base_url(); ?>/public/assets/media/demos/demo1.png" alt="demo" class="w-100" />
 											</div>
 											<div class="overlay-layer bg-dark bg-opacity-10">
 												<a href="https://preview.keenthemes.com/metronic8/demo1" class="btn btn-sm btn-success shadow">Demo 1</a>
@@ -1184,7 +1184,7 @@
 										<!--begin::Demo-->
 										<div class="overlay overflow-hidden position-relative border border-4 border-gray-200 rounded">
 											<div class="overlay-wrapper">
-												<img src="<?= base_url(); ?>/assets/media/demos/demo2.png" alt="demo" class="w-100" />
+												<img src="<?= base_url(); ?>/public/assets/media/demos/demo2.png" alt="demo" class="w-100" />
 											</div>
 											<div class="overlay-layer bg-dark bg-opacity-10">
 												<a href="https://preview.keenthemes.com/metronic8/demo2" class="btn btn-sm btn-success shadow">Demo 2</a>
@@ -1198,7 +1198,7 @@
 										<!--begin::Demo-->
 										<div class="overlay overflow-hidden position-relative border border-4 border-gray-200 rounded">
 											<div class="overlay-wrapper">
-												<img src="<?= base_url(); ?>/assets/media/demos/demo3.png" alt="demo" class="w-100" />
+												<img src="<?= base_url(); ?>/public/assets/media/demos/demo3.png" alt="demo" class="w-100" />
 											</div>
 											<div class="overlay-layer bg-dark bg-opacity-10">
 												<a href="https://preview.keenthemes.com/metronic8/demo3" class="btn btn-sm btn-success shadow">Demo 3</a>
@@ -1212,7 +1212,7 @@
 										<!--begin::Demo-->
 										<div class="overlay overflow-hidden position-relative border border-4 border-gray-200 rounded">
 											<div class="overlay-wrapper">
-												<img src="<?= base_url(); ?>/assets/media/demos/demo4.png" alt="demo" class="w-100" />
+												<img src="<?= base_url(); ?>/public/assets/media/demos/demo4.png" alt="demo" class="w-100" />
 											</div>
 											<div class="overlay-layer bg-dark bg-opacity-10">
 												<a href="https://preview.keenthemes.com/metronic8/demo4" class="btn btn-sm btn-success shadow">Demo 4</a>
@@ -1226,7 +1226,7 @@
 										<!--begin::Demo-->
 										<div class="overlay overflow-hidden position-relative border border-4 border-gray-200 rounded">
 											<div class="overlay-wrapper">
-												<img src="<?= base_url(); ?>/assets/media/demos/demo5.png" alt="demo" class="w-100" />
+												<img src="<?= base_url(); ?>/public/assets/media/demos/demo5.png" alt="demo" class="w-100" />
 											</div>
 											<div class="overlay-layer bg-dark bg-opacity-10">
 												<a href="https://preview.keenthemes.com/metronic8/demo5" class="btn btn-sm btn-success shadow">Demo 5</a>
@@ -1240,7 +1240,7 @@
 										<!--begin::Demo-->
 										<div class="overlay overflow-hidden position-relative border border-4 border-gray-200 rounded">
 											<div class="overlay-wrapper">
-												<img src="<?= base_url(); ?>/assets/media/demos/demo6.png" alt="demo" class="w-100" />
+												<img src="<?= base_url(); ?>/public/assets/media/demos/demo6.png" alt="demo" class="w-100" />
 											</div>
 											<div class="overlay-layer bg-dark bg-opacity-10">
 												<a href="https://preview.keenthemes.com/metronic8/demo6" class="btn btn-sm btn-success shadow">Demo 6</a>
@@ -1254,7 +1254,7 @@
 										<!--begin::Demo-->
 										<div class="overlay overflow-hidden position-relative border border-4 border-gray-200 rounded">
 											<div class="overlay-wrapper">
-												<img src="<?= base_url(); ?>/assets/media/demos/demo7.png" alt="demo" class="w-100" />
+												<img src="<?= base_url(); ?>/public/assets/media/demos/demo7.png" alt="demo" class="w-100" />
 											</div>
 											<div class="overlay-layer bg-dark bg-opacity-10">
 												<a href="https://preview.keenthemes.com/metronic8/demo7" class="btn btn-sm btn-success shadow">Demo 7</a>
@@ -1268,7 +1268,7 @@
 										<!--begin::Demo-->
 										<div class="overlay overflow-hidden position-relative border border-4 border-gray-200 rounded">
 											<div class="overlay-wrapper">
-												<img src="<?= base_url(); ?>/assets/media/demos/demo8.png" alt="demo" class="w-100" />
+												<img src="<?= base_url(); ?>/public/assets/media/demos/demo8.png" alt="demo" class="w-100" />
 											</div>
 											<div class="overlay-layer bg-dark bg-opacity-10">
 												<a href="https://preview.keenthemes.com/metronic8/demo8" class="btn btn-sm btn-success shadow">Demo 8</a>
@@ -1282,7 +1282,7 @@
 										<!--begin::Demo-->
 										<div class="overlay overflow-hidden position-relative border border-4 border-gray-200 rounded">
 											<div class="overlay-wrapper">
-												<img src="<?= base_url(); ?>/assets/media/demos/demo9.png" alt="demo" class="w-100" />
+												<img src="<?= base_url(); ?>/public/assets/media/demos/demo9.png" alt="demo" class="w-100" />
 											</div>
 											<div class="overlay-layer bg-dark bg-opacity-10">
 												<a href="https://preview.keenthemes.com/metronic8/demo9" class="btn btn-sm btn-success shadow">Demo 9</a>
@@ -1296,7 +1296,7 @@
 										<!--begin::Demo-->
 										<div class="overlay overflow-hidden position-relative border border-4 border-gray-200 rounded">
 											<div class="overlay-wrapper">
-												<img src="<?= base_url(); ?>/assets/media/demos/demo10.png" alt="demo" class="w-100" />
+												<img src="<?= base_url(); ?>/public/assets/media/demos/demo10.png" alt="demo" class="w-100" />
 											</div>
 											<div class="overlay-layer bg-dark bg-opacity-10">
 												<a href="https://preview.keenthemes.com/metronic8/demo10" class="btn btn-sm btn-success shadow">Demo 10</a>
@@ -1310,7 +1310,7 @@
 										<!--begin::Demo-->
 										<div class="overlay overflow-hidden position-relative border border-4 border-gray-200 rounded">
 											<div class="overlay-wrapper">
-												<img src="<?= base_url(); ?>/assets/media/demos/demo11.png" alt="demo" class="w-100" />
+												<img src="<?= base_url(); ?>/public/assets/media/demos/demo11.png" alt="demo" class="w-100" />
 											</div>
 											<div class="overlay-layer bg-dark bg-opacity-10">
 												<a href="https://preview.keenthemes.com/metronic8/demo11" class="btn btn-sm btn-success shadow">Demo 11</a>
@@ -1324,7 +1324,7 @@
 										<!--begin::Demo-->
 										<div class="overlay overflow-hidden position-relative border border-4 border-gray-200 rounded">
 											<div class="overlay-wrapper">
-												<img src="<?= base_url(); ?>/assets/media/demos/demo12.png" alt="demo" class="w-100" />
+												<img src="<?= base_url(); ?>/public/assets/media/demos/demo12.png" alt="demo" class="w-100" />
 											</div>
 											<div class="overlay-layer bg-dark bg-opacity-10">
 												<a href="https://preview.keenthemes.com/metronic8/demo12" class="btn btn-sm btn-success shadow">Demo 12</a>
@@ -1338,7 +1338,7 @@
 										<!--begin::Demo-->
 										<div class="overlay overflow-hidden position-relative border border-4 border-success rounded">
 											<div class="overlay-wrapper">
-												<img src="<?= base_url(); ?>/assets/media/demos/demo13.png" alt="demo" class="w-100" />
+												<img src="<?= base_url(); ?>/public/assets/media/demos/demo13.png" alt="demo" class="w-100" />
 											</div>
 											<div class="overlay-layer bg-dark bg-opacity-10">
 												<a href="https://preview.keenthemes.com/metronic8/demo13" class="btn btn-sm btn-success shadow">Demo 13</a>
@@ -1352,7 +1352,7 @@
 										<!--begin::Demo-->
 										<div class="overlay overflow-hidden position-relative border border-4 border-gray-200 rounded">
 											<div class="overlay-wrapper">
-												<img src="<?= base_url(); ?>/assets/media/demos/demo14.png" alt="demo" class="w-100" />
+												<img src="<?= base_url(); ?>/public/assets/media/demos/demo14.png" alt="demo" class="w-100" />
 											</div>
 											<div class="overlay-layer bg-dark bg-opacity-10">
 												<a href="https://preview.keenthemes.com/metronic8/demo14" class="btn btn-sm btn-success shadow">Demo 14</a>
@@ -1366,7 +1366,7 @@
 										<!--begin::Demo-->
 										<div class="overlay overflow-hidden position-relative border border-4 border-gray-200 rounded">
 											<div class="overlay-wrapper">
-												<img src="<?= base_url(); ?>/assets/media/demos/demo15.png" alt="demo" class="w-100" />
+												<img src="<?= base_url(); ?>/public/assets/media/demos/demo15.png" alt="demo" class="w-100" />
 											</div>
 											<div class="overlay-layer bg-dark bg-opacity-10">
 												<a href="https://preview.keenthemes.com/metronic8/demo15" class="btn btn-sm btn-success shadow">Demo 15</a>
@@ -1380,7 +1380,7 @@
 										<!--begin::Demo-->
 										<div class="overlay overflow-hidden position-relative border border-4 border-gray-200 rounded">
 											<div class="overlay-wrapper">
-												<img src="<?= base_url(); ?>/assets/media/demos/demo16.png" alt="demo" class="w-100" />
+												<img src="<?= base_url(); ?>/public/assets/media/demos/demo16.png" alt="demo" class="w-100" />
 											</div>
 											<div class="overlay-layer bg-dark bg-opacity-10">
 												<a href="https://preview.keenthemes.com/metronic8/demo16" class="btn btn-sm btn-success shadow">Demo 16</a>
@@ -1394,7 +1394,7 @@
 										<!--begin::Demo-->
 										<div class="overlay overflow-hidden position-relative border border-4 border-gray-200 rounded">
 											<div class="overlay-wrapper">
-												<img src="<?= base_url(); ?>/assets/media/demos/demo17.png" alt="demo" class="w-100" />
+												<img src="<?= base_url(); ?>/public/assets/media/demos/demo17.png" alt="demo" class="w-100" />
 											</div>
 											<div class="overlay-layer bg-dark bg-opacity-10">
 												<a href="https://preview.keenthemes.com/metronic8/demo17" class="btn btn-sm btn-success shadow">Demo 17</a>
@@ -1408,7 +1408,7 @@
 										<!--begin::Demo-->
 										<div class="overlay overflow-hidden position-relative border border-4 border-gray-200 rounded">
 											<div class="overlay-wrapper">
-												<img src="<?= base_url(); ?>/assets/media/demos/demo18.png" alt="demo" class="w-100" />
+												<img src="<?= base_url(); ?>/public/assets/media/demos/demo18.png" alt="demo" class="w-100" />
 											</div>
 											<div class="overlay-layer bg-dark bg-opacity-10">
 												<a href="https://preview.keenthemes.com/metronic8/demo18" class="btn btn-sm btn-success shadow">Demo 18</a>
@@ -1422,7 +1422,7 @@
 										<!--begin::Demo-->
 										<div class="overlay overflow-hidden position-relative border border-4 border-gray-200 rounded">
 											<div class="overlay-wrapper">
-												<img src="<?= base_url(); ?>/assets/media/demos/demo19.png" alt="demo" class="w-100" />
+												<img src="<?= base_url(); ?>/public/assets/media/demos/demo19.png" alt="demo" class="w-100" />
 											</div>
 											<div class="overlay-layer bg-dark bg-opacity-10">
 												<a href="https://preview.keenthemes.com/metronic8/demo19" class="btn btn-sm btn-success shadow">Demo 19</a>
@@ -1436,7 +1436,7 @@
 										<!--begin::Demo-->
 										<div class="overlay overflow-hidden position-relative border border-4 border-gray-200 rounded">
 											<div class="overlay-wrapper">
-												<img src="<?= base_url(); ?>/assets/media/demos/demo20.png" alt="demo" class="w-100" />
+												<img src="<?= base_url(); ?>/public/assets/media/demos/demo20.png" alt="demo" class="w-100" />
 											</div>
 											<div class="overlay-layer bg-dark bg-opacity-10">
 												<a href="https://preview.keenthemes.com/metronic8/demo20" class="btn btn-sm btn-success shadow">Demo 20</a>
@@ -1450,7 +1450,7 @@
 										<!--begin::Demo-->
 										<div class="overlay overflow-hidden position-relative border border-4 border-gray-200 rounded">
 											<div class="overlay-wrapper">
-												<img src="<?= base_url(); ?>/assets/media/demos/demo21.png" alt="demo" class="w-100 opacity-25" />
+												<img src="<?= base_url(); ?>/public/assets/media/demos/demo21.png" alt="demo" class="w-100 opacity-25" />
 											</div>
 											<div class="overlay-layer bg-dark bg-opacity-10">
 												<div class="badge badge-white px-6 py-4 fw-bold fs-base shadow">Coming soon</div>
@@ -1464,7 +1464,7 @@
 										<!--begin::Demo-->
 										<div class="overlay overflow-hidden position-relative border border-4 border-gray-200 rounded">
 											<div class="overlay-wrapper">
-												<img src="<?= base_url(); ?>/assets/media/demos/demo22.png" alt="demo" class="w-100 opacity-25" />
+												<img src="<?= base_url(); ?>/public/assets/media/demos/demo22.png" alt="demo" class="w-100 opacity-25" />
 											</div>
 											<div class="overlay-layer bg-dark bg-opacity-10">
 												<div class="badge badge-white px-6 py-4 fw-bold fs-base shadow">Coming soon</div>
@@ -1478,7 +1478,7 @@
 										<!--begin::Demo-->
 										<div class="overlay overflow-hidden position-relative border border-4 border-gray-200 rounded">
 											<div class="overlay-wrapper">
-												<img src="<?= base_url(); ?>/assets/media/demos/demo23.png" alt="demo" class="w-100 opacity-25" />
+												<img src="<?= base_url(); ?>/public/assets/media/demos/demo23.png" alt="demo" class="w-100 opacity-25" />
 											</div>
 											<div class="overlay-layer bg-dark bg-opacity-10">
 												<div class="badge badge-white px-6 py-4 fw-bold fs-base shadow">Coming soon</div>
@@ -1492,7 +1492,7 @@
 										<!--begin::Demo-->
 										<div class="overlay overflow-hidden position-relative border border-4 border-gray-200 rounded">
 											<div class="overlay-wrapper">
-												<img src="<?= base_url(); ?>/assets/media/demos/demo24.png" alt="demo" class="w-100 opacity-25" />
+												<img src="<?= base_url(); ?>/public/assets/media/demos/demo24.png" alt="demo" class="w-100 opacity-25" />
 											</div>
 											<div class="overlay-layer bg-dark bg-opacity-10">
 												<div class="badge badge-white px-6 py-4 fw-bold fs-base shadow">Coming soon</div>
@@ -2769,9 +2769,9 @@
 													<!--end::Input-->
 													<!--begin::Card logos-->
 													<div class="position-absolute translate-middle-y top-50 end-0 me-5">
-														<img src="<?= base_url(); ?>/assets/media/svg/card-logos/visa.svg" alt="" class="h-25px" />
-														<img src="<?= base_url(); ?>/assets/media/svg/card-logos/mastercard.svg" alt="" class="h-25px" />
-														<img src="<?= base_url(); ?>/assets/media/svg/card-logos/american-express.svg" alt="" class="h-25px" />
+														<img src="<?= base_url(); ?>/public/assets/media/svg/card-logos/visa.svg" alt="" class="h-25px" />
+														<img src="<?= base_url(); ?>/public/assets/media/svg/card-logos/mastercard.svg" alt="" class="h-25px" />
+														<img src="<?= base_url(); ?>/public/assets/media/svg/card-logos/american-express.svg" alt="" class="h-25px" />
 													</div>
 													<!--end::Card logos-->
 												</div>
@@ -2889,7 +2889,7 @@
 											<!--end::Description-->
 											<!--begin::Illustration-->
 											<div class="text-center px-4 py-15">
-												<img src="<?= base_url(); ?>/assets/media/illustrations/unitedpalms-1/9.png" alt="" class="mw-100 mh-300px" />
+												<img src="<?= base_url(); ?>/public/assets/media/illustrations/unitedpalms-1/9.png" alt="" class="mw-100 mh-300px" />
 											</div>
 											<!--end::Illustration-->
 										</div>
@@ -3034,7 +3034,7 @@
 										<a href="#" class="d-flex align-items-center p-3 rounded bg-state-light bg-state-opacity-50 mb-1">
 											<!--begin::Avatar-->
 											<div class="symbol symbol-35px symbol-circle me-5">
-												<img alt="Pic" src="<?= base_url(); ?>/assets/media/avatars/300-6.jpg" />
+												<img alt="Pic" src="<?= base_url(); ?>/public/assets/media/avatars/300-6.jpg" />
 											</div>
 											<!--end::Avatar-->
 											<!--begin::Info-->
@@ -3064,7 +3064,7 @@
 										<a href="#" class="d-flex align-items-center p-3 rounded bg-state-light bg-state-opacity-50 mb-1">
 											<!--begin::Avatar-->
 											<div class="symbol symbol-35px symbol-circle me-5">
-												<img alt="Pic" src="<?= base_url(); ?>/assets/media/avatars/300-1.jpg" />
+												<img alt="Pic" src="<?= base_url(); ?>/public/assets/media/avatars/300-1.jpg" />
 											</div>
 											<!--end::Avatar-->
 											<!--begin::Info-->
@@ -3079,7 +3079,7 @@
 										<a href="#" class="d-flex align-items-center p-3 rounded bg-state-light bg-state-opacity-50 mb-1">
 											<!--begin::Avatar-->
 											<div class="symbol symbol-35px symbol-circle me-5">
-												<img alt="Pic" src="<?= base_url(); ?>/assets/media/avatars/300-5.jpg" />
+												<img alt="Pic" src="<?= base_url(); ?>/public/assets/media/avatars/300-5.jpg" />
 											</div>
 											<!--end::Avatar-->
 											<!--begin::Info-->
@@ -3094,7 +3094,7 @@
 										<a href="#" class="d-flex align-items-center p-3 rounded bg-state-light bg-state-opacity-50 mb-1">
 											<!--begin::Avatar-->
 											<div class="symbol symbol-35px symbol-circle me-5">
-												<img alt="Pic" src="<?= base_url(); ?>/assets/media/avatars/300-25.jpg" />
+												<img alt="Pic" src="<?= base_url(); ?>/public/assets/media/avatars/300-25.jpg" />
 											</div>
 											<!--end::Avatar-->
 											<!--begin::Info-->
@@ -3124,7 +3124,7 @@
 												<!--end::Checkbox-->
 												<!--begin::Avatar-->
 												<div class="symbol symbol-35px symbol-circle">
-													<img alt="Pic" src="<?= base_url(); ?>/assets/media/avatars/300-6.jpg" />
+													<img alt="Pic" src="<?= base_url(); ?>/public/assets/media/avatars/300-6.jpg" />
 												</div>
 												<!--end::Avatar-->
 												<!--begin::Details-->
@@ -3196,7 +3196,7 @@
 												<!--end::Checkbox-->
 												<!--begin::Avatar-->
 												<div class="symbol symbol-35px symbol-circle">
-													<img alt="Pic" src="<?= base_url(); ?>/assets/media/avatars/300-1.jpg" />
+													<img alt="Pic" src="<?= base_url(); ?>/public/assets/media/avatars/300-1.jpg" />
 												</div>
 												<!--end::Avatar-->
 												<!--begin::Details-->
@@ -3232,7 +3232,7 @@
 												<!--end::Checkbox-->
 												<!--begin::Avatar-->
 												<div class="symbol symbol-35px symbol-circle">
-													<img alt="Pic" src="<?= base_url(); ?>/assets/media/avatars/300-5.jpg" />
+													<img alt="Pic" src="<?= base_url(); ?>/public/assets/media/avatars/300-5.jpg" />
 												</div>
 												<!--end::Avatar-->
 												<!--begin::Details-->
@@ -3268,7 +3268,7 @@
 												<!--end::Checkbox-->
 												<!--begin::Avatar-->
 												<div class="symbol symbol-35px symbol-circle">
-													<img alt="Pic" src="<?= base_url(); ?>/assets/media/avatars/300-25.jpg" />
+													<img alt="Pic" src="<?= base_url(); ?>/public/assets/media/avatars/300-25.jpg" />
 												</div>
 												<!--end::Avatar-->
 												<!--begin::Details-->
@@ -3340,7 +3340,7 @@
 												<!--end::Checkbox-->
 												<!--begin::Avatar-->
 												<div class="symbol symbol-35px symbol-circle">
-													<img alt="Pic" src="<?= base_url(); ?>/assets/media/avatars/300-9.jpg" />
+													<img alt="Pic" src="<?= base_url(); ?>/public/assets/media/avatars/300-9.jpg" />
 												</div>
 												<!--end::Avatar-->
 												<!--begin::Details-->
@@ -3448,7 +3448,7 @@
 												<!--end::Checkbox-->
 												<!--begin::Avatar-->
 												<div class="symbol symbol-35px symbol-circle">
-													<img alt="Pic" src="<?= base_url(); ?>/assets/media/avatars/300-23.jpg" />
+													<img alt="Pic" src="<?= base_url(); ?>/public/assets/media/avatars/300-23.jpg" />
 												</div>
 												<!--end::Avatar-->
 												<!--begin::Details-->
@@ -3520,7 +3520,7 @@
 												<!--end::Checkbox-->
 												<!--begin::Avatar-->
 												<div class="symbol symbol-35px symbol-circle">
-													<img alt="Pic" src="<?= base_url(); ?>/assets/media/avatars/300-12.jpg" />
+													<img alt="Pic" src="<?= base_url(); ?>/public/assets/media/avatars/300-12.jpg" />
 												</div>
 												<!--end::Avatar-->
 												<!--begin::Details-->
@@ -3592,7 +3592,7 @@
 												<!--end::Checkbox-->
 												<!--begin::Avatar-->
 												<div class="symbol symbol-35px symbol-circle">
-													<img alt="Pic" src="<?= base_url(); ?>/assets/media/avatars/300-13.jpg" />
+													<img alt="Pic" src="<?= base_url(); ?>/public/assets/media/avatars/300-13.jpg" />
 												</div>
 												<!--end::Avatar-->
 												<!--begin::Details-->
@@ -3664,7 +3664,7 @@
 												<!--end::Checkbox-->
 												<!--begin::Avatar-->
 												<div class="symbol symbol-35px symbol-circle">
-													<img alt="Pic" src="<?= base_url(); ?>/assets/media/avatars/300-21.jpg" />
+													<img alt="Pic" src="<?= base_url(); ?>/public/assets/media/avatars/300-21.jpg" />
 												</div>
 												<!--end::Avatar-->
 												<!--begin::Details-->
@@ -3742,7 +3742,7 @@
 									<!--end::Message-->
 									<!--begin::Illustration-->
 									<div class="text-center px-5">
-										<img src="<?= base_url(); ?>/assets/media/illustrations/unitedpalms-1/1.png" alt="" class="w-100 h-200px h-sm-325px" />
+										<img src="<?= base_url(); ?>/public/assets/media/illustrations/unitedpalms-1/1.png" alt="" class="w-100 h-200px h-sm-325px" />
 									</div>
 									<!--end::Illustration-->
 								</div>
@@ -3796,7 +3796,7 @@
 						<!--end::Heading-->
 						<!--begin::Google Contacts Invite-->
 						<div class="btn btn-light-primary fw-bolder w-100 mb-8">
-						<img alt="Logo" src="<?= base_url(); ?>/assets/media/svg/brand-logos/google-icon.svg" class="h-20px me-3" />Invite Gmail Contacts</div>
+						<img alt="Logo" src="<?= base_url(); ?>/public/assets/media/svg/brand-logos/google-icon.svg" class="h-20px me-3" />Invite Gmail Contacts</div>
 						<!--end::Google Contacts Invite-->
 						<!--begin::Separator-->
 						<div class="separator d-flex flex-center mb-8">
@@ -3819,7 +3819,7 @@
 									<div class="d-flex align-items-center">
 										<!--begin::Avatar-->
 										<div class="symbol symbol-35px symbol-circle">
-											<img alt="Pic" src="<?= base_url(); ?>/assets/media/avatars/300-6.jpg" />
+											<img alt="Pic" src="<?= base_url(); ?>/public/assets/media/avatars/300-6.jpg" />
 										</div>
 										<!--end::Avatar-->
 										<!--begin::Details-->
@@ -3875,7 +3875,7 @@
 									<div class="d-flex align-items-center">
 										<!--begin::Avatar-->
 										<div class="symbol symbol-35px symbol-circle">
-											<img alt="Pic" src="<?= base_url(); ?>/assets/media/avatars/300-1.jpg" />
+											<img alt="Pic" src="<?= base_url(); ?>/public/assets/media/avatars/300-1.jpg" />
 										</div>
 										<!--end::Avatar-->
 										<!--begin::Details-->
@@ -3903,7 +3903,7 @@
 									<div class="d-flex align-items-center">
 										<!--begin::Avatar-->
 										<div class="symbol symbol-35px symbol-circle">
-											<img alt="Pic" src="<?= base_url(); ?>/assets/media/avatars/300-5.jpg" />
+											<img alt="Pic" src="<?= base_url(); ?>/public/assets/media/avatars/300-5.jpg" />
 										</div>
 										<!--end::Avatar-->
 										<!--begin::Details-->
@@ -3931,7 +3931,7 @@
 									<div class="d-flex align-items-center">
 										<!--begin::Avatar-->
 										<div class="symbol symbol-35px symbol-circle">
-											<img alt="Pic" src="<?= base_url(); ?>/assets/media/avatars/300-25.jpg" />
+											<img alt="Pic" src="<?= base_url(); ?>/public/assets/media/avatars/300-25.jpg" />
 										</div>
 										<!--end::Avatar-->
 										<!--begin::Details-->
@@ -3987,7 +3987,7 @@
 									<div class="d-flex align-items-center">
 										<!--begin::Avatar-->
 										<div class="symbol symbol-35px symbol-circle">
-											<img alt="Pic" src="<?= base_url(); ?>/assets/media/avatars/300-9.jpg" />
+											<img alt="Pic" src="<?= base_url(); ?>/public/assets/media/avatars/300-9.jpg" />
 										</div>
 										<!--end::Avatar-->
 										<!--begin::Details-->
@@ -4071,7 +4071,7 @@
 									<div class="d-flex align-items-center">
 										<!--begin::Avatar-->
 										<div class="symbol symbol-35px symbol-circle">
-											<img alt="Pic" src="<?= base_url(); ?>/assets/media/avatars/300-23.jpg" />
+											<img alt="Pic" src="<?= base_url(); ?>/public/assets/media/avatars/300-23.jpg" />
 										</div>
 										<!--end::Avatar-->
 										<!--begin::Details-->
@@ -4127,7 +4127,7 @@
 									<div class="d-flex align-items-center">
 										<!--begin::Avatar-->
 										<div class="symbol symbol-35px symbol-circle">
-											<img alt="Pic" src="<?= base_url(); ?>/assets/media/avatars/300-12.jpg" />
+											<img alt="Pic" src="<?= base_url(); ?>/public/assets/media/avatars/300-12.jpg" />
 										</div>
 										<!--end::Avatar-->
 										<!--begin::Details-->
@@ -4183,7 +4183,7 @@
 									<div class="d-flex align-items-center">
 										<!--begin::Avatar-->
 										<div class="symbol symbol-35px symbol-circle">
-											<img alt="Pic" src="<?= base_url(); ?>/assets/media/avatars/300-13.jpg" />
+											<img alt="Pic" src="<?= base_url(); ?>/public/assets/media/avatars/300-13.jpg" />
 										</div>
 										<!--end::Avatar-->
 										<!--begin::Details-->
@@ -4239,7 +4239,7 @@
 									<div class="d-flex align-items-center">
 										<!--begin::Avatar-->
 										<div class="symbol symbol-35px symbol-circle">
-											<img alt="Pic" src="<?= base_url(); ?>/assets/media/avatars/300-21.jpg" />
+											<img alt="Pic" src="<?= base_url(); ?>/public/assets/media/avatars/300-21.jpg" />
 										</div>
 										<!--end::Avatar-->
 										<!--begin::Details-->
@@ -4319,24 +4319,24 @@
 		<!--end::Modal - Invite Friend-->
 		<!--end::Modals-->
 		<!--begin::Javascript-->
-		<script>var hostUrl = "<?= base_url(); ?>/assets/";</script>
+		<script>var hostUrl = "<?= base_url(); ?>/public/assets/";</script>
 		<!--begin::Global Javascript Bundle(used by all pages)-->
-		<script src="<?= base_url(); ?>/assets/plugins/global/plugins.bundle.js"></script>
-		<script src="<?= base_url(); ?>/assets/js/scripts.bundle.js"></script>
+		<script src="<?= base_url(); ?>/public/assets/plugins/global/plugins.bundle.js"></script>
+		<script src="<?= base_url(); ?>/public/assets/js/scripts.bundle.js"></script>
 		<!--end::Global Javascript Bundle-->
 		<!--begin::Page Vendors Javascript(used by this page)-->
-		<script src="<?= base_url(); ?>/assets/plugins/custom/datatables/datatables.bundle.js"></script>
+		<script src="<?= base_url(); ?>/public/assets/plugins/custom/datatables/datatables.bundle.js"></script>
 		<!--end::Page Vendors Javascript-->
 		<!--begin::Page Custom Javascript(used by this page)-->
-		<script src="<?= base_url(); ?>/assets/js/custom/apps/user-management/users/list/table.js"></script>
-		<script src="<?= base_url(); ?>/assets/js/custom/apps/user-management/users/list/export-users.js"></script>
-		<script src="<?= base_url(); ?>/assets/js/custom/apps/user-management/users/list/add.js"></script>
-		<script src="<?= base_url(); ?>/assets/js/widgets.bundle.js"></script>
-		<script src="<?= base_url(); ?>/assets/js/custom/widgets.js"></script>
-		<script src="<?= base_url(); ?>/assets/js/custom/apps/chat/chat.js"></script>
-		<script src="<?= base_url(); ?>/assets/js/custom/utilities/modals/upgrade-plan.js"></script>
-		<script src="<?= base_url(); ?>/assets/js/custom/utilities/modals/create-app.js"></script>
-		<script src="<?= base_url(); ?>/assets/js/custom/utilities/modals/users-search.js"></script>
+		<script src="<?= base_url(); ?>/public/assets/js/custom/apps/user-management/users/list/table.js"></script>
+		<script src="<?= base_url(); ?>/public/assets/js/custom/apps/user-management/users/list/export-users.js"></script>
+		<script src="<?= base_url(); ?>/public/assets/js/custom/apps/user-management/users/list/add.js"></script>
+		<script src="<?= base_url(); ?>/public/assets/js/widgets.bundle.js"></script>
+		<script src="<?= base_url(); ?>/public/assets/js/custom/widgets.js"></script>
+		<script src="<?= base_url(); ?>/public/assets/js/custom/apps/chat/chat.js"></script>
+		<script src="<?= base_url(); ?>/public/assets/js/custom/utilities/modals/upgrade-plan.js"></script>
+		<script src="<?= base_url(); ?>/public/assets/js/custom/utilities/modals/create-app.js"></script>
+		<script src="<?= base_url(); ?>/public/assets/js/custom/utilities/modals/users-search.js"></script>
 		<!--end::Page Custom Javascript-->
 		<!--end::Javascript-->
 	</body>

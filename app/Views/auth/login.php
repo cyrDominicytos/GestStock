@@ -15,7 +15,7 @@
 						<div class="d-flex flex-row-fluid flex-column text-center p-10 pt-lg-20">
 							<!--begin::Logo-->
 							<a href="../../demo12/dist/index.html" class="py-9 mb-5">
-								<img alt="Logo" src="<?= base_url(); ?>/assets/media/logos/logo-2.svg " class="h-60px" />
+								<img alt="Logo" src="<?= base_url(); ?>/public/assets/media/logos/logo-2.svg " class="h-60px" />
 							</a>
 							<!--end::Logo-->
 							<!--begin::Title-->
@@ -31,11 +31,11 @@
 						<div class="d-flex flex-row-auto bgi-no-repeat bgi-position-x-center bgi-size-contain bgi-position-y-bottom min-h-100px min-h-lg-350px">
                              <!-- Owl-Carousel -->
                             <div class="owl-carousel owl-theme">
-                                <img src="<?= base_url(); ?>/assets/media/presentation/pre1.png" alt="" class="login_img">
-                                <img src="<?= base_url(); ?>/assets/media/presentation/pre2.png" alt="" class="login_img">
-                                <img src="<?= base_url(); ?>/assets/media/presentation/pre3.png" alt="" class="login_img">
-                                <img src="<?= base_url(); ?>/assets/media/presentation/pre4.png" alt="" class="login_img">
-                                <img src="<?= base_url(); ?>/assets/media/presentation/pre5.png" alt="" class="login_img">                                
+                                <img src="<?= base_url(); ?>/public/assets/media/presentation/pre1.png" alt="" class="login_img">
+                                <img src="<?= base_url(); ?>/public/assets/media/presentation/pre2.png" alt="" class="login_img">
+                                <img src="<?= base_url(); ?>/public/assets/media/presentation/pre3.png" alt="" class="login_img">
+                                <img src="<?= base_url(); ?>/public/assets/media/presentation/pre4.png" alt="" class="login_img">
+                                <img src="<?= base_url(); ?>/public/assets/media/presentation/pre5.png" alt="" class="login_img">                                
                             </div>
                             <!-- /Owl-Carousel -->
                         </div>
@@ -103,13 +103,13 @@
 									<div class="text-center text-muted text-uppercase fw-bolder mb-5">or</div>
 									
 									<a href="#" class="btn btn-flex flex-center btn-light btn-lg w-100 mb-5">
-									<img alt="Logo" src="<?= base_url(); ?>/assets/media/svg/brand-logos/google-icon.svg " class="h-20px me-3" />Continue with Google</a>
+									<img alt="Logo" src="<?= base_url(); ?>/public/assets/media/svg/brand-logos/google-icon.svg " class="h-20px me-3" />Continue with Google</a>
 									
 									<a href="#" class="btn btn-flex flex-center btn-light btn-lg w-100 mb-5">
-									<img alt="Logo" src="<?= base_url(); ?>/assets/media/svg/brand-logos/facebook-4.svg " class="h-20px me-3" />Continue with Facebook</a>
+									<img alt="Logo" src="<?= base_url(); ?>/public/assets/media/svg/brand-logos/facebook-4.svg " class="h-20px me-3" />Continue with Facebook</a>
 									
 									<a href="#" class="btn btn-flex flex-center btn-light btn-lg w-100">
-									<img alt="Logo" src="<?= base_url(); ?>/assets/media/svg/brand-logos/apple-black.svg " class="h-20px me-3" />Continue with Apple</a>
+									<img alt="Logo" src="<?= base_url(); ?>/public/assets/media/svg/brand-logos/apple-black.svg " class="h-20px me-3" />Continue with Apple</a>
 									-->
 								</div>
 								<!--end::Actions-->

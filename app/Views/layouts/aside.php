@@ -4,7 +4,7 @@
 					<div class="aside-logo flex-column-auto" id="kt_aside_logo">
 						<!--begin::Logo-->
 						<a href="">
-							<img alt="Logo" src="<?= base_url(); ?>/assets/media/logos/logo-demo13.sv" class="h-15px logo" />
+							<img alt="Logo" src="<?= base_url(); ?>/public/assets/media/logos/logo-demo13.sv" class="h-15px logo" />
 						</a>
 						<!--end::Logo-->
 						<!--begin::Aside toggler-->

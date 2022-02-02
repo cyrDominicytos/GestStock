@@ -39,6 +39,9 @@ $routes->get('/users/liste', 'User::liste');
 
 
 $routes->post('/sign_in', 'Auth::sign_in');
+
+//External Entity
+$routes->get('external/create', 'ExternalEntity::create');
 //$routes->get('news/(:segment)', 'News::view/$1');
 //$routes->get('news', 'News::index');
 

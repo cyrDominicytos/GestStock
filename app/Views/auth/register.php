@@ -49,16 +49,17 @@
 						<!--begin::Wrapper-->
 						<div class="w-lg-600px p-10 p-lg-15 mx-auto">
 							<!--begin::Form-->
-							<form class="form w-100" novalidate="novalidate" id="kt_sign_up_form">
+							<form class="form w-100" novalidate="novalidate" id="kt_sign_up_form" action="<?= base_url(); ?>/sign_up" method="post">
 								<!--begin::Heading-->
 								<div class="text-center mb-10">
 									<!--begin::Title-->
-									<h1 class="text-dark mb-3">Créer un compte sur <?= getenv('APP_NAME') ?></h1>
+									<h1 class="text-dark mb-3"><?= (isset($user)? ("Mise à jour d'un compte sur ") : ("Créer un compte sur "))?><?= getenv('APP_NAME') ?></h1>
 									<!--end::Title-->
 									<!--begin::Link-->
-									<div class="text-gray-400 fw-bold fs-4">Vous avez déjà un compte?
-									<a href="<?=base_url(); ?>/login" class="link-primary fw-bolder">Connectez-vous</a></div>
+									<div class="text-gray-400 fw-bold fs-4">Retournez à votre
+									<a href="<?=base_url(); ?>/" class="link-primary fw-bolder"> espace de travail</a></div>
 									<!--end::Link-->
+									<div id="infoMessage" style="color:red;"><?=  session()->has('message') ? (session()->get('message')) : ("")?></div>
 								</div>
 								<!--end::Heading-->
 								<!--begin::Action
@@ -76,28 +77,42 @@
 								<div class="row fv-row mb-7">
 									<!--begin::Col-->
 									<div class="col-xl-6">
-										<label class="form-label fw-bolder text-dark fs-6">Nom complet <sup class="mySup">*</sup></label>
-										<input class="form-control form-control-lg form-control-solid" type="text" placeholder="" name="first-name" autocomplete="off" />
+										<label class="form-label fw-bolder text-dark fs-6">Noms <sup class="mySup">*</sup></label>
+										<input class="form-control form-control-lg form-control-solid" type="text" placeholder="" name="last_name" autocomplete="off" required="required" value="<?= (isset($user)? ($user->last_name) : (""))?>"/>
 									</div>
 									<!--end::Col-->
 									<!--begin::Col-->
 									<div class="col-xl-6">
-										<label class="form-label fw-bolder text-dark fs-6">Téléphone <sup class="mySup">*</sup></label>
-										<input class="form-control form-control-lg form-control-solid" type="text" placeholder="" name="last-name" autocomplete="off" />
+										<label class="form-label fw-bolder text-dark fs-6">Prénoms <sup class="mySup">*</sup></label>
+										<input class="form-control form-control-lg form-control-solid" type="text" placeholder="" name="first_name" autocomplete="off" required="required" value="<?= (isset($user)? ($user->first_name) : (""))?>"/>
 									</div>
 									<!--end::Col-->
 								</div>
 								<div class="row fv-row mb-7">
 									<!--begin::Col-->
 									<div class="col-xl-6">
+										<label class="form-label fw-bolder text-dark fs-6">Nom d'utilisateur <sup class="mySup">*</sup></label>
+										<input class="form-control form-control-lg form-control-solid" type="text" placeholder="" name="username" autocomplete="off" required="required" value="<?= (isset($user)? ($user->username) : (""))?>"/>
+									</div>
+									<!--end::Col-->
+									<!--begin::Col-->
+									<div class="col-xl-6">
 										<label class="form-label fw-bolder text-dark fs-6">Email <sup class="mySup">*</sup></label>
-										<input class="form-control form-control-lg form-control-solid" type="text" placeholder="" name="first-name" autocomplete="off" />
+										<input class="form-control form-control-lg form-control-solid" type="email" placeholder="" name="email" autocomplete="off" rique="required" value="<?= (isset($user)? ($user->email) : (""))?>"/>
+									</div>
+									<!--end::Col-->
+								</div>
+								<div class="row fv-row mb-7">
+									<!--begin::Col-->
+									<div class="col-xl-6">
+										<label class="form-label fw-bolder text-dark fs-6">Téléphone <sup class="mySup">*</sup></label>
+										<input class="form-control form-control-lg form-control-solid" type="tel" placeholder="" name="phone" autocomplete="off" required="required" value="<?= (isset($user)? ($user->phone) : (""))?>"/>
 									</div>
 									<!--end::Col-->
 									<!--begin::Col-->
 									<div class="col-xl-6">
 										<label class="form-label fw-bolder text-dark fs-6">Adresse </sup></label>
-										<input class="form-control form-control-lg form-control-solid" type="text" placeholder="" name="last-name" autocomplete="off" />
+										<input class="form-control form-control-lg form-control-solid" type="text" placeholder="" name="address" autocomplete="off" value="<?= (isset($user)? ($user->address) : (""))?>"/>
 									</div>
 									<!--end::Col-->
 								</div>
@@ -105,11 +120,11 @@
 									<!--begin::Input group-->
                                     <div class="fv-row mb-6">
                                         <label class="form-label fw-bolder text-dark fs-6">Profile <sup class="mySup">*</sup></label>
-                                        <select name="role" aria-label="Selectionnez un profile" data-control="select2" data-placeholder="Attribuer un role..." class="form-select form-select-solid form-select-lg fw-bold select2-hidden-accessible" data-select2-id="select2-data-10-02r3" tabindex="-1" aria-hidden="true">
-											<option>Vendeur</option>
-											<option>Supervisuer</option>
-											<option>Comptable</option>
-											<option>Administrateur</option>
+                                        <select name="group" aria-label="Selectionnez un profile" data-control="select2" data-placeholder="Attribuer un role..." class="form-select form-select-solid form-select-lg fw-bold select2-hidden-accessible" data-select2-id="select2-data-10-02r3" tabindex="-1" aria-hidden="true">
+											<?php foreach ($groups as $group): ?>
+												<option value="<?= $group->id ?>" ><?= $group->name ?></option>									
+											<?php endforeach ?>
+											
                                         </select>
                                       
                                     </div>
@@ -151,7 +166,7 @@
 								<!--begin::Input group-->
 								<div class="fv-row mb-5">
 									<label class="form-label fw-bolder text-dark fs-6">Confirmer mot de passe <sup class="mySup">*</sup></label>
-									<input class="form-control form-control-lg form-control-solid" type="password" placeholder="" name="confirm-password" autocomplete="off" />
+									<input class="form-control form-control-lg form-control-solid" type="password" placeholder="" name="password_confirm" autocomplete="off" />
 								</div>
 								<!--end::Input group-->
 								<!--begin::Input group-->
@@ -165,7 +180,7 @@
 								<!--end::Input group-->
 								<!--begin::Actions-->
 								<div class="text-center">
-									<button type="button" id="kt_sign_up_submit" class="btn btn-lg btn-primary">
+									<button type="submit" id="kt_sign_up_submi" class="btn btn-lg btn-primary" >
 										<span class="indicator-label">Enregistrer</span>
 										<span class="indicator-progress">Patientez...
 										<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>

@@ -58,6 +58,7 @@
 									<h1 class="text-dark mb-3">Connexion à <?= getenv('APP_NAME') ?></h1>
 									<!--end::Title-->
 									<!--begin::Link-->
+									<div id="infoMessage" style="color:red;"><?=  session()->has('message') ? (session()->get('message')) : ("")?></div>
 									<!-- <div class="text-gray-400 fw-bold fs-4">Vous n'avez pas de compte? -->
 									<!-- <a href="<?=base_url(); ?>/register" class="link-primary fw-bolder">Inscrivez-vous</a></div> -->
 									<!--end::Link-->

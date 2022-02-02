@@ -34,6 +34,7 @@
 										<span class="menu-title">Tableau de bord</span>
 									</span>
 								</div>
+                               
 								<div class="menu-item">
 									<div class="menu-content pt-8 pb-2">
 										<span class="menu-sectio text-muted text-uppercase fs-8 ls-1"  style="color: #fff;">Fonctionnalités</span>
@@ -211,13 +212,13 @@
                                             <span class="menu-arrow"></span>
                                         </span>
                                         <div class="menu-sub menu-sub-accordion menu-active-bg">
-                                            <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
-                                                <span class="menu-link">
+                                            <div class="menu-item menu-accordion">
+                                                <a class="menu-link" href="<?= base_url() ?>/register">
                                                     <span class="menu-bullet">
                                                         <span class="bullet bullet-dot"></span>
                                                     </span>
                                                     <span class="menu-title" >Ajouter</span>
-                                                </span>
+                                                </a>
                                                 <span class="menu-link">
                                                     <span class="menu-bullet">
                                                         <span class="bullet bullet-dot"></span>

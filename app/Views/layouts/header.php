@@ -623,7 +623,7 @@
 											<!--end::Menu item-->
 											<!--begin::Menu item-->
 											<div class="menu-item px-5">
-												<a href="<?php echo base_url();?>/auth/logout" class="menu-link px-5">Déconnexion</a>
+												<a href="<?php echo base_url();?>/logout" class="menu-link px-5">Déconnexion</a>
 											</div>
 											<!--end::Menu item-->
 										</div>

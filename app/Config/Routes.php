@@ -41,8 +41,9 @@ $routes->post('/user/update/(:num)', 'Auth::edit_user/$1');
 $routes->get('/user/edit/(:num)', 'Auth::update_user/$1');
 $routes->get('/user/banish/(:num)', 'Auth::deactivate/$1');
 $routes->get('/user/activate/(:num)', 'Auth::activate/$1');
-$routes->delete('user/delete/(:id)', 'Auth::delete_user');
-$route['Auth/update_user'] = 'user/(:id)';
+
+//roles and permissions
+$routes->get('/groups/list', 'Auth::role_permission');
 
 $routes->get('/login', 'Auth::index');
 $routes->get('/register', 'Auth::register');

@@ -51,6 +51,8 @@ class IonAuth extends \IonAuth\Config\IonAuth
 		'groups'         => 'groups',
 		'users_groups'   => 'users_groups',
 		'login_attempts' => 'login_attempts',
+		'permissions' => 'permissions',
+		'groups_permissions' => 'groups_permissions',
 	];
 
 	/**
@@ -63,6 +65,17 @@ class IonAuth extends \IonAuth\Config\IonAuth
 	public $join = [
 		'users'  => 'user_id',
 		'groups' => 'group_id',
+	];
+	/**
+	 * Users table column and Group table column you want to join WITH.
+	 * Joins from users.id
+	 * Joins from groups.id
+	 *
+	 * @var array
+	 */
+	public $join2 = [
+		'groups'  => 'groups_id',
+		'permissions' => 'permissions_id',
 	];
 
 	/*

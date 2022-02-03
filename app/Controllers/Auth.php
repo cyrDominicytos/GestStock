@@ -177,7 +177,15 @@ class Auth extends \IonAuth\Controllers\Auth
         $data['userGroup'] = $this->ionAuth->getUsersGroups($data['user']->id)->getResult()[0]->id;
         return view('auth/register',$data);
     }
-
+    public function role_permission()
+    {
+        $data['groups'] = $this->ionAuth->groups()->result();
+      //  echo $data['users'][0]->id;
+        //dd($this->ionAuth->getUsersGroups(1)->getResult());
+       // dd($this->ionAuth->getUsersGroups($data['users'][0]->id));
+        $data['auth'] = $this->ionAuth;
+        return view('role_permission/list',$data);
+    }
 	/**
 	 * Change password
 	 *
@@ -671,11 +679,11 @@ class Auth extends \IonAuth\Controllers\Auth
 					$this->session->setFlashdata('message', $this->ionAuth->errors($this->validationListTemplate));
 				}
 				// redirect them back to the admin page if admin, or to the base url if non admin
-				return redirect()->to("/users/list")->with("message", "Utilisateur édité avec succès !")->with("code", 0);
+				return redirect()->to("/users/list")->with("message", "Utilisateur édité avec succès !")->with("code", 1);
 			}
 		}else
 		// display the edit user form
-        return redirect()->back();
+        return redirect()->to("/")->with("message", "Vous ne remplissez pas les conditions pour effectuer cette opération!")->with("code", 0);
     
     }
 

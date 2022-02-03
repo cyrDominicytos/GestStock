@@ -26,13 +26,13 @@
 						<div class="hover-scroll-overlay-y my-2 py-5 py-lg-8" id="kt_aside_menu_wrapper" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-height="auto" data-kt-scroll-dependencies="#kt_aside_logo, #kt_aside_footer" data-kt-scroll-wrappers="#kt_aside_menu" data-kt-scroll-offset="0">
 							<!--begin::Menu-->
 							<div class="menu menu-column menu-title-gray-800 menu-state-title-primary menu-state-icon-primary menu-state-bullet-primary menu-arrow-gray-500" id="#kt_aside_menu" data-kt-menu="true">
-								<div data-kt-menu-trigger="click" class="menu-item menu-accordion">
-									<span class="menu-link">
+								<div class="menu-item menu-accordion">
+                                    <a class="menu-link" href="<?= base_url() ?>/">
 										<span class="menu-icon">
 											<i class="bi bi-grid fs-3"></i>
 										</span>
 										<span class="menu-title">Tableau de bord</span>
-									</span>
+									</a>
 								</div>
                                
 								<div class="menu-item">
@@ -49,19 +49,19 @@
 										<span class="menu-arrow"></span>
 									</span>
 									<div class="menu-sub menu-sub-accordion menu-active-bg">
-										<div data-kt-menu-trigger="click" class="menu-item menu-accordion">
-											<span class="menu-link">
+										<div class="menu-item menu-accordion">
+                                            <a class="menu-link" href="<?= base_url() ?>/">
 												<span class="menu-bullet">
 													<span class="bullet bullet-dot"></span>
 												</span>
 												<span class="menu-title">Ajouter</span>
-											</span>
-											<span class="menu-link">
+											</a>
+                                            <a class="menu-link" href="<?= base_url() ?>/">
 												<span class="menu-bullet">
 													<span class="bullet bullet-dot"></span>
 												</span>
 												<span class="menu-title">Consulter liste</span>
-											</span>
+											</a>
 										</div>
 									</div>
 								</div>
@@ -74,19 +74,19 @@
 										<span class="menu-arrow"></span>
 									</span>
 									<div class="menu-sub menu-sub-accordion menu-active-bg">
-										<div data-kt-menu-trigger="click" class="menu-item menu-accordion">
-											<span class="menu-link">
+										<div class="menu-item menu-accordion">
+                                            <a class="menu-link" href="<?= base_url() ?>/">
 												<span class="menu-bullet">
 													<span class="bullet bullet-dot"></span>
 												</span>
 												<span class="menu-title" >Ajouter</span>
-											</span>
-											<span class="menu-link">
+											</a>
+                                            <a class="menu-link" href="<?= base_url() ?>/">
 												<span class="menu-bullet">
 													<span class="bullet bullet-dot"></span>
 												</span>
 												<span class="menu-title">Consulter liste</span>
-											</span>
+                                            </a>
 										</div>
 									</div>
 								</div>
@@ -99,28 +99,28 @@
 										<span class="menu-arrow"></span>
 									</span>
 									<div class="menu-sub menu-sub-accordion menu-active-bg">
-                                        <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
-                                            <span class="menu-link">
+                                        <div class="menu-item menu-accordion">
+                                            <a class="menu-link" href="<?= base_url() ?>/">
                                                 <span class="menu-bullet">
                                                     <span class="bullet bullet-dot"></span>
 												</span>
 												<span class="menu-title" >Ajouter</span>
-											</span>
-											<span class="menu-link">
+                                            </a>
+                                            <a class="menu-link" href="<?= base_url() ?>/">
                                                 <span class="menu-bullet">
                                                     <span class="bullet bullet-dot"></span>
 												</span>
 												<span class="menu-title">Consulter liste</span>
-											</span>
+                                            </a>
 										</div>
 									</div>
-                                    <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
-                                        <span class="menu-link">
+                                    <div class="menu-item menu-accordion">
+                                        <a class="menu-link" href="<?= base_url() ?>/">
                                             <span class="menu-icon">
                                                 <i class="bi bi-grid fs-3"></i>
                                             </span>
                                             <span class="menu-title">Inventaire du stock</span>
-                                        </span>
+                                        </a>
                                     </div>
                                     <!-- Admin -->
                                     <div class="menu-item">
@@ -137,19 +137,19 @@
                                             <span class="menu-arrow"></span>
                                         </span>
                                         <div class="menu-sub menu-sub-accordion menu-active-bg">
-                                            <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
-                                                <span class="menu-link">
+                                            <div class="menu-item menu-accordion">
+                                                <a class="menu-link" href="<?= base_url() ?>/">
                                                     <span class="menu-bullet">
                                                         <span class="bullet bullet-dot"></span>
                                                     </span>
                                                     <span class="menu-title" >Ajouter</span>
-                                                </span>
-                                                <span class="menu-link">
+                                                </a>
+                                                <a class="menu-link" href="<?= base_url() ?>/">
                                                     <span class="menu-bullet">
                                                         <span class="bullet bullet-dot"></span>
                                                     </span>
                                                     <span class="menu-title">Consulter liste</span>
-                                                </span>
+                                                </a>
                                             </div>
                                         </div>
                                     </div>
@@ -162,19 +162,19 @@
                                             <span class="menu-arrow"></span>
                                         </span>
                                         <div class="menu-sub menu-sub-accordion menu-active-bg">
-                                            <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
-                                                <span class="menu-link">
+                                            <div class="menu-item menu-accordion">
+                                                <a class="menu-link" href="<?= base_url() ?>/">
                                                     <span class="menu-bullet">
                                                         <span class="bullet bullet-dot"></span>
                                                     </span>
                                                     <span class="menu-title" >Ajouter</span>
-                                                </span>
-                                                <span class="menu-link">
+                                                </a>
+                                                <a class="menu-link" href="<?= base_url() ?>/">
                                                     <span class="menu-bullet">
                                                         <span class="bullet bullet-dot"></span>
                                                     </span>
                                                     <span class="menu-title">Consulter liste</span>
-                                                </span>
+                                                </a>
                                             </div>
                                         </div>
                                     </div>
@@ -187,19 +187,19 @@
                                             <span class="menu-arrow"></span>
                                         </span>
                                         <div class="menu-sub menu-sub-accordion menu-active-bg">
-                                            <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
-                                                <span class="menu-link">
+                                            <div  class="menu-item menu-accordion">
+                                                <a class="menu-link" href="<?= base_url() ?>/">
                                                     <span class="menu-bullet">
                                                         <span class="bullet bullet-dot"></span>
                                                     </span>
                                                     <span class="menu-title" >Ajouter</span>
-                                                </span>
-                                                <span class="menu-link">
+                                                </a>
+                                                <a class="menu-link" href="<?= base_url() ?>/">
                                                     <span class="menu-bullet">
                                                         <span class="bullet bullet-dot"></span>
                                                     </span>
                                                     <span class="menu-title">Consulter liste</span>
-                                                </span>
+                                                </a>
                                             </div>
                                         </div>
                                     </div>
@@ -219,12 +219,12 @@
                                                     </span>
                                                     <span class="menu-title" >Ajouter</span>
                                                 </a>
-                                                <span class="menu-link">
+                                                <a class="menu-link" href="<?= base_url() ?>/users/list">
                                                     <span class="menu-bullet">
                                                         <span class="bullet bullet-dot"></span>
                                                     </span>
                                                     <span class="menu-title">Consulter liste</span>
-                                                </span>
+                                                </a>
                                             </div>
                                         </div>
                                     </div>
@@ -237,28 +237,28 @@
                                             <span class="menu-arrow"></span>
                                         </span>
                                         <div class="menu-sub menu-sub-accordion menu-active-bg">
-                                            <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
-                                                <span class="menu-link">
+                                            <div class="menu-item menu-accordion">
+                                                <a class="menu-link" href="<?= base_url() ?>/groups/create">
                                                     <span class="menu-bullet">
                                                         <span class="bullet bullet-dot"></span>
                                                     </span>
                                                     <span class="menu-title" >Ajouter</span>
-                                                </span>
-                                                <span class="menu-link">
+                                                </a>
+                                                <a class="menu-link" href="<?= base_url() ?>/groups/list">
                                                     <span class="menu-bullet">
                                                         <span class="bullet bullet-dot"></span>
                                                     </span>
                                                     <span class="menu-title">Consulter liste</span>
-                                                </span>
+                                                </a>
                                             </div>
                                         </div>
-                                        <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
-                                        <span class="menu-link">
+                                        <div class="menu-item menu-accordion">
+                                        <a class="menu-link" href="<?= base_url() ?>/">
                                             <span class="menu-icon">
                                                 <i class="las la-tools fs-3"></i>
                                             </span>
                                             <span class="menu-title">Paramétrages</span>
-                                        </span>
+                                         </a>
                                     </div>								
                                 </div>
 								</div>

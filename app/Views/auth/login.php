@@ -122,12 +122,16 @@
 					<!--end::Content-->
 					<!--begin::Footer-->
 					<div class="d-flex flex-center flex-wrap fs-6 p-5 pb-0">
+						<!--begin::Footer-->
+						<div class="d-flex flex-center flex-wrap fs-6 p-5 pb-0">
 						<!--begin::Links-->
 						<div class="d-flex flex-center fw-bold fs-6">
-							<a href="https://keenthemes.com" class="text-muted text-hover-primary px-2" target="_blank">A propos de nous</a>
-							<a href="https://devs.keenthemes.com" class="text-muted text-hover-primary px-2" target="_blank">Support</a>
+							<a href="#" class="text-muted text-hover-primary px-2" target="_blank">A propos</a>
+							<a href="mailto:<?= getenv('DEV_MAIL') ?>" class="text-muted text-hover-primary px-2" target="_blank">Nous contacter</a>
 						</div>
 						<!--end::Links-->
+					</div>
+					<!--end::Footer-->
 					</div>
 					<!--end::Footer-->
 				</div>

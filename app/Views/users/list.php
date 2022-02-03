@@ -610,9 +610,11 @@
                                                 </div>
                                                 <!--end::Menu item-->
                                                 <!--begin::Menu item-->
+                                                <?php if($user->id != $auth->user()->row()->id) : ?>
                                                 <div class="menu-item px-3">
                                                     <p class="menu-link px-3"onclick="banish(<?=$user->id ?>, <?=$user->active ?>)" ><?= deleteUser($user->active) ?></p>
                                                 </div>
+                                                <?php endif ?>
                                                 <!--end::Menu item-->
                                             </div>
                                             <!--end::Menu-->

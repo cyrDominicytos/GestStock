@@ -34,12 +34,19 @@ $routes->setAutoRoute(true);
 $routes->get('/', 'Auth::index');
 $routes->get('/logout', 'Auth::logout');
 $routes->post('/sign_in', 'Auth::login');
+
 $routes->post('/sign_up', 'Auth::create_user');
+$routes->post('/user/update/(:num)', 'Auth::edit_user/$1');
+
+$routes->get('/user/edit/(:num)', 'Auth::update_user/$1');
+$routes->get('/user/banish/(:num)', 'Auth::deactivate/$1');
+$routes->get('/user/activate/(:num)', 'Auth::activate/$1');
+$routes->delete('user/delete/(:id)', 'Auth::delete_user');
+$route['Auth/update_user'] = 'user/(:id)';
 
 $routes->get('/login', 'Auth::index');
 $routes->get('/register', 'Auth::register');
-$routes->get('/users/liste', 'Users::list');
-$routes->get('/users/liste', 'Users::list');
+$routes->get('/users/list', 'Users::list');
 
 
 

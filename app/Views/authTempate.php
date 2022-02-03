@@ -56,6 +56,8 @@
             });
         });
     </script>
+
+	<?= $this->renderSection('javascript') ?>
 	</body>
 	<!--end::Body-->
 </html>

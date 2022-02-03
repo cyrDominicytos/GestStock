@@ -49,7 +49,11 @@
 						<!--begin::Wrapper-->
 						<div class="w-lg-600px p-10 p-lg-15 mx-auto">
 							<!--begin::Form-->
-							<form class="form w-100" novalidate="novalidate" id="kt_sign_up_form" action="<?= base_url(); ?>/sign_up" method="post">
+							<form class="form w-100" novalidate="novalidate" id="kt_sign_up_form" action="<?= base_url(); ?>/<?= isset($userGroup)? 'user/update/'. $user->id: 'sign_up'?>" method="post">
+								<?php if (isset($userGroup)): ?>
+								   <input type="hidden" name="id" value="<?=  $user->id ?>">
+								   <input type="hidden" name="oldgroup" value="<?=  $userGroup?>">
+								<?php endif ?>
 								<!--begin::Heading-->
 								<div class="text-center mb-10">
 									<!--begin::Title-->
@@ -120,7 +124,7 @@
 									<!--begin::Input group-->
                                     <div class="fv-row mb-6">
                                         <label class="form-label fw-bolder text-dark fs-6">Profile <sup class="mySup">*</sup></label>
-                                        <select name="group" aria-label="Selectionnez un profile" data-control="select2" data-placeholder="Attribuer un role..." class="form-select form-select-solid form-select-lg fw-bold select2-hidden-accessible" data-select2-id="select2-data-10-02r3" tabindex="-1" aria-hidden="true">
+                                        <select name="group" aria-label="Selectionnez un profile" data-control="select2" data-placeholder="Attribuer un role..." class="form-select form-select-solid form-select-lg fw-bold select2-hidden-accessible" data-select2-id="select2-data-10-02r3" tabindex="-1" aria-hidden="true" id="group">
 											<?php foreach ($groups as $group): ?>
 												<option value="<?= $group->id ?>" ><?= $group->name ?></option>									
 											<?php endforeach ?>
@@ -172,7 +176,7 @@
 								<!--begin::Input group-->
 								<div class="fv-row mb-10">
 									<label class="form-check form-check-custom form-check-solid form-check-inline">
-										<input class="form-check-input" type="checkbox" name="toc" value="1" />
+										<input class="form-check-input" type="checkbox" name="toc" value="1" id="terms" onclick="toggleTerms()"/>
 										<span class="form-check-label fw-bold text-gray-700 fs-6">J'accepte
 										<a href="#" class="ms-1 link-primary">Les termes et conditions</a>.</span>
 									</label>
@@ -180,8 +184,8 @@
 								<!--end::Input group-->
 								<!--begin::Actions-->
 								<div class="text-center">
-									<button type="submit" id="kt_sign_up_submi" class="btn btn-lg btn-primary" >
-										<span class="indicator-label">Enregistrer</span>
+									<button type="submit" id="submit" class="btn btn-lg btn-primary"  >
+										<span class="indicator-label"><?= isset($userGroup)? 'Mettre à jour': 'Enregistrer'?></span>
 										<span class="indicator-progress">Patientez...
 										<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
 									</button>
@@ -210,4 +214,24 @@
 			<!--end::Authentication - Sign-in-->
 		</div>
 		<!--end::Root-->
+		<?= $this->section('javascript') ?>
+			<script type="text/javascript">
+				var group = "<?= isset($userGroup)? $userGroup: ''?>";
+				if(group!=""){
+					document.getElementById('group').value = group;
+				}
+
+				function toggleTerms() {
+					if(document.getElementById('terms').checked  ==  true)
+						document.getElementById('submit').disabled = false;
+					else
+						document.getElementById('submit').disabled = true;
+
+				}
+				toggleTerms() ;
+
+			</script>
+		<?= $this->endSection() ?>
  <?= $this->endSection() ?>
+
+ 

@@ -606,12 +606,12 @@
                                             <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4" data-kt-menu="true">
                                                 <!--begin::Menu item-->
                                                 <div class="menu-item px-3">
-                                                    <a href="../../demo13/dist/apps/user-management/users/view.html" class="menu-link px-3">Edit</a>
+                                                    <a href="<?= base_url()."/user/edit/".$user->id; ?>" class="menu-link px-3">Editer</a>
                                                 </div>
                                                 <!--end::Menu item-->
                                                 <!--begin::Menu item-->
                                                 <div class="menu-item px-3">
-                                                    <a href="#" class="menu-link px-3" data-kt-users-table-filter="delete_row">Delete</a>
+                                                    <p class="menu-link px-3"onclick="banish(<?=$user->id ?>, <?=$user->active ?>)" ><?= deleteUser($user->active) ?></p>
                                                 </div>
                                                 <!--end::Menu item-->
                                             </div>
@@ -635,4 +635,39 @@
     <!--end::Post-->
 </div>
 <!--end::Content-->
+<?= $this->section('javascript') ?>
+    <script type="text/javascript">
+        var banish_mes = `Vous souhaitez bannir cet utilisateur. <strong>Une fois bannis, il ne pourra plus se connecter à la plateforme tant qu'il ne soit activé à nouveau</strong>,
+                <span class="badge badge-primary">Etes-vous sûr de vouloir le bannir ?</span>`;
+        var active_mes = `Vous souhaitez activer cet utilisateur. <strong>Une fois activer, il pourra se connecter à nouveau à la plateforme et effectuer des opérations selon son profile</strong>,
+                <span class="badge badge-primary">Etes-vous sûr de vouloir l'activer ?</span>`
+        function banish(id, banish_type) {
+            Swal.fire({
+                html: banish_type== 1 ? banish_mes : active_mes,
+                icon: banish_type== 1 ? "warning" : "info",
+                buttonsStyling: false,
+                showCancelButton: true,
+                confirmButtonText: "J'en suis certain!",
+                cancelButtonText: "Non, J'abandonne.",
+                customClass: {
+                    confirmButton: "btn btn-primary",
+                    cancelButton: 'btn btn-danger'
+                }
+            }).then((result)=>
+                {
+                    if(result.value) 
+                        {
+                            if(banish_type == 1)
+                                document.location.href="<?=  base_url(); ?>/user/banish/"+id;
+                            else
+                                document.location.href="<?=  base_url(); ?>/user/activate/"+id;
+                        }
+                });  
+            
+        }
+       
+
+    </script>
+<?= $this->endSection() ?>
+
  <?= $this->endSection() ?>

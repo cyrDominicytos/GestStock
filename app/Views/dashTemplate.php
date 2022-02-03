@@ -32,6 +32,10 @@
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200&display=swap" rel="stylesheet">
         <!--style="font-family: 'Montserrat', sans-serif;"-->
+			<!-- SweetAlert -->
+		<link href="assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css"/>
+ 
+		<?= $this->renderSection('css') ?>
 
 	</head>
 	<body id="kt_body"   class="header-fixed header-tablet-and-mobile-fixed toolbar-enabled toolbar-fixed toolbar-tablet-and-mobile-fixed aside-enabled aside-fixed" style="--kt-toolbar-height:55px;--kt-toolbar-height-tablet-and-mobile:55px">
@@ -4337,8 +4341,50 @@
 		<script src="<?= base_url(); ?>/public/assets/js/custom/utilities/modals/upgrade-plan.js"></script>
 		<script src="<?= base_url(); ?>/public/assets/js/custom/utilities/modals/create-app.js"></script>
 		<script src="<?= base_url(); ?>/public/assets/js/custom/utilities/modals/users-search.js"></script>
+		<!-- SweetAlert -->
+		<script src="assets/plugins/global/plugins.bundle.js"></script>
 		<!--end::Page Custom Javascript-->
+		<?= $this->renderSection('javascript') ?>
 		<!--end::Javascript-->
+		<script type="text/javascript">
+			var message = "<?=  session()->has('message') ? (session()->get('message')) : ("")?>";
+			var code = "<?=  session()->has('code') ? (session()->get('code')) : ("")?>";
+				window.onload = function ()
+			{
+				if(message!="" && code!="")
+				{
+						var toastMixin = Swal.mixin({
+							toast: true,
+							icon: 'success',
+							title: 'General Title',
+							animation: false,
+							position: 'top-right',
+							showConfirmButton: false,
+							timer: 5000,
+							timerProgressBar: true,
+							didOpen: (toast) => {
+							toast.addEventListener('mouseenter', Swal.stopTimer)
+							toast.addEventListener('mouseleave', Swal.resumeTimer)
+							}
+						});
+						
+						//success toast
+						if(code==1)
+							toastMixin.fire({
+							animation: true,
+							title: message
+							});
+						//error toast
+						if(code==0)
+						toastMixin.fire({
+						title: message,
+						icon: 'error'
+						});
+
+				}
+			};
+		</script>
+
 	</body>
 	<!--end::Body-->
 </html>

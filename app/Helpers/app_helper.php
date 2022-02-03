@@ -7,6 +7,12 @@ if (!function_exists("status")) {
 		return ($statusId== 1) ? ("<div class='badge badge-success fw-bolder'>Actif</div>") : ("<div class='badge badge-danger fw-bolder'>InActif</div>"); 
 	}
 }
+if (!function_exists("deleteUser")) {
+	function deleteUser($statusId)
+	{
+		return ($statusId== 1) ? ("<span class='text-danger'>Bannir</span>") : ("<span class='text-success'>Activer</span>"); 
+	}
+}
 
 
 ?>

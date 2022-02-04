@@ -68,6 +68,22 @@ function insertPermissions($groupId, $request)
 		return $data;
 	}
 }
+if (!function_exists("updatePermissions")) {
+function updatePermissions($groupId, $request)
+	{
+		$modelPermission = new Permission();
+		$modelGroupPermission = new GroupPermission();
+		$modelGroupPermission->where("group_id", $groupId)->delete();
+		$permissions = $modelPermission->get()->getResult();
+		$data = [];
+		foreach ($permissions as $permission){
+			if($request->getPost($permission->id) != null){
+				$modelGroupPermission->insert(["group_id"=> $groupId,"permission_id"=>$permission->id]);
+			}
+		}
+		return $data;
+	}
+}
 
 
 ?>

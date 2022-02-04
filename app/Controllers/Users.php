@@ -17,11 +17,17 @@ class Users extends BaseController
 
     public function list()
     {
-        $data['users'] = $this->ionAuth->users()->result();
-      //  echo $data['users'][0]->id;
-        //dd($this->ionAuth->getUsersGroups(1)->getResult());
-       // dd($this->ionAuth->getUsersGroups($data['users'][0]->id));
-        $data['auth'] = $this->ionAuth;
-        return view('users/list',$data);
+        if (!$this->ionAuth->loggedIn() || !$this->ionAuth->isAdmin())
+		{
+			return redirect()->to('/')->with("message", session()->get("message"))->with("code", session()->get("code"));
+		}
+		else 
+		{
+            $data['users'] = $this->ionAuth->users()->result();
+            $data['auth'] = $this->ionAuth;
+            return view('users/list',$data);
+		}
+
+       
     }
 }

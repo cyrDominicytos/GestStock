@@ -63,8 +63,11 @@
                         <!--begin::Content-->
                         <div class="flex-lg-row-fluid me-0 me-lg-20">
                             <!--begin::Form-->
-                            <form action="<?= base_url(); ?>/groups/create" class="form mb-15" method="post" >
-                                <!--begin::Input group-->
+                            <form action="<?= base_url(); ?><?= isset($group) ? "/groups/edit/".$group->id : '/groups/create'; ?>" class="form mb-15" method="post" >
+                                <?php if (isset($group)): ?>
+								   <input type="hidden" name="id" value="<?=  $group->id ?>">
+								<?php endif ?>
+                            <!--begin::Input group-->
                                 <div class="row mb-5">
                                 <div id="infoMessage" style="color:red;"><?=  session()->has('message') ? (session()->get('message')) : ("")?></div>
 

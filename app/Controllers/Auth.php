@@ -99,9 +99,13 @@ class Auth extends \IonAuth\Controllers\Auth
 		{
             return view('auth/login');
 		}
+        elseif($this->ionAuth->isAdmin()){
+			return redirect()->to('/users/list')->with("message", session()->get("message"))->with("code", session()->get("code"));
+        }
 		else 
 		{
-			return redirect()->to('/users/list');
+            echo "<p style='font-weight:bold;color:red; font-size:20px;text-align:center'> Cette page est en cours de développement. Merci.<p>";
+			//return redirect()->to('/users/list')->with("message", session()->get("message"))->with("code", session()->get("code"));
 		}
 	}
 
@@ -178,9 +182,9 @@ class Auth extends \IonAuth\Controllers\Auth
     }
     public function update_user($id=null)
     {
-        if (! $this->ionAuth->loggedIn() || ! $this->ionAuth->isAdmin())
+        if (! $this->ionAuth->loggedIn() || (! $this->ionAuth->isAdmin() && $this->ionAuth->user($id)->row() && $this->ionAuth->user($id)->row()->id != $id) )
 		{
-			return redirect()->to('/auth');
+			return redirect()->to('/');
 		}
         if($id== null){
             return redirect()->back();
@@ -633,34 +637,42 @@ class Auth extends \IonAuth\Controllers\Auth
 	 */
 	public function edit_user(int $id)
 	{
-		if (! $this->ionAuth->loggedIn() || (! $this->ionAuth->isAdmin() && ! ($this->ionAuth->user()->row()->id == $id)))
-		{
-			return redirect()->to('/auth');
-		}
+        if (!$this->ionAuth->loggedIn())
+        {
+            return redirect()->to('/');
+        }
+        // bail if no group id given
+        if (!$id  || $id <= 0 || !$this->request->getPost() || $id!=$this->request->getPost('id') || (! $this->ionAuth->isAdmin() && $this->ionAuth->user($id)->row() && $this->ionAuth->user($id)->row()->id != $id))
+        {
+            return redirect()->back()->with("message", "Erreur : Accès illégal !")->with("code", 0);
+        }
 
 		$user          = $this->ionAuth->user($id)->row();
-		$groups        = $this->ionAuth->groups()->resultArray();
-		$currentGroups = $this->ionAuth->getUsersGroups($id)->getResult();
-        //dd()
-		if (! empty($_POST))
+		if ($user!=null)
 		{
 			// validate form input
+            $tables = $this->configIonAuth->tables;
             $this->validation->setRules([
                 'first_name'=> 'trim|required',
                 'last_name'=> 'trim|required',
                 'phone'=> 'trim',
-
+                'username'=> "trim|required|".($user->username == $this->request->getPost('username') ? ('') : ('is_unique['. $tables['users'] . '.username]')),
+                'email'=> "trim|required|valid_email|".($user->email == $this->request->getPost('email') ? ('') : ('is_unique['. $tables['users'] . '.email]')),
+                
                 ],
                 [
                     "first_name"=>["required"=>"Renseignez le nom"],
                     "last_name"=>["required"=>"Renseignez le prénom"],
+                    "email"=>[
+                        "required"=>"Renseignez l'adresse email",
+                        "valid_email"=>"Renseignez une adresse email valide",
+                        "is_unique"=>"L'email : ".$this->request->getPost('email')." existe déjà",
+                        ],
+                    "username"=>[
+                        "required"=>"Renseignez le nom d'utilisateur",
+                        "is_unique"=>"Le nom d'utilisateur : ".$this->request->getPost('username')." existe déjà",
+                        ],
                 ]);
-			// do we have a valid request?
-			if ($id !== $this->request->getPost('id', FILTER_VALIDATE_INT))
-			{
-				//show_error(lang('Auth.error_security'));
-				throw new \Exception(lang('Auth.error_security'));
-			}
 
 			// update the password if it was posted
 			if ($this->request->getPost('password')  && !empty($this->request->getPost('password')))
@@ -678,9 +690,10 @@ class Auth extends \IonAuth\Controllers\Auth
                                     "required"=>"Confirmer le mot de passe",
                                     ],
                     ]);
+                    $data['password'] = $this->request->getPost('password');
 			}
 
-			if ($this->request->getPost() && $this->validation->withRequest($this->request)->run())
+			if ($this->validation->withRequest($this->request)->run())
 			{
 				$data = [
 					'first_name' => $this->request->getPost('first_name'),
@@ -688,12 +701,10 @@ class Auth extends \IonAuth\Controllers\Auth
 					'address'    => $this->request->getPost('address'),
 					'phone'      => $this->request->getPost('phone'),
 				];
-
-				// update the password if it was posted
-				if ($this->request->getPost('password') && !empty($this->request->getPost('password')))
-				{
-					$data['password'] = $this->request->getPost('password');
-				}
+                if($user->username!=$this->request->getPost('username'))
+                     $data['username'] = $this->request->getPost('username');
+                if($user->email!=$this->request->getPost('email'))
+                     $data['email'] = $this->request->getPost('email');
 
 				// Only allow updating groups if user is admin
 				if ($this->ionAuth->isAdmin())
@@ -712,18 +723,21 @@ class Auth extends \IonAuth\Controllers\Auth
 				// check to see if we are updating the user
 				if ($this->ionAuth->update($user->id, $data))
 				{
-					$this->session->setFlashdata('message', $this->ionAuth->messages());
+                    return redirect()->to("/users/list")->with("message", "Profile édité avec succès !")->with("code", 1);
 				}
 				else
 				{
 					$this->session->setFlashdata('message', $this->ionAuth->errors($this->validationListTemplate));
+                    return redirect()->back()->with("code", 0);
 				}
-				// redirect them back to the admin page if admin, or to the base url if non admin
-				return redirect()->to("/users/list")->with("message", "Utilisateur édité avec succès !")->with("code", 1);
-			}
+			}else{
+                $this->data['message'] = $this->validation->getErrors() ? $this->validation->listErrors($this->validationListTemplate) : ($this->ionAuth->errors($this->validationListTemplate) ? $this->ionAuth->errors($this->validationListTemplate) : $this->session->getFlashdata('message'));
+                $this->session->setFlashdata('message', $this->data['message']);
+                return redirect()->back()->withInput();
+            }
 		}else
 		// display the edit user form
-        return redirect()->to("/")->with("message", "Vous ne remplissez pas les conditions pour effectuer cette opération!")->with("code", 0);
+        return redirect()->back()->with("message", "L'utilisateur que vous essayez de modifier n'existe pas!")->with("code", 0);
     
     }
 
@@ -754,7 +768,7 @@ class Auth extends \IonAuth\Controllers\Auth
 		// validate form input
 		if ($this->request->getPost() && $this->validation->withRequest($this->request)->run())
 		{
-			$newGroupId = $this->ionAuth->createGroup($this->request->getPost('name'), $this->request->getPost('description'));
+			$newGroupId = $this->ionAuth->createGroup($this->request->getPost('name'), $this->request->getPost('description'),['guard' => $this->request->getPost('guard')]);
 			if ($newGroupId)
 			{
 				// check to see if we are creating the group
@@ -768,7 +782,6 @@ class Auth extends \IonAuth\Controllers\Auth
 			// display the create group form
 			// set the flash data error message if there is one
 			$this->data['message'] = $this->validation->getErrors() ? $this->validation->listErrors($this->validationListTemplate) : ($this->ionAuth->errors($this->validationListTemplate) ? $this->ionAuth->errors($this->validationListTemplate) : $this->session->getFlashdata('message'));
-
             return redirect()->back()->with("message", $this->data['message'])->with("code", 0);
 		}
 	}
@@ -782,65 +795,56 @@ class Auth extends \IonAuth\Controllers\Auth
 	 */
 	public function edit_group(int $id = 0)
 	{
-		// bail if no group id given
-		if (! $id)
+		
+        if (!$this->ionAuth->loggedIn())
 		{
-			return redirect()->to('/auth');
+			return redirect()->to('/');
+		}
+        // bail if no group id given
+		if (!$id  || $id <= 0 || !$this->request->getPost() || $id!=$this->request->getPost('id') || ! $this->ionAuth->isAdmin())
+		{
+            return redirect()->back()->with("message", "Erreur : Accès illégal !")->with("code", 0);
 		}
 
-		$this->data['title'] = lang('Auth.edit_group_title');
+            $group = $this->ionAuth->group($id)->row();
+            if($group!= null){
+                //entry exists
+                $tables = $this->configIonAuth->tables;
+                // validate form input
+                $this->validation->setRules([
+                    'name'=> 'trim|required|alpha_dash',
+                    ],
+                    [
+                        "name"=>[
+                                    "required"=>"Renseignez la désignation du rôle",
+                                "alpha_dash"=>"Le désignation du rôle doit être une chaine de caractère",
+                            ],
+                ]);
 
-		if (! $this->ionAuth->loggedIn() || ! $this->ionAuth->isAdmin())
-		{
-			return redirect()->to('/auth');
-		}
+                //check validation 
+                if ($this->validation->withRequest($this->request)->run())
+                {
+                    //update now
+                    $groupUpdate = $this->ionAuth->updateGroup($id, $this->request->getPost('name'), ['description' => $this->request->getPost('description'),'guard' => $this->request->getPost('guard')]);
+                    if ($groupUpdate)
+                    {
+                        updatePermissions($id, $this->request);
+                        return redirect()->to('/groups/list')->with("message", "Le rôle ".$this->request->getPost('name')." est mise à jour avec succès !")->with("code", 1);
+                    }
+                    else
+                    {
+                        return redirect()->back()->with("message", " Il se pourrait que le rôle ".$this->request->getPost('name')." existe déjà!")->with("code", 0);
+                    }
+                }else{
+                    //validation failed
+                    $this->data['message'] = $this->validation->getErrors() ? $this->validation->listErrors($this->validationListTemplate) : ($this->ionAuth->errors($this->validationListTemplate) ? $this->ionAuth->errors($this->validationListTemplate) : $this->session->getFlashdata('message'));
+                    return redirect()->back()->with("message", $this->data['message'])->with("code", 0);
+                }
 
-		$group = $this->ionAuth->group($id)->row();
-
-		// validate form input
-		$this->validation->setRule('group_name', lang('Auth.edit_group_validation_name_label'), 'required|alpha_dash');
-
-		if ($this->request->getPost())
-		{
-			if ($this->validation->withRequest($this->request)->run())
-			{
-				$groupUpdate = $this->ionAuth->updateGroup($id, $this->request->getPost('group_name'), ['description' => $this->request->getPost('group_description')]);
-
-				if ($groupUpdate)
-				{
-					$this->session->setFlashdata('message', lang('Auth.edit_group_saved'));
-				}
-				else
-				{
-					$this->session->setFlashdata('message', $this->ionAuth->errors($this->validationListTemplate));
-				}
-				return redirect()->to('/auth');
-			}
-		}
-
-		// set the flash data error message if there is one
-		$this->data['message'] = $this->validation->listErrors($this->validationListTemplate) ?: ($this->ionAuth->errors($this->validationListTemplate) ?: $this->session->getFlashdata('message'));
-
-		// pass the user to the view
-		$this->data['group'] = $group;
-
-		$readonly = $this->configIonAuth->adminGroup === $group->name ? 'readonly' : '';
-
-		$this->data['group_name']        = [
-			'name'    => 'group_name',
-			'id'      => 'group_name',
-			'type'    => 'text',
-			'value'   => set_value('group_name', $group->name),
-			$readonly => $readonly,
-		];
-		$this->data['group_description'] = [
-			'name'  => 'group_description',
-			'id'    => 'group_description',
-			'type'  => 'text',
-			'value' => set_value('group_description', $group->description),
-		];
-
-		return $this->renderPage($this->viewsFolder . DIRECTORY_SEPARATOR . 'edit_group', $this->data);
+            }else{
+                //group not existe
+                return redirect()->back()->with("message", "Le rôle que vous essayez de mettre à jour n'existe pas")->with("code", 0);
+            }
 	}
 
 	/**

@@ -2,6 +2,10 @@
 
 namespace App\Controllers;
 
+use App\Models\Permission;
+use App\Models\GroupPermission;
+use App\Models\UserGroup;
+
 class Auth extends \IonAuth\Controllers\Auth
 {
 
@@ -10,6 +14,7 @@ class Auth extends \IonAuth\Controllers\Auth
 	 * @var array
 	 */
 	public $data = [];
+    protected $helpers = ["app"];
 
 	/**
 	 * Configuration
@@ -56,6 +61,9 @@ class Auth extends \IonAuth\Controllers\Auth
 	 */
 	protected $viewsFolder = 'Views/auth';
 
+    protected $modelPermission = null;
+	protected $modelGroupPermission = null;
+	protected $modelUserGroup = null;
 	/**
 	 * Constructor
 	 *
@@ -68,6 +76,11 @@ class Auth extends \IonAuth\Controllers\Auth
 		helper(['form', 'url']);
 		$this->configIonAuth = config('IonAuth');
 		$this->session       = \Config\Services::session();
+
+        //Personal models
+        $this->modelPermission = new Permission();
+        $this->modelGroupPermission = new GroupPermission();
+        $this->modelUserGroup = new UserGroup();
 
 		if (! empty($this->configIonAuth->templates['errors']['list']))
 		{
@@ -181,11 +194,38 @@ class Auth extends \IonAuth\Controllers\Auth
     {
         $data['groups'] = $this->ionAuth->groups()->result();
       //  echo $data['users'][0]->id;
-        //dd($this->ionAuth->getUsersGroups(1)->getResult());
-       // dd($this->ionAuth->getUsersGroups($data['users'][0]->id));
+      $data['assignedGroups'] = groups_array($this->modelUserGroup->getAssignedGroups());
         $data['auth'] = $this->ionAuth;
         return view('role_permission/list',$data);
     }
+    public function new_group()
+    {
+        $data['groups'] = $this->ionAuth->groups()->result();
+      //  echo $data['users'][0]->id;
+      $data['assignedGroups'] = groups_array($this->modelUserGroup->getAssignedGroups());
+      $data['permissions'] = getPermissionByModule();
+     // dd($data['permissions']);
+        $data['auth'] = $this->ionAuth;
+        return view('role_permission/create',$data);
+    }
+
+    public function update_group($id=null)
+    {
+        if (! $this->ionAuth->loggedIn() || ! $this->ionAuth->isAdmin())
+		{
+			return redirect()->to('/auth');
+		}
+        if($id== null){
+            return redirect()->back();
+        }
+        $data['groups'] = $this->ionAuth->groups()->result();
+        $data['group'] = $this->ionAuth->group($id)->row();
+        $data['group_permission'] = permission_array ($this->modelGroupPermission->get_goupId($id)) ;
+        $data['assignedGroups'] = groups_array($this->modelUserGroup->getAssignedGroups());
+        $data['permissions'] = getPermissionByModule();
+        $data['auth'] = $this->ionAuth;
+        return view('role_permission/create',$data);
+    } 
 	/**
 	 * Change password
 	 *
@@ -694,25 +734,33 @@ class Auth extends \IonAuth\Controllers\Auth
 	 */
 	public function create_group()
 	{
-		$this->data['title'] = lang('Auth.create_group_title');
-
 		if (! $this->ionAuth->loggedIn() || ! $this->ionAuth->isAdmin())
 		{
-			return redirect()->to('/auth');
+			return redirect()->to('/');
 		}
 
+        $tables = $this->configIonAuth->tables;
+        // validate form input
+		$this->validation->setRules([
+            'name'=> 'trim|required|is_unique['. $tables['groups'] . '.name]|alpha_dash',
+            ],
+            [
+                "name"=>[
+                            "required"=>"Renseignez la désignation du rôle",
+                            "is_unique"=>"Le rôle ".$this->request->getPost('name')." existe déjà",
+                            "alpha_dash"=>"Le désignation du rôle doit être une chaine de caractère",
+                        ],
+            ]);
 		// validate form input
-		$this->validation->setRule('group_name', lang('Auth.create_group_validation_name_label'), 'trim|required|alpha_dash');
-
 		if ($this->request->getPost() && $this->validation->withRequest($this->request)->run())
 		{
-			$newGroupId = $this->ionAuth->createGroup($this->request->getPost('group_name'), $this->request->getPost('description'));
+			$newGroupId = $this->ionAuth->createGroup($this->request->getPost('name'), $this->request->getPost('description'));
 			if ($newGroupId)
 			{
 				// check to see if we are creating the group
 				// redirect them back to the admin page
-				$this->session->setFlashdata('message', $this->ionAuth->messages());
-				return redirect()->to('/auth');
+                insertPermissions($newGroupId, $this->request);
+				return redirect()->to('/groups/list')->with("message", "Le rôle ".$this->request->getPost('name')." est créé avec succès !")->with("code", 1);
 			}
 		}
 		else
@@ -721,20 +769,7 @@ class Auth extends \IonAuth\Controllers\Auth
 			// set the flash data error message if there is one
 			$this->data['message'] = $this->validation->getErrors() ? $this->validation->listErrors($this->validationListTemplate) : ($this->ionAuth->errors($this->validationListTemplate) ? $this->ionAuth->errors($this->validationListTemplate) : $this->session->getFlashdata('message'));
 
-			$this->data['group_name'] = [
-				'name'  => 'group_name',
-				'id'    => 'group_name',
-				'type'  => 'text',
-				'value' => set_value('group_name'),
-			];
-			$this->data['description'] = [
-				'name'  => 'description',
-				'id'    => 'description',
-				'type'  => 'text',
-				'value' => set_value('description'),
-			];
-
-			return $this->renderPage($this->viewsFolder . DIRECTORY_SEPARATOR . 'create_group', $this->data);
+            return redirect()->back()->with("message", $this->data['message'])->with("code", 0);
 		}
 	}
 

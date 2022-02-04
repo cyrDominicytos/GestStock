@@ -44,6 +44,10 @@ $routes->get('/user/activate/(:num)', 'Auth::activate/$1');
 
 //roles and permissions
 $routes->get('/groups/list', 'Auth::role_permission');
+$routes->get('/groups/new', 'Auth::new_group');
+$routes->post('/groups/create', 'Auth::create_group');
+$routes->get('/groups/update/(:num)', 'Auth::update_group/$1');
+$routes->post('/groups/edit/(:num)', 'Auth::edit_group/$1');
 
 $routes->get('/login', 'Auth::index');
 $routes->get('/register', 'Auth::register');

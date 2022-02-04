@@ -130,7 +130,7 @@
                 </div>
                 <!--end::Wrapper-->
                 <!--begin::Button-->
-                <a href="#" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_create_app" id="kt_toolbar_primary_button">Nouveau Rôle</a>
+                <a href="<?= base_url() ?>/groups/new" class="btn btn-sm btn-primary">Nouveau Rôle</a>
                 <!--end::Button-->
             </div>
             <!--end::Actions-->
@@ -234,7 +234,7 @@
                             <!--end::Svg Icon-->Export</button>
                             <!--end::Export-->
                             <!--begin::Add user-->
-                            <a href="<?=  base_url(); ?>/register" class="btn btn-primary">
+                            <a href="<?= base_url() ?>/groups/new" class="btn btn-primary">
                             <!--begin::Svg Icon | path: icons/duotune/arrows/arr075.svg-->
                             <span class="svg-icon svg-icon-2">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -600,7 +600,7 @@
                                             <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4" data-kt-menu="true">
                                                 <!--begin::Menu item-->
                                                 <div class="menu-item px-3">
-                                                    <a href="<?= base_url()."/user/edit/".$group->id; ?>" class="menu-link px-3">Editer</a>
+                                                    <a href="<?= base_url()."/groups/update/".$group->id; ?>" class="menu-link px-3">Editer</a>
                                                 </div>
                                                 <!--end::Menu item-->
                                                 <!--begin::Menu item-->
@@ -636,9 +636,9 @@
 
         var can_not_delete_mes = `Désolé, vous ne pouvez pas supprimer ce rôle car il est actuellement attribué à un ou plusieurs utilisateurs. Assurez vous de le
                 <span class="badge badge-primary">Pour pouvoir le supprimer, veuillez le retirer à tous les utilisateurs qui le possèdent</span>`;
-        var unDetetableGroups = [1, 2, 3];
+        var unDeletableGroups = <?= json_encode($assignedGroups)?>;
         function deleteGroup(id) {
-            if(unDetetableGroups.includes(id)){
+            if(unDeletableGroups.includes(id+"")){
                 //can not delete group
                 Swal.fire({
                     text: can_not_delete_mes,

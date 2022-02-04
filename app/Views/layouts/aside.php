@@ -238,7 +238,7 @@
                                         </span>
                                         <div class="menu-sub menu-sub-accordion menu-active-bg">
                                             <div class="menu-item menu-accordion">
-                                                <a class="menu-link" href="<?= base_url() ?>/groups/create">
+                                                <a class="menu-link" href="<?= base_url() ?>/groups/new">
                                                     <span class="menu-bullet">
                                                         <span class="bullet bullet-dot"></span>
                                                     </span>

@@ -1,5 +1,9 @@
 <?php
 
+use App\Models\Permission;
+use App\Models\GroupPermission;
+
+
 // Function: used to convert a string to revese in order
 if (!function_exists("status")) {
 	function status($statusId)
@@ -8,9 +12,60 @@ if (!function_exists("status")) {
 	}
 }
 if (!function_exists("deleteUser")) {
-	function deleteUser($statusId)
+function deleteUser($statusId)
+{
+	return ($statusId== 1) ? ("<span class='text-danger'>Bannir</span>") : ("<span class='text-success'>Activer</span>"); 
+}
+
+if (!function_exists("groups_array")) {
+function groups_array($groups)
 	{
-		return ($statusId== 1) ? ("<span class='text-danger'>Bannir</span>") : ("<span class='text-success'>Activer</span>"); 
+		$data = [];
+		foreach ($groups as $group){
+			$data[count($data)] = $group->group_id;
+		}
+		return $data;
+	}
+}
+if (!function_exists("permission_array")) {
+function permission_array($groups)
+	{
+		$data = [];
+		foreach ($groups as $group){
+			$data[count($data)] = $group->permission_id;
+		}
+		return $data;
+		}
+	}
+}
+
+if (!function_exists("getPermissionByModule")) {
+function getPermissionByModule()
+	{
+		$modelPermission = new Permission();
+		$permissions = $modelPermission->getPermissionsGroupByModule();
+		$data = [];
+		foreach ($permissions as $permission){
+
+			$data[$permission->module] = $modelPermission->where(['module' => $permission->module])->get()->getResult();
+		}
+		return $data;
+	}
+}
+
+if (!function_exists("insertPermissions")) {
+function insertPermissions($groupId, $request)
+	{
+		$modelPermission = new Permission();
+		$modelGroupPermission = new GroupPermission();
+		$permissions = $modelPermission->get()->getResult();
+		$data = [];
+		foreach ($permissions as $permission){
+			if($request->getPost($permission->id) != null){
+				$modelGroupPermission->insert(["group_id"=> $groupId,"permission_id"=>$permission->id]);
+			}
+		}
+		return $data;
 	}
 }
 

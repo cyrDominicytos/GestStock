@@ -5,6 +5,7 @@ namespace App\Controllers;
 use App\Models\Permission;
 use App\Models\GroupPermission;
 use App\Models\UserGroup;
+use App\Models\Group;
 
 class Auth extends \IonAuth\Controllers\Auth
 {
@@ -64,6 +65,7 @@ class Auth extends \IonAuth\Controllers\Auth
     protected $modelPermission = null;
 	protected $modelGroupPermission = null;
 	protected $modelUserGroup = null;
+	protected $modelGroup = null;
 	/**
 	 * Constructor
 	 *
@@ -81,6 +83,7 @@ class Auth extends \IonAuth\Controllers\Auth
         $this->modelPermission = new Permission();
         $this->modelGroupPermission = new GroupPermission();
         $this->modelUserGroup = new UserGroup();
+        $this->modelGroup = new Group();
 
 		if (! empty($this->configIonAuth->templates['errors']['list']))
 		{
@@ -217,7 +220,7 @@ class Auth extends \IonAuth\Controllers\Auth
     {
         if (! $this->ionAuth->loggedIn() || ! $this->ionAuth->isAdmin())
 		{
-			return redirect()->to('/auth');
+			return redirect()->to('/');
 		}
         if($id== null){
             return redirect()->back();
@@ -229,6 +232,22 @@ class Auth extends \IonAuth\Controllers\Auth
         $data['permissions'] = getPermissionByModule();
         $data['auth'] = $this->ionAuth;
         return view('role_permission/create',$data);
+    } 
+    public function delete_group($id)
+    {
+        if (! $this->ionAuth->loggedIn() || ! $this->ionAuth->isAdmin())
+		{
+			return redirect()->to('/');
+		}
+        if($id && $this->ionAuth->group($id)->row()!=null){
+            $rep = $this->modelGroup->delete([$id]);
+            if($rep)
+                return redirect()->to("/groups/list")->with("message", "Le rôle a été supprimé avec succès !")->with("code", 1);
+            else           
+                return redirect()->to("/groups/list")->with("message", "Erreur lors de la suppression du rôle ou rôle inexistant !")->with("code", 0);
+        }else{
+            return redirect()->to("/groups/list")->with("message", "Le rôle que vous essayez de supprimer n'existe pas !")->with("code", 0);
+        }
     } 
 	/**
 	 * Change password

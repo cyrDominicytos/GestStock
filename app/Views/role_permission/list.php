@@ -634,8 +634,8 @@
         var delete_mes = `Vous souhaitez supprimer ce rôle. 
                 <span class="badge badge-primary">Etes-vous sûr de vouloir le supprimer ?</span>`;
 
-        var can_not_delete_mes = `Désolé, vous ne pouvez pas supprimer ce rôle car il est actuellement attribué à un ou plusieurs utilisateurs. Assurez vous de le
-                <span class="badge badge-primary">Pour pouvoir le supprimer, veuillez le retirer à tous les utilisateurs qui le possèdent</span>`;
+        var can_not_delete_mes = `Désolé, vous ne pouvez pas supprimer ce rôle car il est actuellement attribué à un ou plusieurs utilisateurs.
+        <span class="badge badge-primary">Pour pouvoir le supprimer, veuillez le retirer à tous les utilisateurs auxquels il est attribué.</span>`;
         var unDeletableGroups = <?= json_encode($assignedGroups)?>;
         function deleteGroup(id) {
             if(unDeletableGroups.includes(id+"")){
@@ -664,8 +664,8 @@
                     }
                 }).then((result)=>
                     {
-                        if(result.value)                                
-                            document.location.href="<?=  base_url(); ?>/user/banish/"+id;                               
+                        if(result.value)                               
+                            document.location.href="<?=  base_url(); ?>/groups/delete/"+id;                               
                     });  
             }
         }

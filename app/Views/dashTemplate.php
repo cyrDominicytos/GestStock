@@ -33,7 +33,7 @@
         <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200&display=swap" rel="stylesheet">
         <!--style="font-family: 'Montserrat', sans-serif;"-->
 			<!-- SweetAlert -->
-		<link href="assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css"/>
+		<!-- <link href="<?= base_url() ; ?>/public/asset/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css"/> -->
  
 		<?= $this->renderSection('css') ?>
 
@@ -4342,7 +4342,7 @@
 		<script src="<?= base_url(); ?>/public/assets/js/custom/utilities/modals/create-app.js"></script>
 		<script src="<?= base_url(); ?>/public/assets/js/custom/utilities/modals/users-search.js"></script>
 		<!-- SweetAlert -->
-		<script src="assets/plugins/global/plugins.bundle.js"></script>
+		<!-- <script src="<?= base_url() ; ?>/public/asset/plugins/global/plugins.bundle.js"></script> -->
 		<!--end::Page Custom Javascript-->
 		<?= $this->renderSection('javascript') ?>
 		<!--end::Javascript-->

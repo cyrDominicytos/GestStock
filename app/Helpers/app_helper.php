@@ -2,6 +2,7 @@
 
 use App\Models\Permission;
 use App\Models\GroupPermission;
+use App\Models\Group;
 
 
 // Function: used to convert a string to revese in order
@@ -36,6 +37,23 @@ function permission_array($groups)
 		}
 		return $data;
 		}
+	}
+}
+
+if (!function_exists("permission_list_foreach_group")) {
+function permission_list_foreach_group()
+	{
+		$modelGroup = new Group();
+		$modelGroupPermission = new GroupPermission();
+		$groups = $modelGroup->get()->getResult();
+		$data = [];
+		$temp = [];
+		foreach ($groups as $group){
+			$data[$group->id] = $modelGroupPermission->get_permission_by_group($group->id);
+			
+		}
+
+		return $data;
 	}
 }
 

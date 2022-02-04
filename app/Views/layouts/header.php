@@ -601,7 +601,7 @@
 													<!--begin::Username-->
 													<div class="d-flex flex-column">
 														<div class="fw-bolder d-flex align-items-center fs-5 text-dark"><?=  session()->has('identity') ? ($auth->user()->row()->first_name.''.$auth->user()->row()->last_name) : ("")?>
-														<span class="badge badge-light-success fw-bolder fs-8 px-2 py-1 ms-2"><?=  session()->has('identity') ? ($auth->group()->row()->name) : ("")?></span></div>
+														<span class="badge badge-light-success fw-bolder fs-8 px-2 py-1 ms-2"><?=  session()->has('identity') ? ($auth->getUsersGroups()->getResult()[0]->name) : ("")?></span></div>
 														<a href="#" class="fw-bold text-muted text-hover-primary fs-7"><?=  session()->has('identity') ? (session()->get('identity')) : ("")?></a>
 													</div>
 													<!--end::Username-->

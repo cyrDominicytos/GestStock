@@ -37,7 +37,13 @@
                 <!--end::Breadcrumb-->
             </div>
             <!--end::Page title-->
-            
+            <!--begin::Actions-->
+            <div class="d-flex align-items-center py-1">
+                <!--begin::Button-->
+                <a href="<?= base_url() ?>/groups/list" class="btn btn-sm btn-primary">Liste des rôles</a>
+                <!--end::Button-->
+            </div>
+            <!--end::Actions-->
         </div>
         <!--end::Container-->
     </div>
@@ -109,7 +115,7 @@
                                     <!--begin::Description-->
                                     <div class="m-0">
                                         <!--begin::Title-->
-                                        <h4 class="fs-1 text-gray-800 w-bolder mb-6"><?= isset($group) ? "Mise à jour des" : 'Attribution des'; ?> permissions au rôle</h4>
+                                        <h4 class="fs-1 text-gray-800 w-bolder mb-6"><?= isset($group) ? "Mise à jour des" : 'Ajout des'; ?> permissions au rôle</h4>
                                         <!--end::Title-->
                                         <!--begin::Text-->
                                         <p class="fw-bold fs-4 text-gray-600 mb-2">Cochez les permissions que vous souhaiter attribuer à ce rôle sur chaque module</p>
@@ -207,36 +213,7 @@
 </div>
 <!--end::Content-->
 <?= $this->section('javascript') ?>
-    <script type="text/javascript">
-        var banish_mes = `Vous souhaitez bannir cet utilisateur. <strong>Une fois bannis, il ne pourra plus se connecter à la plateforme tant qu'il ne soit activé à nouveau</strong>,
-                <span class="badge badge-primary">Etes-vous sûr de vouloir le bannir ?</span>`;
-        var active_mes = `Vous souhaitez activer cet utilisateur. <strong>Une fois activer, il pourra se connecter à nouveau à la plateforme et effectuer des opérations selon son profile</strong>,
-                <span class="badge badge-primary">Etes-vous sûr de vouloir l'activer ?</span>`
-        function banish(id, banish_type) {
-            Swal.fire({
-                html: banish_type== 1 ? banish_mes : active_mes,
-                icon: banish_type== 1 ? "warning" : "info",
-                buttonsStyling: false,
-                showCancelButton: true,
-                confirmButtonText: "J'en suis certain!",
-                cancelButtonText: "Non, J'abandonne.",
-                customClass: {
-                    confirmButton: "btn btn-primary",
-                    cancelButton: 'btn btn-danger'
-                }
-            }).then((result)=>
-                {
-                    if(result.value) 
-                        {
-                            if(banish_type == 1)
-                                document.location.href="<?=  base_url(); ?>/user/banish/"+id;
-                            else
-                                document.location.href="<?=  base_url(); ?>/user/activate/"+id;
-                        }
-                });  
-            
-        }
-       
+    <script type="text/javascript">       
 
     </script>
 <?= $this->endSection() ?>

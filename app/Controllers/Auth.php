@@ -200,18 +200,15 @@ class Auth extends \IonAuth\Controllers\Auth
     public function role_permission()
     {
         $data['groups'] = $this->ionAuth->groups()->result();
-      //  echo $data['users'][0]->id;
-      $data['assignedGroups'] = groups_array($this->modelUserGroup->getAssignedGroups());
+        $data['assignedGroups'] = groups_array($this->modelUserGroup->getAssignedGroups());
+        $data['permission_list_foreach_group'] = permission_list_foreach_group() ;
         $data['auth'] = $this->ionAuth;
         return view('role_permission/list',$data);
     }
     public function new_group()
     {
         $data['groups'] = $this->ionAuth->groups()->result();
-      //  echo $data['users'][0]->id;
-      $data['assignedGroups'] = groups_array($this->modelUserGroup->getAssignedGroups());
-      $data['permissions'] = getPermissionByModule();
-     // dd($data['permissions']);
+        $data['permissions'] = getPermissionByModule();
         $data['auth'] = $this->ionAuth;
         return view('role_permission/create',$data);
     }
@@ -228,10 +225,25 @@ class Auth extends \IonAuth\Controllers\Auth
         $data['groups'] = $this->ionAuth->groups()->result();
         $data['group'] = $this->ionAuth->group($id)->row();
         $data['group_permission'] = permission_array ($this->modelGroupPermission->get_goupId($id)) ;
-        $data['assignedGroups'] = groups_array($this->modelUserGroup->getAssignedGroups());
         $data['permissions'] = getPermissionByModule();
         $data['auth'] = $this->ionAuth;
         return view('role_permission/create',$data);
+    } 
+    public function view_group($id=null)
+    {
+        if (! $this->ionAuth->loggedIn() || ! $this->ionAuth->isAdmin())
+		{
+			return redirect()->to('/');
+		}
+        if($id== null){
+            return redirect()->back();
+        }
+        $data['group'] = $this->ionAuth->group($id)->row();
+        $data['users'] = $this->ionAuth->users($id)->result();
+        $data['permissions'] = $this->modelGroupPermission->get_permission_by_group($id);
+        $data['auth'] = $this->ionAuth;
+
+        return view('role_permission/view',$data);
     } 
     public function delete_group($id)
     {

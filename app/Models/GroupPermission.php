@@ -21,7 +21,7 @@ class GroupPermission extends Model
         return $this->db->table('permissions')->join('groups_permissions', 'permissions.id = groups_permissions.permission_id')
         ->select('name, permissions.id as permission_id, group_id ')
         ->where('groups_permissions.group_id', $group)
-        ->get()->getResultArray();
+        ->get()->getResult();
     
     }
     public function get_goupId($group)

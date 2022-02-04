@@ -47,6 +47,7 @@ $routes->get('/groups/list', 'Auth::role_permission');
 $routes->get('/groups/new', 'Auth::new_group');
 $routes->post('/groups/create', 'Auth::create_group');
 $routes->get('/groups/update/(:num)', 'Auth::update_group/$1');
+$routes->get('/groups/view/(:num)', 'Auth::view_group/$1');
 $routes->post('/groups/edit/(:num)', 'Auth::edit_group/$1');
 $routes->get('/groups/delete/(:num)', 'Auth::delete_group/$1');
 

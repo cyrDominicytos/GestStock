@@ -3,6 +3,9 @@
 use App\Models\Permission;
 use App\Models\GroupPermission;
 use App\Models\Group;
+use App\Models\Client;
+use App\Models\Provider;
+use App\Models\DeliveryMen;
 
 
 // Function: used to convert a string to revese in order
@@ -100,6 +103,86 @@ function updatePermissions($groupId, $request)
 			}
 		}
 		return $data;
+	}
+}
+
+if (!function_exists("externalParams")) {
+function externalParams()
+	{
+		return [
+				"1"=>[
+					"title"=>"Liste des clients",
+					"externalName"=>"client",
+					"table"=>"clients",
+				],
+				"2"=>[
+					"title"=>"Liste des fournisseurs",
+					"externalName"=>"fournisseur",
+					"externalNewRoute"=>"",
+					"table"=>"providers",
+				],
+				"3"=>[
+					"title"=>"Liste des livreurs",
+					"externalName"=>"livreur",
+					"externalNewRoute"=>"",
+					"table"=>"delivery_mens",
+				],
+				
+		];
+	}
+}
+
+if (!function_exists("externalInsert")) {
+function externalInsert($type, $data)
+	{
+		switch ($type) {
+			case '1':
+				$clientModel = new Client();
+				return $clientModel->insert($data);
+			case '2':
+				$providerModel = new Provider();
+				return $providerModel->insert($data);
+
+			case '3':
+				$deliveryMenModel = new DeliveryMen();
+				return $deliveryMenModel->insert($data);
+			
+			default:
+				return null;
+		}
+	}
+}
+
+if (!function_exists("externalModel")) {
+function externalModel($type)
+	{
+		switch ($type) {
+			case '1':
+				return new Client();;
+			case '2':
+				return new Provider();
+
+			case '3':
+				return new DeliveryMen();
+			default:
+				return null;
+		}
+	}
+}
+if (!function_exists("deactiveExternal")) {
+function deactiveExternal($type)
+	{
+		switch ($type) {
+			case '1':
+				return new Client();;
+			case '2':
+				return new Provider();
+
+			case '3':
+				return new DeliveryMen();
+			default:
+				return null;
+		}
 	}
 }
 

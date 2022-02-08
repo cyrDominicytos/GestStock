@@ -1,5 +1,5 @@
 <?= $this->extend('dashTemplate') ?>
-<?= $title = getenv('APP_NAME')."| Gestion des rôles et permissions" ?>
+<?php $this->section('title'); echo  getenv('APP_NAME')."|Gestion des rôles et permissions"; $this->endSection()?>
 <?= $this->section('content') ?>
 <!--begin::Content-->
 <div class="content d-flex flex-column flex-column-fluid" id="kt_content">

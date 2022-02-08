@@ -582,6 +582,12 @@ class Auth extends \IonAuth\Controllers\Auth
 			return redirect()->to('/');
 		}
 
+		 // bail if no group id given
+		 if (!$this->request->getPost())
+		 {
+			 return redirect()->back()->with("message", "Erreur : Accès illégal !")->with("code", 0);
+		 }
+
 		$tables                        = $this->configIonAuth->tables;
 		//$identityColumn                = $this->configIonAuth->identity;
 		//$this->data['identity_column'] = $identityColumn;

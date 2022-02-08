@@ -1,5 +1,5 @@
 <?= $this->extend('authTempate') ?>
-<?= $title = getenv('APP_NAME')."| Register" ?>
+<?php $this->section('title'); echo  getenv('APP_NAME')."| Inscription"; $this->endSection()?>
 <?= $this->section('content') ?>
 		<!--begin::Root-->
 		<div class="d-flex flex-column flex-root">

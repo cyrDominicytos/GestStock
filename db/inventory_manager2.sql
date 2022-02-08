@@ -11,17 +11,7 @@
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 
--- Listage de la structure de la table inventory_manager. groups
-CREATE TABLE IF NOT EXISTS `groups` (
-  `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(150) NOT NULL,
-  `guard` varchar(50) NOT NULL,
-  `description` text NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `name` (`name`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
-
--- Listage des données de la table inventory_manager.groups : ~4 rows (environ)
+-- Listage des données de la table inventory_manager.groups : ~5 rows (environ)
 /*!40000 ALTER TABLE `groups` DISABLE KEYS */;
 INSERT INTO `groups` (`id`, `name`, `guard`, `description`) VALUES
 	(1, 'admin', 'Admin', 'Administrateur du système'),
@@ -30,18 +20,6 @@ INSERT INTO `groups` (`id`, `name`, `guard`, `description`) VALUES
 	(11, 'Superviseur', 'Gerant', 'Rôle attribuer au chef ou au superviseur des ventes'),
 	(12, 'SuperAdmin', 'SuperAdmin', 'Administrateur de toute l\'application');
 /*!40000 ALTER TABLE `groups` ENABLE KEYS */;
-
--- Listage de la structure de la table inventory_manager. groups_permissions
-CREATE TABLE IF NOT EXISTS `groups_permissions` (
-  `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
-  `group_id` mediumint(8) unsigned NOT NULL,
-  `permission_id` mediumint(8) unsigned NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `groups_permissions_group_id_foreign` (`group_id`),
-  KEY `groups_permissions_permission_id_foreign` (`permission_id`),
-  CONSTRAINT `groups_permissions_group_id_foreign` FOREIGN KEY (`group_id`) REFERENCES `groups` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION,
-  CONSTRAINT `groups_permissions_permission_id_foreign` FOREIGN KEY (`permission_id`) REFERENCES `permissions` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=210 DEFAULT CHARSET=utf8;
 
 -- Listage des données de la table inventory_manager.groups_permissions : ~97 rows (environ)
 /*!40000 ALTER TABLE `groups_permissions` DISABLE KEYS */;
@@ -145,45 +123,15 @@ INSERT INTO `groups_permissions` (`id`, `group_id`, `permission_id`) VALUES
 	(209, 1, 112);
 /*!40000 ALTER TABLE `groups_permissions` ENABLE KEYS */;
 
--- Listage de la structure de la table inventory_manager. login_attempts
-CREATE TABLE IF NOT EXISTS `login_attempts` (
-  `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
-  `ip_address` varchar(45) NOT NULL,
-  `login` varchar(100) DEFAULT NULL,
-  `time` int(11) unsigned DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
 -- Listage des données de la table inventory_manager.login_attempts : ~0 rows (environ)
 /*!40000 ALTER TABLE `login_attempts` DISABLE KEYS */;
 /*!40000 ALTER TABLE `login_attempts` ENABLE KEYS */;
 
--- Listage de la structure de la table inventory_manager. migrations
-CREATE TABLE IF NOT EXISTS `migrations` (
-  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-  `version` varchar(255) NOT NULL,
-  `class` varchar(255) NOT NULL,
-  `group` varchar(255) NOT NULL,
-  `namespace` varchar(255) NOT NULL,
-  `time` int(11) NOT NULL,
-  `batch` int(11) unsigned NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
-
--- Listage des données de la table inventory_manager.migrations : ~0 rows (environ)
+-- Listage des données de la table inventory_manager.migrations : ~1 rows (environ)
 /*!40000 ALTER TABLE `migrations` DISABLE KEYS */;
 INSERT INTO `migrations` (`id`, `version`, `class`, `group`, `namespace`, `time`, `batch`) VALUES
 	(1, '20181211100537', 'IonAuth\\Database\\Migrations\\Migration_Install_ion_auth', '', 'IonAuth', 1643908835, 1);
 /*!40000 ALTER TABLE `migrations` ENABLE KEYS */;
-
--- Listage de la structure de la table inventory_manager. permissions
-CREATE TABLE IF NOT EXISTS `permissions` (
-  `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(150) NOT NULL,
-  `module` varchar(50) NOT NULL,
-  `description` text NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=113 DEFAULT CHARSET=utf8;
 
 -- Listage des données de la table inventory_manager.permissions : ~36 rows (environ)
 /*!40000 ALTER TABLE `permissions` DISABLE KEYS */;
@@ -226,37 +174,6 @@ INSERT INTO `permissions` (`id`, `name`, `module`, `description`) VALUES
 	(112, 'Editer_Parametrages', 'Parametrages', 'Editer un Paramétrage');
 /*!40000 ALTER TABLE `permissions` ENABLE KEYS */;
 
--- Listage de la structure de la table inventory_manager. users
-CREATE TABLE IF NOT EXISTS `users` (
-  `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
-  `ip_address` varchar(100) NOT NULL,
-  `username` varchar(100) NOT NULL,
-  `password` text NOT NULL,
-  `email` varchar(254) NOT NULL,
-  `activation_selector` varchar(255) DEFAULT NULL,
-  `activation_code` varchar(255) DEFAULT NULL,
-  `forgotten_password_selector` varchar(255) DEFAULT NULL,
-  `forgotten_password_code` varchar(255) DEFAULT NULL,
-  `forgotten_password_time` int(11) unsigned DEFAULT NULL,
-  `remember_selector` varchar(255) DEFAULT NULL,
-  `remember_code` varchar(255) DEFAULT NULL,
-  `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `last_login` int(11) unsigned DEFAULT NULL,
-  `active` tinyint(1) unsigned DEFAULT NULL,
-  `first_name` varchar(100) DEFAULT NULL,
-  `last_name` varchar(100) DEFAULT NULL,
-  `company` varchar(150) DEFAULT NULL,
-  `phone` varchar(50) DEFAULT NULL,
-  `address` varchar(100) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `email` (`email`),
-  UNIQUE KEY `username` (`username`),
-  UNIQUE KEY `activation_selector` (`activation_selector`),
-  UNIQUE KEY `forgotten_password_selector` (`forgotten_password_selector`),
-  UNIQUE KEY `remember_selector` (`remember_selector`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
-
 -- Listage des données de la table inventory_manager.users : ~5 rows (environ)
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
 INSERT INTO `users` (`id`, `ip_address`, `username`, `password`, `email`, `activation_selector`, `activation_code`, `forgotten_password_selector`, `forgotten_password_code`, `forgotten_password_time`, `remember_selector`, `remember_code`, `created_at`, `updated_at`, `last_login`, `active`, `first_name`, `last_name`, `company`, `phone`, `address`) VALUES
@@ -267,19 +184,7 @@ INSERT INTO `users` (`id`, `ip_address`, `username`, `password`, `email`, `activ
 	(5, '::1', 'pierro', '$2y$10$J4lto8X4o/b5xrABOi2yxeoWrJXgDhdyr7vq0Loq/pdXBWhGMTDcO', 'gbeffo@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-02-06 09:52:21', '2022-02-06 11:12:40', NULL, 1, 'Pierrette', 'GBEFFO', '', '+22966757001', 'Rue 560, Cotonou, Bénin');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 
--- Listage de la structure de la table inventory_manager. users_groups
-CREATE TABLE IF NOT EXISTS `users_groups` (
-  `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
-  `user_id` mediumint(8) unsigned NOT NULL,
-  `group_id` mediumint(8) unsigned NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `users_groups_user_id_foreign` (`user_id`),
-  KEY `users_groups_group_id_foreign` (`group_id`),
-  CONSTRAINT `users_groups_group_id_foreign` FOREIGN KEY (`group_id`) REFERENCES `groups` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION,
-  CONSTRAINT `users_groups_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
-
--- Listage des données de la table inventory_manager.users_groups : ~4 rows (environ)
+-- Listage des données de la table inventory_manager.users_groups : ~5 rows (environ)
 /*!40000 ALTER TABLE `users_groups` DISABLE KEYS */;
 INSERT INTO `users_groups` (`id`, `user_id`, `group_id`) VALUES
 	(1, 1, 1),

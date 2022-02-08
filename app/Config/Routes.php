@@ -35,12 +35,23 @@ $routes->get('/', 'Auth::index');
 $routes->get('/logout', 'Auth::logout');
 $routes->post('/sign_in', 'Auth::login');
 
+//user management routes
 $routes->post('/sign_up', 'Auth::create_user');
 $routes->post('/user/update/(:num)', 'Auth::edit_user/$1');
-
 $routes->get('/user/edit/(:num)', 'Auth::update_user/$1');
 $routes->get('/user/banish/(:num)', 'Auth::deactivate/$1');
 $routes->get('/user/activate/(:num)', 'Auth::activate/$1');
+
+//external management routes : 
+$routes->get('/external/list', 'ExternalEntity::list');
+$routes->get('/client/list', 'ExternalEntity::list/1');
+$routes->get('/provider/list', 'ExternalEntity::list/2');
+$routes->get('/delivery_men/list', 'ExternalEntity::list/3');
+$routes->post('/external/create', 'ExternalEntity::create_external');
+$routes->get('/external/banish/(:num)/(:num)', 'ExternalEntity::deactivate/$1/$2');
+$routes->get('/external/activate/(:num)/(:num)', 'ExternalEntity::activate/$1/$2');
+
+
 
 //roles and permissions
 $routes->get('/groups/list', 'Auth::role_permission');

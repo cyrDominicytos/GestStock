@@ -1,5 +1,5 @@
 <?= $this->extend('dashTemplate') ?>
-<?php $this->section('title'); echo  getenv('APP_NAME')."| Liste des utilisateurs"; $this->endSection()?>
+<?php $this->section('title'); echo  getenv('APP_NAME')."| ".externalParams()[$type]["title"]; $this->endSection()?>
 <?= $this->section('content') ?>
 <!--begin::Content-->
 <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
@@ -10,7 +10,7 @@
             <!--begin::Page title-->
             <div data-kt-swapper="true" data-kt-swapper-mode="prepend" data-kt-swapper-parent="{default: '#kt_content_container', 'lg': '#kt_toolbar_container'}" class="page-title d-flex align-items-center flex-wrap me-3 mb-5 mb-lg-0">
                 <!--begin::Title-->
-                <h1 class="d-flex align-items-center text-dark fw-bolder fs-3 my-1">Liste des utilisateurs</h1>
+                <h1 class="d-flex align-items-center text-dark fw-bolder fs-3 my-1"> Gestion des <?= externalParams()[$type]["externalName"] ?>s</h1>
                 <!--end::Title-->
                 <!--begin::Separator-->
                 <span class="h-20px border-gray-300 border-start mx-4"></span>
@@ -23,7 +23,7 @@
                     </li>
                     <!--end::Item-->
                     <!--begin::Item-->
-                    <li class="breadcrumb-item text-muted">Utilisateur</li>
+                    <li class="breadcrumb-item text-muted text-capitalize"><?=  externalParams()[$type]["externalName"]?>s</li>
                     <!--end::Item-->
                     <!--begin::Item-->
                     <li class="breadcrumb-item">
@@ -31,7 +31,7 @@
                     </li>
                     <!--end::Item-->
                     <!--begin::Item-->
-                    <li class="breadcrumb-item text-dark">Liste des utilisateurs</li>
+                    <li class="breadcrumb-item text-dark"><?=  externalParams()[$type]["title"]?></li>
                     <!--end::Item-->
                 </ul>
                 <!--end::Breadcrumb-->
@@ -130,7 +130,7 @@
                 </div>
                 <!--end::Wrapper-->
                 <!--begin::Button-->
-                <a href="#" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_create_app" id="kt_toolbar_primary_button">Create</a>
+                <a href="#" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#external_create_new" id="kt_toolbar_primary_button">Nouveau <?= externalParams()[$type]["externalName"] ?></a>
                 <!--end::Button-->
             </div>
             <!--end::Actions-->
@@ -144,6 +144,9 @@
         <div id="kt_content_container" class="container-xxl">
             <!--begin::Card-->
             <div class="card">
+                <div id="infoMessage" style="color:red;">
+                    <?=  session()->has('message2') ? (session()->get('message2')) : ("")?>
+                </div>
                 <!--begin::Card header-->
                 <div class="card-header border-0 pt-6">
                     <!--begin::Card title-->
@@ -234,7 +237,7 @@
                             <!--end::Svg Icon-->Export</button>
                             <!--end::Export-->
                             <!--begin::Add user-->
-                            <a href="<?=  base_url(); ?>/register" class="btn btn-primary">
+                            <a data-bs-toggle="modal" data-bs-target="#external_create_new" class="btn btn-primary">
                             <!--begin::Svg Icon | path: icons/duotune/arrows/arr075.svg-->
                             <span class="svg-icon svg-icon-2">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -242,7 +245,7 @@
                                     <rect x="4.36396" y="11.364" width="16" height="2" rx="1" fill="black" />
                                 </svg>
                             </span>
-                            <!--end::Svg Icon-->Nouvel Utilisateur</a>
+                            <!--end::Svg Icon-->Nouveau <?= externalParams()[$type]["externalName"]?></a>
                             <!--end::Add user-->
                         </div>
                         <!--end::Toolbar-->
@@ -559,10 +562,11 @@
                                         <input class="form-check-input" type="checkbox" data-kt-check="true" data-kt-check-target="#kt_table_users .form-check-input" value="1" />
                                     </div>
                                 </th>
-                                <th class="min-w-125px">Noms et Prénoms</th>
-                                <th class="min-w-125px">Profile</th>
-                                <th class="min-w-125px">Email</th>
+                                <th class="min-w-125px">Nom Complet</th>
                                 <th class="min-w-125px">Téléphone</th>
+                                <th class="min-w-125px">IFU</th>
+                                <th class="min-w-125px">Email</th>
+                                <th class="min-w-125px">Adresse</th>
                                 <th class="min-w-125px">Statut</th>
                                 <th class="min-w-125px">Créé le</th>
                                 <th class="text-end min-w-100px">Actions</th>
@@ -573,7 +577,7 @@
                         <!--begin::Table body-->
                         <tbody class="text-gray-600 fw-bold">
                             <!--begin::Table row-->
-                            <?php foreach ($users as $user): ?>
+                            <?php foreach ($external as $user): ?>
                                 <!--begin::Table row-->
                                     <tr>
                                         <!--begin::Checkbox-->
@@ -584,15 +588,18 @@
                                         </td>
                                         <!--end::Checkbox-->
                                         <td class="d-flex align-items-center">
-                                            <?= $user->first_name." ".$user->last_name ?>
+                                            <?= $user[$tables.'_company'] ?>
                                         </td>
-                                        <td class="text-capitalize"><?= $auth->getUsersGroups($user->id)->getResult()[0]->name ?></td>
-                                        <td><?= $user->email?></td>
-                                        <td><?= $user->phone?></td>
+                                        <td><?= $user[$tables.'_phone_number']  ?></td>
+                                        <td class=""><?= $user[$tables.'_ifu']  ?></td>
+                                        <td><?= $user[$tables.'_email']  ?></td>
                                         <td> 
-                                            <?= status($user->active) ?>
+                                            <?= $user[$tables.'_address']  ?>
                                        </td>
-                                        <td><?= $user->created_at?></td>
+                                        <td> 
+                                            <?= status($user[$tables.'_isActive'] ) ?>
+                                       </td>
+                                        <td><?= $user[$tables.'_created_at']  ?></td>
                                         <td class="text-end">
                                             <a href="#" class="btn btn-light btn-active-light-primary btn-sm" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">Actions
                                             <!--begin::Svg Icon | path: icons/duotune/arrows/arr072.svg-->
@@ -606,15 +613,13 @@
                                             <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4" data-kt-menu="true">
                                                 <!--begin::Menu item-->
                                                 <div class="menu-item px-3">
-                                                    <a href="<?= base_url()."/user/edit/".$user->id; ?>" class="menu-link px-3">Editer</a>
+                                                    <a href="<?= base_url()."/user/edit/".$user[$tables.'_id'] ; ?>" class="menu-link px-3">Editer</a>
                                                 </div>
                                                 <!--end::Menu item-->
                                                 <!--begin::Menu item-->
-                                                <?php if($user->id != $auth->user()->row()->id) : ?>
                                                 <div class="menu-item px-3">
-                                                    <p class="menu-link px-3"onclick="banish(<?=$user->id ?>, <?=$user->active ?>)" ><?= deleteUser($user->active) ?></p>
+                                                    <p class="menu-link px-3"onclick="banish(<?=$user[$tables.'_id']  ?>, <?=$user[$tables.'_isActive']?>)" ><?= deleteUser($user[$tables.'_isActive'] ) ?></p>
                                                 </div>
-                                                <?php endif ?>
                                                 <!--end::Menu item-->
                                             </div>
                                             <!--end::Menu-->
@@ -636,13 +641,14 @@
     </div>
     <!--end::Post-->
 </div>
+<?=  $this->include("external/create");?>
 <!--end::Content-->
 <?= $this->section('javascript') ?>
     <script type="text/javascript">
-        var banish_mes = `Vous souhaitez bannir cet utilisateur. <strong>Une fois bannis, il ne pourra plus se connecter à la plateforme tant qu'il ne soit activé à nouveau</strong>,
-                <span class="badge badge-primary">Etes-vous sûr de vouloir le bannir ?</span>`;
-        var active_mes = `Vous souhaitez activer cet utilisateur. <strong>Une fois activer, il pourra se connecter à nouveau à la plateforme et effectuer des opérations selon son profile</strong>,
-                <span class="badge badge-primary">Etes-vous sûr de vouloir l'activer ?</span>`
+        var type = "<?= isset($type) ? ($type) : (0) ?>";
+        var typeName = "<?= isset($type) ? (externalParams()[$type]["externalName"]) : ("")  ?>";
+        var banish_mes = "Vous souhaitez bannir ce "+typeName+".<span class='badge badge-primary'>Etes-vous sûr de vouloir le bannir ?</span>";
+        var active_mes = "Vous souhaitez activer ce "+typeName+".<span class='badge badge-primary'>Etes-vous sûr de vouloir l'activer ?</span>";
         function banish(id, banish_type) {
             Swal.fire({
                 html: banish_type== 1 ? banish_mes : active_mes,
@@ -660,9 +666,9 @@
                     if(result.value) 
                         {
                             if(banish_type == 1)
-                                document.location.href="<?=  base_url(); ?>/user/banish/"+id;
+                                document.location.href="<?=  base_url(); ?>/external/banish/"+id+"/"+type;
                             else
-                                document.location.href="<?=  base_url(); ?>/user/activate/"+id;
+                                document.location.href="<?=  base_url(); ?>/external/activate/"+id+"/"+type;
                         }
                 });  
             

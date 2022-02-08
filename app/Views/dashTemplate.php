@@ -3,7 +3,7 @@
 <html lang="en">
 	<!--begin::Head-->
 	<head>
-		<title><?php echo isset($title) ? $title : 'Login' ; ?></title>
+		<title><?= $this->renderSection('title') ?></title>
         <meta charset="utf-8" />
 		<meta name="description" content="The most advanced Bootstrap Admin Theme on Themeforest trusted by 94,000 beginners and professionals. Multi-demo, Dark Mode, RTL support and complete React, Angular, Vue &amp; Laravel versions. Grab your copy now and get life-time updates for free." />
 		<meta name="keywords" content="Metronic, bootstrap, bootstrap 5, Angular, VueJs, React, Laravel, admin themes, web design, figma, web development, free templates, free admin themes, bootstrap theme, bootstrap template, bootstrap dashboard, bootstrap dak mode, bootstrap button, bootstrap datepicker, bootstrap timepicker, fullcalendar, datatables, flaticon" />
@@ -45,7 +45,7 @@
 			<!--begin::Page-->
 			<div class="page d-flex flex-row flex-column-fluid">
 				<!--begin::Aside-->
-                <!-- <?= $this->include('layouts/aside') ?> -->
+                 <?= $this->include('layouts/aside') ?> 
 				<!--end::Aside-->
 				<!--begin::Wrapper-->
 				<div class="wrapper d-flex flex-column flex-row-fluid" id="kt_wrapper">

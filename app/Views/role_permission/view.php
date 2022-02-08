@@ -1,5 +1,5 @@
 <?= $this->extend('dashTemplate') ?>
-<?= $title = getenv('APP_NAME')."| Gestion des rôles et permissions" ?>
+<?php $this->section('title'); echo  getenv('APP_NAME')."| Vue Détailée d'une rôle"; $this->endSection()?>
 <?= $this->section('content') ?>
 <!--begin::Content-->
 

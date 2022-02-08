@@ -194,7 +194,7 @@
                                                     </span>
                                                     <span class="menu-title" >Ajouter</span>
                                                 </a>
-                                                <a class="menu-link" href="<?= base_url() ?>/">
+                                                <a class="menu-link" href="<?= base_url() ?>/client/list">
                                                     <span class="menu-bullet">
                                                         <span class="bullet bullet-dot"></span>
                                                     </span>
@@ -219,7 +219,7 @@
                                                     </span>
                                                     <span class="menu-title" >Ajouter</span>
                                                 </a>
-                                                <a class="menu-link" href="<?= base_url() ?>/">
+                                                <a class="menu-link" href="<?= base_url() ?>/provider/list">
                                                     <span class="menu-bullet">
                                                         <span class="bullet bullet-dot"></span>
                                                     </span>
@@ -244,7 +244,7 @@
                                                     </span>
                                                     <span class="menu-title" >Ajouter</span>
                                                 </a>
-                                                <a class="menu-link" href="<?= base_url() ?>/">
+                                                <a class="menu-link" href="<?= base_url() ?>/delivery_men/list">
                                                     <span class="menu-bullet">
                                                         <span class="bullet bullet-dot"></span>
                                                     </span>

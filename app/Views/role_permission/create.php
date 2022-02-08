@@ -1,5 +1,5 @@
 <?= $this->extend('dashTemplate') ?>
-<?= $title = getenv('APP_NAME')."| Rôles et Permissions" ?>
+<?php $this->section('title'); echo  getenv('APP_NAME')."| Rôles et Permissions "; $this->endSection()?>
 <?= $this->section('content') ?>
 <!--begin::Content-->
 <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
@@ -115,7 +115,7 @@
                                     <!--begin::Description-->
                                     <div class="m-0">
                                         <!--begin::Title-->
-                                        <h4 class="fs-1 text-gray-800 w-bolder mb-6"><?= isset($group) ? "Mise à jour des" : 'Ajout des'; ?> permissions au rôle</h4>
+                                        <h4 class="fs-1 text-gray-800 w-bolder mb-6"><?= isset($group) ? "Mise à jour des" : 'Attribution des'; ?> permissions au rôle</h4>
                                         <!--end::Title-->
                                         <!--begin::Text-->
                                         <p class="fw-bold fs-4 text-gray-600 mb-2">Cochez les permissions que vous souhaiter attribuer à ce rôle sur chaque module</p>

@@ -188,7 +188,7 @@
                                         </span>
                                         <div class="menu-sub menu-sub-accordion menu-active-bg">
                                             <div class="menu-item menu-accordion">
-                                                <a class="menu-link" href="<?= base_url() ?>/">
+                                                <a class="menu-link" href="<?= base_url() ?>/client/list_create">
                                                     <span class="menu-bullet">
                                                         <span class="bullet bullet-dot"></span>
                                                     </span>
@@ -213,13 +213,13 @@
                                         </span>
                                         <div class="menu-sub menu-sub-accordion menu-active-bg">
                                             <div class="menu-item menu-accordion">
-                                                <a class="menu-link" href="<?= base_url() ?>/">
+                                                <a class="menu-link" href="<?= base_url() ?>/fournisseur/list_create">
                                                     <span class="menu-bullet">
                                                         <span class="bullet bullet-dot"></span>
                                                     </span>
                                                     <span class="menu-title" >Ajouter</span>
                                                 </a>
-                                                <a class="menu-link" href="<?= base_url() ?>/provider/list">
+                                                <a class="menu-link" href="<?= base_url() ?>/fournisseur/list">
                                                     <span class="menu-bullet">
                                                         <span class="bullet bullet-dot"></span>
                                                     </span>
@@ -238,13 +238,13 @@
                                         </span>
                                         <div class="menu-sub menu-sub-accordion menu-active-bg">
                                             <div  class="menu-item menu-accordion">
-                                                <a class="menu-link" href="<?= base_url() ?>/">
+                                                <a class="menu-link" href="<?= base_url() ?>/livreur/list_create">
                                                     <span class="menu-bullet">
                                                         <span class="bullet bullet-dot"></span>
                                                     </span>
                                                     <span class="menu-title" >Ajouter</span>
                                                 </a>
-                                                <a class="menu-link" href="<?= base_url() ?>/delivery_men/list">
+                                                <a class="menu-link" href="<?= base_url() ?>/livreur/list">
                                                     <span class="menu-bullet">
                                                         <span class="bullet bullet-dot"></span>
                                                     </span>

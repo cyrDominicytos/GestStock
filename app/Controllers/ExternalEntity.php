@@ -42,7 +42,7 @@ class ExternalEntity extends BaseController
         return view('external/create');
     }
 
-    public function list($type=0)
+    public function list($type=0, $showModal=0)
     {
 
         if (!$this->ionAuth->loggedIn() || !$this->ionAuth->isAdmin())
@@ -58,6 +58,7 @@ class ExternalEntity extends BaseController
             $data['external'] =externalModel($type)->get()->getResultArray();
             $data['auth'] = $this->ionAuth;
             $data['type'] = $type;
+            $data['showModal'] = $showModal;
             $data['tables'] = externalParams()[$type]['table'];
             return view('external/list',$data);
        

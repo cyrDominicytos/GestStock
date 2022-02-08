@@ -44,9 +44,12 @@ $routes->get('/user/activate/(:num)', 'Auth::activate/$1');
 
 //external management routes : 
 $routes->get('/external/list', 'ExternalEntity::list');
-$routes->get('/client/list', 'ExternalEntity::list/1');
-$routes->get('/provider/list', 'ExternalEntity::list/2');
-$routes->get('/delivery_men/list', 'ExternalEntity::list/3');
+$routes->get('/client/list', 'ExternalEntity::list/1/0');
+$routes->get('/client/list_create', 'ExternalEntity::list/1/1');
+$routes->get('/fournisseur/list', 'ExternalEntity::list/2/0');
+$routes->get('/fournisseur/list_create', 'ExternalEntity::list/2/1');
+$routes->get('/livreur/list', 'ExternalEntity::list/3/0');
+$routes->get('/livreur/list_create', 'ExternalEntity::list/3/1');
 $routes->post('/external/create', 'ExternalEntity::create_external');
 $routes->get('/external/banish/(:num)/(:num)', 'ExternalEntity::deactivate/$1/$2');
 $routes->get('/external/activate/(:num)/(:num)', 'ExternalEntity::activate/$1/$2');

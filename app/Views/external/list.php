@@ -645,6 +645,7 @@
 <!--end::Content-->
 <?= $this->section('javascript') ?>
     <script type="text/javascript">
+        var showModal = "<?= $showModal == 1 ? (1) : (0) ?>";
         var type = "<?= isset($type) ? ($type) : (0) ?>";
         var typeName = "<?= isset($type) ? (externalParams()[$type]["externalName"]) : ("")  ?>";
         var banish_mes = "Vous souhaitez bannir ce "+typeName+".<span class='badge badge-primary'>Etes-vous sûr de vouloir le bannir ?</span>";
@@ -687,6 +688,10 @@
            document.getElementById("address").value = table.rows[rowId].cells[5].innerHTML.trim();
         }
        
+        $(window).on('load', function() {
+            if(showModal == 1)
+                 $('#external_create_new').modal('show');
+    });
 
     </script>
 <?= $this->endSection() ?>

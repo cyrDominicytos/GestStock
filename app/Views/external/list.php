@@ -577,7 +577,7 @@
                         <!--begin::Table body-->
                         <tbody class="text-gray-600 fw-bold">
                             <!--begin::Table row-->
-                            <?php foreach ($external as $user): ?>
+                            <?php $i = 1; foreach ($external as $user): ?>
                                 <!--begin::Table row-->
                                     <tr>
                                         <!--begin::Checkbox-->
@@ -613,7 +613,7 @@
                                             <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4" data-kt-menu="true">
                                                 <!--begin::Menu item-->
                                                 <div class="menu-item px-3">
-                                                    <a href="<?= base_url()."/user/edit/".$user[$tables.'_id'] ; ?>" class="menu-link px-3">Editer</a>
+                                                    <a href="" data-bs-toggle="modal" data-bs-target="#external_create_new" onclick="edit_external(<?=$user[$tables.'_id']  ?>,<?= $i ?>)" class="menu-link px-3">Editer</a>
                                                 </div>
                                                 <!--end::Menu item-->
                                                 <!--begin::Menu item-->
@@ -627,7 +627,7 @@
                                         <!--end::Action=-->
                                     </tr>
                                     <!--end::Table row-->	
-                                <?php endforeach ?>							
+                                <?php $i++; endforeach ?>							
                         </tbody>
                         <!--end::Table body-->
                     </table>
@@ -672,6 +672,19 @@
                         }
                 });  
             
+        }
+
+        function edit_external(id, rowId) {
+           let table = document.getElementById("kt_table_users");
+           document.getElementById("kt_modal_new_address_form").action = "<?= base_url() ?>"+"/external/edit";
+           document.getElementById("externalID").value = id;
+           document.getElementById("modalTitle").innerHTML = "Mise à jour d'un "+typeName;
+           document.getElementById("submitText").innerHTML = "Sauvegarder";
+           document.getElementById("company").value = table.rows[rowId].cells[1].innerHTML.trim();
+           document.getElementById("phone_number").value = table.rows[rowId].cells[2].innerHTML.trim();
+           document.getElementById("ifu").value = table.rows[rowId].cells[3].innerHTML.trim();
+           document.getElementById("email").value = table.rows[rowId].cells[4].innerHTML.trim();
+           document.getElementById("address").value = table.rows[rowId].cells[5].innerHTML.trim();
         }
        
 

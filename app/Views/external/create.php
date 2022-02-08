@@ -7,10 +7,11 @@
             <!--begin::Form-->
             <form class="form" action="<?= base_url(); ?>/external/create" method="post" id="kt_modal_new_address_form">
                 <input type="hidden" name="type" value="<?= $type ?>" >   
+                <input type="hidden" name="id"id="externalID"  >   
             <!--begin::Modal header-->
                 <div class="modal-header" id="kt_modal_new_address_header">
                     <!--begin::Modal title-->
-                    <h2 class="text-dark">Création d'un Client</h2>
+                    <h2 class="text-dark" id="modalTitle">Création d'un <?= externalParams()[$type]["externalName"] ?></h2>
                     <!--end::Modal title-->
                     <!--begin::Close-->
                     <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
@@ -41,7 +42,7 @@
                                 <label class="required fs-5 fw-bold mb-2 text-dark" >Nom Complet</label>
                                 <!--end::Label-->
                                 <!--begin::Input-->
-                                <input type="text" class="form-control form-control-solid" placeholder="" name="company" required />
+                                <input type="text" class="form-control form-control-solid" placeholder="" name="company" required id="company"/>
                                 <!--end::Input-->
                             </div>
                             <!--end::Col-->
@@ -51,7 +52,7 @@
                                 <label class="required fs-5 fw-bold mb-2  text-dark">Téléphone</label>
                                 <!--end::Label-->
                                 <!--end::Input-->
-                                <input type="text" class="form-control form-control-solid" placeholder="" name="phone_number" required/>
+                                <input type="text" class="form-control form-control-solid" placeholder="" name="phone_number" required id="phone_number"/>
                                 <!--end::Input-->
                             </div>
                             <!--end::Col-->
@@ -63,7 +64,7 @@
                             <label class="fs-5 fw-bold mb-2">IFU</label>
                             <!--end::Label-->
                             <!--begin::Input-->
-                            <input class="form-control form-control-solid" placeholder="" name="ifu"  type="number" />
+                            <input class="form-control form-control-solid" placeholder="" name="ifu"  type="text" id="ifu" minLength="13" maxLength="13"/>
                             <!--end::Input-->
                         </div>
                         <!--end::Input group-->
@@ -73,7 +74,7 @@
                             <label class="fs-5 fw-bold mb-2">Adresse</label>
                             <!--end::Label-->
                             <!--begin::Input-->
-                            <input class="form-control form-control-solid" placeholder="" name="address" type="text" />
+                            <input class="form-control form-control-solid" placeholder="" name="address" type="text" id="address" />
                             <!--end::Input-->
                         </div>
                         <!--end::Input group-->
@@ -83,7 +84,7 @@
                             <label class="required fs-5 fw-bold mb-2">Email</label>
                             <!--end::Label-->
                             <!--begin::Input-->
-                            <input class="form-control form-control-solid" placeholder="" name="email" type="email"  />
+                            <input class="form-control form-control-solid" placeholder="" name="email" type="email" id="email" />
                             <!--end::Input-->
                         </div>
                         <!--end::Input group-->
@@ -98,7 +99,7 @@
                     <!--end::Button-->
                     <!--begin::Button-->
                     <button type="submit" id="kt_modal_new_address_submit" class="btn btn-primary">
-                        <span class="indicator-label">Enregistrer</span>
+                        <span class="indicator-label" id="submitText">Enregistrer</span>
                         <span class="indicator-progress">Patientez...
                         <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
                     </button>

@@ -135,9 +135,96 @@ class ExternalEntity extends BaseController
             
         }
          //We find some error
+
          $this->data['message'] = $this->validation->getErrors() ? $this->validation->listErrors($this->validationListTemplate) : ($this->ionAuth->errors($this->validationListTemplate) ? $this->ionAuth->errors($this->validationListTemplate) : $this->session->getFlashdata('message'));
          $this->session->setFlashdata('message2', $this->data['message']);
          return redirect()->back()->withInput();		
+	}
+    /**
+	 * Create a new client|provider|delivery_men
+	 *
+	 * @return string|\CodeIgniter\HTTP\RedirectResponse
+	 */
+	public function edit_external()
+	{
+		
+		if (! $this->ionAuth->loggedIn() || ! $this->ionAuth->isAdmin())
+		{
+			return redirect()->to('/');
+		}
+
+        if (!$this->request->getPost())
+		 {
+			 return redirect()->back()->with("message2", "Erreur : Accès illégal !")->with("code", 0);
+		 }
+        $id = (int) $this->request->getPost('id');
+        $type =  $this->request->getPost('type');
+		$tables = externalParams()[$type]['table'];
+        $data = [];
+        $user = externalModel($type)->where($tables.'_id',$id)->get()->getResultArray();
+        //dd($user);
+        if(count($user) >= 1){
+            $user = $user[0];
+		// validate form input
+		$rules = [
+                    'company'=> 'trim|required',
+                    'phone_number'=> "trim|required|".($user[$tables.'_phone_number'] == $this->request->getPost('phone_number') ? ('') : ('is_unique['.$tables.'.'.$tables.'_phone_number]')),
+                ];
+        $errors =  [
+                        "company"=>["required"=>"Renseignez le nom du ".externalParams()[$this->request->getPost('type')]["externalName"]],
+                        "phone_number"=>[
+                            "required"=>"Renseignez le téléphone du ".externalParams()[$this->request->getPost('type')]["externalName"],
+                            "is_unique"=>"Le téléphone ".$this->request->getPost('phone_number')." existe déjà"
+                        ],
+                    ];
+        if ($this->request->getPost('ifu')  && !empty($this->request->getPost('ifu')))
+        {
+            $rules['ifu'] = "trim|exact_length[13]|numeric|".($user[$tables.'_ifu'] == $this->request->getPost('ifu') ? ('') : ('is_unique['.$tables.'.'.$tables.'_ifu]'));
+            $errors["ifu"] = [
+                                    "is_unique"=>"L'IFU : ".$this->request->getPost('ifu')." existe déjà",
+                                    "exact_length"=>"Le numéro IFU doit comporter extactement 13 chiffres",
+                                    "numeric"=>"Le numéro IFU ne peut contenir que des chiffres",
+            ];
+            $data[$tables."_ifu"] = $this->request->getPost('ifu');
+        }   
+
+        if ($this->request->getPost('email')  && !empty($this->request->getPost('email')))
+        {
+            
+            $rules['email'] = "trim|valid_email|".($user[$tables.'_email'] == $this->request->getPost('email') ? ('') : ('is_unique['.$tables.'.'.$tables.'_email]'));
+                
+            $errors["email"] = [
+                                "is_unique"=>"L'email : ".$this->request->getPost('email')." existe déjà",
+                                "valid_email"=>"L'email : ".$this->request->getPost('email')." n'est pas valide",
+            ];
+
+                $data[$tables."_email"] = strtolower($this->request->getPost('email'));
+        }  
+        
+        if ($this->request->getPost('address')  && !empty($this->request->getPost('address')))
+            $data[$tables."_address"] = $this->request->getPost('address');
+        
+            $this->validation->setRules($rules, $errors);
+                     
+		if ($this->validation->withRequest($this->request)->run())
+		{
+            $data[$tables.'_company'] = strtolower($this->request->getPost('company'));
+            $data[$tables.'_phone_number'] = $this->request->getPost('phone_number');
+
+            if(externalModel($type)->update($id, $data))
+                return redirect()->back()->with("message", "Les informations du ".externalParams()[$type]['externalName']." sont mises à jour avec succès !")->with("code", 1);
+            else
+                return redirect()->back()->with("message2", "Le ".externalParams()[$type]['externalName']." que vous essayez d'éditer n'existe pas !")->with("code", 0);
+        }
+        //We find some error
+        $this->data['message'] = $this->validation->getErrors() ? $this->validation->listErrors($this->validationListTemplate) : ($this->ionAuth->errors($this->validationListTemplate) ? $this->ionAuth->errors($this->validationListTemplate) : $this->session->getFlashdata('message'));
+        $this->session->setFlashdata('message2', $this->data['message']);
+        return redirect()->back()->withInput();
+    }else{
+        return redirect()->back()->with("message2", "Le ".externalParams()[$type]['externalName']." que vous essayez de modifier n'existe pas!")->with("code", 0);
+
+    }
+         		
 	}
 
 

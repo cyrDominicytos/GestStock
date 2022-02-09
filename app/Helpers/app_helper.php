@@ -6,6 +6,8 @@ use App\Models\Group;
 use App\Models\Client;
 use App\Models\Provider;
 use App\Models\DeliveryMen;
+use App\Models\ProductCategories;
+use App\Models\SalesOptions;
 
 
 // Function: used to convert a string to revese in order
@@ -169,22 +171,62 @@ function externalModel($type)
 		}
 	}
 }
-if (!function_exists("deactiveExternal")) {
-function deactiveExternal($type)
+
+
+if (!function_exists("productParams")) {
+function productParams()
+	{
+		return [
+				"1"=>[
+					"title"=>"Liste des catégories de produit",
+					"externalName"=>"catégorie de produit",
+					"table"=>"product_categories",
+					"externalNewRoute"=>"/product_category",
+
+				],
+				"2"=>[
+					"title"=>"Liste des options de vente",
+					"externalName"=>"options de vente",
+					"externalNewRoute"=>"/sales_option",
+					"table"=>"sales_options",
+				]
+				
+		];
+	}
+}
+
+
+
+if (!function_exists("productInsert")) {
+function productInsert($type, $data)
 	{
 		switch ($type) {
 			case '1':
-				return new Client();;
+				$clientModel = new ProductCategories();
+				return $clientModel->insert($data);
 			case '2':
-				return new Provider();
-
-			case '3':
-				return new DeliveryMen();
+				$providerModel = new SalesOptions();
+				return $providerModel->insert($data);			
 			default:
 				return null;
 		}
 	}
 }
+
+if (!function_exists("productModel")) {
+function productModel($type)
+	{
+		switch ($type) {
+			case '1':
+				return new ProductCategories();;
+			case '2':
+				return  new SalesOptions();
+			default:
+				return null;
+		}
+	}
+}
+
 
 
 ?>

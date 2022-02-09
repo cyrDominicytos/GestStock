@@ -55,8 +55,16 @@ $routes->get('/external/banish/(:num)/(:num)', 'ExternalEntity::deactivate/$1/$2
 $routes->get('/external/activate/(:num)/(:num)', 'ExternalEntity::activate/$1/$2');
 $routes->post('/external/edit', 'ExternalEntity::edit_external');
 
+//ProductCategory management
+$routes->get('/product_category/list', 'ProductCategory::list/1/0');
+$routes->get('/product_category/list_create', 'ProductCategory::list/1/1');
+$routes->get('/sales_option/list', 'ProductCategory::list/2/0');
+$routes->get('/sales_option/list_create', 'ProductCategory::list/2/1');
 
-
+$routes->post('/product_category/create', 'ProductCategory::create_external');
+$routes->get('/product_category/banish/(:num)/(:num)', 'ProductCategory::deactivate/$1/$2');
+$routes->get('/product_category/activate/(:num)/(:num)', 'ProductCategory::activate/$1/$2');
+$routes->post('/product_category/edit', 'ProductCategory::edit_external');
 
 //roles and permissions
 $routes->get('/groups/list', 'Auth::role_permission');

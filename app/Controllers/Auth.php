@@ -103,7 +103,7 @@ class Auth extends \IonAuth\Controllers\Auth
             return view('auth/login');
 		}
         elseif($this->ionAuth->isAdmin()){
-			return redirect()->to('/users/list')->with("message", session()->get("message"))->with("code", session()->get("code"));
+			return redirect()->to('/dashboard')->with("message", session()->get("message"))->with("code", session()->get("code"));
         }
 		else 
 		{
@@ -112,6 +112,20 @@ class Auth extends \IonAuth\Controllers\Auth
 		}
 	}
 
+
+	public function dashboard(){
+
+		if (!$this->ionAuth->loggedIn() || !$this->ionAuth->isAdmin())
+		{
+			return redirect()->to('/')->with("message", session()->get("message"))->with("code", session()->get("code"));
+		}
+		else 
+		{
+            $data['users'] = $this->ionAuth->users()->result();
+            $data['auth'] = $this->ionAuth;
+            return view('dashboard/dashboard',$data);
+		}
+	}
 	/**
 	 * Log the user in
 	 *
@@ -138,7 +152,7 @@ class Auth extends \IonAuth\Controllers\Auth
 				//if the login is successful
 				//redirect them back to the home page
 				$this->session->setFlashdata('message', $this->ionAuth->messages());
-				return redirect()->to('/users/list')->withCookies();
+				return redirect()->to('/')->withCookies();
 			}
 			else
 			{
@@ -760,7 +774,7 @@ class Auth extends \IonAuth\Controllers\Auth
 				// check to see if we are updating the user
 				if ($this->ionAuth->update($user->id, $data))
 				{
-                    return redirect()->to("/users/list")->with("message", "Profile édité avec succès !")->with("code", 1);
+                    return redirect()->to("/")->with("message", "Profile édité avec succès !")->with("code", 1);
 				}
 				else
 				{

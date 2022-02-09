@@ -30,11 +30,11 @@
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <!-- Font montserrat -->
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200&display=swap" rel="stylesheet">
-        <!--style="font-family: 'Montserrat', sans-serif;"-->
+        <!-- <link href="https://fonts.googleapis.com/css2?family=Montserrat:800" rel="stylesheet"> -->
+        
 			<!-- SweetAlert -->
 		<!-- <link href="<?= base_url() ; ?>/public/asset/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css"/> -->
- 
+		<!-- style="font-family: 'Montserrat', sans-serif; font-weight: bold;" -->
 		<?= $this->renderSection('css') ?>
 
 	</head>

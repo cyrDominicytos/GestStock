@@ -931,13 +931,13 @@
                 <span class="badge badge-primary">Etes-vous sûr de vouloir le supprimer ?</span>`;
 
         var can_not_delete_mes = `Désolé, vous ne pouvez pas supprimer ce rôle car il est actuellement attribué à un ou plusieurs utilisateurs.
-        <span class="badge badge-primary">Pour pouvoir le supprimer, veuillez le retirer à tous les utilisateurs auxquels il est attribué.</span>`;
+        <span class="badge badge-primary">Pour pouvoir le supprimer, veuillez le retirer à </br>tous les utilisateurs auxquels il est attribué.</span>`;
         var unDeletableGroups = <?= json_encode($assignedGroups)?>;
         function deleteGroup(id) {
             if(unDeletableGroups.includes(id+"")){
                 //can not delete group
                 Swal.fire({
-                    text: can_not_delete_mes,
+                    html: can_not_delete_mes,
                     icon: "info",
                     buttonsStyling: false,
                     confirmButtonText: "D'accord, compris!",

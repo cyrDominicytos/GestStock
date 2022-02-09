@@ -54,6 +54,9 @@ $routes->post('/external/create', 'ExternalEntity::create_external');
 $routes->get('/external/banish/(:num)/(:num)', 'ExternalEntity::deactivate/$1/$2');
 $routes->get('/external/activate/(:num)/(:num)', 'ExternalEntity::activate/$1/$2');
 $routes->post('/external/edit', 'ExternalEntity::edit_external');
+//dashboard
+$routes->get('/dashboard', 'Auth::dashboard');
+
 
 //ProductCategory management
 $routes->get('/product_category/list', 'ProductCategory::list/1/0');

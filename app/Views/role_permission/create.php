@@ -83,7 +83,7 @@
                                         <label class="required fw-bolder text-dark fs-6 mb-2">Désignation</label>
                                         <!--end::Label-->
                                         <!--begin::Input-->
-                                        <input type="text" class="form-control form-control-solid" placeholder="" name="name" value="<?= isset($group) ? $group->name : ''; ?>" >
+                                        <input type="text" class="form-control form-control-solid" placeholder="" name="name" value="<?= isset($group) ? $group->name : set_value('name') ?>" >
                                         <!--end::Input-->
                                     </div>
                                     <!--end::Col-->
@@ -93,7 +93,7 @@
                                         <label class="required fw-bolder text-dark fs-6 mb-2"> Nom à afficher</label>
                                         <!--end::Label-->
                                         <!--end::Input-->
-                                        <input type="text" class="form-control form-control-solid" placeholder="" name="display_name" value="<?= isset($group) ? $group->display_name : ''; ?>" />
+                                        <input type="text" class="form-control form-control-solid" placeholder="" name="display_name" value="<?= isset($group) ? $group->display_name : set_value('display_name') ?>" />
                                         <!--end::Input-->
                                     </div>
                                     <!--end::Col-->
@@ -103,7 +103,7 @@
                                         <label class="fw-bolder text-dark fs-6 mb-2">Description</label>
                                         <!--end::Label-->
                                         <!--end::Input-->
-                                        <textarea class="form-control form-control-solid" placeholder="Décrivez l'usage du rôle..." name="description" ><?= isset($group) ? $group->description : ''; ?></textarea>
+                                        <textarea class="form-control form-control-solid" placeholder="Décrivez l'usage du rôle..." name="description" ><?= isset($group) ? $group->description : set_value('description'); ?></textarea>
                                         <!--end::Input-->
                                     </div>
                                     <!--end::Col-->

@@ -42,7 +42,7 @@
                                 <label class="required fs-5 fw-bold mb-2 text-dark" >Nom Complet</label>
                                 <!--end::Label-->
                                 <!--begin::Input-->
-                                <input type="text" class="form-control form-control-solid" placeholder="" name="company" required id="company"/>
+                                <input type="text" class="form-control form-control-solid" placeholder="" name="company" required id="company" value="<?= set_value("company")	?>"/>
                                 <!--end::Input-->
                             </div>
                             <!--end::Col-->
@@ -52,7 +52,7 @@
                                 <label class="required fs-5 fw-bold mb-2  text-dark">Téléphone</label>
                                 <!--end::Label-->
                                 <!--end::Input-->
-                                <input type="text" class="form-control form-control-solid" placeholder="" name="phone_number" required id="phone_number"/>
+                                <input type="text" class="form-control form-control-solid" placeholder="" name="phone_number" required id="phone_number" value="<?= set_value("phone_number")	?>"/>
                                 <!--end::Input-->
                             </div>
                             <!--end::Col-->
@@ -64,7 +64,7 @@
                             <label class="fs-5 fw-bold mb-2">IFU</label>
                             <!--end::Label-->
                             <!--begin::Input-->
-                            <input class="form-control form-control-solid" placeholder="" name="ifu"  type="text" id="ifu" minLength="13" maxLength="13"/>
+                            <input class="form-control form-control-solid" placeholder="" name="ifu"  type="text" id="ifu" minLength="13" maxLength="13" value="<?= set_value("ifu")	?>"/>
                             <!--end::Input-->
                         </div>
                         <!--end::Input group-->
@@ -74,7 +74,7 @@
                             <label class="fs-5 fw-bold mb-2">Adresse</label>
                             <!--end::Label-->
                             <!--begin::Input-->
-                            <input class="form-control form-control-solid" placeholder="" name="address" type="text" id="address" />
+                            <input class="form-control form-control-solid" placeholder="" name="address" type="text" id="address" value="<?= set_value("address")	?>" />
                             <!--end::Input-->
                         </div>
                         <!--end::Input group-->
@@ -84,7 +84,7 @@
                             <label class="fs-5 fw-bold mb-2">Email</label>
                             <!--end::Label-->
                             <!--begin::Input-->
-                            <input class="form-control form-control-solid" placeholder="" name="email" type="email" id="email" />
+                            <input class="form-control form-control-solid" placeholder="" name="email" type="email" id="email" value="<?= set_value("email")	?>" />
                             <!--end::Input-->
                         </div>
                         <!--end::Input group-->
@@ -95,7 +95,7 @@
                 <!--begin::Modal footer-->
                 <div class="modal-footer flex-center">
                     <!--begin::Button-->
-                    <button type="reset" id="kt_modal_new_address_cancel" class="btn btn-danger me-3">Quitter</button>
+                    <button type="reset" id="kt_modal_new_address_cancel" class="btn btn-danger me-3" data-bs-dismiss="modal">Quitter</button>
                     <!--end::Button-->
                     <!--begin::Button-->
                     <button type="submit" id="kt_modal_new_address_submit" class="btn btn-primary">

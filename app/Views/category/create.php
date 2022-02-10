@@ -40,7 +40,7 @@
                             <label class="fs-5 fw-bold mb-2">Désignation</label>
                             <!--end::Label-->
                             <!--begin::Input-->
-                            <input class="form-control form-control-solid" placeholder="" name="name"  type="text" id="name" required/>
+                            <input class="form-control form-control-solid" placeholder="" name="name"  type="text" id="name" value="<?= set_value("name")	?>" required/>
                             <!--end::Input-->
                         </div>
                         <!--end::Input group-->
@@ -50,7 +50,7 @@
                              <label class="fw-bolder text-dark fs-6 mb-2">Description</label>
                             <!--end::Label-->
                             <!--end::Input-->
-                            <textarea class="form-control form-control-solid" placeholder="Brève description ici..." name="description" ></textarea>
+                            <textarea class="form-control form-control-solid" placeholder="Brève description ici..." name="description" ><?= set_value("description")?></textarea>
                             <!--end::Input-->
                         </div>
                         <!--end::Input group-->
@@ -61,7 +61,7 @@
                 <!--begin::Modal footer-->
                 <div class="modal-footer flex-center">
                     <!--begin::Button-->
-                    <button type="reset" id="kt_modal_new_address_cancel" class="btn btn-danger me-3">Quitter</button>
+                    <button type="reset" id="kt_modal_new_address_cancel" class="btn btn-danger me-3" data-bs-dismiss="modal">Quitter</button>
                     <!--end::Button-->
                     <!--begin::Button-->
                     <button type="submit" id="kt_modal_new_address_submit" class="btn btn-primary">

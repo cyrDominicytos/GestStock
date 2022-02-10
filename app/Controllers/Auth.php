@@ -831,13 +831,19 @@ class Auth extends \IonAuth\Controllers\Auth
                 insertPermissions($newGroupId, $this->request);
 				return redirect()->to('/groups/list')->with("message", "Le rôle ".$this->request->getPost('name')." est créé avec succès !")->with("code", 1);
 			}
+			//We find some error
+			$this->data['message'] = $this->validation->getErrors() ? $this->validation->listErrors($this->validationListTemplate) : ($this->ionAuth->errors($this->validationListTemplate) ? $this->ionAuth->errors($this->validationListTemplate) : $this->session->getFlashdata('message'));
+			$this->session->setFlashdata('message', $this->data['message']);
+			return redirect()->back()->withInput();		
 		}
 		else
 		{
 			// display the create group form
 			// set the flash data error message if there is one
+			//We find some error
 			$this->data['message'] = $this->validation->getErrors() ? $this->validation->listErrors($this->validationListTemplate) : ($this->ionAuth->errors($this->validationListTemplate) ? $this->ionAuth->errors($this->validationListTemplate) : $this->session->getFlashdata('message'));
-            return redirect()->back()->with("message", $this->data['message'])->with("code", 0);
+			$this->session->setFlashdata('message', $this->data['message']);
+			return redirect()->back()->withInput();		
 		}
 	}
 

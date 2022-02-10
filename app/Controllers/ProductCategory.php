@@ -82,7 +82,9 @@ class ProductCategory extends BaseController
 			 return redirect()->back()->with("message2", "Erreur : Accès illégal !")->with("code", 0);
 		}
 		$tables = productParams()[$this->request->getPost('type')]['table'];
-		$name = productParams()[$this->request->getPost('type')]['externalName'];
+		$type =  $this->request->getPost('type');
+		$name = ($type == 1) ? ("la ".productParams()[$type]['externalName']) : ("l' ".productParams()[$type]['externalName'])  ;
+        $CreateRoute = ($type == 1) ? ("/product_category/list_create") : ("/sales_option/list_create");
         $data = [];
 		// validate form input
 		$rules = [
@@ -100,20 +102,19 @@ class ProductCategory extends BaseController
                      
 		if ($this->validation->withRequest($this->request)->run())
 		{
-            $data[$tables.'_name'] = $this->request->getPost('name');
+            $data[$tables.'_name'] = strtoupper($this->request->getPost('name'));
             $data[$tables.'_description'] = $this->request->getPost('description');
 
             if(productInsert($this->request->getPost('type'), $data))
             {
-                return redirect()->to("/".productParams()[$this->request->getPost('type')]['externalNewRoute']."/list")->with('message', 'Nouvelle '.$name.' créée avec succès !')->with('code',1);
+                return redirect()->to("/".productParams()[$this->request->getPost('type')]['externalNewRoute']."/list")->with('message', 'Nouvelle '.(productParams()[$type]["externalName"]).' créée avec succès !')->with('code',1);
             }
             
         }
-         //We find some error
-
-         $this->data['message'] = $this->validation->getErrors() ? $this->validation->listErrors($this->validationListTemplate) : ($this->ionAuth->errors($this->validationListTemplate) ? $this->ionAuth->errors($this->validationListTemplate) : $this->session->getFlashdata('message'));
-         $this->session->setFlashdata('message2', $this->data['message']);
-         return redirect()->back()->withInput();		
+		//We find some error
+		$this->data['message'] = $this->validation->getErrors() ? $this->validation->listErrors($this->validationListTemplate) : ($this->ionAuth->errors($this->validationListTemplate) ? $this->ionAuth->errors($this->validationListTemplate) : $this->session->getFlashdata('message'));
+		$this->session->setFlashdata('message2', $this->data['message']);
+		return redirect()->to($CreateRoute)->withInput();		
 	}
     /**
 	 * Create a new client|provider|delivery_men
@@ -136,6 +137,7 @@ class ProductCategory extends BaseController
         $type =  $this->request->getPost('type');
 		$tables = productParams()[$type]['table'];
         $name = ($type == 1) ? ("la ".productParams()[$type]['externalName']) : ("l' ".productParams()[$type]['externalName'])  ;
+        $CreateRoute = ($type == 1) ? ("/product_category/list_create") : ("/sales_option/list_create");
         $data = [];
         $user = productModel($type)->where($tables.'_id',$id)->get()->getResultArray();
         //dd($user);
@@ -154,7 +156,7 @@ class ProductCategory extends BaseController
             $this->validation->setRules($rules, $errors);
 		if ($this->validation->withRequest($this->request)->run())
 		{
-            $data[$tables.'_name'] = $this->request->getPost('name');
+            $data[$tables.'_name'] = strtoupper($this->request->getPost('name'));
             $data[$tables.'_description'] = $this->request->getPost('description');
 
             if(productModel($type)->update($id, $data))
@@ -165,13 +167,13 @@ class ProductCategory extends BaseController
         //We find some error
         $this->data['message'] = $this->validation->getErrors() ? $this->validation->listErrors($this->validationListTemplate) : ($this->ionAuth->errors($this->validationListTemplate) ? $this->ionAuth->errors($this->validationListTemplate) : $this->session->getFlashdata('message'));
         $this->session->setFlashdata('message2', $this->data['message']);
-        return redirect()->back()->withInput();
+        return redirect()->to($CreateRoute)->withInput();
     }else{
         return redirect()->back()->with("message2", $name." que vous essayez de modifier n'existe pas!")->with("code", 0);
 
     }
          		
-	}
+}
 
 
     /**

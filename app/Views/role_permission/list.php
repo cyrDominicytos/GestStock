@@ -63,7 +63,7 @@
                         <div class="card-header">
                             <!--begin::Card title-->
                             <div class="card-title">
-                                <h2 class="text-dark text-capitalize"><?= $group->name ?></h2>
+                                <h2 class="text-dark text-capitalize"><?= $group->display_name ?></h2>
                             </div>
                             <!--end::Card title-->
                         </div>

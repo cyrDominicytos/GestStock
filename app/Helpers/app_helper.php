@@ -69,7 +69,7 @@ function permission_list_foreach_group()
 if (!function_exists("permission_list_group")) {
 function permission_list_group($id)
 	{
-		$modelGroupPermission = new GroupPermission();
+		$modelGroupPermission = new GroupPermissionModel();
 		$data = [];
 			$temp = $modelGroupPermission->get_permission_by_group($id);
 			if(count($temp) > 0)
@@ -121,7 +121,7 @@ if (!function_exists("insertPermissions")) {
 function insertPermissions($groupId, $request)
 	{
 		$modelPermission = new PermissionModel();
-		$modelGroupPermission = new GroupPermission();
+		$modelGroupPermission = new GroupPermissionModel();
 		$permissions = $modelPermission->get()->getResult();
 		$data = [];
 		foreach ($permissions as $permission){
@@ -134,11 +134,12 @@ function insertPermissions($groupId, $request)
 		return $data;
 	}
 }
+
 if (!function_exists("updatePermissions")) {
 function updatePermissions($groupId, $request)
 	{
 		$modelPermission = new PermissionModel();
-		$modelGroupPermission = new GroupPermission();
+		$modelGroupPermission = new GroupPermissionModel();
 		$modelGroupPermission->where("group_id", $groupId)->delete();
 		$permissions = $modelPermission->get()->getResult();
 		$data = [];
@@ -148,8 +149,6 @@ function updatePermissions($groupId, $request)
 				//$modelGroupPermission->insert(["group_id"=> $groupId,"permission_id"=>$permission->id]);
 			}
 		}
-		//echo (json_encode($data));
-		//dd(json_encode($data));
 		$modelGroupPermission->insert(["group_id"=> $groupId,"permissions"=>json_encode($data)]);
 		return $data;
 	}

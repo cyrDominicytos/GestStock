@@ -11,126 +11,66 @@
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 
--- Listage des données de la table inventory_manager.groups : ~5 rows (environ)
+-- Listage des données de la table inventory_manager.clients : ~2 rows (environ)
+/*!40000 ALTER TABLE `clients` DISABLE KEYS */;
+INSERT INTO `clients` (`clients_id`, `clients_ifu`, `clients_company`, `clients_phone_number`, `clients_email`, `clients_address`, `clients_isActive`, `clients_created_at`, `clients_updated_at`) VALUES
+	(1, '1234567891236', 'assogba clément', '+22966757025', 'cyrdominicytos1@gmail.com', 'Rue 560, Cotonou, Bénin', 0, '2022-02-09 13:30:45', '2022-02-09 13:39:15'),
+	(2, '1456987123654', 'assouka bili', '+22966757002', 'cyrdominicytos@gmail.com', 'Rue 560, Cotonou, Bénin', 1, '2022-02-09 13:37:49', '2022-02-09 13:37:49');
+/*!40000 ALTER TABLE `clients` ENABLE KEYS */;
+
+-- Listage des données de la table inventory_manager.delivery_mens : ~2 rows (environ)
+/*!40000 ALTER TABLE `delivery_mens` DISABLE KEYS */;
+INSERT INTO `delivery_mens` (`delivery_mens_id`, `delivery_mens_ifu`, `delivery_mens_company`, `delivery_mens_phone_number`, `delivery_mens_email`, `delivery_mens_address`, `delivery_mens_isActive`, `delivery_mens_created_at`, `delivery_mens_updated_at`) VALUES
+	(1, NULL, 'assouka benjamin', '62359847', NULL, '', 0, '2022-02-09 13:41:23', '2022-02-09 13:46:49'),
+	(2, '1456987123625', 'ali alissou', '65254897', NULL, '', 1, '2022-02-09 13:46:22', '2022-02-09 13:46:38');
+/*!40000 ALTER TABLE `delivery_mens` ENABLE KEYS */;
+
+-- Listage des données de la table inventory_manager.groups : ~3 rows (environ)
 /*!40000 ALTER TABLE `groups` DISABLE KEYS */;
-INSERT INTO `groups` (`id`, `name`, `guard`, `description`) VALUES
-	(1, 'admin', 'Admin', 'Administrateur du système'),
-	(2, 'comptable', 'comptable', 'Comptable'),
-	(10, 'Vendeur', 'Ventes', 'Rôles attribué au service des ventes'),
-	(11, 'Superviseur', 'Gerant', 'Rôle attribuer au chef ou au superviseur des ventes'),
-	(12, 'SuperAdmin', 'SuperAdmin', 'Administrateur de toute l\'application');
+INSERT INTO `groups` (`id`, `name`, `display_name`, `description`) VALUES
+	(1, 'admin', 'admin', 'Administrateur'),
+	(3, 'vendeur', 'vendeur', 'Vendeur');
 /*!40000 ALTER TABLE `groups` ENABLE KEYS */;
 
--- Listage des données de la table inventory_manager.groups_permissions : ~97 rows (environ)
+-- Listage des données de la table inventory_manager.groups_permissions : ~24 rows (environ)
 /*!40000 ALTER TABLE `groups_permissions` DISABLE KEYS */;
 INSERT INTO `groups_permissions` (`id`, `group_id`, `permission_id`) VALUES
-	(54, 2, 40),
-	(85, 10, 20),
-	(86, 10, 21),
-	(87, 10, 22),
-	(88, 10, 30),
-	(89, 10, 31),
-	(90, 10, 32),
-	(91, 10, 60),
-	(92, 10, 61),
-	(93, 10, 62),
-	(94, 10, 80),
-	(95, 11, 10),
-	(96, 11, 20),
-	(97, 11, 21),
-	(98, 11, 22),
-	(99, 11, 23),
-	(100, 11, 30),
-	(101, 11, 31),
-	(102, 11, 32),
-	(103, 11, 40),
-	(104, 11, 41),
-	(105, 11, 42),
-	(106, 11, 50),
-	(107, 11, 60),
-	(108, 11, 61),
-	(109, 11, 62),
-	(110, 11, 70),
-	(111, 11, 71),
-	(112, 11, 72),
-	(113, 11, 80),
-	(114, 11, 81),
-	(115, 11, 82),
-	(145, 12, 10),
-	(146, 12, 20),
-	(147, 12, 21),
-	(148, 12, 22),
-	(149, 12, 23),
-	(150, 12, 30),
-	(151, 12, 31),
-	(152, 12, 32),
-	(153, 12, 33),
-	(154, 12, 40),
-	(155, 12, 41),
-	(156, 12, 42),
-	(157, 12, 43),
-	(158, 12, 50),
-	(159, 12, 60),
-	(160, 12, 61),
-	(161, 12, 62),
-	(162, 12, 63),
-	(163, 12, 70),
-	(164, 12, 71),
-	(165, 12, 72),
-	(166, 12, 73),
-	(167, 12, 80),
-	(168, 12, 81),
-	(169, 12, 82),
-	(170, 12, 83),
-	(171, 12, 90),
-	(172, 12, 91),
-	(173, 12, 92),
-	(174, 12, 93),
-	(175, 12, 100),
-	(176, 12, 101),
-	(177, 12, 102),
-	(178, 12, 103),
-	(179, 12, 110),
-	(180, 12, 112),
-	(181, 1, 10),
-	(182, 1, 20),
-	(183, 1, 21),
-	(184, 1, 22),
-	(185, 1, 30),
-	(186, 1, 31),
-	(187, 1, 32),
-	(188, 1, 41),
-	(189, 1, 42),
-	(190, 1, 50),
-	(191, 1, 60),
-	(192, 1, 61),
-	(193, 1, 62),
-	(194, 1, 70),
-	(195, 1, 71),
-	(196, 1, 72),
-	(197, 1, 80),
-	(198, 1, 81),
-	(199, 1, 82),
-	(200, 1, 90),
-	(201, 1, 91),
-	(202, 1, 92),
-	(203, 1, 93),
-	(204, 1, 100),
-	(205, 1, 101),
-	(206, 1, 102),
-	(207, 1, 103),
-	(208, 1, 110),
-	(209, 1, 112);
+	(90, 1, 10),
+	(91, 1, 40),
+	(92, 1, 41),
+	(93, 1, 42),
+	(94, 1, 43),
+	(95, 1, 50),
+	(96, 1, 70),
+	(97, 1, 71),
+	(98, 1, 72),
+	(99, 1, 73),
+	(100, 1, 80),
+	(101, 1, 81),
+	(102, 1, 82),
+	(103, 1, 83),
+	(104, 1, 90),
+	(105, 1, 91),
+	(106, 1, 92),
+	(107, 1, 93),
+	(108, 1, 100),
+	(109, 1, 101),
+	(110, 1, 102),
+	(111, 1, 103),
+	(112, 1, 110),
+	(113, 1, 112);
 /*!40000 ALTER TABLE `groups_permissions` ENABLE KEYS */;
 
--- Listage des données de la table inventory_manager.login_attempts : ~0 rows (environ)
+-- Listage des données de la table inventory_manager.login_attempts : ~1 rows (environ)
 /*!40000 ALTER TABLE `login_attempts` DISABLE KEYS */;
+INSERT INTO `login_attempts` (`id`, `ip_address`, `login`, `time`) VALUES
+	(1, '::1', 'admin@admin.comd', 1644403877);
 /*!40000 ALTER TABLE `login_attempts` ENABLE KEYS */;
 
 -- Listage des données de la table inventory_manager.migrations : ~1 rows (environ)
 /*!40000 ALTER TABLE `migrations` DISABLE KEYS */;
 INSERT INTO `migrations` (`id`, `version`, `class`, `group`, `namespace`, `time`, `batch`) VALUES
-	(1, '20181211100537', 'IonAuth\\Database\\Migrations\\Migration_Install_ion_auth', '', 'IonAuth', 1643908835, 1);
+	(1, '20181211100537', 'IonAuth\\Database\\Migrations\\Migration_Install_ion_auth', '', 'IonAuth', 1644317196, 1);
 /*!40000 ALTER TABLE `migrations` ENABLE KEYS */;
 
 -- Listage des données de la table inventory_manager.permissions : ~36 rows (environ)
@@ -174,24 +114,52 @@ INSERT INTO `permissions` (`id`, `name`, `module`, `description`) VALUES
 	(112, 'Editer_Parametrages', 'Parametrages', 'Editer un Paramétrage');
 /*!40000 ALTER TABLE `permissions` ENABLE KEYS */;
 
--- Listage des données de la table inventory_manager.users : ~5 rows (environ)
+-- Listage des données de la table inventory_manager.products : ~0 rows (environ)
+/*!40000 ALTER TABLE `products` DISABLE KEYS */;
+/*!40000 ALTER TABLE `products` ENABLE KEYS */;
+
+-- Listage des données de la table inventory_manager.product_categories : ~4 rows (environ)
+/*!40000 ALTER TABLE `product_categories` DISABLE KEYS */;
+INSERT INTO `product_categories` (`product_categories_id`, `product_categories_name`, `product_categories_description`, `product_categories_isActive`, `product_categories_created_at`, `product_categories_updated_at`) VALUES
+	(1, 'Poissonnerie', '', 1, '2022-02-09 06:14:57', '2022-02-09 06:14:57'),
+	(2, 'Brasserie', '', 1, '2022-02-09 06:15:49', '2022-02-09 06:15:49'),
+	(3, 'Divers', '', 1, '2022-02-09 06:16:00', '2022-02-09 06:16:00'),
+	(4, 'Matériel Informatique', '', 1, '2022-02-09 13:48:51', '2022-02-09 13:49:57');
+/*!40000 ALTER TABLE `product_categories` ENABLE KEYS */;
+
+-- Listage des données de la table inventory_manager.product_prices : ~0 rows (environ)
+/*!40000 ALTER TABLE `product_prices` DISABLE KEYS */;
+/*!40000 ALTER TABLE `product_prices` ENABLE KEYS */;
+
+-- Listage des données de la table inventory_manager.providers : ~1 rows (environ)
+/*!40000 ALTER TABLE `providers` DISABLE KEYS */;
+INSERT INTO `providers` (`providers_id`, `providers_ifu`, `providers_company`, `providers_phone_number`, `providers_email`, `providers_address`, `providers_isActive`, `providers_created_at`, `providers_updated_at`) VALUES
+	(1, '9999999999998', 'it lab', '+2296675756', 'cyr@gmail.com', 'Rue 560, Cotonou, Bénin', 1, '2022-02-09 13:40:13', '2022-02-09 13:40:47');
+/*!40000 ALTER TABLE `providers` ENABLE KEYS */;
+
+-- Listage des données de la table inventory_manager.sales_options : ~4 rows (environ)
+/*!40000 ALTER TABLE `sales_options` DISABLE KEYS */;
+INSERT INTO `sales_options` (`sales_options_id`, `sales_options_name`, `sales_options_description`, `sales_options_isActive`, `sales_options_created_at`, `sales_options_updated_at`) VALUES
+	(1, 'Unité', '', 0, '2022-02-09 06:16:19', '2022-02-09 06:34:12'),
+	(2, 'KG', '', 1, '2022-02-09 06:16:36', '2022-02-09 06:16:36'),
+	(3, 'LITTRES', '', 1, '2022-02-09 13:47:39', '2022-02-09 13:48:19'),
+	(4, 'PAQUET', '', 1, '2022-02-09 13:47:55', '2022-02-09 13:47:55');
+/*!40000 ALTER TABLE `sales_options` ENABLE KEYS */;
+
+-- Listage des données de la table inventory_manager.users : ~3 rows (environ)
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
 INSERT INTO `users` (`id`, `ip_address`, `username`, `password`, `email`, `activation_selector`, `activation_code`, `forgotten_password_selector`, `forgotten_password_code`, `forgotten_password_time`, `remember_selector`, `remember_code`, `created_at`, `updated_at`, `last_login`, `active`, `first_name`, `last_name`, `company`, `phone`, `address`) VALUES
-	(1, '127.0.0.1', 'administrator', '$2y$12$4ctWzUqPWzXqNfq2tUMXKeeUHeKZLdCk9qlCLBWfyy82P4GloraHy', 'admin@admin.com', NULL, '', NULL, NULL, NULL, NULL, NULL, '2022-02-03 18:20:41', '2022-02-07 10:13:02', 1644225182, 1, 'Admin', 'istrator', 'ADMIN', '65656565', 'Cotonou'),
-	(2, '127.0.0.1', 'Vendeur', '$2y$10$Cw0N4lbQ/SfIVFj.SRvive3r6AJKt5laZqD7I9RoP/QAHuZYa6If2', 'vendeur@vendeur.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-02-03 18:20:41', '2022-02-04 18:38:16', 1643970264, 1, 'Pierre', 'ALI', 'Seller', '66666666', 'Cotonou'),
-	(3, '::1', 'kha', '$2y$10$RphovPhJLtPr2JrT7YOlrOEwSRi8nHu0TV5ViRuRmuNZLikS5Dvzy', 'kha@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-02-04 19:45:24', '2022-02-04 19:45:24', NULL, 1, 'Khalane', 'AFFISSOU', '', '+33 25035458', 'Rennes'),
-	(4, '::1', 'julie', '$2y$10$FeyqmZGgMfceboHUoAb3R.FZjlyFFLHiwJSsSRASdGCRxfA.aM9Xe', 'julie@gmail.com', 'fecc475844f1186d2715', '$2y$10$Z5k9Ea.AWS.GTHqv8mrGBeQtpgPBA/UIAzISKVeNBWy/zIHh5aXY6', NULL, NULL, NULL, NULL, NULL, '2022-02-04 19:54:54', '2022-02-04 20:06:16', NULL, 0, 'Julie', 'SOSSOU', '', '65892547', ''),
-	(5, '::1', 'pierro', '$2y$10$J4lto8X4o/b5xrABOi2yxeoWrJXgDhdyr7vq0Loq/pdXBWhGMTDcO', 'gbeffo@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-02-06 09:52:21', '2022-02-06 11:12:40', NULL, 1, 'Pierrette', 'GBEFFO', '', '+22966757001', 'Rue 560, Cotonou, Bénin');
+	(1, '127.0.0.1', 'administrator', '$2y$12$msBt095/QvjEy7tFhvfPFuEg/nN2S4.JB3RNclZUcHnFQQVwsv4pe', 'admin@admin.com', NULL, '', NULL, NULL, NULL, NULL, NULL, '2022-02-08 11:46:43', '2022-02-09 12:52:22', 1644407542, 1, 'Admin', 'istrator', 'ADMIN', '65656565', 'Cotonou'),
+	(2, '127.0.0.1', 'Vendeur', '$2y$10$.4lSzBVa22m8wgYAkwf1feDLk9rg21Nzvh6OceOOyH5k7a43WI1wS', 'vendeur@vendeur.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-02-08 11:46:43', '2022-02-09 12:01:58', 1644404518, 1, 'Pierre', 'ALI', 'Seller', '66666666', 'Cotonou'),
+	(3, '::1', 'admin', '$2y$10$ThMlBIydT1tB/P1rOuarGOkd1qgax82W0IMqTjdPUoxri/iU.av/2', 'admin@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-02-09 11:56:57', '2022-02-09 11:57:40', NULL, 1, 'Habib', 'LEWHE', '', '+22966757002', 'Rue 560, Cotonou, Bénin');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 
--- Listage des données de la table inventory_manager.users_groups : ~5 rows (environ)
+-- Listage des données de la table inventory_manager.users_groups : ~3 rows (environ)
 /*!40000 ALTER TABLE `users_groups` DISABLE KEYS */;
 INSERT INTO `users_groups` (`id`, `user_id`, `group_id`) VALUES
 	(1, 1, 1),
-	(2, 2, 2),
-	(4, 4, 11),
-	(5, 3, 10),
-	(7, 5, 2);
+	(3, 3, 3),
+	(4, 2, 3);
 /*!40000 ALTER TABLE `users_groups` ENABLE KEYS */;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;

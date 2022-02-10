@@ -82,13 +82,13 @@
 									<!--begin::Col-->
 									<div class="col-xl-6">
 										<label class="form-label fw-bolder text-dark fs-6">Noms <sup class="mySup">*</sup></label>
-										<input class="form-control form-control-lg form-control-solid" type="text" placeholder="" name="last_name" autocomplete="off" required="required" value="<?= (isset($user)? ($user->last_name) : (""))?>"/>
+										<input class="form-control form-control-lg form-control-solid" type="text" placeholder="" name="last_name" autocomplete="off" required="required" value="<?= (isset($user)? ($user->last_name) : (set_value("last_name")))?>"/>
 									</div>
 									<!--end::Col-->
 									<!--begin::Col-->
 									<div class="col-xl-6">
 										<label class="form-label fw-bolder text-dark fs-6">Prénoms <sup class="mySup">*</sup></label>
-										<input class="form-control form-control-lg form-control-solid" type="text" placeholder="" name="first_name" autocomplete="off" required="required" value="<?= (isset($user)? ($user->first_name) : (""))?>"/>
+										<input class="form-control form-control-lg form-control-solid" type="text" placeholder="" name="first_name" autocomplete="off" required="required" value="<?= (isset($user)? ($user->first_name) : (set_value("first_name")))?>"/>
 									</div>
 									<!--end::Col-->
 								</div>
@@ -96,13 +96,13 @@
 									<!--begin::Col-->
 									<div class="col-xl-6">
 										<label class="form-label fw-bolder text-dark fs-6">Nom d'utilisateur <sup class="mySup">*</sup></label>
-										<input class="form-control form-control-lg form-control-solid" type="text" placeholder="" name="username" autocomplete="off" required="required" value="<?= (isset($user)? ($user->username) : (""))?>"/>
+										<input class="form-control form-control-lg form-control-solid" type="text" placeholder="" name="username" autocomplete="off" required="required" value="<?= (isset($user)? ($user->username) : (set_value("username")))?>"/>
 									</div>
 									<!--end::Col-->
 									<!--begin::Col-->
 									<div class="col-xl-6">
 										<label class="form-label fw-bolder text-dark fs-6">Email <sup class="mySup">*</sup></label>
-										<input class="form-control form-control-lg form-control-solid" type="email" placeholder="" name="email" autocomplete="off" rique="required" value="<?= (isset($user)? ($user->email) : (""))?>"/>
+										<input class="form-control form-control-lg form-control-solid" type="email" placeholder="" name="email" autocomplete="off" rique="required" value="<?= (isset($user)? ($user->email) : (set_value("email")))?>"/>
 									</div>
 									<!--end::Col-->
 								</div>
@@ -110,13 +110,13 @@
 									<!--begin::Col-->
 									<div class="col-xl-6">
 										<label class="form-label fw-bolder text-dark fs-6">Téléphone <sup class="mySup">*</sup></label>
-										<input class="form-control form-control-lg form-control-solid" type="tel" placeholder="" name="phone" autocomplete="off" required="required" value="<?= (isset($user)? ($user->phone) : (""))?>"/>
+										<input class="form-control form-control-lg form-control-solid" type="tel" placeholder="" name="phone" autocomplete="off" required="required" value="<?= (isset($user)? ($user->phone) : (set_value("phone")))?>"/>
 									</div>
 									<!--end::Col-->
 									<!--begin::Col-->
 									<div class="col-xl-6">
 										<label class="form-label fw-bolder text-dark fs-6">Adresse </sup></label>
-										<input class="form-control form-control-lg form-control-solid" type="text" placeholder="" name="address" autocomplete="off" value="<?= (isset($user)? ($user->address) : (""))?>"/>
+										<input class="form-control form-control-lg form-control-solid" type="text" placeholder="" name="address" autocomplete="off" value="<?= (isset($user)? ($user->address) : (set_value("address")))?>"/>
 									</div>
 									<!--end::Col-->
 								</div>
@@ -168,10 +168,36 @@
 								</div>
 								<!--end::Input group=-->
 								<!--begin::Input group-->
-								<div class="fv-row mb-5">
-									<label class="form-label fw-bolder text-dark fs-6">Confirmer mot de passe <sup class="mySup">*</sup></label>
-									<input class="form-control form-control-lg form-control-solid" type="password" placeholder="" name="password_confirm" autocomplete="off" />
+								<div class="mb-10 fv-row" data-kt-password-meter="true">
+									<!--begin::Wrapper-->
+									<div class="mb-1">
+										<!--begin::Label-->
+										<label class="form-label fw-bolder text-dark fs-6">Confirmer mot de passe <sup class="mySup">*</sup></label>
+										<!--end::Label-->
+										<!--begin::Input wrapper-->
+										<div class="position-relative mb-3">
+											<input class="form-control form-control-lg form-control-solid" type="password" placeholder="" name="password_confirm" autocomplete="off" />
+											<span class="btn btn-sm btn-icon position-absolute translate-middle top-50 end-0 me-n2" data-kt-password-meter-control="visibility">
+												<i class="bi bi-eye-slash fs-2"></i>
+												<i class="bi bi-eye fs-2 d-none"></i>
+											</span>
+										</div>
+										<!--end::Input wrapper-->
+										<!--begin::Meter-->
+										<div class="d-flex align-items-center mb-3" data-kt-password-meter-control="highlight">
+											<div class="flex-grow-1 bg-secondary bg-active-success rounded h-5px me-2"></div>
+											<div class="flex-grow-1 bg-secondary bg-active-success rounded h-5px me-2"></div>
+											<div class="flex-grow-1 bg-secondary bg-active-success rounded h-5px me-2"></div>
+											<div class="flex-grow-1 bg-secondary bg-active-success rounded h-5px"></div>
+										</div>
+										<!--end::Meter-->
+									</div>
+									<!--end::Wrapper-->
+									<!--begin::Hint-->
+									<div class="text-muted">Le mot de passe doit contenir au moins 8 caractères avec un mélange de lettres, numbres &amp; de symboles.</div>
+									<!--end::Hint-->
 								</div>
+								<!--end::Input group=-->
 								<!--end::Input group-->
 								<!--begin::Input group-->
 								<div class="fv-row mb-10">
@@ -215,9 +241,12 @@
 		<!--end::Root-->
 		<?= $this->section('javascript') ?>
 			<script type="text/javascript">
+
 				var group = "<?= isset($userGroup)? $userGroup: ''?>";
 				if(group!=""){
 					document.getElementById('group').value = group;
+				}else{
+					document.getElementById('group').value = <?= set_value("group")	?>;
 				}
 
 				function toggleTerms() {

@@ -90,17 +90,17 @@
                                     <!--begin::Col-->
                                     <div class="col-md-6 fv-row">
                                         <!--end::Label-->
-                                        <label class="required fw-bolder text-dark fs-6 mb-2">Grade Associé</label>
+                                        <label class="required fw-bolder text-dark fs-6 mb-2"> Nom à afficher</label>
                                         <!--end::Label-->
                                         <!--end::Input-->
-                                        <input type="text" class="form-control form-control-solid" placeholder="" name="guard" value="<?= isset($group) ? $group->guard : ''; ?>" />
+                                        <input type="text" class="form-control form-control-solid" placeholder="" name="display_name" value="<?= isset($group) ? $group->display_name : ''; ?>" />
                                         <!--end::Input-->
                                     </div>
                                     <!--end::Col-->
                                     <!--begin::Col-->
                                     <div class="col-md-12 fv-row">
                                         <!--end::Label-->
-                                        <label class="required fw-bolder text-dark fs-6 mb-2">Description</label>
+                                        <label class="fw-bolder text-dark fs-6 mb-2">Description</label>
                                         <!--end::Label-->
                                         <!--end::Input-->
                                         <textarea class="form-control form-control-solid" placeholder="Décrivez l'usage du rôle..." name="description" ><?= isset($group) ? $group->description : ''; ?></textarea>
@@ -162,7 +162,7 @@
                                                         <div class="mb-4">
                                                             <!--begin::Item-->
                                                             <div class="d-flex align-items-center ps-10 mb-n1">
-                                                                <input type="checkbox"    id="role"  name="<?= $value->id; ?>" value="<?= $value->id; ?>"  <?= isset($group) ? (in_array($value->id,$group_permission) ? ("checked") : "") : ''; ?>>
+                                                                <input type="checkbox"    id="role"  name="<?= $value->id; ?>" value="<?= $value->id; ?>"  <?= isset($group) ? (array_key_exists($value->id,$group_permission) ? ("checked") : "") : ''; ?>>
                                                                 <label for="role" class="text-gray-600 fw-bold fs-6" style="margin-left:10px"><?= $value->name; ?></label><br>
                                                             </div>
                                                             <!--end::Item-->

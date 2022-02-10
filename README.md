@@ -5,3 +5,5 @@
 #blue => #009ef7
 
 #old background-color: #1e1e2d;
+
+#=DATEDIF(A3;A2;"M") =DATEDIF(A3;A2;"Y")&" ans " &DATEDIF(A3;A2;"YM")&" mois "&DATEDIF(A3;A2;"MD")&" jours"

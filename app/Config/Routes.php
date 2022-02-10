@@ -41,6 +41,10 @@ $routes->post('/user/update/(:num)', 'Auth::edit_user/$1');
 $routes->get('/user/edit/(:num)', 'Auth::update_user/$1');
 $routes->get('/user/banish/(:num)', 'Auth::deactivate/$1');
 $routes->get('/user/activate/(:num)', 'Auth::activate/$1');
+$routes->get('/users/list', 'Users::list');
+
+$routes->get('/login', 'Auth::index');
+$routes->get('/register', 'Auth::register');
 
 //external management routes : 
 $routes->get('/external/list', 'ExternalEntity::list');
@@ -78,9 +82,7 @@ $routes->get('/groups/view/(:num)', 'Auth::view_group/$1');
 $routes->post('/groups/edit/(:num)', 'Auth::edit_group/$1');
 $routes->get('/groups/delete/(:num)', 'Auth::delete_group/$1');
 
-$routes->get('/login', 'Auth::index');
-$routes->get('/register', 'Auth::register');
-$routes->get('/users/list', 'Users::list');
+
 
 
 

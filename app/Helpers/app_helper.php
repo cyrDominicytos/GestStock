@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\Permission;
+use App\Models\PermissionModel;
 use App\Models\GroupPermission;
 use App\Models\Group;
 use App\Models\Client;
@@ -18,9 +18,10 @@ if (!function_exists("status")) {
 	}
 }
 if (!function_exists("deleteUser")) {
-function deleteUser($statusId)
-{
-	return ($statusId== 1) ? ("<span class='text-danger'>Bannir</span>") : ("<span class='text-success'>Activer</span>"); 
+	function deleteUser($statusId)
+	{
+		return ($statusId== 1) ? ("<span class='text-danger'>Bannir</span>") : ("<span class='text-success'>Activer</span>"); 
+	}
 }
 
 if (!function_exists("groups_array")) {
@@ -33,15 +34,14 @@ function groups_array($groups)
 		return $data;
 	}
 }
+
+
 if (!function_exists("permission_array")) {
 function permission_array($groups)
 	{
-		$data = [];
-		foreach ($groups as $group){
-			$data[count($data)] = $group->permission_id;
-		}
-		return $data;
-		}
+			if(count($groups) >0)
+				return (array) json_decode($groups[0]->permissions);
+				return [];
 	}
 }
 
@@ -52,20 +52,36 @@ function permission_list_foreach_group()
 		$modelGroupPermission = new GroupPermission();
 		$groups = $modelGroup->get()->getResult();
 		$data = [];
-		$temp = [];
 		foreach ($groups as $group){
-			$data[$group->id] = $modelGroupPermission->get_permission_by_group($group->id);
+			$temp = $modelGroupPermission->get_permission_by_group($group->id);
+			if(count($temp) > 0)
+				$data[$group->id] =  ((array) json_decode($temp[0]->permissions));
+			else
+				$data[$group->id] = $temp;
+
+			
 			
 		}
-
 		return $data;
+	}
+}
+
+if (!function_exists("permission_list_group")) {
+function permission_list_group($id)
+	{
+		$modelGroupPermission = new GroupPermission();
+		$data = [];
+			$temp = $modelGroupPermission->get_permission_by_group($id);
+			if(count($temp) > 0)
+				return((array) json_decode($temp[0]->permissions));
+				return $temp;						
 	}
 }
 
 if (!function_exists("getPermissionByModule")) {
 function getPermissionByModule()
 	{
-		$modelPermission = new Permission();
+		$modelPermission = new PermissionModel();
 		$permissions = $modelPermission->getPermissionsGroupByModule();
 		$data = [];
 		foreach ($permissions as $permission){
@@ -76,34 +92,65 @@ function getPermissionByModule()
 	}
 }
 
+if (!function_exists("retrivePermissionByModule")) {
+function retrivePermissionByModule($permissions)
+	{
+
+		$data = [];
+		$temp = [];
+		$index = "";
+		foreach ($permissions as $key => $permission){
+			if( $permission->module == $index || $index==""){
+				$temp[count($temp)] = $permission;
+				$index = $permission->module;
+			}else{
+				$data[$index] = $temp;
+				$temp = [];
+				$temp[count($temp)] = $permission;
+				$index = $permission->module;
+			}
+			//$data[$permission->module] = $modelPermission->where(['module' => $permission->module])->get()->getResult();
+		}
+		if($index!= "" && count($temp)>0)
+			$data[$index] = $temp;	
+		return $data;
+	}
+}
+
 if (!function_exists("insertPermissions")) {
 function insertPermissions($groupId, $request)
 	{
-		$modelPermission = new Permission();
+		$modelPermission = new PermissionModel();
 		$modelGroupPermission = new GroupPermission();
 		$permissions = $modelPermission->get()->getResult();
 		$data = [];
 		foreach ($permissions as $permission){
 			if($request->getPost($permission->id) != null){
-				$modelGroupPermission->insert(["group_id"=> $groupId,"permission_id"=>$permission->id]);
+				$data[$permission->id] =$permission;
+				//$modelGroupPermission->insert(["group_id"=> $groupId,"permission_id"=>$permission->id]);
 			}
 		}
+		$modelGroupPermission->insert(["group_id"=> $groupId,"permissions"=>json_encode($data)]);
 		return $data;
 	}
 }
 if (!function_exists("updatePermissions")) {
 function updatePermissions($groupId, $request)
 	{
-		$modelPermission = new Permission();
+		$modelPermission = new PermissionModel();
 		$modelGroupPermission = new GroupPermission();
 		$modelGroupPermission->where("group_id", $groupId)->delete();
 		$permissions = $modelPermission->get()->getResult();
 		$data = [];
 		foreach ($permissions as $permission){
 			if($request->getPost($permission->id) != null){
-				$modelGroupPermission->insert(["group_id"=> $groupId,"permission_id"=>$permission->id]);
+				$data[$permission->id] =$permission;
+				//$modelGroupPermission->insert(["group_id"=> $groupId,"permission_id"=>$permission->id]);
 			}
 		}
+		//echo (json_encode($data));
+		//dd(json_encode($data));
+		$modelGroupPermission->insert(["group_id"=> $groupId,"permissions"=>json_encode($data)]);
 		return $data;
 	}
 }

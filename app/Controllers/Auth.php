@@ -2,7 +2,7 @@
 
 namespace App\Controllers;
 
-use App\Models\Permission;
+use App\Models\PermissionModel;
 use App\Models\GroupPermission;
 use App\Models\UserGroup;
 use App\Models\Group;
@@ -80,7 +80,7 @@ class Auth extends \IonAuth\Controllers\Auth
 		$this->session       = \Config\Services::session();
 
         //Personal models
-        $this->modelPermission = new Permission();
+        $this->modelPermission = new PermissionModel();
         $this->modelGroupPermission = new GroupPermission();
         $this->modelUserGroup = new UserGroup();
         $this->modelGroup = new Group();
@@ -238,7 +238,8 @@ class Auth extends \IonAuth\Controllers\Auth
         }
         $data['groups'] = $this->ionAuth->groups()->result();
         $data['group'] = $this->ionAuth->group($id)->row();
-        $data['group_permission'] = permission_array ($this->modelGroupPermission->get_goupId($id)) ;
+        $data['group_permission'] = permission_array($this->modelGroupPermission->get_goupId($id)) ;
+	//	dd( $data['group_permission']);
         $data['permissions'] = getPermissionByModule();
         $data['auth'] = $this->ionAuth;
         return view('role_permission/create',$data);
@@ -254,7 +255,8 @@ class Auth extends \IonAuth\Controllers\Auth
         }
         $data['group'] = $this->ionAuth->group($id)->row();
         $data['users'] = $this->ionAuth->users($id)->result();
-        $data['permissions'] = $this->modelGroupPermission->get_permission_by_group($id);
+        $data['permissions'] = retrivePermissionByModule(permission_list_group($id));
+		//dd( $data['permissions']);
         $data['auth'] = $this->ionAuth;
 
         return view('role_permission/view',$data);
@@ -701,6 +703,7 @@ class Auth extends \IonAuth\Controllers\Auth
 		$user          = $this->ionAuth->user($id)->row();
 		if ($user!=null)
 		{
+			$route ="/";
 			// validate form input
             $tables = $this->configIonAuth->tables;
             $this->validation->setRules([
@@ -760,6 +763,7 @@ class Auth extends \IonAuth\Controllers\Auth
 				// Only allow updating groups if user is admin
 				if ($this->ionAuth->isAdmin())
 				{
+					$route="/users/list";
 					// Update the groups user belongs to
 					$groupData = $this->request->getPost('group');
 					$oldgroup = $this->request->getPost('oldgroup');
@@ -774,7 +778,7 @@ class Auth extends \IonAuth\Controllers\Auth
 				// check to see if we are updating the user
 				if ($this->ionAuth->update($user->id, $data))
 				{
-                    return redirect()->to("/")->with("message", "Profile édité avec succès !")->with("code", 1);
+                    return redirect()->to($route)->with("message", "Profile édité avec succès !")->with("code", 1);
 				}
 				else
 				{
@@ -819,7 +823,7 @@ class Auth extends \IonAuth\Controllers\Auth
 		// validate form input
 		if ($this->request->getPost() && $this->validation->withRequest($this->request)->run())
 		{
-			$newGroupId = $this->ionAuth->createGroup($this->request->getPost('name'), $this->request->getPost('description'),['guard' => $this->request->getPost('guard')]);
+			$newGroupId = $this->ionAuth->createGroup($this->request->getPost('name'), $this->request->getPost('description'),['display_name' => $this->request->getPost('display_name')]);
 			if ($newGroupId)
 			{
 				// check to see if we are creating the group
@@ -876,7 +880,7 @@ class Auth extends \IonAuth\Controllers\Auth
                 if ($this->validation->withRequest($this->request)->run())
                 {
                     //update now
-                    $groupUpdate = $this->ionAuth->updateGroup($id, $this->request->getPost('name'), ['description' => $this->request->getPost('description'),'guard' => $this->request->getPost('guard')]);
+                    $groupUpdate = $this->ionAuth->updateGroup($id, $this->request->getPost('name'), ['description' => $this->request->getPost('description'),'display_name' => $this->request->getPost('display_name')]);
                     if ($groupUpdate)
                     {
                         updatePermissions($id, $this->request);

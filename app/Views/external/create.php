@@ -81,7 +81,7 @@
                         <!--begin::Input group-->
                         <div class="d-flex flex-column mb-5 fv-row  text-dark">
                             <!--begin::Label-->
-                            <label class="required fs-5 fw-bold mb-2">Email</label>
+                            <label class="fs-5 fw-bold mb-2">Email</label>
                             <!--end::Label-->
                             <!--begin::Input-->
                             <input class="form-control form-control-solid" placeholder="" name="email" type="email" id="email" />

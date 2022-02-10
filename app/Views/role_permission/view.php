@@ -70,15 +70,62 @@
                         <!--end::Card header-->
                         <!--begin::Card body-->
                         <div class="card-body pt-0">
-                              <!--begin::Permissions-->
-                              <div class="d-flex flex-column text-gray-600">
-                                <?php  foreach ($permissions as $permission_list): ?>
-                                    <div class="d-flex align-items-center py-2">
-                                        <span class="bullet bg-primary me-3"></span><?= $permission_list->name ?>
-                                    </div>                                    
-                                <?php endforeach; ?> 
-                            </div>
-                            <!--end::Permissions-->
+                            <!--begin::Accordion-->
+                                    <!--begin::Section-->
+                                    <div class="row mb-5">
+                                        <?php foreach ($permissions as $key => $permission): ?>
+                                            <div class=" col-md-12">
+                                                <!--begin::Heading-->
+                                                <div class="d-flex align-items-center collapsible py-3 toggle mb-0" data-bs-toggle="collapse" data-bs-target="#id_<?= $key; ?>">
+                                                    <!--begin::Icon-->
+                                                    <div class="btn btn-sm btn-icon mw-20px btn-active-color-primary me-5">
+                                                        <!--begin::Svg Icon | path: icons/duotune/general/gen036.svg-->
+                                                        <span class="svg-icon toggle-on svg-icon-primary svg-icon-1">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                                <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="black" />
+                                                                <rect x="6.0104" y="10.9247" width="12" height="2" rx="1" fill="black" />
+                                                            </svg>
+                                                        </span>
+                                                        <!--end::Svg Icon-->
+                                                        <!--begin::Svg Icon | path: icons/duotune/general/gen035.svg-->
+                                                        <span class="svg-icon toggle-off svg-icon-1">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                                <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="black" />
+                                                                <rect x="10.8891" y="17.8033" width="12" height="2" rx="1" transform="rotate(-90 10.8891 17.8033)" fill="black" />
+                                                                <rect x="6.01041" y="10.9247" width="12" height="2" rx="1" fill="black" />
+                                                            </svg>
+                                                        </span>
+                                                        <!--end::Svg Icon-->
+                                                    </div>
+                                                    <!--end::Icon-->
+                                                    <!--begin::Title-->
+                                                    <h4 class="text-gray-700 fw-bolder cursor-pointer mb-0">Module <?= $key ?></h4>
+                                                    <!--end::Title-->
+                                                </div>
+                                                <!--end::Heading-->
+                                                <!--begin::Body-->
+                                                <div id="id_<?= $key; ?>" class="collapse show fs-6 ms-1 d-flex flex-column text-gray-600">
+                                                    <?php foreach ($permission as $value): ?>
+                                                        <!--begin::Item-->
+                                                        <div class="mb-4">
+                                                            <div class="d-flex align-items-center py-2">
+                                                                <span class="bullet bg-primary me-3"></span><?= $value->name ?>
+                                                            </div> 
+                                                        </div>
+                                                        <!--end::Item-->
+                                                    <?php endforeach; ?>
+                                                </div>
+                                                <!--end::Content-->
+                                                <!--begin::Separator-->
+                                                <div class="separator separator-dashed"></div>
+                                                <!--end::Separator-->
+                                            </div>
+                                        <?php endforeach; ?>
+                                    </div>
+                                    <!--end::Section-->
+                                    
+                                    <!--end::Accordion-->
+                             
                         </div>
                         <!--end::Card body-->
                         <!--begin::Card footer-->

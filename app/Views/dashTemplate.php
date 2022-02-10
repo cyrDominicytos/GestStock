@@ -36,7 +36,6 @@
 		<!-- <link href="<?= base_url() ; ?>/public/asset/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css"/> -->
 		<!-- style="font-family: 'Montserrat', sans-serif; font-weight: bold;" -->
 		<?= $this->renderSection('css') ?>
-
 	</head>
 	<body id="kt_body"   class="header-fixed header-tablet-and-mobile-fixed toolbar-enabled toolbar-fixed toolbar-tablet-and-mobile-fixed aside-enabled aside-fixed" style="--kt-toolbar-height:55px;--kt-toolbar-height-tablet-and-mobile:55px">
 		<!--begin::Main-->
@@ -68,7 +67,7 @@
 							<!--begin::Menu-->
 							<ul class="menu menu-gray-600 menu-hover-primary fw-bold order-1">
 								<li class="menu-item">
-									<a href="https://www.myahitcompany.com/" target="_blank" class="menu-link px-2">A propos de nous</a>
+									<a href="<?= getenv('DEV_SITE_URL') ?>" target="_blank" class="menu-link px-2">A propos de nous</a>
 								</li>
 								<li class="menu-item">
 									<a href="mailto:cyrdominicytos@gmail.com" target="_blank" class="menu-link px-2">Contactez l'entreprise</a>

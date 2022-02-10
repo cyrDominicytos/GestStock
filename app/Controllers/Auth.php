@@ -3,9 +3,9 @@
 namespace App\Controllers;
 
 use App\Models\PermissionModel;
-use App\Models\GroupPermission;
-use App\Models\UserGroup;
-use App\Models\Group;
+use App\Models\GroupPermissionModel;
+use App\Models\UserGroupModel;
+use App\Models\GroupModel;
 
 class Auth extends \IonAuth\Controllers\Auth
 {
@@ -81,9 +81,9 @@ class Auth extends \IonAuth\Controllers\Auth
 
         //Personal models
         $this->modelPermission = new PermissionModel();
-        $this->modelGroupPermission = new GroupPermission();
-        $this->modelUserGroup = new UserGroup();
-        $this->modelGroup = new Group();
+        $this->modelGroupPermission = new GroupPermissionModel();
+        $this->modelUserGroup = new UserGroupModel();
+        $this->modelGroup = new GroupModel();
 
 		if (! empty($this->configIonAuth->templates['errors']['list']))
 		{
@@ -215,11 +215,11 @@ class Auth extends \IonAuth\Controllers\Auth
     {
         $data['groups'] = $this->ionAuth->groups()->result();
         $data['assignedGroups'] = groups_array($this->modelUserGroup->getAssignedGroups());
-        $data['permission_list_foreach_group'] = permission_list_foreach_group() ;
+        $data['permission_list_foreach_group'] = permission_list_foreach_Group() ;
         $data['auth'] = $this->ionAuth;
         return view('role_permission/list',$data);
     }
-    public function new_group()
+    public function new_Group()
     {
         $data['groups'] = $this->ionAuth->groups()->result();
         $data['permissions'] = getPermissionByModule();
@@ -801,7 +801,7 @@ class Auth extends \IonAuth\Controllers\Auth
 	 *
 	 * @return string string|\CodeIgniter\HTTP\RedirectResponse
 	 */
-	public function create_group()
+	public function create_Group()
 	{
 		if (! $this->ionAuth->loggedIn() || ! $this->ionAuth->isAdmin())
 		{

@@ -2,15 +2,15 @@
 namespace App\Models;
 use CodeIgniter\Model;
  
-class SalesOptions extends Model
+class ProductCategoriesModel extends Model
 {
-    protected $table = 'sales_options';
-    protected $primaryKey = 'sales_options_id';
+    protected $table = 'product_categories';
+    protected $primaryKey = 'product_categories_id';
 	protected $returnType = 'array';
     protected $allowedFields = [
-         'sales_options_name',
-         'sales_options_description',
-         'sales_options_isActive',
+         'product_categories_name',
+         'product_categories_description',
+         'product_categories_isActive',
         ];
 
     protected $validationRules    = [];

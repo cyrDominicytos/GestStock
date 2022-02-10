@@ -1,13 +1,13 @@
 <?php
 
 use App\Models\PermissionModel;
-use App\Models\GroupPermission;
-use App\Models\Group;
-use App\Models\Client;
-use App\Models\Provider;
-use App\Models\DeliveryMen;
-use App\Models\ProductCategories;
-use App\Models\SalesOptions;
+use App\Models\GroupPermissionModel;
+use App\Models\GroupModel;
+use App\Models\ClientModel;
+use App\Models\ProviderModel;
+use App\Models\DeliveryMenModel;
+use App\Models\ProductCategoriesModel;
+use App\Models\SalesOptionsModel;
 
 
 // Function: used to convert a string to revese in order
@@ -48,8 +48,8 @@ function permission_array($groups)
 if (!function_exists("permission_list_foreach_group")) {
 function permission_list_foreach_group()
 	{
-		$modelGroup = new Group();
-		$modelGroupPermission = new GroupPermission();
+		$modelGroup = new GroupModel();
+		$modelGroupPermission = new GroupPermissionModel();
 		$groups = $modelGroup->get()->getResult();
 		$data = [];
 		foreach ($groups as $group){
@@ -186,14 +186,14 @@ function externalInsert($type, $data)
 	{
 		switch ($type) {
 			case '1':
-				$clientModel = new Client();
+				$clientModel = new ClientModel();
 				return $clientModel->insert($data);
 			case '2':
-				$providerModel = new Provider();
+				$providerModel = new ProviderModel();
 				return $providerModel->insert($data);
 
 			case '3':
-				$deliveryMenModel = new DeliveryMen();
+				$deliveryMenModel = new DeliveryMenModel();
 				return $deliveryMenModel->insert($data);
 			
 			default:
@@ -207,12 +207,12 @@ function externalModel($type)
 	{
 		switch ($type) {
 			case '1':
-				return new Client();;
+				return new ClientModel();;
 			case '2':
-				return new Provider();
+				return new ProviderModel();
 
 			case '3':
-				return new DeliveryMen();
+				return new DeliveryMenModel();
 			default:
 				return null;
 		}
@@ -249,10 +249,10 @@ function productInsert($type, $data)
 	{
 		switch ($type) {
 			case '1':
-				$clientModel = new ProductCategories();
+				$clientModel = new ProductCategoriesModel();
 				return $clientModel->insert($data);
 			case '2':
-				$providerModel = new SalesOptions();
+				$providerModel = new SalesOptionsModel();
 				return $providerModel->insert($data);			
 			default:
 				return null;
@@ -265,9 +265,9 @@ function productModel($type)
 	{
 		switch ($type) {
 			case '1':
-				return new ProductCategories();;
+				return new ProductCategoriesModel();;
 			case '2':
-				return  new SalesOptions();
+				return  new SalesOptionsModel();
 			default:
 				return null;
 		}

@@ -2,7 +2,7 @@
 namespace App\Models;
 use CodeIgniter\Model;
  
-class Provider extends Model
+class ProviderModel extends Model
 {
     protected $table = 'providers';
     protected $primaryKey = 'providers_id';

@@ -2,7 +2,7 @@
 namespace App\Models;
 use CodeIgniter\Model;
  
-class GroupPermission extends Model
+class GroupPermissionModel extends Model
 {
     protected $table = 'groups_permissions';
     protected $primaryKey = 'group_id, permission_id';

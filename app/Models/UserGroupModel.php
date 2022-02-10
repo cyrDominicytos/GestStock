@@ -2,7 +2,7 @@
 namespace App\Models;
 use CodeIgniter\Model;
  
-class UserGroup extends Model
+class UserGroupModel extends Model
 {
     protected $table = 'users_groups';
     protected $primaryKey = 'id';

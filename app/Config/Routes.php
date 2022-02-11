@@ -89,13 +89,11 @@ $routes->get('/groups/view/(:num)', 'Auth::view_group/$1');
 $routes->post('/groups/edit/(:num)', 'Auth::edit_group/$1');
 $routes->get('/groups/delete/(:num)', 'Auth::delete_group/$1');
 
+//config routes
+$routes->get('/config', 'Config::config');
+$routes->post('/config/save', 'Config::save');
 
 
-
-
-
-//External Entity
-$routes->get('external/create', 'ExternalEntity::create');
 //$routes->get('news/(:segment)', 'News::view/$1');
 //$routes->get('news', 'News::index');
 

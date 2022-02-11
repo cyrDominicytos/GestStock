@@ -328,7 +328,7 @@
                                             </div>
                                         </div>
                                         <div class="menu-item menu-accordion">
-                                        <a class="menu-link" href="<?= base_url() ?>/">
+                                        <a class="menu-link" href="<?= base_url() ?>/config">
                                             <span class="menu-icon">
                                                 <i class="las la-tools fs-3"></i>
                                             </span>

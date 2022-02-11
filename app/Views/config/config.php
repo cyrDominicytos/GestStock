@@ -50,7 +50,7 @@
                 <div class="card-header">
                     <!--begin::Card title-->
                     <div class="card-title">
-                        <h1 class="text-dark">Configurations de l'application/h1>
+                        <h1 class="text-dark">Configurations de l'application</h1>
                     </div>
                     <!--end::Card title-->
                 </div>                                 
@@ -70,108 +70,96 @@
                                     <!--begin::Col-->
                                     <div class="col-md-6 fv-row">
                                         <!--begin::Label-->
-                                        <label class="required fw-bolder text-dark fs-6 mb-2">Désignation</label>
+                                        <label class="required fw-bolder text-dark fs-6 mb-2">Nom complet de l'entreprise</label>
                                         <!--end::Label-->
                                         <!--begin::Input-->
-                                        <input type="text" class="form-control form-control-solid" placeholder="" name="name" value="<?= isset($group) ? $group->name : set_value('name') ?>" >
+                                        <input type="text" class="form-control form-control-solid" placeholder="" name="company_name" value="<?= isset($config) ? $config->company_name : set_value('company_name') ?>" >
                                         <!--end::Input-->
                                     </div>
                                     <!--end::Col-->
                                     <!--begin::Col-->
                                     <div class="col-md-6 fv-row">
                                         <!--end::Label-->
-                                        <label class="required fw-bolder text-dark fs-6 mb-2"> Nom à afficher</label>
+                                        <label class="required fw-bolder text-dark fs-6 mb-2"> Numéro IFU</label>
                                         <!--end::Label-->
                                         <!--end::Input-->
-                                        <input type="text" class="form-control form-control-solid" placeholder="" name="display_name" value="<?= isset($group) ? $group->display_name : set_value('display_name') ?>" />
+                                        <input type="text" class="form-control form-control-solid" placeholder="" name="company_ifu" value="<?= isset($config) ? $config->display_name : set_value('display_name') ?>" />
                                         <!--end::Input-->
                                     </div>
                                     <!--end::Col-->
                                     <!--begin::Col-->
-                                    <div class="col-md-12 fv-row">
+                                    <div class="col-md-6 fv-row">
                                         <!--end::Label-->
-                                        <label class="fw-bolder text-dark fs-6 mb-2">Description</label>
+                                        <label class="required fw-bolder text-dark fs-6 mb-2"> Email</label>
                                         <!--end::Label-->
                                         <!--end::Input-->
-                                        <textarea class="form-control form-control-solid" placeholder="Décrivez l'usage du rôle..." name="description" ><?= isset($group) ? $group->description : set_value('description'); ?></textarea>
+                                        <input type="text" class="form-control form-control-solid" placeholder="" name="company_ifu" value="<?= isset($config) ? $config->display_name : set_value('display_name') ?>" />
+                                        <!--end::Input-->
+                                    </div>
+                                    <!--end::Col-->
+                                    <!--begin::Col-->
+                                    <div class="col-md-6 fv-row">
+                                        <!--end::Label-->
+                                        <label class="required fw-bolder text-dark fs-6 mb-2">Téléphone</label>
+                                        <!--end::Label-->
+                                        <!--end::Input-->
+                                        <input type="text" class="form-control form-control-solid" placeholder="" name="company_ifu" value="<?= isset($config) ? $config->display_name : set_value('display_name') ?>" />
+                                        <!--end::Input-->
+                                    </div>
+                                    <!--end::Col-->
+                                    <!--begin::Col-->
+                                    <div class="col-md-6 fv-row">
+                                        <!--end::Label-->
+                                        <label class="required fw-bolder text-dark fs-6 mb-2">Adresse de site web</label>
+                                        <!--end::Label-->
+                                        <!--end::Input-->
+                                        <input type="text" class="form-control form-control-solid" placeholder="" name="company_ifu" value="<?= isset($config) ? $config->display_name : set_value('display_name') ?>" />
+                                        <!--end::Input-->
+                                    </div>
+                                    <!--end::Col-->
+                                    <!--begin::Col-->
+                                    <div class="col-md-6 fv-row">
+                                        <!--end::Label-->
+                                        <label class="required fw-bolder text-dark fs-6 mb-2">Adresse de l'entreprise</label>
+                                        <!--end::Label-->
+                                        <!--end::Input-->
+                                        <input type="text" class="form-control form-control-solid" placeholder="" name="company_ifu" value="<?= isset($config) ? $config->display_name : set_value('display_name') ?>" />
+                                        <!--end::Input-->
+                                    </div>
+                                    <!--end::Col-->
+                                    <!--begin::Col-->
+                                    <div class="col-md-6 fv-row">
+                                        <!--end::Label-->
+                                        <label class="required fw-bolder text-dark fs-6 mb-2">Date de création</label>
+                                        <!--end::Label-->
+                                        <!--end::Input-->
+                                        <input type="text" class="form-control form-control-solid" placeholder="" name="company_ifu" value="<?= isset($config) ? $config->display_name : set_value('display_name') ?>" />
+                                        <!--end::Input-->
+                                    </div>
+                                    <!--end::Col-->
+                                    <!--begin::Col-->
+                                    <div class="col-md-6 fv-row">
+                                        <!--end::Label-->
+                                        <label class="required fw-bolder text-dark fs-6 mb-2">Identificateur des produits</label>
+                                        <!--end::Label-->
+                                        <!--end::Input-->
+                                        <input type="text" class="form-control form-control-solid" placeholder="" name="company_ifu" value="<?= isset($config) ? $config->display_name : set_value('display_name') ?>" />
+                                        <!--end::Input-->
+                                    </div>
+                                    <!--end::Col-->
+                                    <!--begin::Col-->
+                                    <div class="col-md-6 fv-row">
+                                        <!--end::Label-->
+                                        <label class="required fw-bolder text-dark fs-6 mb-2">Identificateur de connexion</label>
+                                        <!--end::Label-->
+                                        <!--end::Input-->
+                                        <input type="text" class="form-control form-control-solid" placeholder="" name="company_ifu" value="<?= isset($config) ? $config->display_name : set_value('display_name') ?>" />
                                         <!--end::Input-->
                                     </div>
                                     <!--end::Col-->
                                 </div>
                                 <!--end::Input group-->
-                                <!--begin::Job-->
-                                
-                                <div class="mb-12 mb-lg-0">
-                                    <!--begin::Description-->
-                                    <div class="m-0">
-                                        <!--begin::Title-->
-                                        <h4 class="fs-1 text-gray-800 w-bolder mb-6"><?= isset($group) ? "Mise à jour des" : 'Attribution des'; ?> permissions au rôle</h4>
-                                        <!--end::Title-->
-                                        <!--begin::Text-->
-                                        <p class="fw-bold fs-4 text-gray-600 mb-2">Cochez les permissions que vous souhaiter attribuer à ce rôle sur chaque module</p>
-                                        <!--end::Text-->
-                                    </div>
-                                    <!--end::Description-->
-                                    <!--begin::Accordion-->
-                                    <!--begin::Section-->
-                                    <div class="row mb-5">
-                                        <?php foreach ($permissions as $key => $permission): ?>
-                                            <div class=" col-md-6">
-                                                <!--begin::Heading-->
-                                                <div class="d-flex align-items-center collapsible py-3 toggle mb-0" data-bs-toggle="collapse" data-bs-target="#id_<?= $key; ?>">
-                                                    <!--begin::Icon-->
-                                                    <div class="btn btn-sm btn-icon mw-20px btn-active-color-primary me-5">
-                                                        <!--begin::Svg Icon | path: icons/duotune/general/gen036.svg-->
-                                                        <span class="svg-icon toggle-on svg-icon-primary svg-icon-1">
-                                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                                <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="black" />
-                                                                <rect x="6.0104" y="10.9247" width="12" height="2" rx="1" fill="black" />
-                                                            </svg>
-                                                        </span>
-                                                        <!--end::Svg Icon-->
-                                                        <!--begin::Svg Icon | path: icons/duotune/general/gen035.svg-->
-                                                        <span class="svg-icon toggle-off svg-icon-1">
-                                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                                <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="black" />
-                                                                <rect x="10.8891" y="17.8033" width="12" height="2" rx="1" transform="rotate(-90 10.8891 17.8033)" fill="black" />
-                                                                <rect x="6.01041" y="10.9247" width="12" height="2" rx="1" fill="black" />
-                                                            </svg>
-                                                        </span>
-                                                        <!--end::Svg Icon-->
-                                                    </div>
-                                                    <!--end::Icon-->
-                                                    <!--begin::Title-->
-                                                    <h4 class="text-gray-700 fw-bolder cursor-pointer mb-0">Module <?= $key ?></h4>
-                                                    <!--end::Title-->
-                                                </div>
-                                                <!--end::Heading-->
-                                                <!--begin::Body-->
-                                                <div id="id_<?= $key; ?>" class="collapse show fs-6 ms-1">
-                                                    <?php foreach ($permission as $value): ?>
-                                                        <!--begin::Item-->
-                                                        <div class="mb-4">
-                                                            <!--begin::Item-->
-                                                            <div class="d-flex align-items-center ps-10 mb-n1">
-                                                                <input type="checkbox"    id="role"  name="<?= $value->id; ?>" value="<?= $value->id; ?>"  <?= isset($group) ? (array_key_exists($value->id,$group_permission) ? ("checked") : "") : ''; ?>>
-                                                                <label for="role" class="text-gray-600 fw-bold fs-6" style="margin-left:10px"><?= $value->name; ?></label><br>
-                                                            </div>
-                                                            <!--end::Item-->
-                                                        </div>
-                                                        <!--end::Item-->
-                                                    <?php endforeach; ?>
-                                                </div>
-                                                <!--end::Content-->
-                                                <!--begin::Separator-->
-                                                <div class="separator separator-dashed"></div>
-                                                <!--end::Separator-->
-                                            </div>
-                                        <?php endforeach; ?>
-                                    </div>
-                                    <!--end::Section-->
-                                    
-                                    <!--end::Accordion-->
-                                </div>
-                                <!--end::Job-->
+                               
             
                                 <!--begin::Separator-->
                                 <div class="separator mb-8"></div>

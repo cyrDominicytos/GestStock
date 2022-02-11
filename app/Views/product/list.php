@@ -645,11 +645,10 @@
 <?= $this->section('javascript') ?>
     <script type="text/javascript">
         var showModal = "<?= $showModal == 1 ? (1) : (0) ?>";
-        var banish_mes = "Vous souhaitez déactiver ce produit.<span class='badge badge-primary'>Etes-vous sûr de vouloir la désactiver ?</span>";
-        var active_mes = "Vous souhaitez activer ce produit.<span class='badge badge-primary'>Etes-vous sûr de vouloir l'activer ?</span>";
-        var selected_option = <?= set_value("product_categories_id")!== null ? set_value("product_categories_id") : 0 ?>                     
+        var banish_mes = "Vous souhaitez déactiver ce produit. Une fois qu'il sera désactivé, il n'apparaitra plus dans les modules d'approvisionnement et de vente<span class='badge badge-primary'>Etes-vous sûr de vouloir la désactiver ?</span>";
+        var active_mes = "Vous souhaitez activer ce produit. Une fois activé, il apparaitra à nouveau dans les modules d'approvisionnement et de vente<span class='badge badge-primary'>Etes-vous sûr de vouloir l'activer ?</span>";
         function banish(id, banish_type) {
-            Swal.fire({
+             Swal.fire({
                 html: banish_type== 1 ? banish_mes : active_mes,
                 icon: banish_type== 1 ? "warning" : "info",
                 buttonsStyling: false,
@@ -665,9 +664,9 @@
                     if(result.value) 
                         {
                             if(banish_type == 1)
-                                document.location.href="<?=  base_url(); ?>/product_category/banish/"+id+"/"+type;
+                                document.location.href="<?=  base_url(); ?>/product/banish/"+id;
                             else
-                                document.location.href="<?=  base_url(); ?>/product_category/activate/"+id+"/"+type;
+                                document.location.href="<?=  base_url(); ?>/product/activate/"+id;
                         }
                 });  
             
@@ -688,14 +687,13 @@
         $(window).on('load', function() {
             if(showModal == 1)
                  $('#external_create_new').modal('show');
-            if(selected_option > 0)
-                updateCategory(selected_option);
     });
 
     function updateCategory(category) {
            document.getElementById("product_categories_id").value = category;
            document.getElementById("product_categories_id").dispatchEvent(new Event('change'));
     }
+
     </script>
 <?= $this->endSection() ?>
 

@@ -176,7 +176,7 @@ class Product extends BaseController
 	 *
 	 * @return \CodeIgniter\HTTP\RedirectResponse
 	 */
-	public function activate(int $id, int $type): \CodeIgniter\HTTP\RedirectResponse
+	public function activate(int $id): \CodeIgniter\HTTP\RedirectResponse
 	{
         if (! $this->ionAuth->loggedIn() || ! $this->ionAuth->isAdmin())
 		{
@@ -184,18 +184,16 @@ class Product extends BaseController
             return redirect()->back()->with("message", "Cette page est reservée aux administrateurs du sytème!")->with("code", 0);
 		}
         $id = (int) $id;
-        $type = (int) $type;
-		if (in_array($type,[1,2]))
+		if ($id >0)
 		{
-            $tables = productParams()[$type]['table'];
-            if(productModel($type)->update($id,[$tables."_isActive"=>1]))
-                return redirect()->back()->with("message", productParams()[$type]['externalName']." activé avec succès !")->with("code", 1);
+            if($this->modelProduct->update($id,["products_isActive"=>1]))
+                return redirect()->to("/product/list")->with("message", "Produit activé avec succès !")->with("code", 1);
             else
-                return redirect()->back()->with("message", "Le ".productParams()[$type]['externalName']." que vous essayez d'activer n'existe pas !")->with("code", 0);
+                return redirect()->to("/product/list")->with("message", "Le produit que vous essayez d'activer n'existe pas !")->with("code", 0);
 		}
 		else
 		{
-            return redirect()->back()->with("message", "Désolé cet utilisateur n'est pas valide !")->with("code", 0);
+			 return redirect()->back()->with("message2", "Erreur : Accès illégal !")->with("code", 0);
 		}
 	}
 
@@ -207,7 +205,7 @@ class Product extends BaseController
 	 *
 	 * @return \CodeIgniter\HTTP\RedirectResponse
 	 */
-	public function deactivate(int $id, int $type)
+	public function deactivate(int $id)
 	{
 		if (! $this->ionAuth->loggedIn() || ! $this->ionAuth->isAdmin())
 		{
@@ -215,19 +213,16 @@ class Product extends BaseController
             return redirect()->back()->with("message", "Cette page est reservée aux administrateurs du sytème!")->with("code", 0);
 		}
         $id = (int) $id;
-		if (in_array($type,[1,2,3]))
+		if ($id >0)
 		{
-            //dd(externalModel($type)->find($id));
-            $tables = productParams()[$type]['table'];
-            $data = [$tables."_isActive"=>0];
-            if(productModel($type)->update($id, $data))
-                return redirect()->back()->with("message", productParams()[$type]['externalName']." désactivée avec succès !")->with("code", 1);
+            if($this->modelProduct->update($id,["products_isActive"=>0]))
+                return redirect()->to("/product/list")->with("message", "Produit désactivé avec succès !")->with("code", 1);
             else
-                return redirect()->back()->with("message", "Le ".productParams()[$type]['externalName']." que vous essayez de désactiver n'existe pas !")->with("code", 0);
+                return redirect()->to("/product/list")->with("message", "Le produit que vous essayez d'désactiver n'existe pas !")->with("code", 0);
 		}
 		else
 		{
-            return redirect()->back()->with("message", "Désolé cet utilisateur n'est pas valide !")->with("code", 0);
+			 return redirect()->back()->with("message2", "Erreur : Accès illégal !")->with("code", 0);
 		}
 
 	}

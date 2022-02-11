@@ -48,7 +48,7 @@
                             <label class="form-label fw-bolder text-dark fs-6 required">Catégories</label>
                             <select name="product_categories_id" aria-label="Selectionnez un profile" data-control="select2" data-placeholder="Attribuer un role..." class="form-select form-select-solid form-select-lg fw-bold select2-hidden-accessible" data-select2-id="select2-data-10-02r3" tabindex="-1" aria-hidden="true" id="product_categories_id">
                                 <?php foreach ($categories as $categorie): ?>
-                                    <option value="<?= $categorie->product_categories_id ?>"  id="<?=  $categorie->product_categories_id?>"><?= $categorie->product_categories_name ?></option>									
+                                    <option value="<?= $categorie->product_categories_id ?>"  id="<?=  $categorie->product_categories_id?>" <?= set_select('product_categories_id', $categorie->product_categories_id) ?>><?= $categorie->product_categories_name ?></option>									
                                 <?php endforeach ?>
                                 
                             </select>

@@ -37,7 +37,7 @@
                         <!--begin::Input group-->
                         <div class="d-flex flex-column mb-5 fv-row  text-dark">
                             <!--begin::Label-->
-                            <label class="fs-5 fw-bold mb-2">Désignation</label>
+                            <label class="fs-5 fw-bold mb-2 required">Désignation</label>
                             <!--end::Label-->
                             <!--begin::Input-->
                             <input class="form-control form-control-solid" placeholder="" name="name"  type="text" id="name" value="<?= set_value("name")	?>" required/>
@@ -50,7 +50,7 @@
                              <label class="fw-bolder text-dark fs-6 mb-2">Description</label>
                             <!--end::Label-->
                             <!--end::Input-->
-                            <textarea class="form-control form-control-solid" placeholder="Brève description ici..." name="description" ><?= set_value("description")?></textarea>
+                            <textarea class="form-control form-control-solid" placeholder="Brève description ici..." name="description" id="description" ><?= set_value("description")?></textarea>
                             <!--end::Input-->
                         </div>
                         <!--end::Input group-->

@@ -160,7 +160,7 @@ class ProductCategory extends BaseController
             $data[$tables.'_description'] = $this->request->getPost('description');
 
             if(productModel($type)->update($id, $data))
-                return redirect()->back()->with("message", "Les informations de ".$name ." sont mises à jour avec succès !")->with("code", 1);
+                return redirect()->to("/".productParams()[$this->request->getPost('type')]['externalNewRoute']."/list")->with("message", "Les informations de ".$name ." sont mises à jour avec succès !")->with("code", 1);
             else
                 return redirect()->back()->with("message2", $name ." que vous essayez d'éditer n'existe pas !")->with("code", 0);
         }

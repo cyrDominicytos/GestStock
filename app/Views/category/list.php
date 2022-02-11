@@ -640,8 +640,8 @@
         var showModal = "<?= $showModal == 1 ? (1) : (0) ?>";
         var type = "<?= isset($type) ? ($type) : (0) ?>";
         var typeName = "<?= isset($type) ? (productParams()[$type]["externalName"]) : ("")  ?>";
-        var banish_mes = "Vous souhaitez déactiver cette "+typeName+".<span class='badge badge-primary'>Etes-vous sûr de vouloir la désactiver ?</span>";
-        var active_mes = "Vous souhaitez activer cette "+typeName+".<span class='badge badge-primary'>Etes-vous sûr de vouloir l'activer ?</span>";
+        var banish_mes = "Vous souhaitez déactiver cette "+typeName+". Une fois désactivée, elle n'apparaîtra plus dans les modules de vente et d'approvisionnement.<span class='badge badge-primary'>Etes-vous sûr de vouloir la désactiver ?</span>";
+        var active_mes = "Vous souhaitez activer cette "+typeName+". Une fois activée, elle apparaîtra à nouveau dans les modules de vente et d'approvisionnement.<span class='badge badge-primary'>Etes-vous sûr de vouloir l'activer ?</span>";
         function banish(id, banish_type) {
             Swal.fire({
                 html: banish_type== 1 ? banish_mes : active_mes,

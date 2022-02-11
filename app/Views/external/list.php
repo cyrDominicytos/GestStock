@@ -648,8 +648,8 @@
         var showModal = "<?= $showModal == 1 ? (1) : (0) ?>";
         var type = "<?= isset($type) ? ($type) : (0) ?>";
         var typeName = "<?= isset($type) ? (externalParams()[$type]["externalName"]) : ("")  ?>";
-        var banish_mes = "Vous souhaitez bannir ce "+typeName+".<span class='badge badge-primary'>Etes-vous sûr de vouloir le bannir ?</span>";
-        var active_mes = "Vous souhaitez activer ce "+typeName+".<span class='badge badge-primary'>Etes-vous sûr de vouloir l'activer ?</span>";
+        var banish_mes = "Vous souhaitez bannir ce "+typeName+". Une fois banni, il n'apparaîtra plus dans les modules de vente et d'approvisionnement<span class='badge badge-primary'>Etes-vous sûr de vouloir le bannir ?</span>";
+        var active_mes = "Vous souhaitez activer ce "+typeName+".  Une fois activé, il apparaîtra  à nouveau dans les modules de vente et d'approvisionnement<span class='badge badge-primary'>Etes-vous sûr de vouloir l'activer ?</span>";
         function banish(id, banish_type) {
             Swal.fire({
                 html: banish_type== 1 ? banish_mes : active_mes,

@@ -67,11 +67,18 @@ $routes->get('/product_category/list', 'ProductCategory::list/1/0');
 $routes->get('/product_category/list_create', 'ProductCategory::list/1/1');
 $routes->get('/sales_option/list', 'ProductCategory::list/2/0');
 $routes->get('/sales_option/list_create', 'ProductCategory::list/2/1');
-
 $routes->post('/product_category/create', 'ProductCategory::create_external');
 $routes->get('/product_category/banish/(:num)/(:num)', 'ProductCategory::deactivate/$1/$2');
 $routes->get('/product_category/activate/(:num)/(:num)', 'ProductCategory::activate/$1/$2');
 $routes->post('/product_category/edit', 'ProductCategory::edit_external');
+
+//Product management
+$routes->get('/product/list', 'Product::list/0');
+$routes->get('/product/list_create', 'Product::list/1');
+$routes->post('/product/create', 'Product::create');
+$routes->get('/product/banish/(:num)', 'Product::deactivate/$1');
+$routes->get('/product/activate/(:num)', 'Product::activate/$1');
+$routes->post('/product/edit', 'Product::edit');
 
 //roles and permissions
 $routes->get('/groups/list', 'Auth::role_permission');

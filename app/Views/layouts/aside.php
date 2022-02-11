@@ -188,13 +188,13 @@
                                         </span>
                                         <div class="menu-sub menu-sub-accordion menu-active-bg">
                                             <div class="menu-item menu-accordion">
-                                                <a class="menu-link" href="<?= base_url() ?>/">
+                                                <a class="menu-link" href="<?= base_url() ?>/product/list_create">
                                                     <span class="menu-bullet">
                                                         <span class="bullet bullet-dot"></span>
                                                     </span>
                                                     <span class="menu-title" >Ajouter</span>
                                                 </a>
-                                                <a class="menu-link" href="<?= base_url() ?>/">
+                                                <a class="menu-link" href="<?= base_url() ?>/product/list">
                                                     <span class="menu-bullet">
                                                         <span class="bullet bullet-dot"></span>
                                                     </span>

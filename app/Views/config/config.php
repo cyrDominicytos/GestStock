@@ -62,7 +62,7 @@
                         <!--begin::Content-->
                         <div class="flex-lg-row-fluid me-0 me-lg-20">
                             <!--begin::Form-->
-                            <form action="<?= base_url(); ?>/config" class="form mb-15" method="post" >
+                            <form action="" class="form mb-15" method="post" >
                             <!--begin::Input group-->
                                 <div class="row mb-5">
                                 <div id="infoMessage" style="color:red;"><?=  session()->has('message') ? (session()->get('message')) : ("")?></div>

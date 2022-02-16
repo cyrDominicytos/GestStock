@@ -8,6 +8,7 @@ use App\Models\ProviderModel;
 use App\Models\DeliveryMenModel;
 use App\Models\ProductCategoriesModel;
 use App\Models\SalesOptionsModel;
+use App\Models\ConfigModel;
 
 
 // Function: used to convert a string to revese in order
@@ -272,6 +273,20 @@ function productModel($type)
 		}
 	}
 }
+
+
+if (!function_exists("getConfigList")) {
+	function getConfigList()
+		{
+			$modelConfig = new ConfigModel();
+			$configList = $modelConfig->get()->getResult();
+			$data = [];
+			foreach ($configList as $config){
+				$data[$config->config_code] = $config;
+			}
+			return $data;
+		}
+	}
 
 
 

@@ -55,17 +55,16 @@
                     <!--end::Card title-->
                 </div>                                 
                 <!--begin::Body-->
-                <div class="card-body p-lg-17">
-                    
+                <div class="card-body p-lg-17">              
                     <!--begin::Layout-->
                     <div class="d-flex flex-column flex-lg-row mb-17">
                         <!--begin::Content-->
                         <div class="flex-lg-row-fluid me-0 me-lg-20">
                             <!--begin::Form-->
-                            <form action="" class="form mb-15" method="post" >
+                            <form action="<?= base_url() ?>/config/save" class="form mb-15" method="post" >
                             <!--begin::Input group-->
                                 <div class="row mb-5">
-                                <div id="infoMessage" style="color:red;"><?=  session()->has('message') ? (session()->get('message')) : ("")?></div>
+                                <div id="infoMessage" style="color:red;"><?=  session()->has('error') ? (session()->get('error')) : ("")?></div>
 
                                     <!--begin::Col-->
                                     <div class="col-md-6 fv-row">
@@ -73,7 +72,7 @@
                                         <label class="required fw-bolder text-dark fs-6 mb-2">Nom complet de l'entreprise</label>
                                         <!--end::Label-->
                                         <!--begin::Input-->
-                                        <input type="text" class="form-control form-control-solid" placeholder="" name="company_name" value="<?= isset($config) ? $config->company_name : set_value('company_name') ?>" >
+                                        <input type="text" class="form-control form-control-solid" placeholder="" name="company_name" value="<?= !session()->has('error')  ? $configList[1]->config_value : set_value('company_name') ?>" >
                                         <!--end::Input-->
                                     </div>
                                     <!--end::Col-->
@@ -83,7 +82,7 @@
                                         <label class="required fw-bolder text-dark fs-6 mb-2"> Numéro IFU</label>
                                         <!--end::Label-->
                                         <!--end::Input-->
-                                        <input type="text" class="form-control form-control-solid" placeholder="" name="company_ifu" value="<?= isset($config) ? $config->display_name : set_value('display_name') ?>" />
+                                        <input type="text" class="form-control form-control-solid" placeholder="" name="company_ifu" value="<?= !session()->has('error') ? $configList[2]->config_value : set_value('company_ifu') ?>" />
                                         <!--end::Input-->
                                     </div>
                                     <!--end::Col-->
@@ -93,7 +92,7 @@
                                         <label class="required fw-bolder text-dark fs-6 mb-2"> Email</label>
                                         <!--end::Label-->
                                         <!--end::Input-->
-                                        <input type="text" class="form-control form-control-solid" placeholder="" name="company_ifu" value="<?= isset($config) ? $config->display_name : set_value('display_name') ?>" />
+                                        <input type="text" class="form-control form-control-solid" placeholder="" name="company_email" value="<?= !session()->has('error')  ? $configList[3]->config_value : set_value('company_email') ?>" />
                                         <!--end::Input-->
                                     </div>
                                     <!--end::Col-->
@@ -103,17 +102,7 @@
                                         <label class="required fw-bolder text-dark fs-6 mb-2">Téléphone</label>
                                         <!--end::Label-->
                                         <!--end::Input-->
-                                        <input type="text" class="form-control form-control-solid" placeholder="" name="company_ifu" value="<?= isset($config) ? $config->display_name : set_value('display_name') ?>" />
-                                        <!--end::Input-->
-                                    </div>
-                                    <!--end::Col-->
-                                    <!--begin::Col-->
-                                    <div class="col-md-6 fv-row">
-                                        <!--end::Label-->
-                                        <label class="required fw-bolder text-dark fs-6 mb-2">Adresse de site web</label>
-                                        <!--end::Label-->
-                                        <!--end::Input-->
-                                        <input type="text" class="form-control form-control-solid" placeholder="" name="company_ifu" value="<?= isset($config) ? $config->display_name : set_value('display_name') ?>" />
+                                        <input type="text" class="form-control form-control-solid" placeholder="" name="company_phone_number" value="<?= !session()->has('error')  ? $configList[4]->config_value : set_value('company_phone_number') ?>" />
                                         <!--end::Input-->
                                     </div>
                                     <!--end::Col-->
@@ -123,40 +112,51 @@
                                         <label class="required fw-bolder text-dark fs-6 mb-2">Adresse de l'entreprise</label>
                                         <!--end::Label-->
                                         <!--end::Input-->
-                                        <input type="text" class="form-control form-control-solid" placeholder="" name="company_ifu" value="<?= isset($config) ? $config->display_name : set_value('display_name') ?>" />
+                                        <input type="text" class="form-control form-control-solid" placeholder="" name="company_address" value="<?= !session()->has('error')  ? $configList[5]->config_value : set_value('company_address') ?>" />
                                         <!--end::Input-->
                                     </div>
                                     <!--end::Col-->
                                     <!--begin::Col-->
                                     <div class="col-md-6 fv-row">
-                                        <!--end::Label-->
-                                        <label class="required fw-bolder text-dark fs-6 mb-2">Date de création</label>
-                                        <!--end::Label-->
-                                        <!--end::Input-->
-                                        <input type="text" class="form-control form-control-solid" placeholder="" name="company_ifu" value="<?= isset($config) ? $config->display_name : set_value('display_name') ?>" />
-                                        <!--end::Input-->
-                                    </div>
-                                    <!--end::Col-->
-                                    <!--begin::Col-->
-                                    <div class="col-md-6 fv-row">
-                                        <!--end::Label-->
                                         <label class="required fw-bolder text-dark fs-6 mb-2">Identificateur des produits</label>
-                                        <!--end::Label-->
-                                        <!--end::Input-->
-                                        <input type="text" class="form-control form-control-solid" placeholder="" name="company_ifu" value="<?= isset($config) ? $config->display_name : set_value('display_name') ?>" />
-                                        <!--end::Input-->
+                                        <select name="company_product_identity" aria-label="Selectionnez un profile" data-control="select2" data-placeholder="Attribuer un role..." class="form-select form-select-solid form-select-lg fw-bold select2-hidden-accessible" data-select2-id="select2-data-10-02r3" tabindex="-1" aria-hidden="true" id="company_product_identity">
+                                                <option value="none"  <?= set_select('company_product_identity', !session()->has('error')  ? $configList[6]->config_value : set_value('company_product_identity')) ?>> Aucun identificateur</option>									                                
+                                                <option value="barre_code"  <?= set_select('company_product_identity', !session()->has('error')  ? $configList[6]->config_value : set_value('company_product_identity')) ?>> Code QR</option>									                                
+                                                <option value="qr_code"  <?= set_select('company_product_identity', !session()->has('error')  ? $configList[6]->config_value : set_value('company_product_identity')) ?>> Code Barre</option>									                                
+                                        </select>
                                     </div>
                                     <!--end::Col-->
                                     <!--begin::Col-->
                                     <div class="col-md-6 fv-row">
-                                        <!--end::Label-->
                                         <label class="required fw-bolder text-dark fs-6 mb-2">Identificateur de connexion</label>
+                                        <select name="company_identity" aria-label="Selectionnez un profile" data-control="select2" data-placeholder="Attribuer un role..." class="form-select form-select-solid form-select-lg fw-bold select2-hidden-accessible" data-select2-id="select2-data-10-02r3" tabindex="-1" aria-hidden="true" id="company_identity">
+                                                <option value="none"  <?= set_select('company_identity', !session()->has('error')  ? $configList[7]->config_value : set_value('company_identity')) ?>> Aucun identificateur</option>									                                
+                                                <option value="email"  <?= set_select('company_identity', !session()->has('error')  ? $configList[7]->config_value : set_value('company_identity')) ?>> Adresse email</option>									                                
+                                                <option value="username"  <?= set_select('company_identity', !session()->has('error')  ? $configList[7]->config_value : set_value('company_identity')) ?>> Nom d'utilisateur</option>									                                
+                                        </select>
+                                    </div>
+                                    <!--end::Col-->
+                                     <!--begin::Col-->
+                                     <div class="col-md-6 fv-row">
+                                        <!--end::Label-->
+                                        <label class="fw-bolder text-dark fs-6 mb-2">Date de création</label>
                                         <!--end::Label-->
                                         <!--end::Input-->
-                                        <input type="text" class="form-control form-control-solid" placeholder="" name="company_ifu" value="<?= isset($config) ? $config->display_name : set_value('display_name') ?>" />
+                                        <input type="date" class="form-control form-control-solid" placeholder="" name="company_created_at" value="<?= !session()->has('error')  ? $configList[8]->config_value : set_value('company_created_at') ?>" />
                                         <!--end::Input-->
                                     </div>
                                     <!--end::Col-->
+                                     <!--begin::Col-->
+                                     <div class="col-md-6 fv-row">
+                                        <!--end::Label-->
+                                        <label class="fw-bolder text-dark fs-6 mb-2">Adresse de site web</label>
+                                        <!--end::Label-->
+                                        <!--end::Input-->
+                                        <input type="text" class="form-control form-control-solid" placeholder="" name="company_site_url" value="<?= !session()->has('error')  ? $configList[9]->config_value : set_value('company_site_url') ?>" />
+                                        <!--end::Input-->
+                                    </div>
+                                    <!--end::Col-->
+                                    
                                 </div>
                                 <!--end::Input group-->
                                
@@ -192,7 +192,8 @@
 <!--end::Content-->
 <?= $this->section('javascript') ?>
     <script type="text/javascript">       
-
+        document.getElementById("company_product_identity").value ="<?= !session()->has('error')  ? $configList[6]->config_value : set_value('company_product_identity')?>";
+        document.getElementById("company_identity").value ="<?= !session()->has('error')  ? $configList[7]->config_value : set_value('company_identity')?>";
     </script>
 <?= $this->endSection() ?>
 

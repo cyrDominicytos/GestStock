@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Controllers;
-
+use App\Models\ConfigModel;
 
 class Config extends BaseController
 {
@@ -20,6 +20,7 @@ class Config extends BaseController
 	protected $validationSigneTemplate = 'single';
     protected $modelProduct = null;
     protected $modelProductCategory = null;
+    protected $modelConfig = null;
 
     /**
 	 * Constructor
@@ -33,6 +34,7 @@ class Config extends BaseController
         helper(['form', 'url']);
 		$this->configIonAuth = config('IonAuth');
 		$this->session       = \Config\Services::session();
+		$this->modelConfig = new ConfigModel();
 
         if (! empty($this->configIonAuth->templates['errors']['list']))
 		{
@@ -48,6 +50,7 @@ class Config extends BaseController
 		}
         
         $data['auth'] = $this->ionAuth;
+        $data['configList'] = getConfigList();
         return view('config/config',$data);
     }
     
@@ -56,7 +59,7 @@ class Config extends BaseController
 	 *
 	 * @return string|\CodeIgniter\HTTP\RedirectResponse
 	 */
-	public function create()
+	public function save()
 	{
 		
 		if (! $this->ionAuth->loggedIn() || ! $this->ionAuth->isAdmin())
@@ -69,37 +72,64 @@ class Config extends BaseController
 			 return redirect()->back()->with("message2", "Erreur : Accès illégal !")->with("code", 0);
 		}
 		
-        $data = [];
 		// validate form input
 		$rules = [
-                    'name'=> 'trim|required|is_unique[products.products_name]',
-                    'description'=> "trim",
+                    'company_name'=> 'trim|required',
+                    'company_ifu'=> 'trim|required',
+                    'company_email'=> 'trim|required|valid_email',
+                    'company_phone_number'=> 'trim|required',
+                    'company_address'=> 'trim|required',
+                    'company_product_identity'=> 'trim|required',
+                    'company_identity'=> 'trim|required',
+                    'company_created_at'=> 'trim',
+                    'company_site_url'=> 'trim',
                 ];
         $errors =  [
-                        "name"=>[
-                            "required"=>"Renseignez la désignation du produit",
+                        "company_name"=>[
+                            "required"=>"Renseignez le nom de l'entreprise",
                             "is_unique"=>"La désignation ".$this->request->getPost('name')." existe déjà"
                             ],
-                        
+                        "company_ifu"=>[
+                            "required"=>"Renseignez l'IFU de l'entreprise",
+                            ],
+                        "company_email"=>[
+                            "required"=>"Renseignez l'email de l'entreprise",
+                            "valid_email"=>"Le texte ".$this->request->getPost('company_email')." n'est pas un email valid"
+                            ],
+                        "company_phone_number"=>[
+                            "required"=>"Renseignez le téléphone de l'entreprise",
+                            ],
+                        "company_address"=>[
+                            "required"=>"Renseignez le téléphone de l'entreprise",
+                            ],
+                        "company_product_identity"=>[
+                            "required"=>"Renseignez l'identificateur des produit l'entreprise",
+                            ],
+                        "company_identity"=>[
+                            "required"=>"Renseignez l'identifiant de connexion de l'entreprise",
+                            ],
                     ]; 
         $this->validation->setRules($rules, $errors);
                      
 		if ($this->validation->withRequest($this->request)->run())
-		{
-            $data['products_name'] = strtoupper($this->request->getPost('name'));
-            $data['products_product_categorie_id'] = $this->request->getPost('product_categories_id');
-            $data['products_description'] = $this->request->getPost('description');
+		{			
+			$this->modelConfig->where("config_code", 1)->set(['config_value'=>$this->request->getPost('company_name')])->update();
+			$this->modelConfig->where("config_code", 2)->set(['config_value'=>$this->request->getPost('company_ifu')])->update();
+			$this->modelConfig->where("config_code", 3)->set(['config_value'=>$this->request->getPost('company_email')])->update();
+			$this->modelConfig->where("config_code", 4)->set(['config_value'=>$this->request->getPost('company_phone_number')])->update();
+			$this->modelConfig->where("config_code", 5)->set(['config_value'=>$this->request->getPost('company_address')])->update();
+			$this->modelConfig->where("config_code", 6)->set(['config_value'=>$this->request->getPost('company_product_identity')])->update();
+			$this->modelConfig->where("config_code", 7)->set(['config_value'=>$this->request->getPost('company_identity')])->update();
+			$this->modelConfig->where("config_code", 8)->set(['config_value'=>$this->request->getPost('company_created_at')])->update();
+			$this->modelConfig->where("config_code", 9)->set(['config_value'=>$this->request->getPost('company_site_url')])->update();
 
-            if($this->modelProduct->insert($data))
-            {
-                return redirect()->to("product/list")->with('message', 'Nouveau produit créé avec succès !')->with('code',1);
-            }
-            
+            return redirect()->to("/config")->with('message', 'Configuration mise à jour avec succès!')->with('code',1);            
         }
 		//We find some error
-		$this->data['message'] = $this->validation->getErrors() ? $this->validation->listErrors($this->validationListTemplate) : ($this->ionAuth->errors($this->validationListTemplate) ? $this->ionAuth->errors($this->validationListTemplate) : $this->session->getFlashdata('message'));
-		$this->session->setFlashdata('message2', $this->data['message']);
-		return redirect()->to("/product/list_create")->withInput();		
+		$this->data['error'] = $this->validation->getErrors() ? $this->validation->listErrors($this->validationListTemplate) : ($this->ionAuth->errors($this->validationListTemplate) ? $this->ionAuth->errors($this->validationListTemplate) : $this->session->getFlashdata('error'));
+		$this->session->setFlashdata('error', $this->data['error']);
+		return redirect()->to("/config")->withInput();		
 	}
+
    
 }

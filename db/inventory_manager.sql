@@ -11,141 +11,94 @@
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 
+-- Listage de la structure de la table inventory_manager. clients
+DROP TABLE IF EXISTS `clients`;
+CREATE TABLE IF NOT EXISTS `clients` (
+  `clients_id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
+  `clients_ifu` varchar(13) DEFAULT NULL,
+  `clients_company` varchar(250) NOT NULL,
+  `clients_phone_number` varchar(100) DEFAULT NULL,
+  `clients_email` varchar(100) DEFAULT NULL,
+  `clients_address` varchar(250) NOT NULL,
+  `clients_isActive` tinyint(1) unsigned DEFAULT '1',
+  `clients_created_at` datetime DEFAULT CURRENT_TIMESTAMP,
+  `clients_updated_at` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`clients_id`),
+  UNIQUE KEY `clients_ifu` (`clients_ifu`),
+  UNIQUE KEY `clients_phone_number` (`clients_phone_number`),
+  UNIQUE KEY `clients_email` (`clients_email`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+-- Listage des données de la table inventory_manager.clients : ~0 rows (environ)
+/*!40000 ALTER TABLE `clients` DISABLE KEYS */;
+INSERT INTO `clients` (`clients_id`, `clients_ifu`, `clients_company`, `clients_phone_number`, `clients_email`, `clients_address`, `clients_isActive`, `clients_created_at`, `clients_updated_at`) VALUES
+	(1, '6235197846125', 'ali alissou', '62487956', 'alialissou@gmail.com', 'Aidjèdo', 1, '2022-02-11 17:48:13', '2022-02-11 17:49:17');
+/*!40000 ALTER TABLE `clients` ENABLE KEYS */;
+
+-- Listage de la structure de la table inventory_manager. delivery_mens
+DROP TABLE IF EXISTS `delivery_mens`;
+CREATE TABLE IF NOT EXISTS `delivery_mens` (
+  `delivery_mens_id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
+  `delivery_mens_ifu` varchar(13) DEFAULT NULL,
+  `delivery_mens_company` varchar(250) NOT NULL,
+  `delivery_mens_phone_number` varchar(100) DEFAULT NULL,
+  `delivery_mens_email` varchar(100) DEFAULT NULL,
+  `delivery_mens_address` varchar(250) NOT NULL,
+  `delivery_mens_isActive` tinyint(1) unsigned DEFAULT '1',
+  `delivery_mens_created_at` datetime DEFAULT CURRENT_TIMESTAMP,
+  `delivery_mens_updated_at` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`delivery_mens_id`),
+  UNIQUE KEY `delivery_mens_ifu` (`delivery_mens_ifu`),
+  UNIQUE KEY `delivery_mens_phone_number` (`delivery_mens_phone_number`),
+  UNIQUE KEY `delivery_mens_email` (`delivery_mens_email`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- Listage des données de la table inventory_manager.delivery_mens : ~0 rows (environ)
+/*!40000 ALTER TABLE `delivery_mens` DISABLE KEYS */;
+/*!40000 ALTER TABLE `delivery_mens` ENABLE KEYS */;
+
 -- Listage de la structure de la table inventory_manager. groups
+DROP TABLE IF EXISTS `groups`;
 CREATE TABLE IF NOT EXISTS `groups` (
   `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(150) NOT NULL,
-  `guard` varchar(50) NOT NULL,
+  `display_name` varchar(50) NOT NULL,
   `description` text NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
--- Listage des données de la table inventory_manager.groups : ~4 rows (environ)
+-- Listage des données de la table inventory_manager.groups : ~5 rows (environ)
 /*!40000 ALTER TABLE `groups` DISABLE KEYS */;
-INSERT INTO `groups` (`id`, `name`, `guard`, `description`) VALUES
-	(1, 'admin', 'Admin', 'Administrateur du système'),
+INSERT INTO `groups` (`id`, `name`, `display_name`, `description`) VALUES
+	(1, 'admin', 'Administrateur', 'Administrateur'),
 	(2, 'comptable', 'comptable', 'Comptable'),
-	(10, 'Vendeur', 'Ventes', 'Rôles attribué au service des ventes'),
-	(11, 'Superviseur', 'Gerant', 'Rôle attribuer au chef ou au superviseur des ventes'),
-	(12, 'SuperAdmin', 'SuperAdmin', 'Administrateur de toute l\'application');
+	(3, 'vendeur', 'vendeur', 'Vendeur'),
+	(4, 'superviseur', 'Superviseur', ''),
+	(5, 'Superviseur2', 'Superviseur', '');
 /*!40000 ALTER TABLE `groups` ENABLE KEYS */;
 
 -- Listage de la structure de la table inventory_manager. groups_permissions
+DROP TABLE IF EXISTS `groups_permissions`;
 CREATE TABLE IF NOT EXISTS `groups_permissions` (
   `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
   `group_id` mediumint(8) unsigned NOT NULL,
-  `permission_id` mediumint(8) unsigned NOT NULL,
+  `permissions` json NOT NULL,
   PRIMARY KEY (`id`),
   KEY `groups_permissions_group_id_foreign` (`group_id`),
-  KEY `groups_permissions_permission_id_foreign` (`permission_id`),
-  CONSTRAINT `groups_permissions_group_id_foreign` FOREIGN KEY (`group_id`) REFERENCES `groups` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION,
-  CONSTRAINT `groups_permissions_permission_id_foreign` FOREIGN KEY (`permission_id`) REFERENCES `permissions` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=210 DEFAULT CHARSET=utf8;
+  CONSTRAINT `groups_permissions_group_id_foreign` FOREIGN KEY (`group_id`) REFERENCES `groups` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
--- Listage des données de la table inventory_manager.groups_permissions : ~97 rows (environ)
+-- Listage des données de la table inventory_manager.groups_permissions : ~2 rows (environ)
 /*!40000 ALTER TABLE `groups_permissions` DISABLE KEYS */;
-INSERT INTO `groups_permissions` (`id`, `group_id`, `permission_id`) VALUES
-	(54, 2, 40),
-	(85, 10, 20),
-	(86, 10, 21),
-	(87, 10, 22),
-	(88, 10, 30),
-	(89, 10, 31),
-	(90, 10, 32),
-	(91, 10, 60),
-	(92, 10, 61),
-	(93, 10, 62),
-	(94, 10, 80),
-	(95, 11, 10),
-	(96, 11, 20),
-	(97, 11, 21),
-	(98, 11, 22),
-	(99, 11, 23),
-	(100, 11, 30),
-	(101, 11, 31),
-	(102, 11, 32),
-	(103, 11, 40),
-	(104, 11, 41),
-	(105, 11, 42),
-	(106, 11, 50),
-	(107, 11, 60),
-	(108, 11, 61),
-	(109, 11, 62),
-	(110, 11, 70),
-	(111, 11, 71),
-	(112, 11, 72),
-	(113, 11, 80),
-	(114, 11, 81),
-	(115, 11, 82),
-	(145, 12, 10),
-	(146, 12, 20),
-	(147, 12, 21),
-	(148, 12, 22),
-	(149, 12, 23),
-	(150, 12, 30),
-	(151, 12, 31),
-	(152, 12, 32),
-	(153, 12, 33),
-	(154, 12, 40),
-	(155, 12, 41),
-	(156, 12, 42),
-	(157, 12, 43),
-	(158, 12, 50),
-	(159, 12, 60),
-	(160, 12, 61),
-	(161, 12, 62),
-	(162, 12, 63),
-	(163, 12, 70),
-	(164, 12, 71),
-	(165, 12, 72),
-	(166, 12, 73),
-	(167, 12, 80),
-	(168, 12, 81),
-	(169, 12, 82),
-	(170, 12, 83),
-	(171, 12, 90),
-	(172, 12, 91),
-	(173, 12, 92),
-	(174, 12, 93),
-	(175, 12, 100),
-	(176, 12, 101),
-	(177, 12, 102),
-	(178, 12, 103),
-	(179, 12, 110),
-	(180, 12, 112),
-	(181, 1, 10),
-	(182, 1, 20),
-	(183, 1, 21),
-	(184, 1, 22),
-	(185, 1, 30),
-	(186, 1, 31),
-	(187, 1, 32),
-	(188, 1, 41),
-	(189, 1, 42),
-	(190, 1, 50),
-	(191, 1, 60),
-	(192, 1, 61),
-	(193, 1, 62),
-	(194, 1, 70),
-	(195, 1, 71),
-	(196, 1, 72),
-	(197, 1, 80),
-	(198, 1, 81),
-	(199, 1, 82),
-	(200, 1, 90),
-	(201, 1, 91),
-	(202, 1, 92),
-	(203, 1, 93),
-	(204, 1, 100),
-	(205, 1, 101),
-	(206, 1, 102),
-	(207, 1, 103),
-	(208, 1, 110),
-	(209, 1, 112);
+INSERT INTO `groups_permissions` (`id`, `group_id`, `permissions`) VALUES
+	(2, 5, '{"60": {"id": "60", "name": "Consulter_Clients", "module": "Clients", "description": "Voir la liste des clients"}, "61": {"id": "61", "name": "Enregistrer_Clients", "module": "Clients", "description": "Enregistrer un client"}, "62": {"id": "62", "name": "Editer_Clients", "module": "Clients", "description": "Editer un client"}, "63": {"id": "63", "name": "Supprimer_Clients", "module": "Clients", "description": "Supprimer un client"}, "70": {"id": "70", "name": "Consulter_Fournisseurs", "module": "Fournisseurs", "description": "Voir la liste des fournisseurs"}, "71": {"id": "71", "name": "Enregistrer_Fournisseurs", "module": "Fournisseurs", "description": "Enregistrer un fournisseur"}}'),
+	(3, 4, '{"30": {"id": "30", "name": "Consulter_Commandes_Clients", "module": "Commandes_Clients", "description": "Consulter les commandes des clients"}, "31": {"id": "31", "name": "Enregistrer_Commandes_Clients", "module": "Commandes_Clients", "description": "Enregistrer les commandes des clients"}, "32": {"id": "32", "name": "Editer_Commandes_Clients", "module": "Commandes_Clients", "description": "Editer les commandes des clients"}, "33": {"id": "33", "name": "Supprimer_Commandes_Clients", "module": "Commandes_Clients", "description": "Supprimer les commandes des clients"}, "40": {"id": "40", "name": "Consulter_Approvisionnements", "module": "Approvisionnements", "description": "Consulter les approvisionnements de produit"}, "41": {"id": "41", "name": "Enregistrer_Approvisionnements", "module": "Approvisionnements", "description": "Enregistrer les approvisionnements de produit"}, "42": {"id": "42", "name": "Editer_Approvisionnements", "module": "Approvisionnements", "description": "Editer les approvisionnements de produit"}, "43": {"id": "43", "name": "Supprimer_Approvisionnements", "module": "Approvisionnements", "description": "Supprimer les approvisionnements de produit"}, "60": {"id": "60", "name": "Consulter_Clients", "module": "Clients", "description": "Voir la liste des clients"}, "61": {"id": "61", "name": "Enregistrer_Clients", "module": "Clients", "description": "Enregistrer un client"}, "62": {"id": "62", "name": "Editer_Clients", "module": "Clients", "description": "Editer un client"}, "63": {"id": "63", "name": "Supprimer_Clients", "module": "Clients", "description": "Supprimer un client"}, "70": {"id": "70", "name": "Consulter_Fournisseurs", "module": "Fournisseurs", "description": "Voir la liste des fournisseurs"}, "71": {"id": "71", "name": "Enregistrer_Fournisseurs", "module": "Fournisseurs", "description": "Enregistrer un fournisseur"}, "72": {"id": "72", "name": "Editer_Fournisseurs", "module": "Fournisseurs", "description": "Editer un fournisseur"}, "73": {"id": "73", "name": "Supprimer_Fournisseurs", "module": "Fournisseurs", "description": "Supprimer un fournisseur"}, "80": {"id": "80", "name": "Consulter_Livreurs", "module": "Livreurs", "description": "Voir la liste des livreurs"}, "81": {"id": "81", "name": "Enregistrer_Livreurs", "module": "Livreurs", "description": "Enregistrer un livreur"}, "82": {"id": "82", "name": "Editer_Livreurs", "module": "Livreurs", "description": "Editer un livreur"}, "83": {"id": "83", "name": "Supprimer_Livreurs", "module": "Livreurs", "description": "Supprimer un livreur"}}'),
+	(4, 1, '[]');
 /*!40000 ALTER TABLE `groups_permissions` ENABLE KEYS */;
 
 -- Listage de la structure de la table inventory_manager. login_attempts
+DROP TABLE IF EXISTS `login_attempts`;
 CREATE TABLE IF NOT EXISTS `login_attempts` (
   `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
   `ip_address` varchar(45) NOT NULL,
@@ -159,6 +112,7 @@ CREATE TABLE IF NOT EXISTS `login_attempts` (
 /*!40000 ALTER TABLE `login_attempts` ENABLE KEYS */;
 
 -- Listage de la structure de la table inventory_manager. migrations
+DROP TABLE IF EXISTS `migrations`;
 CREATE TABLE IF NOT EXISTS `migrations` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `version` varchar(255) NOT NULL,
@@ -173,16 +127,18 @@ CREATE TABLE IF NOT EXISTS `migrations` (
 -- Listage des données de la table inventory_manager.migrations : ~0 rows (environ)
 /*!40000 ALTER TABLE `migrations` DISABLE KEYS */;
 INSERT INTO `migrations` (`id`, `version`, `class`, `group`, `namespace`, `time`, `batch`) VALUES
-	(1, '20181211100537', 'IonAuth\\Database\\Migrations\\Migration_Install_ion_auth', '', 'IonAuth', 1643908835, 1);
+	(1, '20181211100537', 'IonAuth\\Database\\Migrations\\Migration_Install_ion_auth', '', 'IonAuth', 1644417805, 1);
 /*!40000 ALTER TABLE `migrations` ENABLE KEYS */;
 
 -- Listage de la structure de la table inventory_manager. permissions
+DROP TABLE IF EXISTS `permissions`;
 CREATE TABLE IF NOT EXISTS `permissions` (
   `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(150) NOT NULL,
   `module` varchar(50) NOT NULL,
   `description` text NOT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `name` (`name`)
 ) ENGINE=InnoDB AUTO_INCREMENT=113 DEFAULT CHARSET=utf8;
 
 -- Listage des données de la table inventory_manager.permissions : ~36 rows (environ)
@@ -226,7 +182,121 @@ INSERT INTO `permissions` (`id`, `name`, `module`, `description`) VALUES
 	(112, 'Editer_Parametrages', 'Parametrages', 'Editer un Paramétrage');
 /*!40000 ALTER TABLE `permissions` ENABLE KEYS */;
 
+-- Listage de la structure de la table inventory_manager. products
+DROP TABLE IF EXISTS `products`;
+CREATE TABLE IF NOT EXISTS `products` (
+  `products_id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
+  `products_name` varchar(100) DEFAULT NULL,
+  `products_barre_code` varchar(255) DEFAULT NULL,
+  `products_description` text,
+  `products_isActive` tinyint(1) unsigned DEFAULT '1',
+  `products_product_categorie_id` mediumint(8) unsigned NOT NULL,
+  `products_created_at` datetime DEFAULT CURRENT_TIMESTAMP,
+  `products_updated_at` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`products_id`),
+  UNIQUE KEY `products_name` (`products_name`),
+  UNIQUE KEY `products_barre_code` (`products_barre_code`),
+  KEY `products_products_product_categorie_id_foreign` (`products_product_categorie_id`),
+  CONSTRAINT `products_products_product_categorie_id_foreign` FOREIGN KEY (`products_product_categorie_id`) REFERENCES `product_categories` (`product_categories_id`) ON DELETE CASCADE ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+
+-- Listage des données de la table inventory_manager.products : ~4 rows (environ)
+/*!40000 ALTER TABLE `products` DISABLE KEYS */;
+INSERT INTO `products` (`products_id`, `products_name`, `products_barre_code`, `products_description`, `products_isActive`, `products_product_categorie_id`, `products_created_at`, `products_updated_at`) VALUES
+	(1, 'HUILE', NULL, '', 0, 2, '2022-02-11 11:49:55', '2022-02-11 17:28:53'),
+	(2, 'ORDINATEUR HP ELITE BOOK', NULL, '', 1, 1, '2022-02-11 11:55:33', '2022-02-11 17:29:23'),
+	(3, 'DISQUE DURE EXTERNE 500GO', NULL, '', 1, 1, '2022-02-11 11:56:06', '2022-02-11 11:56:06'),
+	(4, 'POULET', NULL, '', 0, 3, '2022-02-11 11:57:28', '2022-02-11 17:29:12');
+/*!40000 ALTER TABLE `products` ENABLE KEYS */;
+
+-- Listage de la structure de la table inventory_manager. product_categories
+DROP TABLE IF EXISTS `product_categories`;
+CREATE TABLE IF NOT EXISTS `product_categories` (
+  `product_categories_id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
+  `product_categories_name` varchar(100) DEFAULT NULL,
+  `product_categories_description` text,
+  `product_categories_isActive` tinyint(1) unsigned DEFAULT '1',
+  `product_categories_created_at` datetime DEFAULT CURRENT_TIMESTAMP,
+  `product_categories_updated_at` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`product_categories_id`),
+  UNIQUE KEY `product_categories_name` (`product_categories_name`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+
+-- Listage des données de la table inventory_manager.product_categories : ~2 rows (environ)
+/*!40000 ALTER TABLE `product_categories` DISABLE KEYS */;
+INSERT INTO `product_categories` (`product_categories_id`, `product_categories_name`, `product_categories_description`, `product_categories_isActive`, `product_categories_created_at`, `product_categories_updated_at`) VALUES
+	(1, 'Matériel Informatique', '', 1, '2022-02-10 15:30:58', '2022-02-10 15:30:58'),
+	(2, 'DIVERS', '', 1, '2022-02-11 11:17:26', '2022-02-11 11:17:26'),
+	(3, 'POISSONNERIE', '', 1, '2022-02-11 11:17:51', '2022-02-11 11:17:51');
+/*!40000 ALTER TABLE `product_categories` ENABLE KEYS */;
+
+-- Listage de la structure de la table inventory_manager. product_prices
+DROP TABLE IF EXISTS `product_prices`;
+CREATE TABLE IF NOT EXISTS `product_prices` (
+  `product_prices_id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
+  `product_prices_price` double NOT NULL DEFAULT '0',
+  `product_prices_product_id` mediumint(8) unsigned NOT NULL,
+  `product_prices_sales_option_id` mediumint(8) unsigned NOT NULL,
+  `product_prices_created_at` datetime DEFAULT CURRENT_TIMESTAMP,
+  `product_prices_updated_at` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`product_prices_id`),
+  KEY `product_prices_product_prices_product_id_foreign` (`product_prices_product_id`),
+  KEY `product_prices_product_prices_sales_option_id_foreign` (`product_prices_sales_option_id`),
+  CONSTRAINT `product_prices_product_prices_product_id_foreign` FOREIGN KEY (`product_prices_product_id`) REFERENCES `products` (`products_id`) ON DELETE CASCADE ON UPDATE NO ACTION,
+  CONSTRAINT `product_prices_product_prices_sales_option_id_foreign` FOREIGN KEY (`product_prices_sales_option_id`) REFERENCES `sales_options` (`sales_options_id`) ON DELETE CASCADE ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- Listage des données de la table inventory_manager.product_prices : ~0 rows (environ)
+/*!40000 ALTER TABLE `product_prices` DISABLE KEYS */;
+/*!40000 ALTER TABLE `product_prices` ENABLE KEYS */;
+
+-- Listage de la structure de la table inventory_manager. providers
+DROP TABLE IF EXISTS `providers`;
+CREATE TABLE IF NOT EXISTS `providers` (
+  `providers_id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
+  `providers_ifu` varchar(13) DEFAULT NULL,
+  `providers_company` varchar(250) NOT NULL,
+  `providers_phone_number` varchar(100) DEFAULT NULL,
+  `providers_email` varchar(100) DEFAULT NULL,
+  `providers_address` varchar(250) NOT NULL,
+  `providers_isActive` tinyint(1) unsigned DEFAULT '1',
+  `providers_created_at` datetime DEFAULT CURRENT_TIMESTAMP,
+  `providers_updated_at` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`providers_id`),
+  UNIQUE KEY `providers_ifu` (`providers_ifu`),
+  UNIQUE KEY `providers_phone_number` (`providers_phone_number`),
+  UNIQUE KEY `providers_email` (`providers_email`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- Listage des données de la table inventory_manager.providers : ~0 rows (environ)
+/*!40000 ALTER TABLE `providers` DISABLE KEYS */;
+/*!40000 ALTER TABLE `providers` ENABLE KEYS */;
+
+-- Listage de la structure de la table inventory_manager. sales_options
+DROP TABLE IF EXISTS `sales_options`;
+CREATE TABLE IF NOT EXISTS `sales_options` (
+  `sales_options_id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
+  `sales_options_name` varchar(100) DEFAULT NULL,
+  `sales_options_description` text,
+  `sales_options_isActive` tinyint(1) unsigned DEFAULT '1',
+  `sales_options_created_at` datetime DEFAULT CURRENT_TIMESTAMP,
+  `sales_options_updated_at` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`sales_options_id`),
+  UNIQUE KEY `sales_options_name` (`sales_options_name`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+
+-- Listage des données de la table inventory_manager.sales_options : ~5 rows (environ)
+/*!40000 ALTER TABLE `sales_options` DISABLE KEYS */;
+INSERT INTO `sales_options` (`sales_options_id`, `sales_options_name`, `sales_options_description`, `sales_options_isActive`, `sales_options_created_at`, `sales_options_updated_at`) VALUES
+	(1, 'KG', 'Le KG d\'un produit', 1, '2022-02-10 15:13:34', '2022-02-11 17:38:57'),
+	(2, 'LITTRE', 'LE LITTRE D\'UN PRODUIT', 1, '2022-02-10 15:33:03', '2022-02-10 15:33:03'),
+	(3, 'SACHET', 'SACHET', 1, '2022-02-10 15:35:10', '2022-02-10 15:35:10'),
+	(4, 'PAQUET', '', 1, '2022-02-10 15:35:52', '2022-02-10 15:36:47'),
+	(5, 'SAC', 'Le sac d\'un produit', 1, '2022-02-11 17:34:39', '2022-02-11 17:35:16');
+/*!40000 ALTER TABLE `sales_options` ENABLE KEYS */;
+
 -- Listage de la structure de la table inventory_manager. users
+DROP TABLE IF EXISTS `users`;
 CREATE TABLE IF NOT EXISTS `users` (
   `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
   `ip_address` varchar(100) NOT NULL,
@@ -251,23 +321,20 @@ CREATE TABLE IF NOT EXISTS `users` (
   `address` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `email` (`email`),
-  UNIQUE KEY `username` (`username`),
   UNIQUE KEY `activation_selector` (`activation_selector`),
   UNIQUE KEY `forgotten_password_selector` (`forgotten_password_selector`),
   UNIQUE KEY `remember_selector` (`remember_selector`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
--- Listage des données de la table inventory_manager.users : ~5 rows (environ)
+-- Listage des données de la table inventory_manager.users : ~2 rows (environ)
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
 INSERT INTO `users` (`id`, `ip_address`, `username`, `password`, `email`, `activation_selector`, `activation_code`, `forgotten_password_selector`, `forgotten_password_code`, `forgotten_password_time`, `remember_selector`, `remember_code`, `created_at`, `updated_at`, `last_login`, `active`, `first_name`, `last_name`, `company`, `phone`, `address`) VALUES
-	(1, '127.0.0.1', 'administrator', '$2y$12$4ctWzUqPWzXqNfq2tUMXKeeUHeKZLdCk9qlCLBWfyy82P4GloraHy', 'admin@admin.com', NULL, '', NULL, NULL, NULL, NULL, NULL, '2022-02-03 18:20:41', '2022-02-07 10:13:02', 1644225182, 1, 'Admin', 'istrator', 'ADMIN', '65656565', 'Cotonou'),
-	(2, '127.0.0.1', 'Vendeur', '$2y$10$Cw0N4lbQ/SfIVFj.SRvive3r6AJKt5laZqD7I9RoP/QAHuZYa6If2', 'vendeur@vendeur.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-02-03 18:20:41', '2022-02-04 18:38:16', 1643970264, 1, 'Pierre', 'ALI', 'Seller', '66666666', 'Cotonou'),
-	(3, '::1', 'kha', '$2y$10$RphovPhJLtPr2JrT7YOlrOEwSRi8nHu0TV5ViRuRmuNZLikS5Dvzy', 'kha@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-02-04 19:45:24', '2022-02-04 19:45:24', NULL, 1, 'Khalane', 'AFFISSOU', '', '+33 25035458', 'Rennes'),
-	(4, '::1', 'julie', '$2y$10$FeyqmZGgMfceboHUoAb3R.FZjlyFFLHiwJSsSRASdGCRxfA.aM9Xe', 'julie@gmail.com', 'fecc475844f1186d2715', '$2y$10$Z5k9Ea.AWS.GTHqv8mrGBeQtpgPBA/UIAzISKVeNBWy/zIHh5aXY6', NULL, NULL, NULL, NULL, NULL, '2022-02-04 19:54:54', '2022-02-04 20:06:16', NULL, 0, 'Julie', 'SOSSOU', '', '65892547', ''),
-	(5, '::1', 'pierro', '$2y$10$J4lto8X4o/b5xrABOi2yxeoWrJXgDhdyr7vq0Loq/pdXBWhGMTDcO', 'gbeffo@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-02-06 09:52:21', '2022-02-06 11:12:40', NULL, 1, 'Pierrette', 'GBEFFO', '', '+22966757001', 'Rue 560, Cotonou, Bénin');
+	(1, '127.0.0.1', 'administrator', '$2y$12$QW0Ylko9cDPnRKF3Nb1RZOCPYzDjh.2J0wdEuTnS4iWwxrXWg73fO', 'admin@admin.com', NULL, '', NULL, NULL, NULL, NULL, NULL, '2022-02-09 15:44:40', '2022-02-16 09:17:27', 1644999447, 1, 'Admin', 'istrator', 'ADMIN', '65656565', 'Cotonou'),
+	(2, '127.0.0.1', 'Vendeur', '$2y$08$200Z6ZZbp3RAEXoaWcMA6uJOFicwNZaqk4oDhqTUiFXFe63MG.Daa', 'vendeur@vendeur.com', NULL, '', NULL, NULL, NULL, NULL, NULL, '2022-02-09 15:44:40', '2022-02-09 15:44:40', 1268889823, 1, 'Pierre', 'ALI', 'Seller', '66666666', 'Cotonou');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 
 -- Listage de la structure de la table inventory_manager. users_groups
+DROP TABLE IF EXISTS `users_groups`;
 CREATE TABLE IF NOT EXISTS `users_groups` (
   `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
   `user_id` mediumint(8) unsigned NOT NULL,
@@ -277,16 +344,13 @@ CREATE TABLE IF NOT EXISTS `users_groups` (
   KEY `users_groups_group_id_foreign` (`group_id`),
   CONSTRAINT `users_groups_group_id_foreign` FOREIGN KEY (`group_id`) REFERENCES `groups` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION,
   CONSTRAINT `users_groups_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
--- Listage des données de la table inventory_manager.users_groups : ~4 rows (environ)
+-- Listage des données de la table inventory_manager.users_groups : ~2 rows (environ)
 /*!40000 ALTER TABLE `users_groups` DISABLE KEYS */;
 INSERT INTO `users_groups` (`id`, `user_id`, `group_id`) VALUES
 	(1, 1, 1),
-	(2, 2, 2),
-	(4, 4, 11),
-	(5, 3, 10),
-	(7, 5, 2);
+	(2, 2, 2);
 /*!40000 ALTER TABLE `users_groups` ENABLE KEYS */;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;

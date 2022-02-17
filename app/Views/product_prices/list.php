@@ -10,7 +10,7 @@
             <!--begin::Page title-->
             <div data-kt-swapper="true" data-kt-swapper-mode="prepend" data-kt-swapper-parent="{default: '#kt_content_container', 'lg': '#kt_toolbar_container'}" class="page-title d-flex align-items-center flex-wrap me-3 mb-5 mb-lg-0">
                 <!--begin::Title-->
-                <h1 class="d-flex align-items-center text-dark fw-bolder fs-3 my-1"> Gestion des produits</h1>
+                <h1 class="d-flex align-items-center text-dark fw-bolder fs-3 my-1"> Gestion des prix de vente</h1>
                 <!--end::Title-->
                 <!--begin::Separator-->
                 <span class="h-20px border-gray-300 border-start mx-4"></span>
@@ -31,7 +31,7 @@
                     </li>
                     <!--end::Item-->
                     <!--begin::Item-->
-                    <li class="breadcrumb-item text-dark">Liste des produits</li>
+                    <li class="breadcrumb-item text-dark">Prix de vente des produits</li>
                     <!--end::Item-->
                 </ul>
                 <!--end::Breadcrumb-->
@@ -130,7 +130,7 @@
                 </div>
                 <!--end::Wrapper-->
                 <!--begin::Button-->
-                <a href="<?= base_url() ?>/product/list_create" class="btn btn-sm btn-primary"  id="kt_toolbar_primary_button">Nouveau produit</a>
+                <a href="<?= base_url() ?>/price/list_create" class="btn btn-sm btn-primary" id="kt_toolbar_primary_button">Nouveau prix</a>
                 <!--end::Button-->
             </div>
             <!--end::Actions-->
@@ -237,7 +237,7 @@
                             <!--end::Svg Icon-->Export</button>
                             <!--end::Export-->
                             <!--begin::Add user-->
-                            <a href="<?= base_url() ?>/product/list_create" class="btn btn-primary">
+                            <a href="<?= base_url() ?>/price/list_create" class="btn btn-primary">
                             <!--begin::Svg Icon | path: icons/duotune/arrows/arr075.svg-->
                             <span class="svg-icon svg-icon-2">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -245,7 +245,7 @@
                                     <rect x="4.36396" y="11.364" width="16" height="2" rx="1" fill="black" />
                                 </svg>
                             </span>
-                            <!--end::Svg Icon-->Nouveau produit</a>
+                            <!--end::Svg Icon-->Nouveau prix</a>
                             <!--end::Add user-->
                         </div>
                         <!--end::Toolbar-->
@@ -265,7 +265,7 @@
                                     <!--begin::Modal header-->
                                     <div class="modal-header">
                                         <!--begin::Modal title-->
-                                        <h2 class="fw-bolder">Export Users</h2>
+                                        <h2 class="fw-bolder">Exporter</h2>
                                         <!--end::Modal title-->
                                         <!--begin::Close-->
                                         <div class="btn btn-icon btn-sm btn-active-icon-primary" data-kt-users-modal-action="close">
@@ -562,10 +562,10 @@
                                         <input class="form-check-input" type="checkbox" data-kt-check="true" data-kt-check-target="#kt_table_users .form-check-input" value="1" />
                                     </div>
                                 </th>
-                                <th class="min-w-125px">Désignation</th>
-                                <th class="min-w-125px">Catégorie</th>
-                                <th class="min-w-125px">Description</th>
-                                <th class="min-w-125px">Statut</th>
+                                <th class="min-w-125px">Catégories</th>
+                                <th class="min-w-125px">Produits</th>
+                                <th class="min-w-125px">Option de Vente</th>
+                                <th class="min-w-125px">Prix de vente</th>
                                 <th class="min-w-125px">Créé le</th>
                                 <th class="text-end min-w-100px">Actions</th>
                             </tr>
@@ -575,7 +575,7 @@
                         <!--begin::Table body-->
                         <tbody class="text-gray-600 fw-bold">
                             <!--begin::Table row-->
-                            <?php $i = 1; foreach ($products as $product): ?>
+                            <?php $i = 1; foreach ($product_prices as $product): ?>
                                 <!--begin::Table row-->
                                     <tr>
                                         <!--begin::Checkbox-->
@@ -586,18 +586,17 @@
                                         </td>
                                         <!--end::Checkbox-->
                                         <td class="d-flex align-items-center">
-                                            <?= $product->products_name ?>
+                                            <?= $product->product_categories_name ?>
                                         </td>
                                         <td class="">
-                                        <?= $product->product_categories_name ?>
+                                        <?= $product->products_name?>
                                         </td>
-                                        <td>
-                                        <?= $product->products_description ?>
+                                        <td class="">
+                                        <?= $product->sales_options_name?>
                                         </td>
-
-                                        <td> 
-                                            <?= status($product->products_isActive) ?>
-                                       </td>
+                                        <td class="">
+                                        <?= $product->product_prices_price?>
+                                        </td>
                                         <td><?= $product->products_created_at ?></td>
                                         <td class="text-end">
                                             <a href="#" class="btn btn-light btn-active-light-primary btn-sm" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">Actions
@@ -612,12 +611,12 @@
                                             <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4" data-kt-menu="true">
                                                 <!--begin::Menu item-->
                                                 <div class="menu-item px-3">
-                                                    <a href="" data-bs-toggle="modal" data-bs-target="#external_create_new" onclick="edit(<?=$product->products_id ?>,<?= $i ?>,<?= $product->products_product_categorie_id  ?>)" class="menu-link px-3">Editer</a>
+                                                    <a href="" data-bs-toggle="modal" data-bs-target="#external_create_new" onclick='edit(<?=$product->product_prices_id ?>, <?= json_encode($product) ?>)' class="menu-link px-3">Editer</a>
                                                 </div>
                                                 <!--end::Menu item-->
                                                 <!--begin::Menu item-->
                                                 <div class="menu-item px-3">
-                                                    <p class="menu-link px-3"onclick="banish(<?=$product->products_id ?>, <?=$product->products_isActive ?>)" ><?= deleteUser($product->products_isActive) ?></p>
+                                                    <p class="menu-link px-3"onclick='removePrice(<?=$product->product_prices_id ?>, <?=json_encode($product)?>)' >Supprimer</p>
                                                 </div>
                                                 <!--end::Menu item-->
                                             </div>
@@ -640,17 +639,22 @@
     </div>
     <!--end::Post-->
 </div>
-<?=  $this->include("product/create");?>
+<?=  $this->include("product_prices/create");?>
 <!--end::Content-->
 <?= $this->section('javascript') ?>
     <script type="text/javascript">
+        var base_url = "<?= base_url() ?>";
         var showModal = "<?= $showModal == 1 ? (1) : (0) ?>";
-        var banish_mes = "Vous souhaitez déactiver ce produit. Une fois qu'il sera désactivé, il n'apparaitra plus dans les modules d'approvisionnement et de vente<span class='badge badge-primary'>Etes-vous sûr de vouloir la désactiver ?</span>";
         var active_mes = "Vous souhaitez activer ce produit. Une fois activé, il apparaitra à nouveau dans les modules d'approvisionnement et de vente<span class='badge badge-primary'>Etes-vous sûr de vouloir l'activer ?</span>";
-        function banish(id, banish_type) {
+        var category = document.getElementById("product_categories_id");
+        var product = document.getElementById("product_prices_product_id");
+        var sale_option = document.getElementById("product_prices_sales_option_id");
+        var price = document.getElementById("product_prices_price");
+        function removePrice(id, product) {
+            let mes = "Vous souhaitez supprimer l'option de vente : au produit : <span class='badge badge-primary'>Etes-vous sûr de vouloir la supprimer ?</span>";
              Swal.fire({
-                html: banish_type== 1 ? banish_mes : active_mes,
-                icon: banish_type== 1 ? "warning" : "info",
+                html: mes,
+                icon: "warning",
                 buttonsStyling: false,
                 showCancelButton: true,
                 confirmButtonText: "J'en suis certain!",
@@ -662,25 +666,25 @@
             }).then((result)=>
                 {
                     if(result.value) 
-                        {
-                            if(banish_type == 1)
-                                document.location.href="<?=  base_url(); ?>/product/banish/"+id;
-                            else
-                                document.location.href="<?=  base_url(); ?>/product/activate/"+id;
-                        }
+                        document.location.href="<?=  base_url(); ?>/price/delete/"+id;                           
                 });  
-            
         }
 
-        function edit(id, rowId, category) {
+        function edit(id, product) {
            let table = document.getElementById("kt_table_users");
-           document.getElementById("kt_modal_new_address_form").action = "<?= base_url() ?>"+"/product/edit";
+           document.getElementById("kt_modal_new_address_form").action = "<?= base_url() ?>"+"/price/edit";
            document.getElementById("externalID").value = id;
            document.getElementById("modalTitle").innerHTML = "Mise à jour de produit";
            document.getElementById("submitText").innerHTML = "Sauvegarder";
-           document.getElementById("name").value = table.rows[rowId].cells[1].innerHTML.trim();
-           document.getElementById("description").value = table.rows[rowId].cells[3].innerHTML.trim();
-           updateCategory(category);
+           document.getElementById("product_categories_id").value = product.product_categories_id;
+           document.getElementById("product_prices_product_id").value = product.product_prices_product_id;
+           document.getElementById("product_prices_sales_option_id").value = product.product_prices_sales_option_id;
+           document.getElementById("product_prices_price").value = product.product_prices_price;
+
+           document.getElementById("product_categories_id").disabled = true;
+           document.getElementById("product_prices_product_id").disabled = true;
+           document.getElementById("product_prices_sales_option_id").disabled = true;
+           //updateCategory(category);
            
         }
        
@@ -689,10 +693,44 @@
                  $('#external_create_new').modal('show');
     });
 
-    function updateCategory(category) {
+    
+    $('#product_categories_id').change(function(){
+        alert(1)
+        if($(this).val() != '')
+        {
+            var value = $(this).val();   
+            $.ajax({
+                url: base_url+"/dynamic/product",
+                method:"POST",
+                data:{id:value},
+                success:function(result)
+                {
+                $('#product_prices_product_id').html(result);
+                }
+            })
+        }
+    });
+
+    $('#product_prices_product_id').change(function(){
+        if($(this).val() != '')
+        {
+            var value = $(this).val();   
+            $.ajax({
+                url: base_url+"/dynamic/sale_options",
+                method:"POST",
+                data:{id:value},
+                success:function(result)
+                {
+                $('#product_prices_sales_option_id').html(result);
+                }
+            })
+        }
+    });
+
+    /*function updateCategory(category) {
            document.getElementById("product_categories_id").value = category;
            document.getElementById("product_categories_id").dispatchEvent(new Event('change'));
-    }
+    }*/
 
     </script>
 <?= $this->endSection() ?>

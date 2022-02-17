@@ -80,6 +80,18 @@ $routes->get('/product/banish/(:num)', 'Product::deactivate/$1');
 $routes->get('/product/activate/(:num)', 'Product::activate/$1');
 $routes->post('/product/edit', 'Product::edit');
 
+//Product Price management
+$routes->get('/price/list', 'Price::list/0');
+$routes->get('/price/list_create', 'Price::list/1');
+$routes->post('/price/create', 'Price::create');
+$routes->get('/price/delete/(:num)', 'Price::activate/$1');
+$routes->post('/price/edit', 'Price::edit');
+
+//Dynamic
+$routes->post('/dynamic/product', 'Dynamic::product');
+$routes->post('/dynamic/sale_options', 'Dynamic::sale_options');
+
+
 //roles and permissions
 $routes->get('/groups/list', 'Auth::role_permission');
 $routes->get('/groups/new', 'Auth::new_group');

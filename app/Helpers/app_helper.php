@@ -7,6 +7,7 @@ use App\Models\ClientModel;
 use App\Models\ProviderModel;
 use App\Models\DeliveryMenModel;
 use App\Models\ProductCategoriesModel;
+use App\Models\ProductModel;
 use App\Models\SalesOptionsModel;
 use App\Models\ConfigModel;
 
@@ -147,7 +148,6 @@ function updatePermissions($groupId, $request)
 		foreach ($permissions as $permission){
 			if($request->getPost($permission->id) != null){
 				$data[$permission->id] =$permission;
-				//$modelGroupPermission->insert(["group_id"=> $groupId,"permission_id"=>$permission->id]);
 			}
 		}
 		$modelGroupPermission->insert(["group_id"=> $groupId,"permissions"=>json_encode($data)]);
@@ -288,6 +288,29 @@ if (!function_exists("getConfigList")) {
 		}
 	}
 
-
+if (!function_exists("getProductByCategory")) {
+	function getProductByCategory($id)
+		{
+			$model = new ProductModel();
+			$results = $model->where('products_product_categorie_id', $id)->get()->getResult();
+			$output = '<option value="">Choisissez un produit...</option>';
+			foreach ($results as $result){
+				$output .= '<option value="'.$result->products_id.'">'.$result->products_name.'</option>';
+			}
+			return  $output;
+		}
+	}
+if (!function_exists("getSaleOptionsByProduct")) {
+	function getSaleOptionsByProduct($id)
+		{
+			$model = new SalesOptionsModel();
+			$results = $model->get_not_set_options_for_product( $id);
+			$output = '<option value="">Choisissez une option de vente...</option>';
+			foreach ($results->getResult() as $result){
+				$output .= '<option value="'.$result->sales_options_id.'">'.$result->sales_options_name.'</option>';
+			}
+			return  $output;
+		}
+	}
 
 ?>

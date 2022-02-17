@@ -2,9 +2,11 @@
 
 namespace App\Controllers;
 
-use App\Models\ProductCategoriesModel;
 use App\Models\ProductModel;
-class Product extends BaseController
+use App\Models\ProductPriceModel;
+use App\Models\ProductCategoriesModel;
+use App\Models\SalesOptionsModel;
+class Price extends BaseController
 {
     public  $ionAuth = null;
     public  $validation = null;
@@ -19,8 +21,10 @@ class Product extends BaseController
 	 */
 	protected $validationListTemplate = 'list';
 	protected $validationSigneTemplate = 'single';
+    protected $modelPrice = null;
     protected $modelProduct = null;
     protected $modelProductCategory = null;
+    protected $modelSalesOptions = null;
 
     /**
 	 * Constructor
@@ -35,7 +39,9 @@ class Product extends BaseController
 		$this->configIonAuth = config('IonAuth');
 		$this->session       = \Config\Services::session();
         $this->modelProduct = new ProductModel();
+        $this->modelProductPrice = new ProductPriceModel();
         $this->modelProductCategory = new ProductCategoriesModel();
+        $this->modelSalesOptions = new SalesOptionsModel();
 
         if (! empty($this->configIonAuth->templates['errors']['list']))
 		{
@@ -54,15 +60,21 @@ class Product extends BaseController
 		{
             return redirect()->back()->with("message", "Erreur : Accès illégal !")->with("code", 0);
 		}
-        $data['products'] =$this->modelProduct->get_product_list();
+        $data['product_prices'] =$this->modelProductPrice->get_product_price_list();
+        $data['products'] =$this->modelProduct->get()->getResult();
         $data['categories'] = $this->modelProductCategory->get()->getResult();
-		if($showModal==1){
-		if($data['categories']==null)
-			return redirect()->to("product_category/list")->with('message', 'Veuillez enregistrer les catégories de produits !')->with('code',0);
-		}
+        $data['sales_options'] = $this->modelSalesOptions->get()->getResult();
+        if($showModal==1){
+            if($data['categories']==null)
+                return redirect()->to("product_category/list")->with('message', 'Veuillez enregistrer les catégories de produits !')->with('code',0);
+            if($data['products']==null)
+                return redirect()->to("product/list")->with('message', 'Veuillez enregistrer les produits !')->with('code',0);
+            if($data['sales_options']==null)
+                return redirect()->to("sales_option/list")->with('message', 'Veuillez enregistrer les options de vente !')->with('code',0);
+        }
         $data['auth'] = $this->ionAuth;
         $data['showModal'] = $showModal;
-        return view('product/list',$data);
+        return view('product_prices/list',$data);
     }
     
     /**
@@ -86,34 +98,39 @@ class Product extends BaseController
         $data = [];
 		// validate form input
 		$rules = [
-                    'name'=> 'trim|required|is_unique[products.products_name]',
-                    'description'=> "trim",
+                    'product_prices_product_id'=> 'trim|required',
+                    'product_prices_sales_option_id'=> 'trim|required',
+                    'product_prices_price'=> 'trim|required',
+                   
                 ];
-        $errors =  [
-                        "name"=>[
-                            "required"=>"Renseignez la désignation du produit",
-                            "is_unique"=>"La désignation ".$this->request->getPost('name')." existe déjà"
-                            ],
-                        
-                    ]; 
+        $errors = [
+                    "product_prices_product_id"=>[
+                        "required"=>"Choisissez un produit",
+                        ],
+                    "product_prices_sales_option_id"=>[
+                        "required"=>"Choisissez une option de vente",
+                        ],
+                    "product_prices_price"=>[
+                        "required"=>"Renseignez le prix de vente",
+                        ],
+                ]; 
         $this->validation->setRules($rules, $errors);
                      
 		if ($this->validation->withRequest($this->request)->run())
 		{
-            $data['products_name'] = strtoupper($this->request->getPost('name'));
-            $data['products_product_categorie_id'] = $this->request->getPost('product_categories_id');
-            $data['products_description'] = $this->request->getPost('description');
-
-            if($this->modelProduct->insert($data))
-            {
-                return redirect()->to("product/list")->with('message', 'Nouveau produit créé avec succès !')->with('code',1);
-            }
+            $data['product_prices_product_id'] = $this->request->getPost('product_prices_product_id');
+            $data['product_prices_sales_option_id'] = $this->request->getPost('product_prices_sales_option_id');
+            $data['product_prices_price'] = $this->request->getPost('product_prices_price');
             
+            if($this->modelProductPrice->insert($data))
+            {
+                return redirect()->to("price/list")->with('message', 'Nouveau produit créé avec succès !')->with('code',1);
+            }
         }
 		//We find some error
 		$this->data['message'] = $this->validation->getErrors() ? $this->validation->listErrors($this->validationListTemplate) : ($this->ionAuth->errors($this->validationListTemplate) ? $this->ionAuth->errors($this->validationListTemplate) : $this->session->getFlashdata('message'));
 		$this->session->setFlashdata('message2', $this->data['message']);
-		return redirect()->to("/product/list_create")->withInput();		
+		return redirect()->to("/price/list_create")->withInput();		
 	}
     /**
 	 * Create a new client|provider|delivery_men
@@ -134,36 +151,36 @@ class Product extends BaseController
 		 }
         $id = (int) $this->request->getPost('id');
         $data = [];
-        $product = $this->modelProduct->where('products_id',$id)->get()->getResultArray();
+        $product = $this->modelProductPrice->find($id);
+       // dd($product);
         //dd($user);
         if(count($product) >= 1){
-            $product = $product[0];
-		// validate form input
-		$rules = [
-                    'name'=> "trim|required|".($product['products_name'] == $this->request->getPost('name') ? ('') : ('is_unique[products.products_name]')),
-                ];
-        $errors =  [
-                       "name"=>[
-                            "required"=>"Renseignez la désignation du produit",
-                            "is_unique"=>"La désignation ".$this->request->getPost('name')." existe déjà"
-                        ],
-                    ];
+           // $product = $product[0];
+            $rules = [
+               'product_prices_price'=> 'trim|required',
+            ];
+            $errors = [
+                        "product_prices_price"=>[
+                            "required"=>"Renseignez le prix de vente",
+                            ],
+                    ]; 
             $this->validation->setRules($rules, $errors);
+
 		if ($this->validation->withRequest($this->request)->run())
 		{
-            $data['products_name'] = strtoupper($this->request->getPost('name'));
-            $data['products_product_categorie_id'] = $this->request->getPost('product_categories_id');
-            $data['products_description'] = $this->request->getPost('description');
-
-            if($this->modelProduct->update($id, $data))
-                return redirect()->to("product/list")->with("message", "Les informations du produit sont mises à jour avec succès !")->with("code", 1);
+           // $data['product_prices_product_id'] = $this->request->getPost('product_prices_product_id');
+            //$data['product_prices_sales_option_id'] = $this->request->getPost('product_prices_sales_option_id');
+            $data['product_prices_price'] = $this->request->getPost('product_prices_price');
+            
+            if($this->modelProductPrice->update($id, $data))
+                return redirect()->to("price/list")->with('message', 'Le prix de vente  à été mise à jour avec succès !')->with('code',1);
             else
-                return redirect()->back()->with("message2", " Le produit que vous essayez d'éditer n'existe pas !")->with("code", 0);
+                return redirect()->back()->with("message2", "Impossible de mettre à jour ce prix de vente!")->with("code", 0);
         }
         //We find some error
         $this->data['message'] = $this->validation->getErrors() ? $this->validation->listErrors($this->validationListTemplate) : ($this->ionAuth->errors($this->validationListTemplate) ? $this->ionAuth->errors($this->validationListTemplate) : $this->session->getFlashdata('message'));
         $this->session->setFlashdata('message2', $this->data['message']);
-        return redirect()->to("/product/list_create")->withInput();
+        return redirect()->to("/price/list_create")->withInput();
     }else{
         return redirect()->back()->with("message2", "Le produit que vous essayez de modifier n'existe pas!")->with("code", 0);
 
@@ -171,35 +188,6 @@ class Product extends BaseController
          		
 }
 
-
-    /**
-	 * Activate the user
-	 *
-	 * @param integer $id   The user ID
-	 * @param integer  $type the user type : client,provider, etc.
-	 *
-	 * @return \CodeIgniter\HTTP\RedirectResponse
-	 */
-	public function activate(int $id): \CodeIgniter\HTTP\RedirectResponse
-	{
-        if (! $this->ionAuth->loggedIn() || ! $this->ionAuth->isAdmin())
-		{
-			// redirect them to the home page because they must be an administrator to view this
-            return redirect()->back()->with("message", "Cette page est reservée aux administrateurs du sytème!")->with("code", 0);
-		}
-        $id = (int) $id;
-		if ($id >0)
-		{
-            if($this->modelProduct->update($id,["products_isActive"=>1]))
-                return redirect()->to("/product/list")->with("message", "Produit activé avec succès !")->with("code", 1);
-            else
-                return redirect()->to("/product/list")->with("message", "Le produit que vous essayez d'activer n'existe pas !")->with("code", 0);
-		}
-		else
-		{
-			 return redirect()->back()->with("message2", "Erreur : Accès illégal !")->with("code", 0);
-		}
-	}
 
 	/**
 	 * Deactivate the user
@@ -209,7 +197,7 @@ class Product extends BaseController
 	 *
 	 * @return \CodeIgniter\HTTP\RedirectResponse
 	 */
-	public function deactivate(int $id)
+	public function delete(int $id)
 	{
 		if (! $this->ionAuth->loggedIn() || ! $this->ionAuth->isAdmin())
 		{
@@ -219,10 +207,10 @@ class Product extends BaseController
         $id = (int) $id;
 		if ($id >0)
 		{
-            if($this->modelProduct->update($id,["products_isActive"=>0]))
-                return redirect()->to("/product/list")->with("message", "Produit désactivé avec succès !")->with("code", 1);
+            if($this->modelProductPrice->delete($id))
+                return redirect()->to("/price/list")->with("message", "Le prix de vente est supprimé avec succès !")->with("code", 1);
             else
-                return redirect()->to("/product/list")->with("message", "Le produit que vous essayez d'désactiver n'existe pas !")->with("code", 0);
+                return redirect()->to("/price/list")->with("message", "Le produit que vous essayez d'désactiver n'existe pas !")->with("code", 0);
 		}
 		else
 		{

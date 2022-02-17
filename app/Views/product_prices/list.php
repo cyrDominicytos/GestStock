@@ -727,10 +727,10 @@
         }
     });
 
-    /*function updateCategory(category) {
+    function initPage() {
            document.getElementById("product_categories_id").value = category;
            document.getElementById("product_categories_id").dispatchEvent(new Event('change'));
-    }*/
+    }
 
     </script>
 <?= $this->endSection() ?>

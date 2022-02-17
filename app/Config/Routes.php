@@ -84,7 +84,7 @@ $routes->post('/product/edit', 'Product::edit');
 $routes->get('/price/list', 'Price::list/0');
 $routes->get('/price/list_create', 'Price::list/1');
 $routes->post('/price/create', 'Price::create');
-$routes->get('/price/delete/(:num)', 'Price::activate/$1');
+$routes->get('/price/delete/(:num)', 'Price::delete/$1');
 $routes->post('/price/edit', 'Price::edit');
 
 //Dynamic

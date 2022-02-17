@@ -40,7 +40,6 @@
                                 <?php foreach ($categories as $categorie): ?>
                                     <option value="<?= $categorie->product_categories_id ?>"  id="<?=  $categorie->product_categories_id?>" <?= set_select('product_categories_id', $categorie->product_categories_id) ?>><?= $categorie->product_categories_name ?></option>									
                                 <?php endforeach ?>
-                                
                             </select>
                         </div>
                         <!--end::Input group-->
@@ -51,7 +50,6 @@
                                 <?php foreach ($products as $product): ?>
                                     <option value="<?= $product->products_id ?>"  id="<?=  $product->products_id ?>" <?= set_select('product_prices_product_id', $product->products_id) ?>><?=$product->products_name ?></option>									
                                 <?php endforeach ?>
-                                
                             </select>
                         </div>
                         <!--end::Input group-->

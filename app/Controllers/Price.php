@@ -72,6 +72,8 @@ class Price extends BaseController
             if($data['sales_options']==null)
                 return redirect()->to("sales_option/list")->with('message', 'Veuillez enregistrer les options de vente !')->with('code',0);
         }
+        $data['products'] = [];
+        $data['sales_options'] = [];
         $data['auth'] = $this->ionAuth;
         $data['showModal'] = $showModal;
         return view('product_prices/list',$data);
@@ -99,7 +101,7 @@ class Price extends BaseController
 		// validate form input
 		$rules = [
                     'product_prices_product_id'=> 'trim|required',
-                    'product_prices_sales_option_id'=> 'trim|required',
+                    'product_prices_sales_option_id'=> 'trim|required|unique_price[product_prices_sales_option_id,product_prices_product_id]',
                     'product_prices_price'=> 'trim|required',
                    
                 ];
@@ -109,13 +111,13 @@ class Price extends BaseController
                         ],
                     "product_prices_sales_option_id"=>[
                         "required"=>"Choisissez une option de vente",
+                        "unique_price"=>"Cette option de vente était déjà attribuée au produit",
                         ],
                     "product_prices_price"=>[
                         "required"=>"Renseignez le prix de vente",
                         ],
                 ]; 
-        $this->validation->setRules($rules, $errors);
-                     
+        $this->validation->setRules($rules, $errors);         
 		if ($this->validation->withRequest($this->request)->run())
 		{
             $data['product_prices_product_id'] = $this->request->getPost('product_prices_product_id');
@@ -193,7 +195,6 @@ class Price extends BaseController
 	 * Deactivate the user
 	 *
 	 * @param integer $id   The user ID
-	 * @param integer  $type the user type : client,provider, etc.
 	 *
 	 * @return \CodeIgniter\HTTP\RedirectResponse
 	 */
@@ -210,7 +211,7 @@ class Price extends BaseController
             if($this->modelProductPrice->delete($id))
                 return redirect()->to("/price/list")->with("message", "Le prix de vente est supprimé avec succès !")->with("code", 1);
             else
-                return redirect()->to("/price/list")->with("message", "Le produit que vous essayez d'désactiver n'existe pas !")->with("code", 0);
+                return redirect()->to("/price/list")->with("message", "Vous ne pouvez pas supprimer ce prix de vente!")->with("code", 0);
 		}
 		else
 		{

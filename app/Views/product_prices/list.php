@@ -611,12 +611,12 @@
                                             <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4" data-kt-menu="true">
                                                 <!--begin::Menu item-->
                                                 <div class="menu-item px-3">
-                                                    <a href="" data-bs-toggle="modal" data-bs-target="#external_create_new" onclick='edit(<?=$product->product_prices_id ?>, <?= json_encode($product) ?>)' class="menu-link px-3">Editer</a>
+                                                    <a href="" data-bs-toggle="modal" data-bs-target="#external_create_new" onclick='edit(<?=$product->product_prices_id ?>, <?= json_encode($product) ?>)' class="menu-link px-3"><i class="fa fa-edit text-primary py-2"> Editer</i></a>
                                                 </div>
                                                 <!--end::Menu item-->
                                                 <!--begin::Menu item-->
                                                 <div class="menu-item px-3">
-                                                    <p class="menu-link px-3"onclick='removePrice(<?=$product->product_prices_id ?>, <?=json_encode($product)?>)' >Supprimer</p>
+                                                    <p class="menu-link px-3"onclick='removePrice(<?=$product->product_prices_id ?>, <?=json_encode($product)?>)' ><i class="fa fa-trash text-danger py-2"> Supprimer</i></p>
                                                 </div>
                                                 <!--end::Menu item-->
                                             </div>

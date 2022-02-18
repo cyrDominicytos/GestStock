@@ -107,7 +107,9 @@ class Auth extends \IonAuth\Controllers\Auth
         }
 		else 
 		{
-            echo "<p style='font-weight:bold;color:red; font-size:20px;text-align:center'> Cette page est en cours de développement. Merci.<p>";
+			return redirect()->to('/dashboard')->with("message", session()->get("message"))->with("code", session()->get("code"));
+
+           // echo "<p style='font-weight:bold;color:red; font-size:20px;text-align:center'> Cette page est en cours de développement. Merci.<p>";
 			//return redirect()->to('/users/list')->with("message", session()->get("message"))->with("code", session()->get("code"));
 		}
 	}
@@ -115,7 +117,7 @@ class Auth extends \IonAuth\Controllers\Auth
 
 	public function dashboard(){
 
-		if (!$this->ionAuth->loggedIn() || !$this->ionAuth->isAdmin())
+		if (!$this->ionAuth->loggedIn())
 		{
 			return redirect()->to('/')->with("message", session()->get("message"))->with("code", session()->get("code"));
 		}

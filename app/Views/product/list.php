@@ -612,7 +612,7 @@
                                             <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4" data-kt-menu="true">
                                                 <!--begin::Menu item-->
                                                 <div class="menu-item px-3">
-                                                    <a href="" data-bs-toggle="modal" data-bs-target="#external_create_new" onclick="edit(<?=$product->products_id ?>,<?= $i ?>,<?= $product->products_product_categorie_id  ?>)" class="menu-link px-3">Editer</a>
+                                                    <a href="" data-bs-toggle="modal" data-bs-target="#external_create_new" onclick="edit(<?=$product->products_id ?>,<?= $i ?>,<?= $product->products_product_categorie_id  ?>)" class="menu-link px-3"><i class="fa fa-edit text-primary py-2"> Editer</i></a>
                                                 </div>
                                                 <!--end::Menu item-->
                                                 <!--begin::Menu item-->

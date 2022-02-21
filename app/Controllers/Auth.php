@@ -115,6 +115,9 @@ class Auth extends \IonAuth\Controllers\Auth
 	}
 
 
+	public function back(){
+		return redirect()->back()->back();
+	}
 	public function dashboard(){
 
 		if (!$this->ionAuth->loggedIn())
@@ -218,6 +221,7 @@ class Auth extends \IonAuth\Controllers\Auth
         $data['groups'] = $this->ionAuth->groups()->result();
         $data['assignedGroups'] = groups_array($this->modelUserGroup->getAssignedGroups());
         $data['permission_list_foreach_group'] = permission_list_foreach_Group() ;
+		//dd( $data['permission_list_foreach_group']);
         $data['auth'] = $this->ionAuth;
         return view('role_permission/list',$data);
     }
@@ -239,6 +243,8 @@ class Auth extends \IonAuth\Controllers\Auth
             return redirect()->back();
         }
         $data['groups'] = $this->ionAuth->groups()->result();
+		//dd( $data['groups']);
+
         $data['group'] = $this->ionAuth->group($id)->row();
         $data['group_permission'] = permission_array($this->modelGroupPermission->get_goupId($id)) ;
 	//	dd( $data['group_permission']);

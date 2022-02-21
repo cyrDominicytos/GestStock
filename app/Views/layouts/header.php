@@ -29,7 +29,15 @@
 													<span class="menu-title" style="color: #fff;">Nouvelle Vente</span>
 													<span class="menu-arrow d-lg-none"></span>
 												</span>
-												
+											</div>
+											<div class="menu-item menu-lg-down-accordion me-lg-1">
+	
+											<span class="menu-link py-3">
+												<a class="menu-link bg-color hover-overlay br-dark" href="<?= base_url() ?>/order/new" style="hover{backhround-color:black}"> 
+													<span class="menu-title" style="color: #fff;">Nouvelle Commande</span>
+													<span class="menu-arrow d-lg-none"></span>
+													</a>
+												</span>
 											</div>
 											<div data-kt-menu-trigger="click" data-kt-menu-placement="bottom-start" class="menu-item menu-lg-down-accordion me-lg-1">
 												<span class="menu-link py-3">
@@ -51,6 +59,9 @@
 									<!--begin::Notifications-->
 									<div class="d-flex align-items-stretch">
 										<!--begin::Menu wrapper-->
+										<div class="topbar-item px-3 px-lg-5 position-relative" data-kt-menu-attach="parent" data-kt-menu-placement="bottom-end" data-kt-menu-flip="bottom">
+											<a onclick="location.back" ><i class="fa fa-back fs-3" style="color: #fff;">Retour</i></a>
+										</div>
 										<div class="topbar-item px-3 px-lg-5 position-relative" data-kt-menu-trigger="click" data-kt-menu-attach="parent" data-kt-menu-placement="bottom-end" data-kt-menu-flip="bottom">
 											<i class="bi bi-app-indicator fs-3" style="color: #fff;"></i>
 										</div>

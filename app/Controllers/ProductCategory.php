@@ -102,7 +102,7 @@ class ProductCategory extends BaseController
                      
 		if ($this->validation->withRequest($this->request)->run())
 		{
-            $data[$tables.'_name'] = strtoupper($this->request->getPost('name'));
+            $data[$tables.'_name'] = $this->request->getPost('name');
             $data[$tables.'_description'] = $this->request->getPost('description');
 
             if(productInsert($this->request->getPost('type'), $data))
@@ -156,7 +156,7 @@ class ProductCategory extends BaseController
             $this->validation->setRules($rules, $errors);
 		if ($this->validation->withRequest($this->request)->run())
 		{
-            $data[$tables.'_name'] = strtoupper($this->request->getPost('name'));
+            $data[$tables.'_name'] = $this->request->getPost('name');
             $data[$tables.'_description'] = $this->request->getPost('description');
 
             if(productModel($type)->update($id, $data))

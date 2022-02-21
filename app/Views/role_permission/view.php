@@ -99,7 +99,7 @@
                                                     </div>
                                                     <!--end::Icon-->
                                                     <!--begin::Title-->
-                                                    <h4 class="text-gray-700 fw-bolder cursor-pointer mb-0">Module <?= $key ?></h4>
+                                                    <h4 class="text-gray-700 fw-bolder cursor-pointer mb-0"><?= $key ?></h4>
                                                     <!--end::Title-->
                                                 </div>
                                                 <!--end::Heading-->

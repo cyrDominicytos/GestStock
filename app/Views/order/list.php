@@ -691,7 +691,7 @@
         $(window).on('load', function() {
             if(showModal == 1)
                  $('#external_create_new').modal('show');
-        });
+    });
 
     
     $('#product_categories_id').change(function(){

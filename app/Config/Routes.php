@@ -60,6 +60,7 @@ $routes->get('/external/activate/(:num)/(:num)', 'ExternalEntity::activate/$1/$2
 $routes->post('/external/edit', 'ExternalEntity::edit_external');
 //dashboard
 $routes->get('/dashboard', 'Auth::dashboard');
+$routes->get('/back', 'Auth::back');
 
 
 //ProductCategory management
@@ -86,6 +87,14 @@ $routes->get('/price/list_create', 'Price::list/1');
 $routes->post('/price/create', 'Price::create');
 $routes->get('/price/delete/(:num)', 'Price::delete/$1');
 $routes->post('/price/edit', 'Price::edit');
+
+
+//Order management
+$routes->get('/order/new', 'Order::new');
+$routes->get('/order/list', 'Order::list');
+$routes->post('/order/create', 'Order::create');
+$routes->get('/order/delete/(:num)', 'Order::delete/$1');
+$routes->post('/order/edit', 'Order::edit');
 
 //Dynamic
 $routes->post('/dynamic/product', 'Dynamic::product');

@@ -4332,8 +4332,8 @@
 		<!--end::Page Vendors Javascript-->
 		<!--begin::Page Custom Javascript(used by this page)-->
 		<script src="<?= base_url(); ?>/public/assets/js/custom/apps/user-management/users/list/table.js"></script>
-		<script src="<?= base_url(); ?>/public/assets/js/custom/apps/user-management/users/list/export-users.js"></script>
-		<script src="<?= base_url(); ?>/public/assets/js/custom/apps/user-management/users/list/add.js"></script>
+		<!-- <script src="<?= base_url(); ?>/public/assets/js/custom/apps/user-management/users/list/export-users.js"></script>
+		<script src="<?= base_url(); ?>/public/assets/js/custom/apps/user-management/users/list/add.js"></script> -->
 		<script src="<?= base_url(); ?>/public/assets/js/widgets.bundle.js"></script>
 		<script src="<?= base_url(); ?>/public/assets/js/custom/widgets.js"></script>
 		<script src="<?= base_url(); ?>/public/assets/js/custom/apps/chat/chat.js"></script>

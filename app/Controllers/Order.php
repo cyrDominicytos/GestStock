@@ -6,7 +6,7 @@ use App\Models\ProductModel;
 use App\Models\ProductPriceModel;
 use App\Models\ProductCategoriesModel;
 use App\Models\SalesOptionsModel;
-class Price extends BaseController
+class Order extends BaseController
 {
     public  $ionAuth = null;
     public  $validation = null;
@@ -49,6 +49,26 @@ class Price extends BaseController
 		}
 	}
 
+    public function new()
+    {
+
+        if (!$this->ionAuth->loggedIn() || !$this->ionAuth->isAdmin())
+		{
+			return redirect()->to('/')->with("message", session()->get("message"))->with("code", session()->get("code"));
+		}
+       
+        $data['product_prices'] =$this->modelProductPrice->get_product_price_list();
+        $data['products'] =$this->modelProduct->get()->getResult();
+        $data['categories'] = $this->modelProductCategory->get()->getResult();
+        $data['sales_options'] = $this->modelSalesOptions->get()->getResult();
+       
+        $data['products'] = [];
+        $data['sales_options'] = [];
+        $data['auth'] = $this->ionAuth;
+        return view('order/create',$data);
+    }
+
+
     public function list($showModal=0)
     {
 
@@ -87,7 +107,7 @@ class Price extends BaseController
 	public function create()
 	{
 		
-		if (! $this->ionAuth->loggedIn() || ! $this->ionAuth->isAdmin())
+		if (! $this->ionAuth->loggedIn())
 		{
 			return redirect()->to('/');
 		}
@@ -97,6 +117,7 @@ class Price extends BaseController
 			 return redirect()->back()->with("message2", "Erreur : Accès illégal !")->with("code", 0);
 		}
 		
+        dd($this->request->getVar("product_list"));
         $data = [];
 		// validate form input
 		$rules = [

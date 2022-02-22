@@ -54,6 +54,17 @@
                             <!--end::Input-->
                         </div>
                         <!--end::Input group-->
+                         <!--begin::Input group-->
+                         <div class="d-flex flex-column mb-5 fv-row  text-dark">
+                            <label class="form-label fw-bolder text-dark fs-6 required">Exonération</label>
+                            <select name="products_exonerations_id" aria-label="Selectionnez un profile" data-control="select2" data-placeholder="Attribuer un role..." class="form-select form-select-solid form-select-lg fw-bold select2-hidden-accessible" data-select2-id="select2-data-10-02r3" tabindex="-1" aria-hidden="true" id="products_exonerations_id">
+                                <?php foreach ($exonerations as $exoneration): ?>
+                                    <option value="<?= $exoneration->exonerations_id ?>"  id="<?=  $exoneration->exonerations_id?>" <?= set_select('product_categories_id', $exoneration->exonerations_id) ?>><?= $exoneration->exonerations_slug ?></option>									
+                                <?php endforeach ?>
+                                
+                            </select>
+                        </div>
+                        <!--end::Input group-->
                         <!--begin::Input group-->
                         <div class="d-flex flex-column mb-5 fv-row  text-dark">
                              <!--end::Label-->

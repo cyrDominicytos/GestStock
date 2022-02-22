@@ -564,6 +564,7 @@
                                 </th>
                                 <th class="min-w-125px">Désignation</th>
                                 <th class="min-w-125px">Catégorie</th>
+                                <th class="min-w-125px">Exonération</th>
                                 <th class="min-w-125px">Description</th>
                                 <th class="min-w-125px">Statut</th>
                                 <th class="min-w-125px">Créé le</th>
@@ -591,6 +592,9 @@
                                         <td class="">
                                         <?= $product->product_categories_name ?>
                                         </td>
+                                        <td class="">
+                                        <?= $product->exonerations_slug ?>
+                                        </td>
                                         <td>
                                         <?= $product->products_description ?>
                                         </td>
@@ -612,7 +616,7 @@
                                             <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4" data-kt-menu="true">
                                                 <!--begin::Menu item-->
                                                 <div class="menu-item px-3">
-                                                    <a href="" data-bs-toggle="modal" data-bs-target="#external_create_new" onclick="edit(<?=$product->products_id ?>,<?= $i ?>,<?= $product->products_product_categorie_id  ?>)" class="menu-link px-3"><i class="fa fa-edit text-primary py-2"> Editer</i></a>
+                                                    <a href="" data-bs-toggle="modal" data-bs-target="#external_create_new" onclick="edit(<?=$product->products_id ?>,<?= $i ?>,<?= $product->products_product_categorie_id  ?>,<?= $product->products_exonerations_id  ?>)" class="menu-link px-3"><i class="fa fa-edit text-primary py-2"> Editer</i></a>
                                                 </div>
                                                 <!--end::Menu item-->
                                                 <!--begin::Menu item-->
@@ -672,14 +676,17 @@
             
         }
 
-        function edit(id, rowId, category) {
+        function edit(id, rowId, category, exoneration) {
            let table = document.getElementById("kt_table_users");
            document.getElementById("kt_modal_new_address_form").action = "<?= base_url() ?>"+"/product/edit";
            document.getElementById("externalID").value = id;
            document.getElementById("modalTitle").innerHTML = "Mise à jour de produit";
            document.getElementById("submitText").innerHTML = "Sauvegarder";
            document.getElementById("name").value = table.rows[rowId].cells[1].innerHTML.trim();
-           document.getElementById("description").value = table.rows[rowId].cells[3].innerHTML.trim();
+           document.getElementById("description").value = table.rows[rowId].cells[4].innerHTML.trim();
+
+           document.getElementById("products_exonerations_id").value = exoneration;
+           document.getElementById("products_exonerations_id").dispatchEvent(new Event('change'));
            updateCategory(category);
            
         }

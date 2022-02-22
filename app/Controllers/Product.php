@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Models\ProductCategoriesModel;
 use App\Models\ProductModel;
+use App\Models\ExonerationModel;
 class Product extends BaseController
 {
     public  $ionAuth = null;
@@ -21,6 +22,7 @@ class Product extends BaseController
 	protected $validationSigneTemplate = 'single';
     protected $modelProduct = null;
     protected $modelProductCategory = null;
+    protected $modelExoneration = null;
 
     /**
 	 * Constructor
@@ -36,6 +38,7 @@ class Product extends BaseController
 		$this->session       = \Config\Services::session();
         $this->modelProduct = new ProductModel();
         $this->modelProductCategory = new ProductCategoriesModel();
+        $this->modelExoneration = new ExonerationModel();
 
         if (! empty($this->configIonAuth->templates['errors']['list']))
 		{
@@ -56,9 +59,14 @@ class Product extends BaseController
 		}
         $data['products'] =$this->modelProduct->get_product_list();
         $data['categories'] = $this->modelProductCategory->get()->getResult();
+        $data['exonerations'] = $this->modelExoneration->get()->getResult();
 		if($showModal==1){
 		if($data['categories']==null)
 			return redirect()->to("product_category/list")->with('message', 'Veuillez enregistrer les catégories de produits !')->with('code',0);
+		
+		if($data['exonerations']==null)
+			return redirect()->back()->with('message', 'Les catégories d\'exaunération ne sont pas renseignées. Veuillez contacter l\'administrateur!')->with('code',0);
+		
 		}
         $data['auth'] = $this->ionAuth;
         $data['showModal'] = $showModal;
@@ -97,11 +105,12 @@ class Product extends BaseController
                         
                     ]; 
         $this->validation->setRules($rules, $errors);
-                     
+        //dd($this->request);
 		if ($this->validation->withRequest($this->request)->run())
 		{
             $data['products_name'] = $this->request->getPost('name');
             $data['products_product_categorie_id'] = $this->request->getPost('product_categories_id');
+            $data['products_exonerations_id'] = $this->request->getPost('products_exonerations_id');
             $data['products_description'] = $this->request->getPost('description');
 
             if($this->modelProduct->insert($data))
@@ -153,6 +162,7 @@ class Product extends BaseController
 		{
             $data['products_name'] = $this->request->getPost('name');
             $data['products_product_categorie_id'] = $this->request->getPost('product_categories_id');
+            $data['products_exonerations_id'] = $this->request->getPost('products_exonerations_id');
             $data['products_description'] = $this->request->getPost('description');
 
             if($this->modelProduct->update($id, $data))

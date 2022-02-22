@@ -13,6 +13,7 @@ class ProductModel extends Model
          'products_description',
          'products_isActive',
          'products_product_categorie_id',
+         'products_exonerations_id',
         ];
 
     protected $validationRules    = [];
@@ -22,14 +23,18 @@ class ProductModel extends Model
     public function get_product_list()
     {
        
-       return $this->db->table('products')->join('product_categories', 'products.products_product_categorie_id = product_categories.product_categories_id')
+       return $this->db->table('products')
+        ->join('product_categories', 'products.products_product_categorie_id = product_categories.product_categories_id')
+        ->join('exonerations', 'exonerations.exonerations_id = products.products_exonerations_id')
         ->select('*')
         ->get()->getResult();
     }
     public function get_product($productId)
     {
        
-       return $this->db->table('products')->join('product_categories', 'products.products_product_categorie_id = product_categories.product_categories_id')
+       return $this->db->table('products')
+       ->join('product_categories', 'products.products_product_categorie_id = product_categories.product_categories_id')
+       ->join('exonerations', 'exonerations.exonerations_id = products.products_exonerations_id')
         ->select('*')
         ->where('products_id', $productId)
         ->get()->getResult();
@@ -37,8 +42,10 @@ class ProductModel extends Model
     public function get_product_list_by_category_id($categoryproductId)
     {
        
-       return $this->db->table('products')->join('product_categories', 'products.products_product_categorie_id = product_categories.product_categories_id')
-        ->select('*')
+       return $this->db->table('products')
+       ->join('product_categories', 'products.products_product_categorie_id = product_categories.product_categories_id')
+       ->join('exonerations', 'exonerations.exonerations_id = products.products_exonerations_id')
+       ->select('*')
         ->where('product_categories_id', $categoryproductId)
         ->get()->getResult();
     }

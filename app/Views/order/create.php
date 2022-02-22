@@ -68,9 +68,9 @@
                         <!--begin::Content-->
                         <div class="flex-lg-row-fluid me-0 me-lg-20">
                             <!--begin::Form-->
-                            <form action="<?= base_url() ?>/order/create" class="form mb-15" method="post" >
+                            <form action="<?= base_url() ?><?= isset($order) ? "/order/edit" : "/order/create" ?>" class="form mb-15" method="post" >
                                 <?php if (isset($order)): ?>
-								   <input type="hidden" name="id" value="<?=  $order->id ?>">
+								   <input type="hidden" name="id" value="<?=  isset($order) ? ($order->orders_id) : ("") ?>">
 								<?php endif ?>
                             <!--begin::Input group-->
                                 <div class="row mb-5">
@@ -83,7 +83,10 @@
                                             <label class="form-label fw-bolder text-dark fs-6 required">Nom complet du client</label>
                                             <div class="d-flex flex-row mb-5 fv-row text-dark">
                                                 <select name="client" aria-label="Selectionnez un profile" data-control="select2" data-placeholder="Attribuer un role..." class="form-select form-select-solid form-select-lg fw-bold select2-hidden-accessible" data-select2-id="select2-data-10-02r3" tabindex="-1" aria-hidden="true" id="client">
-                                                <option value=""  id="0">Choisissez le client...</option>									
+                                                <option value=""  id="0" disabled>Choisissez le client...</option>									
+                                                <?php foreach ($clients as $client): ?>
+                                                    <option value="<?= $client->clients_id ?>"  id="<?=  $client->clients_id?>" ><?= $client->clients_company ?></option>									
+                                                <?php endforeach ?>
                                                 </select>
                                                 <a href="<?= base_url() ?>/client/list_create"   class="btn btn-primary" id="add_client_btn">
                                                     <i class="fa fa-plus"></i>
@@ -129,7 +132,7 @@
                                        <!--begin::Col-->
                                         <div class="col-md-6 fv-row">
                                             <label class="form-label fw-bolder text-dark fs-6 required">Quantité</label>
-                                            <input required class="form-control form-control-solid" placeholder="" name="product_prices_price"  type="number" min="0" id="product_prices_price" value="<?= set_value("product_prices_price")	?>"  />
+                                            <input  class="form-control form-control-solid" placeholder="" name="product_prices_price"  type="number" min="0" id="product_prices_price" value="<?= set_value("product_prices_price")	?>"  />
                                         </div>
                                         <!--end::Col-->
                                     </div>
@@ -167,7 +170,7 @@
                                                     <th>Actions</th>
                                                 </tr>
                                                 <tbody  class="text-gray-600 fw-bold">
-
+                                                
                                                 </tbody>
                                             </table>
                                     
@@ -178,7 +181,7 @@
                                     <!--end::Separator-->
                                     <div class="d-flex flex-column mb-5">
                                         <!--begin::Button-->
-                                        <button type="submit" id="" class="btn btn-primary">
+                                        <button type="submit" id="submit" class="btn btn-primary">
                                             <span class="indicator-label" id="submitText">Enregistrer</span>
                                             <span class="indicator-progress">Patientez...
                                             <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
@@ -211,16 +214,41 @@
         var table_unique = [];
         var nbr_row_add = 0;
         var base_url = "<?= base_url() ?>";
+        var oldClient = "<?= isset($order) ? ($order->orders_client_id) : ("") ?>";
+        var order_detail = <?= isset($order) ? (json_encode($order_detail)) : (0) ?>;
+
+        var product_price = <?= json_encode($product_price)?>;
         var active_mes = "Vous souhaitez activer ce produit. Une fois activé, il apparaitra à nouveau dans les modules d'approvisionnement et de vente<span class='badge badge-primary'>Etes-vous sûr de vouloir l'activer ?</span>";
         var category = document.getElementById("product_categories_id");
         var product = document.getElementById("product_prices_product_id");
         var sale_option = document.getElementById("product_prices_sales_option_id");
         var price = document.getElementById("product_prices_price");
         $(window).on('load', function() {
-            //alert(1)
-        });
+            if(oldClient!= 0){
+                document.getElementById("client").value = oldClient;
+                document.getElementById("client").dispatchEvent(new Event('change'));
+            }
 
-        
+            if(order_detail!== 0){
+                var indexId = product.value+sale_option.value;
+
+                 order_detail.forEach(function(element) {
+                     var indexId = element['orders_details_products_id']+element['orders_details_sales_options_id'];
+                     table_unique[table_unique.length] =indexId;
+                  
+                    var html = '';
+                    html += '<tr class="text-start text-black fw-bolder fs-7">';
+                    html += '<td class="text-gray"><input type="text" required id="product_list[]" name="product_list[]" class="form-control" hidden  value='+element['orders_details_products_id']+'/><input type="text" required id="option_list[]" name="option_list[]" class="form-control" hidden  value='+element['orders_details_sales_options_id']+' /><input type="text" required id="quantity_list[]" name="quantity_list[]" class="form-control" hidden  value='+element['orders_details_quantity']+' /><input type="text" required id="montant_list[]" name="montant_list[]" class="form-control" hidden value='+element['orders_details_amount']+'/>'+element['products_name']+'</td>';
+                    html += '<td class="text-gray">'+element['sales_options_name']+'</td>';
+                    html += '<td class="text-gray">'+element['orders_details_quantity']+'</td>';
+                    html += '<td class="text-gray">'+element['orders_details_amount']+'</td>';
+                    html += '<td><button type="button" name="remove" class="btn btn-danger btn-sm remove" id="'+indexId+'"><span class="fa fa-minus"></span></button></td></tr>';
+                    $('#kt_table_users').append(html);
+                },  this);
+                              
+            }
+            checkForm() 
+        });
 
      $('#product_categories_id').change(function(){
         if($(this).val() != '')
@@ -243,7 +271,7 @@
         {
             var value = $(this).val();   
             $.ajax({
-                url: base_url+"/dynamic/sale_options",
+                url: base_url+"/dynamic/assign_sale_options",
                 method:"POST",
                 data:{id:value},
                 success:function(result)
@@ -256,32 +284,32 @@
 
     $(document).on('click', '#add', function(){
         if(!checkSelect())
-        die();
+            return;
         var indexId = product.value+sale_option.value;
-        //alert(indexId);
         console.log(table_unique);
         if(table_unique.includes(indexId)){
-
             //row already exists
             var rowId = table_unique.indexOf(indexId)+1;
             var table =  document.getElementById('kt_table_users');
             var oldValue = table.rows[rowId].cells[2].innerHTML.trim();
             var newValue = parseInt(price.value)+ parseInt(oldValue);
             table.rows[rowId].cells[2].innerHTML = newValue;
+            table.rows[rowId].cells[3].innerHTML = newValue * product_price[indexId];
+            var html = '<td class="text-gray"><input type="text" required id="product_list[]" name="product_list[]" class="form-control" hidden  value='+product.value+'/><input type="text" required id="option_list[]" name="option_list[]" class="form-control" hidden  value='+sale_option.value+' /><input type="text" required id="quantity_list[]" name="quantity_list[]" class="form-control" hidden  value='+newValue+' /><input type="text" required id="montant_list[]" name="montant_list[]" class="form-control" hidden value='+(newValue * product_price[indexId])+'/>'+product.options[product.selectedIndex].text+'</td>';
+            table.rows[rowId].cells[0].innerHTML = html;
         }else{
             //new row
             table_unique[table_unique.length] = indexId;
             var html = '';
             html += '<tr class="text-start text-black fw-bolder fs-7">';
-            html += '<td class="text-gray"><input type="text" required id="product_list[]" name="product_list[]" class="form-control" hidden  value='+product.value+'/><input type="text" required id="option_list[]" name="option_list[]" class="form-control" hidden  value='+sale_option.value+' /><input type="text" required id="quantity_list[]" name="quantity_list[]" class="form-control" hidden  value='+price.value+' /><input type="text" required id="montant_list[]" name="montant_list[]" class="form-control" hidden value='+price.value+'/>'+product.options[product.selectedIndex].text+'</td>';
+            html += '<td class="text-gray"><input type="text" required id="product_list[]" name="product_list[]" class="form-control" hidden  value='+product.value+'/><input type="text" required id="option_list[]" name="option_list[]" class="form-control" hidden  value='+sale_option.value+' /><input type="text" required id="quantity_list[]" name="quantity_list[]" class="form-control" hidden  value='+price.value+' /><input type="text" required id="montant_list[]" name="montant_list[]" class="form-control" hidden value='+(product_price[indexId]*price.value)+'/>'+product.options[product.selectedIndex].text+'</td>';
             html += '<td class="text-gray">'+sale_option.options[sale_option.selectedIndex].text+'</td>';
             html += '<td class="text-gray">'+price.value+'</td>';
-            html += '<td class="text-gray">'+price.value+'</td>';
-            
+            html += '<td class="text-gray">'+(product_price[indexId]*price.value)+'</td>';
             html += '<td><button type="button" name="remove" class="btn btn-danger btn-sm remove" id="'+indexId+'"><span class="fa fa-minus"></span></button></td></tr>';
             $('#kt_table_users').append(html);
         }
-              
+        checkForm() 
        });
        
        $(document).on('click', '.remove', function(){
@@ -289,14 +317,20 @@
         var rowId =  $(this).attr("id");
         table_unique.splice(row_index-1, 1);
         $(this).closest('tr').remove();
+        checkForm();
        });
-function checkSelect() {
-    if(category.value!== "" && product.value!== "" && sale_option.value!=="")
-        return true;
-        return false;
-    
-}
-
+    function checkSelect() {
+        if(category.value!== "" && product.value!== "" && sale_option.value!=="")
+            return true;
+            return false; 
+    }
+    function checkForm() {
+        console.log(client.value +" - "+ table_unique.length);
+        if(client.value!== "" && table_unique.length > 0)
+            document.getElementById("submit").disabled = false;
+        else
+            document.getElementById("submit").disabled = true;
+    }
     </script>
 <?= $this->endSection() ?>
 

@@ -91,4 +91,19 @@ class Dynamic extends BaseController
        return  getSaleOptionsByProduct($this->request->getVar("id"));	
 	}
 
+	public function assign_sale_options()
+	{
+		
+		if (! $this->ionAuth->loggedIn() || ! $this->ionAuth->isAdmin())
+		{
+			return redirect()->to('/');
+		}
+
+        if (!$this->request->getPost())
+		 {
+			 return redirect()->back()->with("message2", "Erreur : Accès illégal !")->with("code", 0);
+		}
+       return  get_assign_options_by_product($this->request->getVar("id"));	
+	}
+
 }

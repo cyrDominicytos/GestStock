@@ -9,6 +9,9 @@ use App\Models\DeliveryMenModel;
 use App\Models\ProductCategoriesModel;
 use App\Models\ProductModel;
 use App\Models\SalesOptionsModel;
+use App\Models\OrdersModel;
+use App\Models\OrdersDetailsModel;
+use App\Models\ProductPriceModel;
 use App\Models\ConfigModel;
 
 
@@ -288,6 +291,19 @@ if (!function_exists("getConfigList")) {
 		}
 	}
 
+if (!function_exists("getProductPriceArray")) {
+	function getProductPriceArray()
+		{
+			$model = new ProductPriceModel();
+
+			$results = $model->get()->getResult();
+			$data = [];
+			foreach ($results as $result){
+				$data[$result->product_prices_product_id."".$result->product_prices_sales_option_id] = $result->product_prices_price;
+			}
+			return  $data;
+		}
+	}
 if (!function_exists("getProductByCategory")) {
 	function getProductByCategory($id)
 		{
@@ -300,6 +316,7 @@ if (!function_exists("getProductByCategory")) {
 			return  $output;
 		}
 	}
+
 if (!function_exists("getSaleOptionsByProduct")) {
 	function getSaleOptionsByProduct($id)
 		{
@@ -313,4 +330,79 @@ if (!function_exists("getSaleOptionsByProduct")) {
 		}
 	}
 
+if (!function_exists("get_assign_options_by_product")) {
+	function get_assign_options_by_product($id)
+		{
+			$model = new ProductPriceModel();
+			$results = $model->get_assign_options_by_product($id);
+			$output = '<option value="" >Choisissez une option de vente...</option>';
+			foreach ($results as $result){
+				$output .= '<option value="'.$result->sales_options_id.'">'.$result->sales_options_name.'</option>';
+			}
+			//dd($output);
+			return  $output;
+		}
+	}
+
+	if (!function_exists("insertOrder")) {
+		function insertOrder($request)
+			{
+				$result = false;
+				$amount = 0;
+				$modelOrders = new OrdersModel();
+				$modelOrderDetails = new OrdersDetailsModel();
+				$id = null;
+				$id = $modelOrders->insert([
+					"orders_client_id"=>$request->getVar('client'),
+					"orders_amount"=>0,
+				]);
+
+				foreach ($request->getVar('product_list') as $key => $product){
+					//dd($request->getVar('montant_list')); 
+					$amount += (int) $request->getVar('montant_list')[$key]; 
+					$result = $modelOrderDetails->insert([
+						"orders_details_amount"=>$request->getVar('montant_list')[$key],
+						"orders_details_quantity"=>$request->getVar('quantity_list')[$key],
+						"orders_details_orders_id"=>$id,
+						"orders_details_sales_options_id"=>$request->getVar('option_list')[$key],
+						"orders_details_products_id"=>$product,
+					]);
+
+				}
+				$modelOrders->update($id,[
+					"orders_amount"=>$amount,
+				]);
+				return $result;
+			}
+		}
+
+
+	if (!function_exists("updateOrder")) {
+		function updateOrder($request, $id)
+			{
+				$modelOrders = new OrdersModel();
+				$modelOrdersDetails = new OrdersDetailsModel();
+				$result = false;
+				$amount = 0;
+
+				//remove all details rows
+			    $modelOrdersDetails->where("orders_details_orders_id",$id)->delete();
+				foreach ($request->getVar('product_list') as $key => $product){
+					//dd($request->getVar('montant_list')); 
+					$amount += (int) $request->getVar('montant_list')[$key]; 
+					$result = $modelOrdersDetails->insert([
+						"orders_details_amount"=>$request->getVar('montant_list')[$key],
+						"orders_details_quantity"=>$request->getVar('quantity_list')[$key],
+						"orders_details_orders_id"=>$id,
+						"orders_details_sales_options_id"=>$request->getVar('option_list')[$key],
+						"orders_details_products_id"=>$product,
+					]);
+
+				}
+				return	$modelOrders->update($id,[
+					"orders_amount"=>$amount,
+					"orders_client_id"=>$request->getVar('client'),
+				]);
+			}
+		}
 ?>

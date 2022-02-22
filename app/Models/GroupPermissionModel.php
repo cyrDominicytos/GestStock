@@ -18,10 +18,6 @@ class GroupPermissionModel extends Model
     public function get_permission_by_group($group)
     {
        
-       /* return $this->db->table('permissions')->join('groups_permissions', 'permissions.id = groups_permissions.permission_id')
-        ->select('name, permissions.id as permission_id, group_id ')
-        ->where('groups_permissions.group_id', $group)
-        ->get()->getResult();*/
         return $this->db->table('groups_permissions')->select('*')
         ->where('groups_permissions.group_id', $group)
         ->get()->getResult();

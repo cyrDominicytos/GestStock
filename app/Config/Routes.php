@@ -92,13 +92,15 @@ $routes->post('/price/edit', 'Price::edit');
 //Order management
 $routes->get('/order/new', 'Order::new');
 $routes->get('/order/list', 'Order::list');
-$routes->post('/order/create', 'Order::create');
+$routes->get('/order/update/(:num)', 'Order::update/$1');
 $routes->get('/order/delete/(:num)', 'Order::delete/$1');
+$routes->post('/order/create', 'Order::create');
 $routes->post('/order/edit', 'Order::edit');
 
 //Dynamic
 $routes->post('/dynamic/product', 'Dynamic::product');
 $routes->post('/dynamic/sale_options', 'Dynamic::sale_options');
+$routes->post('/dynamic/assign_sale_options', 'Dynamic::assign_sale_options');
 
 
 //roles and permissions

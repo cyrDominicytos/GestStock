@@ -9,7 +9,9 @@ use App\Models\SalesOptionsModel;
 use App\Models\ClientModel;
 use App\Models\OrdersModel;
 use App\Models\OrdersDetailsModel;
-class Order extends BaseController
+use App\Models\ProviderModel;
+use App\Models\SupplyModel;
+class Supply extends BaseController
 {
     public  $ionAuth = null;
     public  $validation = null;
@@ -31,6 +33,8 @@ class Order extends BaseController
     protected $modelClient = null;
     protected $modelOrder = null;
     protected $modelOrderDetails = null;
+    protected $modelProvider = null;
+    protected $modelSupply  = null;
 
     /**
 	 * Constructor
@@ -51,6 +55,8 @@ class Order extends BaseController
         $this->modelClient = new ClientModel();
         $this->modelOrder = new OrdersModel();
         $this->modelOrderDetails = new OrdersDetailsModel();
+        $this->modelProvider = new ProviderModel();
+        $this->modelSupply  = new SupplyModel();
 
         if (! empty($this->configIonAuth->templates['errors']['list']))
 		{
@@ -77,12 +83,13 @@ class Order extends BaseController
         if($data['sales_options']==null)
             return redirect()->to("sales_option/list")->with('message', 'Veuillez enregistrer les options de vente !')->with('code',0);
        
-        $data['clients'] = $this->modelClient->where("clients_isActive", 1)->get()->getResult();
+        $data['providers'] = $this->modelProvider->where("providers_isActive", 1)->get()->getResult();
         $data['products'] = [];
         $data['sales_options'] = [];
         $data['product_price'] = getProductPriceArray();
         $data['auth'] = $this->ionAuth;
-        return view('order/create',$data);
+       // dd(getProductByCategory(1));
+        return view('supply/create',$data);
     }
 
     public function update($id=0)
@@ -109,16 +116,18 @@ class Order extends BaseController
         if($data['sales_options']==null)
             return redirect()->to("sales_option/list")->with('message', 'Veuillez enregistrer les options de vente !')->with('code',0);
        
-        $data['clients'] = $this->modelClient->where("clients_isActive", 1)->get()->getResult();
-        $data['order'] = $this->modelOrder->where("orders_id", $id)->get()->getResult();
-        if(count($data['order']) > 0)
-        $data['order'] = $data['order'][0];
-        $data['order_detail'] = $this->modelOrderDetails->get_order_detail($id);
-        $data['products'] = [];
-        $data['sales_options'] = [];
+        $data['providers'] = $this->modelProvider->where("providers_isActive", 1)->get()->getResult();
+        $data['supply'] = $this->modelSupply->get_supply($id);
+        if(count($data['supply']) > 0)
+            $data['supply'] = $data['supply'][0];
+        else
+            return redirect()->back()->with("message", "Erreur : Accès illégal !")->with("code", 0);
+
+        //$data['products'] = [];
+        //$data['sales_options'] = [];
         $data['product_price'] = getProductPriceArray();
         $data['auth'] = $this->ionAuth;
-        return view('order/create',$data);
+        return view('supply/create',$data);
     }
 
 
@@ -130,9 +139,9 @@ class Order extends BaseController
 			return redirect()->to('/')->with("message", session()->get("message"))->with("code", session()->get("code"));
 		}
        
-        $data['orders'] =$this->modelOrder->get_order_list();
+        $data['supplies'] =$this->modelSupply->get_supply_list();
         $data['auth'] = $this->ionAuth;
-        return view('order/list',$data);
+        return view('supply/list',$data);
     }
     
     /**
@@ -153,18 +162,11 @@ class Order extends BaseController
 			 return redirect()->back()->with("message2", "Erreur : Accès illégal !")->with("code", 0);
 		}
 		
-        //dd($this->request->getVar("product_list"));
-       // $data = [];
-		// validate form input
 		$rules = [
-                    'client'=> 'required',
                     'product_list'=> 'required',
                    
                 ];
         $errors = [
-                    "client"=>[
-                        "required"=>"Choisissez le client",
-                        ],
                     "product_list"=>[
                         "required"=>"Ajouter le(s) produit(s) au panier",
                         ],
@@ -172,9 +174,9 @@ class Order extends BaseController
         $this->validation->setRules($rules, $errors);         
 		if ($this->validation->withRequest($this->request)->run())
 		{            
-            if(insertOrder($this->request))
+            if(insertSupply($this->request))
             {
-                return redirect()->to("order/list")->with('message', 'Commande enregistrée avec succès !')->with('code',1);
+                return redirect()->to("supply/list")->with('message', 'Produits approvisionnés avec succès !')->with('code',1);
             }
         }
 		//We find some error
@@ -200,18 +202,14 @@ class Order extends BaseController
 			 return redirect()->back()->with("message2", "Erreur : Accès illégal !")->with("code", 0);
 		 }
         $id = (int) $this->request->getPost('id');
-        $order = $this->modelOrder->find($id);
-        if(count($order) >= 1){
+        $supply = $this->modelSupply->find($id);
+        if(count($supply) >= 1){
            // $product = $product[0];
            $rules = [
-            'client'=> 'required',
-            'product_list'=> 'required',
-           
-        ];
-        $errors = [
-                    "client"=>[
-                        "required"=>"Choisissez le client",
-                        ],
+                        'product_list'=> 'required',
+                    
+                    ];
+           $errors = [
                     "product_list"=>[
                         "required"=>"Ajouter le(s) produit(s) au panier",
                         ],
@@ -219,11 +217,11 @@ class Order extends BaseController
         $this->validation->setRules($rules, $errors);         
         if ($this->validation->withRequest($this->request)->run())
         {            
-            if(updateOrder($this->request, $id))
+            if(updateSupply($this->request, $id))
             {
-                return redirect()->to("order/list")->with('message', 'Commande editée avec succès !')->with('code',1);
+                return redirect()->to("supply/list")->with('message', 'Approvisionnement édité avec succès !')->with('code',1);
             }else{
-                return redirect()->to("order/list")->with('message', 'Impossible d\'editer cette commande!')->with('code',0);
+                return redirect()->to("supply/list")->with('message', 'Impossible d\'editer ce approvisionnement!')->with('code',0);
             }
         }
         //We find some error
@@ -231,7 +229,7 @@ class Order extends BaseController
         $this->session->setFlashdata('message', $this->data['message']);
         return redirect()->back()->withInput();
     }else{
-        return redirect()->back()->with("message", "La commande que vous essayez d'éditer n'existe pas!")->with("code", 0);
+        return redirect()->back()->with("message", "L'approvisionnement que vous essayez d'éditer n'existe pas!")->with("code", 0);
 
     }
          		
@@ -255,7 +253,7 @@ class Order extends BaseController
         $id = (int) $id;
 		if ($id >0)
 		{
-            if($this->modelOrder->delete($id))
+            if($this->modelSupply->delete($id))
                 return redirect()->to("/order/list")->with("message", "La commande est supprimée avec succès !")->with("code", 1);
             else
                 return redirect()->to("/order/list")->with("message", "Vous ne pouvez pas supprimer cette commande !")->with("code", 0);

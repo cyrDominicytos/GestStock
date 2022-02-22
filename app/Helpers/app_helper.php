@@ -13,6 +13,7 @@ use App\Models\OrdersModel;
 use App\Models\OrdersDetailsModel;
 use App\Models\ProductPriceModel;
 use App\Models\ConfigModel;
+use App\Models\SupplyModel;
 
 
 // Function: used to convert a string to revese in order
@@ -403,6 +404,47 @@ if (!function_exists("get_assign_options_by_product")) {
 					"orders_amount"=>$amount,
 					"orders_client_id"=>$request->getVar('client'),
 				]);
+			}
+		}
+	if (!function_exists("insertSupply")) {
+		function insertSupply($request)
+			{
+				$result = false;
+				$modelSupply = new SupplyModel();
+				foreach ($request->getVar('product_list') as $key => $product){
+					//dd($request->getVar('montant_list')); 
+					$result = $modelSupply->insert([
+						"supplies_cost"=>$request->getVar('cost_list')[$key],
+						"supplies_selling_price"=>$request->getVar('pu_list')[$key],
+						"supplies_selling_quantity"=>$request->getVar('quantity_list')[$key],
+						"supplies_provider_id"=>$request->getVar('provider_list')[$key],
+						"supplies_sales_options_id"=>$request->getVar('option_list')[$key],
+						"supplies_products_id"=>$product,
+					]);
+
+				}
+				return $result;
+			}
+		}
+
+
+	if (!function_exists("updateSupply")) {
+		function updateSupply($request, $id)
+			{
+				$result = false;
+				$modelSupply = new SupplyModel();
+			    $modelSupply->where("supplies_id",$id)->delete();
+				foreach ($request->getVar('product_list') as $key => $product){
+					$result = $modelSupply->insert([
+						"supplies_cost"=>$request->getVar('cost_list')[$key],
+						"supplies_selling_price"=>$request->getVar('pu_list')[$key],
+						"supplies_selling_quantity"=>$request->getVar('quantity_list')[$key],
+						"supplies_provider_id"=>$request->getVar('provider_list')[$key],
+						"supplies_sales_options_id"=>$request->getVar('option_list')[$key],
+						"supplies_products_id"=>$product,
+					]);
+				}
+				return $result;
 			}
 		}
 ?>

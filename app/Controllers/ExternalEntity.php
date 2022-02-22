@@ -126,7 +126,7 @@ class ExternalEntity extends BaseController
                      
 		if ($this->validation->withRequest($this->request)->run())
 		{
-            $data[$tables.'_company'] = strtolower($this->request->getPost('company'));
+            $data[$tables.'_company'] = $this->request->getPost('company');
             $data[$tables.'_phone_number'] = $this->request->getPost('phone_number');
 
             if(externalInsert($this->request->getPost('type'), $data))
@@ -209,7 +209,7 @@ class ExternalEntity extends BaseController
                      
 		if ($this->validation->withRequest($this->request)->run())
 		{
-            $data[$tables.'_company'] = strtolower($this->request->getPost('company'));
+            $data[$tables.'_company'] = $this->request->getPost('company');
             $data[$tables.'_phone_number'] = $this->request->getPost('phone_number');
 
             if(externalModel($type)->update($id, $data))

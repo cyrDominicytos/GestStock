@@ -31,21 +31,21 @@
 												</span>
 											</div>
 											<div class="menu-item menu-lg-down-accordion me-lg-1">
-	
-											<span class="menu-link py-3">
-												<a class="menu-link bg-color hover-overlay br-dark" href="<?= base_url() ?>/order/new" style="hover{backhround-color:black}"> 
-													<span class="menu-title" style="color: #fff;">Nouvelle Commande</span>
-													<span class="menu-arrow d-lg-none"></span>
+												<span class="menu-link py-3">
+													<a class="menu-link bg-color hover-overlay br-dark" href="<?= base_url() ?>/order/new" style="hover{backhround-color:black}"> 
+														<span class="menu-title" style="color: #fff;">Nouvelle Commande</span>
+														<span class="menu-arrow d-lg-none"></span>
 													</a>
 												</span>
 											</div>
-											<div data-kt-menu-trigger="click" data-kt-menu-placement="bottom-start" class="menu-item menu-lg-down-accordion me-lg-1">
+											<div class="menu-item menu-lg-down-accordion me-lg-1">
 												<span class="menu-link py-3">
-													<span class="menu-title" style="color: #fff;">Approvisionnement</span>
-													<span class="menu-arrow d-lg-none"></span>
+													<a class="menu-link bg-color hover-overlay br-dark" href="<?= base_url() ?>/supply/new" style="hover{backhround-color:black}"> 
+														<span class="menu-title" style="color: #fff;">Approvisionnement</span>
+														<span class="menu-arrow d-lg-none"></span>
+													</a>
 												</span>
 											</div>
-											
 										</div>
 										<!--end::Menu-->
 									</div>

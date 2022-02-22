@@ -80,6 +80,13 @@ $routes->post('/product/create', 'Product::create');
 $routes->get('/product/banish/(:num)', 'Product::deactivate/$1');
 $routes->get('/product/activate/(:num)', 'Product::activate/$1');
 $routes->post('/product/edit', 'Product::edit');
+//Product management
+$routes->get('/product/list', 'Product::list/0');
+$routes->get('/product/list_create', 'Product::list/1');
+$routes->post('/product/create', 'Product::create');
+$routes->get('/product/banish/(:num)', 'Product::deactivate/$1');
+$routes->get('/product/activate/(:num)', 'Product::activate/$1');
+$routes->post('/product/edit', 'Product::edit');
 
 //Product Price management
 $routes->get('/price/list', 'Price::list/0');
@@ -96,6 +103,14 @@ $routes->get('/order/update/(:num)', 'Order::update/$1');
 $routes->get('/order/delete/(:num)', 'Order::delete/$1');
 $routes->post('/order/create', 'Order::create');
 $routes->post('/order/edit', 'Order::edit');
+
+//Supply management
+$routes->get('/supply/new', 'Supply::new');
+$routes->get('/supply/list', 'Supply::list');
+$routes->get('/supply/update/(:num)', 'Supply::update/$1');
+$routes->get('/supply/delete/(:num)', 'Supply::delete/$1');
+$routes->post('/supply/create', 'Supply::create');
+$routes->post('/supply/edit', 'Supply::edit');
 
 //Dynamic
 $routes->post('/dynamic/product', 'Dynamic::product');

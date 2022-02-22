@@ -100,19 +100,19 @@
 									</span>
 									<div class="menu-sub menu-sub-accordion menu-active-bg">
                                         <div class="menu-item menu-accordion">
-                                            <a class="menu-link" href="<?= base_url() ?>/">
+                                            <a class="menu-link" href="<?= base_url() ?>/supply/new">
                                                 <span class="menu-bullet">
                                                     <span class="bullet bullet-dot"></span>
-												</span>
-												<span class="menu-title" >Ajouter</span>
+                                                </span>
+                                                <span class="menu-title" >Ajouter</span>
                                             </a>
-                                            <a class="menu-link" href="<?= base_url() ?>/">
+                                            <a class="menu-link" href="<?= base_url() ?>/supply/list">
                                                 <span class="menu-bullet">
                                                     <span class="bullet bullet-dot"></span>
-												</span>
-												<span class="menu-title">Consulter liste</span>
+                                                </span>
+                                                <span class="menu-title ">Consulter liste</span>
                                             </a>
-										</div>
+                                        </div>
 									</div>
                                     <div class="menu-item menu-accordion">
                                         <a class="menu-link" href="<?= base_url() ?>/">

@@ -115,7 +115,7 @@
                                         </div>
 									</div>
                                     <div class="menu-item menu-accordion">
-                                        <a class="menu-link" href="<?= base_url() ?>/">
+                                        <a class="menu-link" href="<?= base_url() ?>/inventory">
                                             <span class="menu-icon">
                                                 <i class="bi bi-grid fs-3"></i>
                                             </span>

@@ -112,6 +112,10 @@ $routes->get('/supply/delete/(:num)', 'Supply::delete/$1');
 $routes->post('/supply/create', 'Supply::create');
 $routes->post('/supply/edit', 'Supply::edit');
 
+//Inventory management
+$routes->get('/inventory', 'Inventory::list');
+
+
 //Dynamic
 $routes->post('/dynamic/product', 'Dynamic::product');
 $routes->post('/dynamic/sale_options', 'Dynamic::sale_options');

@@ -130,7 +130,7 @@
                 </div>
                 <!--end::Wrapper-->
                 <!--begin::Button-->
-                <a href="<?= base_url() ?>/supply/new" class="btn btn-sm btn-primary" id="kt_toolbar_primary_button">Nouvelle approvisionnement</a>
+                <a href="<?= base_url() ?>/supply/new" class="btn btn-sm btn-primary" id="kt_toolbar_primary_button">Nouvel approvisionnement</a>
                 <!--end::Button-->
             </div>
             <!--end::Actions-->
@@ -245,7 +245,7 @@
                                     <rect x="4.36396" y="11.364" width="16" height="2" rx="1" fill="black" />
                                 </svg>
                             </span>
-                            <!--end::Svg Icon-->Nouvelle approvisionnement</a>
+                            <!--end::Svg Icon-->Nouvel approvisionnement</a>
                             <!--end::Add user-->
                         </div>
                         <!--end::Toolbar-->

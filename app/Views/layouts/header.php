@@ -46,6 +46,14 @@
 													</a>
 												</span>
 											</div>
+											<div class="menu-item menu-lg-down-accordion me-lg-1">
+												<span class="menu-link py-3">
+													<a class="menu-link bg-color hover-overlay br-dark" href="<?= base_url() ?>/inventory" style="hover{backhround-color:black}"> 
+														<span class="menu-title" style="color: #fff;">Stock</span>
+														<span class="menu-arrow d-lg-none"></span>
+													</a>
+												</span>
+											</div>
 										</div>
 										<!--end::Menu-->
 									</div>

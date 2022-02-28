@@ -24,10 +24,12 @@
 									<div class="header-menu align-items-stretch" data-kt-drawer="true" data-kt-drawer-name="header-menu" data-kt-drawer-activate="{default: true, lg: false}" data-kt-drawer-overlay="true" data-kt-drawer-width="{default:'200px', '300px': '250px'}" data-kt-drawer-direction="end" data-kt-drawer-toggle="#kt_header_menu_mobile_toggle" data-kt-swapper="true" data-kt-swapper-mode="prepend" data-kt-swapper-parent="{default: '#kt_body', lg: '#kt_header_nav'}">
 										<!--begin::Menu-->
 										<div class="menu menu-lg-rounded menu-column menu-lg-row menu-state-bg menu-title-gray-700 menu-state-title-primary menu-state-icon-primary menu-state-bullet-primary menu-arrow-gray-400 fw-bold my-5 my-lg-0 align-items-stretch" id="#kt_header_menu" data-kt-menu="true">
-											<div data-kt-menu-trigger="click" data-kt-menu-placement="bottom-start" class="menu-item menu-lg-down-accordion me-lg-1">
+											<div class="menu-item menu-lg-down-accordion me-lg-1">
 												<span class="menu-link py-3">
-													<span class="menu-title" style="color: #fff;">Nouvelle Vente</span>
-													<span class="menu-arrow d-lg-none"></span>
+													<a class="menu-link bg-color hover-overlay br-dark" href="<?= base_url() ?>/sell/new" style="hover{backhround-color:black}"> 
+														<span class="menu-title" style="color: #fff;">Nouvelle vente</span>
+														<span class="menu-arrow d-lg-none"></span>
+													</a>
 												</span>
 											</div>
 											<div class="menu-item menu-lg-down-accordion me-lg-1">
@@ -68,7 +70,7 @@
 									<div class="d-flex align-items-stretch">
 										<!--begin::Menu wrapper-->
 										<div class="topbar-item px-3 px-lg-5 position-relative" data-kt-menu-attach="parent" data-kt-menu-placement="bottom-end" data-kt-menu-flip="bottom">
-											<a onclick="location.back" ><i class="fa fa-back fs-3" style="color: #fff;">Retour</i></a>
+											<a onclick="history.back()" ><i class="bi bi-arrow-left-circle-fill fs-3" style="color: #fff;"></i></a>
 										</div>
 										<div class="topbar-item px-3 px-lg-5 position-relative" data-kt-menu-trigger="click" data-kt-menu-attach="parent" data-kt-menu-placement="bottom-end" data-kt-menu-flip="bottom">
 											<i class="bi bi-app-indicator fs-3" style="color: #fff;"></i>

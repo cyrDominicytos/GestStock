@@ -245,15 +245,6 @@
                 category.value = oldprovider;
                 price.value = supply['supplies_selling_quantity'];
                
-                //    setTimeout(function(){
-                //         product.value =2;
-                //         product.dispatchEvent(new Event('change'));
-                //     },5000);
-                    
-                //    setTimeout(function(){
-                //         sale_option.value = supply['supplies_sales_options_id'];
-                //         sale_option.dispatchEvent(new Event('change'));
-                //     },5000);
                cost.value = supply['supplies_cost'];
                pu.value = supply['supplies_selling_price'];
                

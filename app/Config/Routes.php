@@ -112,6 +112,14 @@ $routes->get('/supply/delete/(:num)', 'Supply::delete/$1');
 $routes->post('/supply/create', 'Supply::create');
 $routes->post('/supply/edit', 'Supply::edit');
 
+//sell management
+$routes->get('/sell/new', 'Sell::new');
+$routes->get('/sell/list', 'Sell::list');
+$routes->get('/sell/update/(:num)', 'Sell::update/$1');
+$routes->get('/sell/delete/(:num)', 'Sell::delete/$1');
+$routes->post('/sell/create', 'Sell::create');
+$routes->post('/sell/edit', 'Sell::edit');
+
 //Inventory management
 $routes->get('/inventory', 'Inventory::list');
 

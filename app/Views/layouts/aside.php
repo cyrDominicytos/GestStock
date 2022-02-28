@@ -29,7 +29,7 @@
 								<div class="menu-item menu-accordion">
                                     <a class="menu-link" href="<?= base_url() ?>/">
 										<span class="menu-icon">
-											<i class="bi bi-grid fs-3"></i>
+											<i class="bi bi-bar-chart-steps fs-3"></i>
 										</span>
 										<span class="menu-title">Tableau de bord</span>
 									</a>
@@ -43,20 +43,20 @@
 								<div data-kt-menu-trigger="click" class="menu-item menu-accordion">
 									<span class="menu-link">
 										<span class="menu-icon">
-											<i class="bi bi-archive fs-3"></i>
+											<i class="bi bi-cash-coin fs-3"></i>
 										</span>
 										<span class="menu-title">Ventes</span>
 										<span class="menu-arrow"></span>
 									</span>
 									<div class="menu-sub menu-sub-accordion menu-active-bg">
 										<div class="menu-item menu-accordion">
-                                            <a class="menu-link" href="<?= base_url() ?>/">
+                                            <a class="menu-link" href="<?= base_url() ?>/sell/new">
 												<span class="menu-bullet">
 													<span class="bullet bullet-dot"></span>
 												</span>
 												<span class="menu-title">Ajouter</span>
 											</a>
-                                            <a class="menu-link" href="<?= base_url() ?>/">
+                                            <a class="menu-link" href="<?= base_url() ?>/sell/list">
 												<span class="menu-bullet">
 													<span class="bullet bullet-dot"></span>
 												</span>
@@ -68,7 +68,7 @@
 								<div data-kt-menu-trigger="click" class="menu-item menu-accordion">
 									<span class="menu-link">
 										<span class="menu-icon">
-											<i class="bi bi-archive fs-3"></i>
+											<i class="bi bi-card-checklist fs-3"></i>
 										</span>
 										<span class="menu-title">Commandes clients</span>
 										<span class="menu-arrow"></span>
@@ -93,7 +93,7 @@
 								<div data-kt-menu-trigger="click" class="menu-item menu-accordion">
                                     <span class="menu-link">
                                         <span class="menu-icon">
-                                            <i class="bi bi-archive fs-3"></i>
+                                            <i class="bi bi-cart-check fs-3"></i>
 										</span>
 										<span class="menu-title">Approvisionnements</span>
 										<span class="menu-arrow"></span>
@@ -156,7 +156,7 @@
                                     <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
                                         <span class="menu-link">
                                             <span class="menu-icon">
-                                                <i class="bi bi-archive fs-3"></i>
+                                                <i class="bi bi-bookmark-plus fs-3"></i>
                                             </span>
                                             <span class="menu-title">Catégories Produits</span>
                                             <span class="menu-arrow"></span>
@@ -231,7 +231,7 @@
                                     <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
                                         <span class="menu-link">
                                             <span class="menu-icon">
-                                                <i class="bi bi-archive fs-3"></i>
+                                                <i class="bi bi-person-plus fs-3"></i>
                                             </span>
                                             <span class="menu-title">Clients</span>
                                             <span class="menu-arrow"></span>
@@ -256,7 +256,7 @@
                                     <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
                                         <span class="menu-link">
                                             <span class="menu-icon">
-                                                <i class="bi bi-archive fs-3"></i>
+                                                <i class="bi bi-person-plus fs-3"></i>
                                             </span>
                                             <span class="menu-title">Fournisseurs</span>
                                             <span class="menu-arrow"></span>
@@ -281,7 +281,7 @@
                                     <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
                                         <span class="menu-link">
                                             <span class="menu-icon">
-                                                <i class="bi bi-archive fs-3"></i>
+                                                <i class="bi bi-person-plus fs-3"></i>
                                             </span>
                                             <span class="menu-title">Nos Livreurs</span>
                                             <span class="menu-arrow"></span>

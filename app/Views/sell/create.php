@@ -231,35 +231,117 @@
                                                 <!--end::Switch-->
                                             </div>
                                         </div>
-                                        <!--begin::Col-->
+                                        <!--begin::Col reduction_total-->
                                         <div class="col-md-12 fv-row mt-5 reduction_total" style="display:none">
                                             <div class="d-flex flex-row">
                                                 <!--begin::Col-->
                                                 <div class="col-md-6 fv-row" style="padding-right: 10px;">
                                                     <label class="form-label fw-bolder text-dark fs-6 required">Réduction (en %)</label>
-                                                    <input  class="form-control form-control-solid" placeholder="" name="product_prices_price"  type="number" min="0" id="product_prices_price" value="<?= set_value("product_prices_price")	?>"  />
+                                                    <input  class="form-control form-control-solid" placeholder="" name="product_prices_price"  type="number" min="0" id="reduction_total1" value="<?= set_value("product_prices_price")	?>"  />
                                                 </div>
                                                 <!--end::Col-->
                                                 <!--begin::Col-->
                                                 <div class="col-md-6 fv-row mx-5" style="margin-left: 10px;">
                                                     <label class="form-label fw-bolder text-dark fs-6 required">Réduction (en FCFA)</label>
-                                                    <input  class="form-control form-control-solid" placeholder="" name="product_prices_price"  type="number" min="0" id="product_prices_price" value="<?= set_value("product_prices_price")	?>"  />
+                                                    <input  class="form-control form-control-solid" placeholder="" name="product_prices_price"  type="number" min="0" id="reduction_total2" value="<?= set_value("product_prices_price")	?>"  />
                                                 </div>
                                                 <!--end::Col-->
                                             </div>
                                         </div>
-                                        <!--begin::Col-->
+                                        <!--begin::Col reduction_total-->
                                         <div class="col-md-6 fv-row my-5">
-                                            <label class="form-label fw-bolder text-dark fs-6">Total vente (HT)</label>
+                                            <label class="form-label fw-bolder text-dark fs-6">Total des ventes sans réduction </label>
                                             <input  class="form-control form-control-solid" placeholder="" name="amount"  type="number" readonly min="0" id="amount" value="<?= set_value("amount")	?>"  />
                                         </div>
                                         <!--end::Col-->
                                         <!--begin::Col-->
                                         <div class="col-md-6 fv-row my-5">
-                                            <label class="form-label fw-bolder text-dark fs-6">Total avec réduction  (TTC)</label>
+                                            <label class="form-label fw-bolder text-dark fs-6">Total des ventes avec réduction</label>
                                             <input  class="form-control form-control-solid" placeholder="" name="amount_reduce"  type="number" readonly min="0" id="amount_reduce" value="<?= set_value("amount_reduce")	?>"  />
                                         </div>
                                         <!--end::Col-->
+                                         <!--begin::Col delivery service-->
+                                        <div class="col-md-7 fv-row mt-5">
+                                            <div class="d-flex flex-stack mb-8 items-center">
+                                                <!--begin::Label-->
+                                                <div class="me-5">
+                                                    <label class="fs-6 fw-bold fw-bolder text-dark">Livraison</label>
+                                                    <div class="fs-7 fw-bold text-muted">Cette vente nécessite-t-elle un service de livraison ? </div>
+                                                </div>
+                                                <!--end::Label-->
+                                                <!--begin::Switch-->
+                                                <label class="form-check form-switch form-check-custom form-check-solid">
+                                                    <input class="form-check-input" type="checkbox" value="1" id="delivery_service" name="delivery_service">
+                                                    <span class="form-check-label fw-bold text-muted delivery_text">Non</span>
+                                                </label>
+                                                <!--end::Switch-->
+                                            </div>
+                                        </div>
+                                         <div class="col-md-12 fv-row mt-5 delivery_service" style="display:none">
+                                            <div class="d-flex flex-row">
+                                                <div class="col-md-6 fv-row mx-5" style="margin-left: 10px;">
+                                                    <!--begin::Input group-->
+                                                    <div class="d-flex flex-column mb-5 fv-row  text-dark">
+                                                        <label class="form-label fw-bolder text-dark fs-6 required">Nom complet du livreur</label>
+                                                        <div class="d-flex flex-row mb-5 fv-row text-dark">
+                                                            <select name="delivery_man" aria-label="Selectionnez un profile" data-control="select2" data-placeholder="Attribuer un role..." class="form-select form-select-solid form-select-lg fw-bold select2-hidden-accessible" data-select2-id="select2-data-10-02r3" tabindex="-1" aria-hidden="true" id="delivery_man">
+                                                            <option value=""  id="0" disabled>Choisissez le livreur...</option>									
+                                                            <?php foreach ($delivery_mens as $delivery_man): ?>
+                                                                <option value="<?= $delivery_man->delivery_mens_id ?>"  id="<?=  $delivery_man->delivery_mens_id?>" ><?= $delivery_man->delivery_mens_company ?></option>									
+                                                            <?php endforeach ?>
+                                                            </select>
+                                                            <a href="<?= base_url() ?>/livreur/list_create"   class="btn btn-primary" id="add_client_btn">
+                                                                <i class="fa fa-plus"></i>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                    <!--end::Input group-->
+                                                </div>
+                                                <!--begin::Col-->
+                                                <div class="col-md-6 fv-row mx-5" style="margin-left: 10px;">
+                                                    <label class="form-label fw-bolder text-dark fs-6 required">Date de livraison</label>
+                                                    <input  class="form-control form-control-solid" placeholder="" name="sales_delivery_date"  type="date" min="0" id="sales_delivery_date" value="<?= set_value("sales_delivery_date")	?>"  />
+                                                </div>
+                                                <!--end::Col-->
+                                            </div>
+                                        </div>
+                                        <!--end::Col delivery service-->
+                                         <!--begin::Col delivery service-->
+                                        <div class="col-md-7 fv-row mt-5">
+                                            <div class="d-flex flex-stack mb-8 items-center">
+                                                <!--begin::Label-->
+                                                <div class="me-5">
+                                                    <label class="fs-6 fw-bold fw-bolder text-dark">Facturation</label>
+                                                    <div class="fs-7 fw-bold text-muted">Souhaitez-vous générer une facture ou un ticket pour cette vente ? </div>
+                                                </div>
+                                                <!--end::Label-->
+                                                <!--begin::Switch-->
+                                                <label class="form-check form-switch form-check-custom form-check-solid">
+                                                    <input class="form-check-input" type="checkbox" value="1" id="bill_service" name="bill_service">
+                                                    <span class="form-check-label fw-bold text-muted bill_text">Non</span>
+                                                </label>
+                                                <!--end::Switch-->
+                                            </div>
+                                        </div>
+                                         <div class="col-md-12 fv-row mt-5 bill_service" style="display:none">
+                                            <div class="d-flex flex-row">
+                                                <div class="col-md-6 fv-row mx-5" style="margin-left: 10px;">
+                                                    <!--begin::Input group-->
+                                                    <div class="d-flex flex-column mb-5 fv-row  text-dark">
+                                                        <label class="form-label fw-bolder text-dark fs-6 required">Type de facture</label>
+                                                        <div class="d-flex flex-row mb-5 fv-row text-dark">
+                                                            <select name="bill_type" aria-label="Selectionnez un profile" data-control="select2" data-placeholder="Attribuer un role..." class="form-select form-select-solid form-select-lg fw-bold select2-hidden-accessible" data-select2-id="select2-data-10-02r3" tabindex="-1" aria-hidden="true" id="delivery_man">
+                                                            <option value=""  id="0" disabled>Choisissez le type de facture...</option>									
+                                                            <option value="ticket"  id="ticket" >TICKET DE CAISSE</option>									
+                                                            <option value="a4"  id="a4" >FACTURE A4</option>									
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <!--end::Input group-->
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--end::Col delivery service-->
                                     </div>
                                     <!--end: Reduction :Col--> 
 
@@ -375,6 +457,7 @@
         if(!checkSelect())
             return;
         var indexId = product.value+sale_option.value;
+
         if(table_unique.includes(indexId)){
             //row already exists
 
@@ -391,7 +474,7 @@
             table.rows[rowId].cells[4].innerHTML = reduction;
             table.rows[rowId].cells[5].innerHTML = newValue - reduction;
             montant += newValue - reduction;
-            var html = '<td class="text-gray"><input type="text" required id="product_list[]" name="product_list[]" class="form-control" hidden  value='+product.value+'/><input type="text" required id="option_list[]" name="option_list[]" class="form-control" hidden  value='+sale_option.value+' /><input type="text" required id="quantity_list[]" name="quantity_list[]" class="form-control" hidden  value='+newValue+' /><input type="text" required id="reduce_list[]" name="reduce_list[]" class="form-control" hidden  value='+reduction+' /><input type="text" required id="montant_list[]" name="montant_list[]" class="form-control" hidden value='+(newValue- reduction)+'/>'+product.options[product.selectedIndex].text+'</td>';
+            var html = '<td class="text-gray"><input type="text" required id="product_list[]" name="product_list[]" class="form-control" hidden  value='+product.value+'/><input type="text" required id="option_list[]" name="option_list[]" class="form-control" hidden  value='+sale_option.value+' /><input type="text" required id="quantity_list[]" name="quantity_list[]" class="form-control" hidden  value='+newValue+' /><input type="text" required id="reduction_list[]" name="reduction_list[]" class="form-control" hidden  value='+reduction+' /><input type="text" required id="montant_list[]" name="montant_list[]" class="form-control" hidden value='+(newValue- reduction)+'/>'+product.options[product.selectedIndex].text+'</td>';
             table.rows[rowId].cells[0].innerHTML = html;
 
         }else{
@@ -404,7 +487,7 @@
            montant += newValue - reduction;
             var html = '';
             html += '<tr class="text-start text-black fw-bolder fs-7">';
-            html += '<td class="text-gray"><input type="text" required id="product_list[]" name="product_list[]" class="form-control" hidden  value='+product.value+'/><input type="text" required id="option_list[]" name="option_list[]" class="form-control" hidden  value='+sale_option.value+' /><input type="text" required id="quantity_list[]" name="quantity_list[]" class="form-control" hidden  value='+price.value+' /><input type="text" required id="reduce_list[]" name="reduce_list[]" class="form-control" hidden  value='+reduction+' /><input type="text" required id="montant_list[]" name="montant_list[]" class="form-control" hidden value='+(product_price[indexId]*price.value)+'/>'+product.options[product.selectedIndex].text+'</td>';
+            html += '<td class="text-gray"><input type="text" required id="product_list[]" name="product_list[]" class="form-control" hidden  value='+product.value+'/><input type="text" required id="option_list[]" name="option_list[]" class="form-control" hidden  value='+sale_option.value+' /><input type="text" required id="quantity_list[]" name="quantity_list[]" class="form-control" hidden  value='+price.value+' /><input type="text" required id="reduction_list[]" name="reduction_list[]" class="form-control" hidden  value='+reduction+' /><input type="text" required id="montant_list[]" name="montant_list[]" class="form-control" hidden value='+(product_price[indexId]*price.value)+'/>'+product.options[product.selectedIndex].text+'</td>';
             html += '<td class="text-gray">'+sale_option.options[sale_option.selectedIndex].text+'</td>';
             html += '<td class="text-gray">'+product_price[indexId]+'</td>';
             html += '<td class="text-gray">'+price.value+'</td>';
@@ -443,13 +526,25 @@
 
     //total
     $(document).on('click', '#apply_total', function(){
-        $('.reduction_total').toggle(); 
+        $('.reduction_total').toggle();
+        reduceTotal(); 
     });
     $(document).on('change', '#reduction_total1', function(){
         $('#reduction_total2').val(0); 
+        reduceTotal();
     });
     $(document).on('change', '#reduction_total2', function(){
         $('#reduction_total1').val(0); 
+        reduceTotal();
+    });
+    //delivery
+    $(document).on('click', '#delivery_service', function(){
+        $('.delivery_text').html($('.delivery_text').html()=="Non" ? "Oui": "Non");
+        $('.delivery_service').toggle();
+    });
+    $(document).on('click', '#bill_service', function(){
+        $('.bill_text').html($('.bill_text').html()=="Non" ? "Oui": "Non");
+        $('.bill_service').toggle();
     });
     //end reduction 
 
@@ -463,6 +558,12 @@
             document.getElementById("submit").disabled = false;
         else
             document.getElementById("submit").disabled = true;
+    }
+    function reduceTotal() {
+      var reduction = 0;
+      if($("#apply_total").is(":visible"))
+         reduction = (document.getElementById("reduction_total1").value > 0 ) ? ((document.getElementById("reduction_total1").value*montant/100)) : (document.getElementById("reduction_total2").value);
+     amount_reduce.value = montant - reduction;
     }
     </script>
 <?= $this->endSection() ?>

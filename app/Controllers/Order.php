@@ -77,7 +77,7 @@ class Order extends BaseController
         if($data['sales_options']==null)
             return redirect()->to("sales_option/list")->with('message', 'Veuillez enregistrer les options de vente !')->with('code',0);
        
-        $data['clients'] = $this->modelClient->where("clients_isActive", 1)->get()->getResult();
+        $data['clients'] = $this->modelClient->where("clients_isActive", 1)->whereNotIn("clients_id", [1])->get()->getResult();
         $data['products'] = [];
         $data['sales_options'] = [];
         $data['product_price'] = getProductPriceArray();
@@ -109,8 +109,8 @@ class Order extends BaseController
         if($data['sales_options']==null)
             return redirect()->to("sales_option/list")->with('message', 'Veuillez enregistrer les options de vente !')->with('code',0);
        
-        $data['clients'] = $this->modelClient->where("clients_isActive", 1)->get()->getResult();
-        $data['order'] = $this->modelOrder->where("orders_id", $id)->get()->getResult();
+            $data['clients'] = $this->modelClient->where("clients_isActive", 1)->whereNotIn("clients_id", [1])->get()->getResult();
+            $data['order'] = $this->modelOrder->where("orders_id", $id)->get()->getResult();
         if(count($data['order']) > 0)
         $data['order'] = $data['order'][0];
         $data['order_detail'] = $this->modelOrderDetails->get_order_detail($id);

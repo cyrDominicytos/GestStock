@@ -56,6 +56,8 @@ class ExternalEntity extends BaseController
 		
         
             $data['external'] =externalModel($type)->get()->getResultArray();
+            if(in_array($type, [1,2]))
+            $data['external'] =externalModel($type)->whereNotIn(externalParams()[$type]['table']."_id", [1])->get()->getResultArray();
             $data['auth'] = $this->ionAuth;
             $data['type'] = $type;
             $data['showModal'] = $showModal;

@@ -16,37 +16,24 @@ class SaleModel extends Model
          'sales_deliver_man',
          'sales_delivery_date',
          'sales_client_id',
+         'sales_users_id',
         ];
 
     protected $validationRules    = [];
     protected $validationMessages = [];
     protected $skipValidation     = false;
 
-    public function get_supply_list()
-    {
-       
-        return $this->db->table('sales')
-        ->join('products', 'products.products_id = sales.sales_products_id')
-        ->join('sales_options', 'sales_options.sales_options_id = sales.sales_sales_options_id')
-        ->join('product_categories', 'product_categories.product_categories_id = products.products_product_categorie_id')
-        ->join('exonerations', 'exonerations.exonerations_id = products.products_exonerations_id')
-        ->join('providers', 'providers.providers_id = sales.sales_provider_id')
 
-        ->select('*')
-        ->get()->getResult();
-    }
-    public function get_supply($supplieId)
+    public function get_sale_list()
     {
        
-        return $this->db->table('sales')
-        ->join('products', 'products.products_id = sales.sales_products_id')
-        ->join('sales_options', 'sales_options.sales_options_id = sales.sales_sales_options_id')
-        ->join('product_categories', 'product_categories.product_categories_id = products.products_product_categorie_id')
-        ->join('exonerations', 'exonerations.exonerations_id = products.products_exonerations_id')
-        ->join('providers', 'providers.providers_id = sales.sales_provider_id')
+       return $this->db->table('sales')
+        ->join('clients', 'sales.sales_client_id = clients.clients_id')
+       // ->join('users', 'sales.sales_users_id = users.id')
         ->select('*')
-        ->where('sales_id', $supplieId)
+        ->whereNotIn("clients.clients_company", ["Système"])
         ->get()->getResult();
     }
-    
+
+
 }

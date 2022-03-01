@@ -32,6 +32,7 @@ class SupplyModel extends Model
         ->join('providers', 'providers.providers_id = supplies.supplies_provider_id')
 
         ->select('*')
+        ->whereNotIn("providers.providers_company", ["Système"])
         ->get()->getResult();
     }
     public function get_supply($supplieId)
@@ -45,6 +46,7 @@ class SupplyModel extends Model
         ->join('providers', 'providers.providers_id = supplies.supplies_provider_id')
         ->select('*')
         ->where('supplies_id', $supplieId)
+        ->whereNotIn("providers.providers_company", ["Système"])
         ->get()->getResult();
     }
     

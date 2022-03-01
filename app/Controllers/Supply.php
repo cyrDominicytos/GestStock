@@ -83,7 +83,7 @@ class Supply extends BaseController
         if($data['sales_options']==null)
             return redirect()->to("sales_option/list")->with('message', 'Veuillez enregistrer les options de vente !')->with('code',0);
        
-        $data['providers'] = $this->modelProvider->where("providers_isActive", 1)->get()->getResult();
+        $data['providers'] = $this->modelProvider->where("providers_isActive", 1)->whereNotIn("prodivers_id", [1])->get()->getResult();
         $data['products'] = [];
         $data['sales_options'] = [];
         $data['product_price'] = getProductPriceArray();
@@ -104,7 +104,12 @@ class Supply extends BaseController
 		{
             return redirect()->back()->with("message", "Erreur : Accès illégal !")->with("code", 0);
 		}
-       
+
+        $data['supply'] = $this->modelSupply->get_supply($id);
+        if(count($data['supply']) > 0)
+            $data['supply'] = $data['supply'][0];
+        else
+            return redirect()->back()->with("message", "Erreur : Accès illégal !")->with("code", 0);
         $data['product_prices'] =$this->modelProductPrice->get_product_price_list();
         $data['products'] =$this->modelProduct->get()->getResult();
         $data['categories'] = $this->modelProductCategory->get()->getResult();
@@ -116,15 +121,7 @@ class Supply extends BaseController
         if($data['sales_options']==null)
             return redirect()->to("sales_option/list")->with('message', 'Veuillez enregistrer les options de vente !')->with('code',0);
        
-        $data['providers'] = $this->modelProvider->where("providers_isActive", 1)->get()->getResult();
-        $data['supply'] = $this->modelSupply->get_supply($id);
-        if(count($data['supply']) > 0)
-            $data['supply'] = $data['supply'][0];
-        else
-            return redirect()->back()->with("message", "Erreur : Accès illégal !")->with("code", 0);
-
-        //$data['products'] = [];
-        //$data['sales_options'] = [];
+        $data['providers'] = $this->modelProvider->where("providers_isActive", 1)->whereNotIn("prodivers_id", [1])->get()->getResult();
         $data['product_price'] = getProductPriceArray();
         $data['auth'] = $this->ionAuth;
         return view('supply/create',$data);

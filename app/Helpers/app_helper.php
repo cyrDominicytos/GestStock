@@ -11,6 +11,8 @@ use App\Models\ProductModel;
 use App\Models\SalesOptionsModel;
 use App\Models\OrdersModel;
 use App\Models\OrdersDetailsModel;
+use App\Models\SaleModel;
+use App\Models\SellDetailsModel;
 use App\Models\ProductPriceModel;
 use App\Models\ConfigModel;
 use App\Models\SupplyModel;
@@ -20,7 +22,26 @@ use App\Models\SupplyModel;
 if (!function_exists("status")) {
 	function status($statusId)
 	{
-		return ($statusId== 1) ? ("<div class='badge badge-success fw-bolder'>Actif</div>") : ("<div class='badge badge-danger fw-bolder'>InActif</div>"); 
+		switch ($statusId) {
+			case 0:
+				return ("<div class='badge badge-danger fw-bolder'>InActif</div>"); 
+			case 1:
+				return ("<div class='badge badge-success fw-bolder'>Actif</div>"); 
+			case 2:
+				return ("<div class='badge badge-info fw-bolder'>Réglée</div>"); 
+			case 3:
+				return ("<div class='badge badge-warning fw-bolder'>Facturée</div>"); 
+			case 4:
+				return  ("<div class='badge badge-success fw-bolder'>Normalisée</div>"); 
+			default:
+				return ("<div class='badge badge-danger fw-bolder'>Default status</div>") ; 
+		}
+	}
+}
+if (!function_exists("livraison")) {
+	function livraison($statusId)
+	{
+		return ($statusId!= 0) ? ("<div class='badge badge-success fw-bolder'>Oui</div>") : ("<div class='badge badge-danger fw-bolder'>Non</div>"); 
 	}
 }
 if (!function_exists("deleteUser")) {
@@ -211,7 +232,7 @@ function externalModel($type)
 	{
 		switch ($type) {
 			case '1':
-				return new ClientModel();;
+				return new ClientModel();
 			case '2':
 				return new ProviderModel();
 
@@ -406,7 +427,94 @@ if (!function_exists("get_assign_options_by_product")) {
 				]);
 			}
 		}
-	if (!function_exists("insertSupply")) {
+	
+	if (!function_exists("insertSales")) {
+		function insertSales($request, $ionAuth)
+			{
+				$id = false;
+				$amount = 0;
+				$modelSale = new SaleModel();
+				$modelSellDetails = new SellDetailsModel();
+				$id = $modelSale->insert([
+					"sales_client_id"=>$request->getVar('client'),
+					"sales_amount"=>0,
+					"sales_users_id"=>$ionAuth->user()->row()->id,
+					"sales_status"=>2,
+				]);
+
+				foreach ($request->getVar('product_list') as $key => $product){
+					//dd($request->getVar('montant_list')); 
+					$amount += (int) $request->getVar('montant_list')[$key];
+					$data = [
+						"sell_details_amount"=>$request->getVar('montant_list')[$key],
+						"sell_details_quantity"=>$request->getVar('quantity_list')[$key],
+						"sell_details_reduction"=>$request->getVar('reduction_list')[$key],
+						"sell_details_sales_id"=>$id,
+						"sell_details_sales_options_id"=>$request->getVar('option_list')[$key],
+						"sell_details_products_id"=>$product,
+					];
+				//	if($request->getPost('reduction_list')$request->getVar('reduction_list'))
+				    $modelSellDetails->insert($data);
+
+				}
+				$data = [
+					"sell_details_amount"=>$request->getVar('montant_list')[$key],
+					"sell_details_quantity"=>$request->getVar('quantity_list')[$key],
+					"sell_details_reduction"=>$request->getVar('reduction_list')[$key],
+					"sell_details_sales_id"=>$id,
+					"sell_details_sales_options_id"=>$request->getVar('option_list')[$key],
+					"sell_details_products_id"=>$product,
+				];
+				if($request->getVar('delivery_man'))
+					{
+						$data["sales_deliver_man"] = $request->getVar('delivery_man');
+						$data["sales_delivery_date"] = $request->getVar('sales_delivery_date');
+					}
+				if($request->getVar('amount_reduce'))
+					{
+						$data["sales_reduction"] = $request->getVar('amount_reduce');
+					}
+					
+					$data["sales_amount"] = $request->getVar('amount');
+
+				$modelSale->update($id,$data);
+				return $id;
+			}
+		}
+
+
+	if (!function_exists("updateSales")) {
+		function updateSales($request, $id)
+			{
+				//remove all details rows
+				$amount = 0;
+				$modelSale = new SaleModel();
+				$modelSellDetails = new SellDetailsModel();
+				$modelSellDetails->where("sell_details_sales_id",$id)->delete();
+
+				foreach ($request->getVar('product_list') as $key => $product){
+					//dd($request->getVar('montant_list')); 
+					$amount += (int) $request->getVar('montant_list')[$key]; 
+					$result = $modelSellDetails->insert([
+						"sell_details_amount"=>$request->getVar('montant_list')[$key],
+						"sell_details_quantity"=>$request->getVar('quantity_list')[$key],
+						"sell_details_reduction"=>$request->getVar('reduction_list')[$key],
+						"sell_details_sales_id"=>$id,
+						"sell_details_sales_options_id"=>$request->getVar('option_list')[$key],
+						"sell_details_products_id"=>$product,
+					]);
+
+				}
+
+				return	$modelSale->update($id,[
+					"orders_amount"=>$amount,
+					"orders_client_id"=>$request->getVar('client'),
+				]);
+			}
+		}
+	
+
+		if (!function_exists("insertSupply")) {
 		function insertSupply($request)
 			{
 				$result = false;
@@ -426,9 +534,8 @@ if (!function_exists("get_assign_options_by_product")) {
 				return $result;
 			}
 		}
-
-
-	if (!function_exists("updateSupply")) {
+	
+		if (!function_exists("updateSupply")) {
 		function updateSupply($request, $id)
 			{
 				$result = false;

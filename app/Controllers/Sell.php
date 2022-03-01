@@ -7,8 +7,10 @@ use App\Models\ProductPriceModel;
 use App\Models\ProductCategoriesModel;
 use App\Models\SalesOptionsModel;
 use App\Models\ClientModel;
+use App\Models\DeliveryMenModel;
 use App\Models\SaleModel;
 use App\Models\SellDetailsModel;
+use App\Models\BillModel;
 class Sell extends BaseController
 {
     public  $ionAuth = null;
@@ -29,8 +31,10 @@ class Sell extends BaseController
     protected $modelProductCategory = null;
     protected $modelSalesOptions = null;
     protected $modelClient = null;
+    protected $modelDeliveryMen = null;
     protected $modelSale = null;
     protected $modelSellDetails = null;
+    protected $modelBill = null;
 
     /**
 	 * Constructor
@@ -49,8 +53,10 @@ class Sell extends BaseController
         $this->modelProductCategory = new ProductCategoriesModel();
         $this->modelSalesOptions = new SalesOptionsModel();
         $this->modelClient = new ClientModel();
+        $this->modelDeliveryMen = new DeliveryMenModel();
         $this->modelSale = new SaleModel();
         $this->modelSaleDetails = new SellDetailsModel();
+        $this->modelBill = new BillModel();
 
         if (! empty($this->configIonAuth->templates['errors']['list']))
 		{
@@ -58,6 +64,39 @@ class Sell extends BaseController
 		}
 	}
 
+    public function test(){
+        $billingController = new Billing();
+        $bill_code = $billingController->generateBill(9);
+        if(!$billingController->certifyBill($bill_code, \Swagger\Client\Model\InvoiceTypeEnum::FV))
+        {
+            return redirect()->to("sell/list")->with('message', 'Error lors de la normalisation de la facture, veuillez réessayer la normalisation !')->with('code',0);
+        }
+        return redirect()->to("sell/list")->with('message', 'La vente est enregistrée avec succès !')->with('code',1);
+                
+    }
+    public function normalize($id){
+        $billingController = new Billing();
+        $bill = $this->modelBill->where("bill_sales_id", $id)->get()->getResult();
+        if($bill){
+            if(!$billingController->certifyBill($bill[0]->bill_code, "FV"))
+                return redirect()->to("sell/list")->with('message', 'Error lors de la normalisation de la facture, veuillez réessayer la normalisation !')->with('code',0);
+            return redirect()->to("sell/list")->with('message', 'La vente est facturée avec succès !')->with('code',1);
+        }else
+            return redirect()->to("sell/list")->with('message', 'La vente est facturée avec succès !')->with('code',1);                
+    }
+
+    public function invoice($id){
+        $billingController = new Billing();
+        $sale = $this->modelSale->where("sales_id", $id)->get()->getResult();
+        if($sale){
+           $billingController->generateBill($id);
+           return redirect()->to("sell/list")->with('message', 'La vente est facturée avec succès !')->with('code',1);
+        }else{
+            return redirect()->to("sell/list")->with('message', 'La vente que vous essayez de facturée n\'existe pas !')->with('code',0);
+
+        }
+                
+    }
     public function new()
     {
 
@@ -77,7 +116,8 @@ class Sell extends BaseController
         if($data['sales_options']==null)
             return redirect()->to("sales_option/list")->with('message', 'Veuillez enregistrer les options de vente !')->with('code',0);
        
-        $data['clients'] = $this->modelClient->where("clients_isActive", 1)->get()->getResult();
+        $data['clients'] = $this->modelClient->where("clients_isActive", 1)->whereNotIn("clients_id", [1])->get()->getResult();
+        $data['delivery_mens'] = $this->modelDeliveryMen->where("delivery_mens_isActive", 1)->get()->getResult();
         $data['products'] = [];
         $data['sales_options'] = [];
         $data['product_price'] = getProductPriceArray();
@@ -130,7 +170,7 @@ class Sell extends BaseController
 			return redirect()->to('/')->with("message", session()->get("message"))->with("code", session()->get("code"));
 		}
        
-        $data['sales'] =$this->modelSale->get_order_list();
+        $data['sales'] =$this->modelSale->get_sale_list();
         $data['auth'] = $this->ionAuth;
         return view('sell/list',$data);
     }
@@ -153,8 +193,7 @@ class Sell extends BaseController
 			 return redirect()->back()->with("message2", "Erreur : Accès illégal !")->with("code", 0);
 		}
 		
-        //dd($this->request->getVar("product_list"));
-       // $data = [];
+       // dd($this->request);
 		// validate form input
 		$rules = [
                     'client'=> 'required',
@@ -171,11 +210,22 @@ class Sell extends BaseController
                 ]; 
         $this->validation->setRules($rules, $errors);         
 		if ($this->validation->withRequest($this->request)->run())
-		{            
-            if(insertOrder($this->request))
+		{     
+           // dd($this->request->getPost("bill_service"));
+            if($id = insertSales($this->request, $this->ionAuth))
             {
-                return redirect()->to("sell/list")->with('message', 'Commande enregistrée avec succès !')->with('code',1);
-            }
+                if($this->request->getPost("bill_service"))
+                {
+                    $bill_type = $this->request->getPost("bill_type");
+                    $billingController = new Billing();
+                    $bill_code = $billingController->generateBill($id);
+                    if(!$billingController->certifyBill($bill_code,"FV"))
+                    {
+                        return redirect()->to("sell/list")->with('message', 'Error lors de la normalisation de la facture, veuillez réessayer la normalisation !')->with('code',0);
+                    }
+                    return redirect()->to("sell/list")->with('message', 'La vente est enregistrée avec succès !')->with('code',1);
+                }
+           }
         }
 		//We find some error
 		$this->data['message'] = $this->validation->getErrors() ? $this->validation->listErrors($this->validationListTemplate) : ($this->ionAuth->errors($this->validationListTemplate) ? $this->ionAuth->errors($this->validationListTemplate) : $this->session->getFlashdata('message'));

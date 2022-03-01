@@ -642,7 +642,7 @@
                                                 <?php if($order->sales_status > 2): ?>
                                                 <!--begin::Menu item-->
                                                 <div class="menu-item px-3">
-                                                    <a href="<?= base_url() ?>/sell/view/<?= $order->sales_id?>"  class="menu-link px-3"><i class="fa fa-edit text-primary py-2"> Consulter</i></a>
+                                                    <a href="<?= base_url() ?>/sell/vue/<?= $order->sales_id?>"  class="menu-link px-3"><i class="fa fa-edit text-primary py-2"> Consulter</i></a>
                                                 </div>
                                                 <!--end::Menu item-->
                                                 <?php endif;?>

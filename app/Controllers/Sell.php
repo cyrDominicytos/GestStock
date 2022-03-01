@@ -55,7 +55,7 @@ class Sell extends BaseController
         $this->modelClient = new ClientModel();
         $this->modelDeliveryMen = new DeliveryMenModel();
         $this->modelSale = new SaleModel();
-        $this->modelSaleDetails = new SellDetailsModel();
+        $this->modelSellDetails = new SellDetailsModel();
         $this->modelBill = new BillModel();
 
         if (! empty($this->configIonAuth->templates['errors']['list']))
@@ -74,6 +74,8 @@ class Sell extends BaseController
         return redirect()->to("sell/list")->with('message', 'La vente est enregistrée avec succès !')->with('code',1);
                 
     }
+
+    //normalize bill
     public function normalize($id){
         $billingController = new Billing();
         $bill = $this->modelBill->where("bill_sales_id", $id)->get()->getResult();
@@ -82,9 +84,29 @@ class Sell extends BaseController
                 return redirect()->to("sell/list")->with('message', 'Error lors de la normalisation de la facture, veuillez réessayer la normalisation !')->with('code',0);
             return redirect()->to("sell/list")->with('message', 'La vente est facturée avec succès !')->with('code',1);
         }else
-            return redirect()->to("sell/list")->with('message', 'La vente est facturée avec succès !')->with('code',1);                
+            return redirect()->to("sell/list")->with('message', 'La facture que vous désirez normalisée n\'existe pas !')->with('code',0);                
     }
 
+    //View bill
+    public function vue($id){
+        $billingController = new Billing();
+        $bill = $this->modelBill->where("bill_sales_id", $id)->get()->getResult();
+        if($bill){
+            $data['product_price'] = getProductPriceArray();
+            $data['auth'] = $this->ionAuth;
+            $data['invoice_type'] = "FV";
+            $data['bill'] = $bill[0];
+            $data['sellDetails'] = $this->modelSellDetails->get_sell_detail($id);
+            $data['sale'] = $this->modelSale->where("sales_id", $id)->get()->getResult()[0];
+          //  dd( $data['sellDetails']);
+           // $data['sellDetailss'] = [];
+            $data['configList'] = getConfigList();
+            return view('bills/show_single_invoice',$data);
+        }else
+            return redirect()->to("sell/list")->with('message', 'La facture que vous désirez visualisée n\'existe pas!')->with('code',0);                
+    }
+
+    //invoice sale
     public function invoice($id){
         $billingController = new Billing();
         $sale = $this->modelSale->where("sales_id", $id)->get()->getResult();
@@ -93,7 +115,6 @@ class Sell extends BaseController
            return redirect()->to("sell/list")->with('message', 'La vente est facturée avec succès !')->with('code',1);
         }else{
             return redirect()->to("sell/list")->with('message', 'La vente que vous essayez de facturée n\'existe pas !')->with('code',0);
-
         }
                 
     }

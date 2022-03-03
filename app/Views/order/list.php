@@ -593,7 +593,7 @@
                                         <td class="">
                                         <?= status($order->orders_status)  ?>
                                         </td>
-                                        <td><?= $order->orders_created_at ?></td>
+                                        <td><?= "le ".format_date($order->orders_created_at , "d/m/Y à H:i:s") ?></td>
                                         <td class="text-end">
                                             <a href="#" class="btn btn-light btn-active-light-primary btn-sm" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">Actions
                                             <!--begin::Svg Icon | path: icons/duotune/arrows/arr072.svg-->

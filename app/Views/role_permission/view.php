@@ -228,7 +228,7 @@
                                         </td>
                                         <!--end::user=-->
                                         <!--begin::Joined date=-->
-                                        <td><?= $user->created_at ?></td>
+                                        <td><?= format_date($user->created_at, "d/m/Y à H:i:s")?></td>
                                         <td> <?= status($user->active) ?></td>
                                         <!--end::Joined date=-->
                                         <!--begin::Action=-->

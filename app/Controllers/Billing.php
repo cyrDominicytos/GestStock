@@ -25,14 +25,13 @@ class Billing extends BaseController
     // PUBLIC FUNCTION TO GENERATE QR CODE
     public function generateQrCode($secret_string = null, $file_name = null){
         if($secret_string == null){
-            $qrcode = new QRCode($secret_string);
-            $qrcode->setSize(90);
-            $qrcode->create(WRITEPATH.'uploads/qrcode/qrcode.png');
+            return false;
         }
         else{
             $qrcode = new QRCode($secret_string);
             $qrcode->setSize(90);
-            $qrcode->create(WRITEPATH.'uploads/qrcode/qrcode.png');
+            $qrcode->create(WRITEPATH.'uploads/qrcode/'.$file_name.'.png');
+            return true;
         }
     }
     // PUBLIC FUNCTION TO GENERATE QR CODE
@@ -117,8 +116,9 @@ class Billing extends BaseController
                     $securityElementsDto = $apiInvoiceInstance->apiInvoiceUidConfirmPut($uid);
                   //  dd($securityElementsDto);
                     // Update invoice with security elements MECEF
+                   
                     $bill_sec_info = array(
-                        'bill_mecef_date_time'=> $securityElementsDto['date_time'],
+                        'bill_mecef_date_time'=> format_date($securityElementsDto['date_time'], "Y/m/d H:i:s"),
                         'bill_mecef_qr_code'=> $securityElementsDto['qr_code'],
                         'bill_mecef_code_dgi'=> $securityElementsDto['code_me_ce_fdgi'],
                         'bill_mecef_counters'=> $securityElementsDto['counters'],
@@ -145,13 +145,13 @@ class Billing extends BaseController
                         'bill_uid'=> $uid,
 
                     );
-
+                    //dd($bill_sec_info);
                     //Get Bill id from db
                     //$single_bill = $billing_model->getBills($bill_code);
                     // And update based on single uniq id
                     if($billModel->update($bill->bill_id, $bill_sec_info)){
                         // If update success, generate QRCODE and store it, then redirect to view bill with bill_code variable
-                        $this->generateQrCode($bill_sec_info['bill_mecef_qr_code'], $bill_sec_info['bill_mecef_code_dgi']);
+                        $this->generateQrCode($bill_sec_info['bill_mecef_qr_code'], $bill_code);
                         $saleModel->update($bill->bill_sales_id,[
                             "sales_status" => 4,
                         ]);

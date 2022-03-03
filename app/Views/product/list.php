@@ -602,7 +602,7 @@
                                         <td> 
                                             <?= status($product->products_isActive) ?>
                                        </td>
-                                        <td><?= $product->products_created_at ?></td>
+                                        <td><?= format_date($product->products_created_at , "d/m/Y à H:i:s")  ?></td>
                                         <td class="text-end">
                                             <a href="#" class="btn btn-light btn-active-light-primary btn-sm" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">Actions
                                             <!--begin::Svg Icon | path: icons/duotune/arrows/arr072.svg-->

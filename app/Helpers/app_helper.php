@@ -571,4 +571,12 @@ if (!function_exists("get_assign_options_by_product")) {
 					return  $data;
 				}
 			}
+		//Load inventory quantity foreach existing product
+		if (!function_exists("format_date")) {
+			function format_date($text, $format)
+				{
+					$date=date_create($text);
+					return  date_format($date,$format);
+				}
+			}
 ?>

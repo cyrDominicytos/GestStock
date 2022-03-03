@@ -284,9 +284,9 @@
                                     <strong>Code MECef : </strong> <?php echo $bill->bill_mecef_code_dgi ?> <br/>
                                     <strong>NIM : </strong> <?php echo $bill->bill_mecef_nim ?> <br/>
                                     <strong>Compteurs : </strong> <?php echo $bill->bill_mecef_counters ?> <br/>
-                                    <strong>Date & Heure : </strong> <?php echo $bill->bill_mecef_date_time  ?> <br/><br/>
+                                    <strong>Date & Heure : </strong> <?php echo "le ".format_date($bill->bill_mecef_date_time, "d/m/Y à H:i:s")   ?> <br/><br/>
                                     <p>
-                                        <img src="<?php echo WRITEPATH.'\uploads\qrcode\qrcode.png';?>"alt="<?php echo WRITEPATH.'\uploads\qrcode\qrcode.png'; ?> codeqr introuvable" />
+                                        <img src="<?php echo base_url().'/writable/uploads/qrcode/qrcode.png';?>"alt="<?php echo base_url().'/writable/uploads/qrcode/qrcode.png'; ?> codeqr introuvable" />
                                     </p>
                                 </div>
                             <?php

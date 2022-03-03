@@ -14,6 +14,8 @@ class SellDetailsModel extends Model
          'sell_details_sales_id',
          'sell_details_sales_options_id',
          'sell_details_products_id',
+         'sell_details_default_price',
+         'sell_details_selling_price',
         ];
 
     protected $validationRules    = [];

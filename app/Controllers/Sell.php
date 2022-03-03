@@ -82,7 +82,7 @@ class Sell extends BaseController
         if($bill){
             if(!$billingController->certifyBill($bill[0]->bill_code, "FV"))
                 return redirect()->to("sell/list")->with('message', 'Error lors de la normalisation de la facture, veuillez réessayer la normalisation !')->with('code',0);
-            return redirect()->to("sell/list")->with('message', 'La vente est facturée avec succès !')->with('code',1);
+            return redirect()->to("sell/list")->with('message', 'La facture est normalisée avec succès !')->with('code',1);
         }else
             return redirect()->to("sell/list")->with('message', 'La facture que vous désirez normalisée n\'existe pas !')->with('code',0);                
     }
@@ -111,7 +111,7 @@ class Sell extends BaseController
         $billingController = new Billing();
         $sale = $this->modelSale->where("sales_id", $id)->get()->getResult();
         if($sale){
-           $billingController->generateBill($id);
+           $billingController->generateBill($id,"FV");
            return redirect()->to("sell/list")->with('message', 'La vente est facturée avec succès !')->with('code',1);
         }else{
             return redirect()->to("sell/list")->with('message', 'La vente que vous essayez de facturée n\'existe pas !')->with('code',0);
@@ -142,6 +142,10 @@ class Sell extends BaseController
         $data['products'] = [];
         $data['sales_options'] = [];
         $data['product_price'] = getProductPriceArray();
+        $data['inventory_product_quantity'] = getExistingProductQuantity();
+        if(count( $data['inventory_product_quantity'])==0)
+            return redirect()->to("supply/list")->with('message', 'Aucun produit en stock, Veuillez mettre à jour le stock des produits !')->with('code',0);
+
         $data['auth'] = $this->ionAuth;
         return view('sell/create',$data);
     }
@@ -239,13 +243,14 @@ class Sell extends BaseController
                 {
                     $bill_type = $this->request->getPost("bill_type");
                     $billingController = new Billing();
-                    $bill_code = $billingController->generateBill($id);
+                    $bill_code = $billingController->generateBill($id,"FV");
                     if(!$billingController->certifyBill($bill_code,"FV"))
                     {
                         return redirect()->to("sell/list")->with('message', 'Error lors de la normalisation de la facture, veuillez réessayer la normalisation !')->with('code',0);
                     }
-                    return redirect()->to("sell/list")->with('message', 'La vente est enregistrée avec succès !')->with('code',1);
                 }
+                return redirect()->to("sell/list")->with('message', 'La vente est enregistrée avec succès !')->with('code',1);
+
            }
         }
 		//We find some error

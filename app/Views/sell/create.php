@@ -342,6 +342,42 @@
                                             </div>
                                         </div>
                                         <!--end::Col delivery service-->
+                                         <!--begin::Col AIB service-->
+                                        <div class="col-md-7 fv-row mt-5">
+                                            <div class="d-flex flex-stack mb-8 items-center">
+                                                <!--begin::Label-->
+                                                <div class="me-5">
+                                                    <label class="fs-6 fw-bold fw-bolder text-dark">Collecte de l'AIB</label>
+                                                    <div class="fs-7 fw-bold text-muted">Avez-vous collecté l'AIB chez ce client ? </div>
+                                                </div>
+                                                <!--end::Label-->
+                                                <!--begin::Switch-->
+                                                <label class="form-check form-switch form-check-custom form-check-solid">
+                                                    <input class="form-check-input" type="checkbox" value="1" id="aib_service" name="aib_service">
+                                                    <span class="form-check-label fw-bold text-muted aib_text">Non</span>
+                                                </label>
+                                                <!--end::Switch-->
+                                            </div>
+                                        </div>
+                                         <div class="col-md-12 fv-row mt-5 aib_service" style="display:none">
+                                            <div class="d-flex flex-row">
+                                                <div class="col-md-6 fv-row mx-5" style="margin-left: 10px;">
+                                                    <!--begin::Input group-->
+                                                    <div class="d-flex flex-column mb-5 fv-row  text-dark">
+                                                        <label class="form-label fw-bolder text-dark fs-6 required">Type d'AIB</label>
+                                                        <div class="d-flex flex-row mb-5 fv-row text-dark">
+                                                            <select name="aib_type" aria-label="Selectionnez un profile" data-control="select2" data-placeholder="Attribuer un role..." class="form-select form-select-solid form-select-lg fw-bold select2-hidden-accessible" data-select2-id="select2-data-10-02r3" tabindex="-1" aria-hidden="true" id="aib_type">
+                                                            <option value=""  id="0" disabled>Choisissez le type d'AIB...</option>									
+                                                            <option value="A"  id="ticket" >A (AIB 1%)</option>									
+                                                            <option value="B"  id="a4" >B (AIB 5%)</option>									
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <!--end::Input group-->
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--end::Col AIB service-->
                                     </div>
                                     <!--end: Reduction :Col--> 
 
@@ -386,6 +422,7 @@
         var order_detail = <?= isset($order) ? (json_encode($order_detail)) : (0) ?>;
 
         var product_price = <?= json_encode($product_price)?>;
+        var inventory_product_quantity = <?= json_encode($inventory_product_quantity)?>;
         var active_mes = "Vous souhaitez activer ce produit. Une fois activé, il apparaitra à nouveau dans les modules d'approvisionnement et de vente<span class='badge badge-primary'>Etes-vous sûr de vouloir l'activer ?</span>";
         var category = document.getElementById("product_categories_id");
         var product = document.getElementById("product_prices_product_id");
@@ -457,10 +494,15 @@
         if(!checkSelect())
             return;
         var indexId = product.value+sale_option.value;
+        //Check if quantity is enongh
+        if(parseInt(inventory_product_quantity[indexId]) < parseInt(price.value)){
+            quantity_not_enongh("Quantité insuffisante. La quantité en stock restante pour ce produit est : "+inventory_product_quantity[indexId])
+            return 0;
+        }
+        inventory_product_quantity[indexId] = parseInt(inventory_product_quantity[indexId]) - parseInt(price.value);
 
         if(table_unique.includes(indexId)){
             //row already exists
-
             var rowId = table_unique.indexOf(indexId)+1;
             montant -= Number(table.rows[rowId].cells[5].innerHTML)
             var oldValue = table.rows[rowId].cells[3].innerHTML.trim();
@@ -505,10 +547,13 @@
        $(document).on('click', '.remove', function(){
         var row_index =$(this).closest("tr").index();
         var rowId =  $(this).attr("id");
-        montant -= Number(table.rows[rowId].cells[5].innerHTML)
+        //and quantity
+        inventory_product_quantity[rowId] = parseInt(inventory_product_quantity[rowId]) + Number(table.rows[row_index].cells[3].innerHTML);
+        montant -= Number(table.rows[row_index].cells[5].innerHTML)
         amount.value = montant
         amount_reduce.value = montant
         table_unique.splice(row_index-1, 1);
+
         $(this).closest('tr').remove();
         checkForm();
        });
@@ -546,6 +591,10 @@
         $('.bill_text').html($('.bill_text').html()=="Non" ? "Oui": "Non");
         $('.bill_service').toggle();
     });
+    $(document).on('click', '#aib_service', function(){
+        $('.aib_text').html($('.bill_text').html()=="Non" ? "Oui": "Non");
+        $('.aib_service').toggle();
+    });
     //end reduction 
 
     function checkSelect() {
@@ -565,6 +614,25 @@
          reduction = (document.getElementById("reduction_total1").value > 0 ) ? ((document.getElementById("reduction_total1").value*montant/100)) : (document.getElementById("reduction_total2").value);
      amount_reduce.value = montant - reduction;
     }
+
+
+    //Information dialog 
+      
+      function quantity_not_enongh(mes) {
+           Swal.fire({
+              html: mes,
+              icon: "info",
+              buttonsStyling: false,
+              confirmButtonText: "C'est compris!",
+              customClass: {
+                  confirmButton: "btn btn-primary",
+              }
+          }).then((result)=>
+              {
+                  if(result.value) 
+                     console.log(result.value);                         
+              });  
+      }
     </script>
 <?= $this->endSection() ?>
 

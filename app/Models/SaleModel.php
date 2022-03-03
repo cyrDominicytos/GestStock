@@ -17,6 +17,7 @@ class SaleModel extends Model
          'sales_delivery_date',
          'sales_client_id',
          'sales_users_id',
+         'sales_aib',
         ];
 
     protected $validationRules    = [];

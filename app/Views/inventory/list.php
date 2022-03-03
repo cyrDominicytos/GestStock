@@ -613,7 +613,7 @@
                                             <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4" data-kt-menu="true">
                                                 <!--begin::Menu item-->
                                                 <div class="menu-item px-3">
-                                                    <p class="menu-link px-3"onclick='removePrice(<?=$inventory->supplies_id ?>, <?=json_encode($inventory)?>)' ><i class="fa fa-trash text-danger py-2">Rebus</i></p>
+                                                    <p class="menu-link px-3"onclick='removePrice(<?=json_encode($inventory)?>)' ><i class="fa fa-lock text-danger my-2">Rebut</i></p>
                                                 </div>
                                                 <!--end::Menu item-->
                                             </div>

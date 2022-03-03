@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "77471be13970ca76312045fbd5276548",
+    "content-hash": "89bc1e6e51612323d3405840efed40e0",
     "packages": [
         {
             "name": "benedmunds/codeigniter-ion-auth",
@@ -238,6 +238,50 @@
                 }
             ],
             "time": "2021-09-02T17:10:53+00:00"
+        },
+        {
+            "name": "nguyenary/qr-code-monkey",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/nguyenary/QRCodeMonkey.git",
+                "reference": "709d0003e8defb409eb477261e408c939549f8ab"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/nguyenary/QRCodeMonkey/zipball/709d0003e8defb409eb477261e408c939549f8ab",
+                "reference": "709d0003e8defb409eb477261e408c939549f8ab",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.2"
+            },
+            "suggest": {
+                "ext-json": "*"
+            },
+            "default-branch": true,
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "nguyenary\\QRCodeMonkey\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "nguyenary",
+                    "email": "nguyenary.dev@gmail.com"
+                }
+            ],
+            "description": "PHP Library for free generator QR Code from qrcode-monkey.com",
+            "support": {
+                "issues": "https://github.com/nguyenary/QRCodeMonkey/issues",
+                "source": "https://github.com/nguyenary/QRCodeMonkey/tree/master"
+            },
+            "time": "2021-09-01T16:06:14+00:00"
         },
         {
             "name": "psr/log",
@@ -2627,7 +2671,8 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "benedmunds/codeigniter-ion-auth": 20
+        "benedmunds/codeigniter-ion-auth": 20,
+        "nguyenary/qr-code-monkey": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

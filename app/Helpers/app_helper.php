@@ -16,6 +16,7 @@ use App\Models\SellDetailsModel;
 use App\Models\ProductPriceModel;
 use App\Models\ConfigModel;
 use App\Models\SupplyModel;
+use App\Models\InventoryModel;
 
 
 // Function: used to convert a string to revese in order
@@ -440,6 +441,7 @@ if (!function_exists("get_assign_options_by_product")) {
 					"sales_amount"=>0,
 					"sales_users_id"=>$ionAuth->user()->row()->id,
 					"sales_status"=>2,
+					"sales_aib"=> ($request->getVar('aib_service')) ? ($request->getVar('aib_type')): (0),
 				]);
 
 				foreach ($request->getVar('product_list') as $key => $product){
@@ -554,4 +556,19 @@ if (!function_exists("get_assign_options_by_product")) {
 				return $result;
 			}
 		}
+
+		//Load inventory quantity foreach existing product
+		if (!function_exists("getExistingProductQuantity")) {
+			function getExistingProductQuantity()
+				{
+					$model = new InventoryModel();
+		
+					$results = $model->get()->getResult();
+					$data = [];
+					foreach ($results as $result){
+						$data[$result->products_id."".$result->sales_options_id] = $result->quantity_inventory;
+					}
+					return  $data;
+				}
+			}
 ?>

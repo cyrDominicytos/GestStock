@@ -24,6 +24,19 @@ class Billing extends BaseController
 
     // PUBLIC FUNCTION TO GENERATE QR CODE
     public function generateQrCode($secret_string = null, $file_name = null){
+        if($secret_string == null){
+            $qrcode = new QRCode($secret_string);
+            $qrcode->setSize(90);
+            $qrcode->create(WRITEPATH.'uploads/qrcode/qrcode.png');
+        }
+        else{
+            $qrcode = new QRCode($secret_string);
+            $qrcode->setSize(90);
+            $qrcode->create(WRITEPATH.'uploads/qrcode/qrcode.png');
+        }
+    }
+    // PUBLIC FUNCTION TO GENERATE QR CODE
+    public function generateQrCode2($secret_string = null, $file_name = null){
         $my_app_variables = new \Config\MyAppVariables();
         if($secret_string == null){
             $qrcode = new QRCode($my_app_variables->default_string_to_embed_as_qr_code);
@@ -49,7 +62,8 @@ class Billing extends BaseController
         if(!$bill)
             return redirect()->back()->with("message", "La facture que vous essayez de normaliser n'existe pas !")->with("code", 0);
         $bill =  $bill[0];
-
+        
+        
         //Get company parameters
         $companyParams = getConfigList();
         $ionAuth    = new \IonAuth\Libraries\IonAuth();
@@ -69,6 +83,9 @@ class Billing extends BaseController
         $operatorDto->setName($ionAuth->user()->row()->last_name." ".$ionAuth->user()->row()->first_name);
         $body->setOperator($operatorDto);
         $body->setType($bill_type);
+        $sale = $saleModel->where("sales_id", $bill->bill_sales_id)->get()->getResult();
+        if( $sale[0]->sales_aib != "0")
+            $body->setAib($sale[0]->sales_aib);
 
         $items = array();
         $sellDetails = $sellDetailsModel->get_sell_detail($bill->bill_sales_id);
@@ -77,8 +94,8 @@ class Billing extends BaseController
             foreach($sellDetails as $singleDetail){
                 $single_item = new \Swagger\Client\Model\ItemDto();
                 $single_item->setName($singleDetail->products_name);
-                $single_item->setPrice($singleDetail->sell_details_selling_price);
-                $single_item->setQuantity($singleDetail->sell_details_quantity);
+                $single_item->setPrice( (int) $singleDetail->sell_details_selling_price);
+                $single_item->setQuantity( (int) $singleDetail->sell_details_quantity);
                 $single_item->setTaxGroup($singleDetail->exonerations_name);   // Old value => $single_item->setTaxGroup(\Swagger\Client\Model\TaxGroupTypeEnum::B);
                 array_push($items, $single_item);
                 
@@ -116,12 +133,16 @@ class Billing extends BaseController
                         'bill_taf'=> $invoiceResponseDto['taf'],
                         'bill_hab'=> $invoiceResponseDto['hab'],
                         'bill_had'=> $invoiceResponseDto['had'],
+                        'bill_vab'=> $invoiceResponseDto['vab'],
                         'bill_vad'=> $invoiceResponseDto['vad'],
+                        'bill_total'=> $invoiceResponseDto['total'],
                         'bill_aib'=> $invoiceResponseDto['aib'],
                         'bill_ts'=> $invoiceResponseDto['ts'],
 
 
                         'bill_certify_by'=> $ionAuth->user()->row()->id,
+                        'bill_type'=> $bill_type,
+                        'bill_uid'=> $uid,
 
                     );
 
@@ -130,8 +151,7 @@ class Billing extends BaseController
                     // And update based on single uniq id
                     if($billModel->update($bill->bill_id, $bill_sec_info)){
                         // If update success, generate QRCODE and store it, then redirect to view bill with bill_code variable
-                        //$this->generateQrCode($bill_sec_info['bill_mecef_qr_code'], $bill_sec_info['bill_mecef_code_dgi']);
-                        //return redirect()->to('bill/viewBill/'.$bill_code);
+                        $this->generateQrCode($bill_sec_info['bill_mecef_qr_code'], $bill_sec_info['bill_mecef_code_dgi']);
                         $saleModel->update($bill->bill_sales_id,[
                             "sales_status" => 4,
                         ]);
@@ -206,9 +226,9 @@ class Billing extends BaseController
 
 
     // FUNCTION TO BILL SALE
-    public function generateBill($saleId)
+    public function generateBill($saleId, $type)
     {
-        $bill_code = $this->generateBillCode();
+        $bill_code = $this->generateBillCode($type);
         $billModel = new BillModel();
         $saleModel = new SaleModel();
         $ionAuth    = new \IonAuth\Libraries\IonAuth();
@@ -226,14 +246,14 @@ class Billing extends BaseController
 
 
     // FUNCTION TO GENERATE THE BILL CODE
-    public function generateBillCode(){
+    public function generateBillCode($type="FV"){
         $billing_model = new BillModel();
         helper('text'); // Helper that generate strings use docs for usage
         // Do generate mat string while the mat is not uniq after DataBase checking
         do{
             $random_length = 4; //random_string('nozero',1); // Generate a random length  which is numeric value(except 0) from 1 to 9
             $random_gen_code = random_string('numeric', $random_length); // String type, and length : alnum, numeric
-            $random_mat = 'FLN'. $random_gen_code;
+            $random_mat = $type. $random_gen_code;
         }while(! $billing_model->isCodeUniq($random_mat));
         return $random_mat;
     }

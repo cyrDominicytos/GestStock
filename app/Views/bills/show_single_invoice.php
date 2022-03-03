@@ -100,7 +100,7 @@
                                                 <th>
                                                     <h1>
                                                         <?php 
-                                                                echo $item->products_name.' - '.$item->exonerations_name.'<br/>T.S = '.$item->sell_details_quantity.' x '.(round($item->exonerations_rate/$item->sell_details_quantity)).' x '.$item->exonerations_rate;
+                                                                echo $item->products_name.' - '.$item->exonerations_slug.'<br/>T.S = '.$item->sell_details_quantity.' x '.(round($item->exonerations_rate/$item->sell_details_quantity)).' x '.$item->exonerations_rate;
                                                         ?>
                                                     </h1>
                                                 </th>
@@ -155,11 +155,11 @@
                                     ?>
                                             <tr>
                                                 <th style="width:50%;">T. H.T. [B] 18%</th>						
-                                                <td style="text-align:right;padding-right:10px !important;"><?php echo '*'.($bill->bill_hab - $bill->bill_ts); ?></td>
+                                                <td style="text-align:right;padding-right:10px !important;"><?php echo '*'.($bill->bill_hab); ?></td>
                                             </tr>
                                             <tr>
-                                                <th style="width:50%;">T. TVA [B] 18%</th>						
-                                                <td style="text-align:right;padding-right:10px !important;"><?php echo '*'.($bill->bill_tab - $bill->bill_hab);?></td>
+                                                <th style="width:50%;">TVA [B] 18%</th>						
+                                                <td style="text-align:right;padding-right:10px !important;"><?php echo '*'.($bill->bill_vab);?></td>
                                             </tr>
                                     <?php 
                                         }
@@ -171,11 +171,11 @@
                                     ?>
                                             <tr>
                                                 <th style="width:50%;">T. H.T. [C] 0%</th>						
-                                                <td style="text-align:right;padding-right:10px !important;"><?php echo '*'.($bill->bill_hac) ; ?></td>
+                                                <td style="text-align:right;padding-right:10px !important;"><?php echo '*'.($bill->bill_tac) ; ?></td>
                                             </tr>
                                             <tr>
                                                 <th style="width:50%;">T. TVA [C] 0%</th>						
-                                                <td style="text-align:right;padding-right:10px !important;"><?php echo '*'.($bill->bill_tac - $bill->bill_tac);?></td>
+                                                <td style="text-align:right;padding-right:10px !important;"><?php echo '*0';?></td>
                                             </tr>
                                     <?php 
                                         }
@@ -196,13 +196,47 @@
                                     <?php 
                                         }
                                     ?>
+                                    <?php 
+                                        // TOTAL HT AND TVA FOR TAXABLE GROUP E
+                                        if($bill->bill_tae > 0){
+                                    ?>
+                                            <tr>
+                                                <th style="width:50%;">REGIME TPS [E]</th>						
+                                                <td style="text-align:right;padding-right:10px !important;"><?php echo '*'.($bill->bill_tae) ; ?></td>
+                                            </tr>
+                                    <?php 
+                                        }
+                                    ?>
+
+                                    <?php 
+                                        // TOTAL HT AND TVA FOR TAXABLE GROUP F
+                                        if($bill->bill_taf > 0){
+                                    ?>
+                                            <tr>
+                                                <th style="width:50%;">RESERVES [F]</th>						
+                                                <td style="text-align:right;padding-right:10px !important;"><?php echo '*'.($bill->bill_taf) ; ?></td>
+                                            </tr>
+                                    <?php 
+                                        }
+                                    ?>
+                                     <?php 
+                                        // TOTAL HT AND TVA FOR TAXABLE GROUP A
+                                        if($bill->bill_taa > 0){
+                                    ?>
+                                            <tr>
+                                                <th>EXONÉRÉS</th>						
+                                                <td style="text-align:right;padding-right:10px !important;"><?php echo '*'.$bill->bill_taa ; ?></td>
+                                            </tr>
+                                    <?php 
+                                        }
+                                    ?>
 
                                     <?php 
                                         // AIB SPECIFICATION
                                         if($bill->bill_aib > 0){
                                     ?>
                                             <tr>
-                                                <th style="width:50%;">AIB - <?php echo $bill->bill_aib.'%'; ?></th>						
+                                                <th style="width:50%;">AIB - <?php echo ($sale->sales_aib == "A") ? (1) : (5).'%'; ?></th>						
                                                 <td style="text-align:right;padding-right:10px !important;"><?php echo '*'.$bill->bill_aib; ?></td>
                                             </tr>
                                     <?php 
@@ -216,18 +250,6 @@
                                             <tr>
                                                 <th style="width:50%;">TOTAL TS</th>						
                                                 <td style="text-align:right;padding-right:10px !important;"><?php echo '*'.$bill->bill_ts ; ?></td>
-                                            </tr>
-                                    <?php 
-                                        }
-                                    ?>
-
-                                    <?php 
-                                        // TOTAL HT AND TVA FOR TAXABLE GROUP A
-                                        if($bill->bill_taa > 0){
-                                    ?>
-                                            <tr>
-                                                <th>EXONÉRÉS</th>						
-                                                <td style="text-align:right;padding-right:10px !important;"><?php echo '*'.$bill->bill_taa ; ?></td>
                                             </tr>
                                     <?php 
                                         }
@@ -256,19 +278,17 @@
                         <div class="info">
                             <div class="info-time"><strong>Mode de paiement:</strong> <?php echo 'ESPECE' ?> </div>
                             
-                            <?php if(isset($bill->bill_qrCode)){
+                            <?php if($bill->bill_mecef_qr_code != null){
                             ?>
-
                                 <div class="info-payment"><strong>MECef/DGI</strong><br>
-                                    <strong>Code MECef : </strong> <?php echo 'codeMECeFDGI' ?> <br/>
-                                    <strong>NIM : </strong> <?php echo $bill->bill_nim ?> <br/>
-                                    <strong>Compteurs : </strong> <?php echo $bill->bill_counters ?> <br/>
+                                    <strong>Code MECef : </strong> <?php echo $bill->bill_mecef_code_dgi ?> <br/>
+                                    <strong>NIM : </strong> <?php echo $bill->bill_mecef_nim ?> <br/>
+                                    <strong>Compteurs : </strong> <?php echo $bill->bill_mecef_counters ?> <br/>
                                     <strong>Date & Heure : </strong> <?php echo $bill->bill_mecef_date_time  ?> <br/><br/>
                                     <p>
-                                        <img src="<?php echo base_url(); ?>/public/assets/bill/.'qrcodes/codeMECeFDGI.png'; ?>" />
+                                        <img src="<?php echo WRITEPATH.'\uploads\qrcode\qrcode.png';?>"alt="<?php echo WRITEPATH.'\uploads\qrcode\qrcode.png'; ?> codeqr introuvable" />
                                     </p>
                                 </div>
-
                             <?php
                             }
                             ?>
@@ -291,9 +311,6 @@
                 </section><!-- FINANCIALS SECTION -->
 
                 <footer id="footer">  
-                    <!--<div class="footer-mail">stevenson@yourcompany.com</div>
-                    <div class="footer-phone">+75 754 234 908</div>
-                    <div class="footer-web">www.yourcompany.com</div>-->
                     <p style="color:white;padding-top:5px;">
                         <b><?= $configList[1]->config_value." | ".$configList[9]->config_value ?></b>
                     </p>

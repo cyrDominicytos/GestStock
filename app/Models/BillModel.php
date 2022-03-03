@@ -16,18 +16,22 @@ class BillModel extends Model
          'bill_mecef_nim',
          'bill_certify_bill',
          'bill_taa',
+         'bill_tab',
          'bill_tac',
          'bill_tad',
          'bill_tae',
          'bill_taf',
          'bill_hab',
          'bill_had',
+         'bill_vab',
          'bill_vad',
          'bill_aib',
          'bill_ts',
+         'bill_total',
          'bill_generate_by',
          'bill_sales_id',
          'bill_certify_by',
+         'bill_type',
         ];
 
     protected $validationRules    = [];

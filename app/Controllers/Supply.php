@@ -83,7 +83,7 @@ class Supply extends BaseController
         if($data['sales_options']==null)
             return redirect()->to("sales_option/list")->with('message', 'Veuillez enregistrer les options de vente !')->with('code',0);
        
-        $data['providers'] = $this->modelProvider->where("providers_isActive", 1)->whereNotIn("prodivers_id", [1])->get()->getResult();
+        $data['providers'] = $this->modelProvider->where("providers_isActive", 1)->whereNotIn("providers_id", [1])->get()->getResult();
         $data['products'] = [];
         $data['sales_options'] = [];
         $data['product_price'] = getProductPriceArray();
@@ -121,7 +121,7 @@ class Supply extends BaseController
         if($data['sales_options']==null)
             return redirect()->to("sales_option/list")->with('message', 'Veuillez enregistrer les options de vente !')->with('code',0);
        
-        $data['providers'] = $this->modelProvider->where("providers_isActive", 1)->whereNotIn("prodivers_id", [1])->get()->getResult();
+        $data['providers'] = $this->modelProvider->where("providers_isActive", 1)->whereNotIn("providers_id", [1])->get()->getResult();
         $data['product_price'] = getProductPriceArray();
         $data['auth'] = $this->ionAuth;
         return view('supply/create',$data);

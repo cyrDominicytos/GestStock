@@ -6,6 +6,13 @@ use App\Models\PermissionModel;
 use App\Models\GroupPermissionModel;
 use App\Models\UserGroupModel;
 use App\Models\GroupModel;
+use App\Models\ClientModel;
+use App\Models\ProviderModel;
+use App\Models\DeliveryMenModel;
+use App\Models\ProductModel;
+use App\Models\ProductCategoriesModel;
+use App\Models\SalesOptionsModel;
+use App\Models\OrdersModel;
 
 class Auth extends \IonAuth\Controllers\Auth
 {
@@ -66,6 +73,14 @@ class Auth extends \IonAuth\Controllers\Auth
 	protected $modelGroupPermission = null;
 	protected $modelUserGroup = null;
 	protected $modelGroup = null;
+
+	protected $modelClient = null;
+	protected $modelProvider = null;
+	protected $modelDeliveryMen = null;
+	protected $modelProductCategory = null;
+	protected $modelProduct = null;
+	protected $modelSalesOptions = null;
+	protected $modelOrder = null;
 	/**
 	 * Constructor
 	 *
@@ -84,6 +99,15 @@ class Auth extends \IonAuth\Controllers\Auth
         $this->modelGroupPermission = new GroupPermissionModel();
         $this->modelUserGroup = new UserGroupModel();
         $this->modelGroup = new GroupModel();
+
+        $this->modelClient = new ClientModel();
+        $this->modelDeliveryMen = new DeliveryMenModel();
+        $this->modelProvider = new ProviderModel();
+        $this->modelProduct = new ProductModel();
+        $this->modelSalesOptions = new SalesOptionsModel();
+        $this->modelProductCategory = new ProductCategoriesModel();
+        $this->modelOrder = new OrdersModel();
+
 
 		if (! empty($this->configIonAuth->templates['errors']['list']))
 		{
@@ -126,7 +150,16 @@ class Auth extends \IonAuth\Controllers\Auth
 		}
 		else 
 		{
+
             $data['users'] = $this->ionAuth->users()->result();
+            $data['users_count'] = count($this->ionAuth->users()->result());
+            $data['client_count'] = count($this->modelClient->get()->getResult()) -1;
+            $data['provider_count'] = count($this->modelProvider->get()->getResult()) -1;
+            $data['deliver_men_count'] = count($this->modelDeliveryMen->get()->getResult());
+            $data['category_product_count'] = count($this->modelProductCategory->get()->getResult());
+            $data['product_count'] = count($this->modelProduct->get()->getResult());
+            $data['sale_options_count'] = count($this->modelSalesOptions->get()->getResult());
+            $data['order_count'] = count($this->modelOrder->get()->getResult());
             $data['auth'] = $this->ionAuth;
             return view('dashboard/dashboard',$data);
 		}

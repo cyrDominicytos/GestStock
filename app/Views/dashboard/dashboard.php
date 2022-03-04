@@ -22,7 +22,7 @@
                             </svg>
                         </span>
                         <!--end::Svg Icon-->
-                        <div class="text-white fw-bolder fs-2 mb-2 mt-5">3</div>
+                        <div class="text-white fw-bolder fs-2 mb-2 mt-5"><?= $client_count ?></div>
                         <div class="fw-bold text-white">Clients</div>
                     </div>
                     <!--end::Body-->
@@ -43,7 +43,7 @@
                             </svg>
                         </span>
                         <!--end::Svg Icon-->
-                        <div class="text-white fw-bolder fs-2 mb-2 mt-5">1</div>
+                        <div class="text-white fw-bolder fs-2 mb-2 mt-5"><?= $provider_count ?></div>
                         <div class="fw-bold text-white">Fournisseur</div>
                     </div>
                     <!--end::Body-->
@@ -64,7 +64,7 @@
                             </svg>
                         </span>
                         <!--end::Svg Icon-->
-                        <div class="text-white fw-bolder fs-2 mb-2 mt-5">2</div>
+                        <div class="text-white fw-bolder fs-2 mb-2 mt-5"><?= $deliver_men_count ?></div>
                         <div class="fw-bold text-white">Livreurs</div>
                     </div>
                     <!--end::Body-->
@@ -85,7 +85,7 @@
                             </svg>
                         </span>
                         <!--end::Svg Icon-->
-                        <div class="text-white fw-bolder fs-2 mb-2 mt-5">7</div>
+                        <div class="text-white fw-bolder fs-2 mb-2 mt-5"><?= $users_count ?></div>
                         <div class="fw-bold text-white">Employés</div>
                     </div>
                     <!--end::Body-->
@@ -110,7 +110,7 @@
                             </svg>
                         </span>
                         <!--end::Svg Icon-->
-                        <div class="text-gray-100 fw-bolder fs-2 mb-2 mt-5">5</div>
+                        <div class="text-gray-100 fw-bolder fs-2 mb-2 mt-5"><?= $category_product_count ?></div>
                         <div class="fw-bold text-gray-100">Catégories</div>
                     </div>
                     <!--end::Body-->
@@ -130,7 +130,7 @@
                             </svg>
                         </span>
                         <!--end::Svg Icon-->
-                        <div class="text-white fw-bolder fs-2 mb-2 mt-5">6</div>
+                        <div class="text-white fw-bolder fs-2 mb-2 mt-5"><?= $sale_options_count ?></div>
                         <div class="fw-bold text-white">Options de vente</div>
                     </div>
                     <!--end::Body-->
@@ -150,7 +150,7 @@
                             </svg>
                         </span>
                         <!--end::Svg Icon-->
-                        <div class="text-white fw-bolder fs-2 mb-2 mt-5">20</div>
+                        <div class="text-white fw-bolder fs-2 mb-2 mt-5"><?= $product_count ?></div>
                         <div class="fw-bold text-white">Produits</div>
                     </div>
                     <!--end::Body-->
@@ -189,8 +189,8 @@
                     <div class="card-body my-3">
                         <a href="#" class="card-title fw-bolder text-primary fs-5 mb-3 d-block">Commandes totale</a>
                         <div class="py-1">
-                            <span class="text-dark fs-1 fw-bolder me-2">10</span>
-                            <span class="fw-bold text-muted fs-7">sur 10</span>
+                            <span class="text-dark fs-1 fw-bolder me-2"><?= $order_count ?></span>
+                            <span class="fw-bold text-muted fs-7">sur <?= $order_count ?></span>
                         </div>
                         <div class="progress h-7px bg-primary bg-opacity-50 mt-7">
                             <div class="progress-bar bg-primary" role="progressbar" style="width: 100%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>

@@ -97,7 +97,6 @@ class Billing extends BaseController
                 $single_item->setQuantity( (int) $singleDetail->sell_details_quantity);
                 $single_item->setTaxGroup($singleDetail->exonerations_name);   // Old value => $single_item->setTaxGroup(\Swagger\Client\Model\TaxGroupTypeEnum::B);
                 array_push($items, $single_item);
-                
             }
         }
         $body->setItems($items);

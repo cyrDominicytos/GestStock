@@ -41,7 +41,7 @@
             <div id="invoice" class="new"><!-- INVOICE -->
 
                 <header id="header"><!-- HEADER -->
-                    <div class="invoice-logo"></div><!-- LOGO -->
+                    <div class="invoice-logo" style="background-image : url(<?php echo base_url()."/writable/".$configList[11]->config_value;?>)"></div><!-- LOGO -->
                 
                     <div class="invoice-from"><!-- HEADER FROM -->
                         <div class="org"><b>IFU :<?=$configList[2]->config_value." - ".$configList[10]->config_value." -  Siège : ".$configList[5]->config_value ?></b></div>
@@ -286,7 +286,7 @@
                                     <strong>Compteurs : </strong> <?php echo $bill->bill_mecef_counters ?> <br/>
                                     <strong>Date & Heure : </strong> <?php echo "le ".format_date($bill->bill_mecef_date_time, "d/m/Y à H:i:s")   ?> <br/><br/>
                                     <p>
-                                        <img src="<?php echo base_url().'/writable/uploads/qrcode/qrcode.png';?>"alt="<?php echo base_url().'/writable/uploads/qrcode/qrcode.png'; ?> codeqr introuvable" />
+                                        <img src="<?php echo base_url().'/writable/uploads/qrcode/'.$bill->bill_code.'.png';?>"alt="codeqr introuvable" />
                                     </p>
                                 </div>
                             <?php

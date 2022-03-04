@@ -61,7 +61,7 @@
                         <!--begin::Content-->
                         <div class="flex-lg-row-fluid me-0 me-lg-20">
                             <!--begin::Form-->
-                            <form action="<?= base_url() ?>/config/save" class="form mb-15" method="post" >
+                            <form action="<?= base_url() ?>/config/save" class="form mb-15" method="post" enctype="multipart/form-data" >
                             <!--begin::Input group-->
                                 <div class="row mb-5">
                                 <div id="infoMessage" style="color:red;"><?=  session()->has('error') ? (session()->get('error')) : ("")?></div>
@@ -146,7 +146,7 @@
                                         <!--end::Input-->
                                     </div>
                                     <!--end::Col-->
-                                     <!--begin::Col-->
+                                    <!--begin::Col-->
                                      <div class="col-md-6 fv-row">
                                         <!--end::Label-->
                                         <label class="fw-bolder text-dark fs-6 mb-2">Adresse de site web</label>
@@ -156,7 +156,26 @@
                                         <!--end::Input-->
                                     </div>
                                     <!--end::Col-->
-                                    
+                                    <!--begin::Col-->
+                                     <div class="col-md-6 fv-row">
+                                        <!--end::Label-->
+                                        <label class="fw-bolder text-dark fs-6 mb-2">Registre de commerce</label>
+                                        <!--end::Label-->
+                                        <!--end::Input-->
+                                        <input type="text" class="form-control form-control-solid" placeholder="" name="company_rccm" value="<?= !session()->has('error')  ? $configList[10]->config_value : set_value('company_rccm') ?>" />
+                                        <!--end::Input-->
+                                    </div>
+                                    <!--end::Col-->
+                                    <!--begin::Col-->
+                                     <div class="col-md-6 fv-row">
+                                        <!--end::Label-->
+                                        <label class="fw-bolder text-dark fs-6 mb-2">Logo (Image : png, jpj ou jpeg)</label>
+                                        <!--end::Label-->
+                                        <!--end::Input-->
+                                        <input type="file" class="form-control form-control-solid" placeholder="" name="company_logo" value="<?= !session()->has('error')  ? $configList[11]->config_value : set_value('company_logo') ?>" />
+                                        <!--end::Input-->
+                                    </div>
+                                    <!--end::Col-->
                                 </div>
                                 <!--end::Input group-->
                                

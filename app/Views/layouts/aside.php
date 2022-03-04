@@ -281,8 +281,7 @@
                                     <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
                                         <span class="menu-link">
                                             <span class="menu-icon">
-                                                <i class="bi bi-person-plus5214
-                                                §:;,nbvcfs-3"></i>
+                                                <i class="bi bi-person-plus fs-3"></i>
                                             </span>
                                             <span class="menu-title">Nos Livreurs</span>
                                             <span class="menu-arrow"></span>

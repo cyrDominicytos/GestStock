@@ -83,6 +83,8 @@ class Config extends BaseController
                     'company_identity'=> 'trim|required',
                     'company_created_at'=> 'trim',
                     'company_site_url'=> 'trim',
+                    'company_rccm'=> 'trim',
+                    'company_logo'=> 'is_image[company_logo]|mime_in[company_logo,image/jpg,image/jpeg,image/gif,image/png,image/webp]'
                 ];
         $errors =  [
                         "company_name"=>[
@@ -100,7 +102,7 @@ class Config extends BaseController
                             "required"=>"Renseignez le téléphone de l'entreprise",
                             ],
                         "company_address"=>[
-                            "required"=>"Renseignez le téléphone de l'entreprise",
+                            "required"=>"Renseignez l'adresse de l'entreprise",
                             ],
                         "company_product_identity"=>[
                             "required"=>"Renseignez l'identificateur des produit l'entreprise",
@@ -108,9 +110,12 @@ class Config extends BaseController
                         "company_identity"=>[
                             "required"=>"Renseignez l'identifiant de connexion de l'entreprise",
                             ],
+                        "company_logo"=>[
+                            "is_image"=>"Désolé, le fichier envoyé n'est pas une image",
+                            "mime_in"=>"Désolé, vous ne pouvez envoyer qu'une : image/jpg, image/jpeg, image/gif, image/png ou image/webp",
+                            ],
                     ]; 
         $this->validation->setRules($rules, $errors);
-                     
 		if ($this->validation->withRequest($this->request)->run())
 		{			
 			$this->modelConfig->where("config_code", 1)->set(['config_value'=>$this->request->getPost('company_name')])->update();
@@ -122,7 +127,17 @@ class Config extends BaseController
 			$this->modelConfig->where("config_code", 7)->set(['config_value'=>$this->request->getPost('company_identity')])->update();
 			$this->modelConfig->where("config_code", 8)->set(['config_value'=>$this->request->getPost('company_created_at')])->update();
 			$this->modelConfig->where("config_code", 9)->set(['config_value'=>$this->request->getPost('company_site_url')])->update();
-
+			$this->modelConfig->where("config_code", 10)->set(['config_value'=>$this->request->getPost('company_rccm')])->update();
+            
+            //Upload new image
+            if($this->request->getFile('company_logo')->isValid())
+            {
+                $img = $this->request->getFile('company_logo');
+                $filepath = 'uploads/logo/company_logo.'.$img->getExtension();
+                unlink(WRITEPATH.$filepath);
+                $img->move(WRITEPATH . 'uploads/logo', "company_logo.".$img->getExtension());  
+                $this->modelConfig->where("config_code", 11)->set(['config_value'=> $filepath])->update();
+            }
             return redirect()->to("/config")->with('message', 'Configuration mise à jour avec succès!')->with('code',1);            
         }
 		//We find some error

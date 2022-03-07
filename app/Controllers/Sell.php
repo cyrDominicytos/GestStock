@@ -240,13 +240,13 @@ class Sell extends BaseController
 		if ($this->validation->withRequest($this->request)->run())
 		{     
            // dd($this->request->getPost("bill_service"));
-            if($id = insertSales($this->request, $this->ionAuth))
+            if($id = insertSales($this->request, $this->ionAuth, true))
             {
                 //delete order and details
                 $orderId = (int) $this->request->getPost("id");
                 if($orderId > 0)
                     $this->modelOrder->delete($orderId);
-                    
+
                 //check if need to bill
                 if($this->request->getPost("bill_service"))
                 {

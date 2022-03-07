@@ -445,7 +445,7 @@ if (!function_exists("get_assign_options_by_product")) {
 		}
 	
 	if (!function_exists("insertSales")) {
-		function insertSales($request, $ionAuth)
+		function insertSales($request, $ionAuth, $sales_is_commanded=false)
 			{
 				$id = false;
 				$amount = 0;
@@ -457,6 +457,7 @@ if (!function_exists("get_assign_options_by_product")) {
 					"sales_users_id"=>$ionAuth->user()->row()->id,
 					"sales_status"=>2,
 					"sales_aib"=> ($request->getVar('aib_service')) ? ($request->getVar('aib_type')): (0),
+					"sales_is_commanded"=>$sales_is_commanded,
 				]);
 
 				foreach ($request->getVar('product_list') as $key => $product){

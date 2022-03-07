@@ -612,6 +612,16 @@
                                                 <!--end::Menu item-->
                                                 <!--begin::Menu item-->
                                                 <div class="menu-item px-3">
+                                                    <a href="<?= base_url() ?>/order/sale/<?= $order->orders_id?>"  class="menu-link px-3"><i class="fa fa-edit text-success py-2"> Régler</i></a>
+                                                </div>
+                                                <!--end::Menu item-->
+                                                <!--begin::Menu item-->
+                                                <div class="menu-item px-3">
+                                                    <a href="<?= base_url() ?>/order/vue/<?= $order->orders_id?>"  class="menu-link px-3"><i class="fa fa-edit text-primary py-2"> Proforma</i></a>
+                                                </div>
+                                                <!--end::Menu item-->
+                                                <!--begin::Menu item-->
+                                                <div class="menu-item px-3">
                                                     <p class="menu-link px-3"onclick='removePrice(<?=$order->orders_id ?>, <?=json_encode($order)?>)' ><i class="fa fa-trash text-danger py-2"> Supprimer</i></p>
                                                 </div>
                                                 <!--end::Menu item-->

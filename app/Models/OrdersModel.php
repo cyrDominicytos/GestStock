@@ -12,6 +12,13 @@ class OrdersModel extends Model
          'orders_amount',
          'orders_client_id',
          'orders_delivery_date',
+         'orders_aib',
+         'orders_reduction',
+         'orders_is_delivable',
+         'orders_deliver_man',
+         'orders_users_id',
+         'orders_users_id', 
+
         ];
 
     protected $validationRules    = [];

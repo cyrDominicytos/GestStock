@@ -368,9 +368,10 @@ if (!function_exists("get_assign_options_by_product")) {
 	}
 
 	if (!function_exists("insertOrder")) {
-		function insertOrder($request)
+		function insertOrder($request, $ionAuth)
 			{
-				$result = false;
+
+			//	dd($request);
 				$amount = 0;
 				$modelOrders = new OrdersModel();
 				$modelOrderDetails = new OrdersDetailsModel();
@@ -378,24 +379,38 @@ if (!function_exists("get_assign_options_by_product")) {
 				$id = $modelOrders->insert([
 					"orders_client_id"=>$request->getVar('client'),
 					"orders_amount"=>0,
+					"orders_users_id"=>$ionAuth->user()->row()->id,
+					"orders_status"=>1,
+					"orders_aib"=> ($request->getVar('aib_service')) ? ($request->getVar('aib_type')): (0),
 				]);
 
 				foreach ($request->getVar('product_list') as $key => $product){
-					//dd($request->getVar('montant_list')); 
 					$amount += (int) $request->getVar('montant_list')[$key]; 
-					$result = $modelOrderDetails->insert([
+				    $modelOrderDetails->insert([
 						"orders_details_amount"=>$request->getVar('montant_list')[$key],
 						"orders_details_quantity"=>$request->getVar('quantity_list')[$key],
+						"orders_details_reduction"=>$request->getVar('reduction'.$key),
 						"orders_details_orders_id"=>$id,
 						"orders_details_sales_options_id"=>$request->getVar('option_list')[$key],
 						"orders_details_products_id"=>$product,
 					]);
 
 				}
-				$modelOrders->update($id,[
-					"orders_amount"=>$amount,
-				]);
-				return $result;
+
+				$data["orders_amount"] = $amount;
+				if($request->getVar('delivery_man'))
+				{
+					$data["orders_deliver_man"] = $request->getVar('delivery_man');
+					$data["orders_delivery_date"] = $request->getVar('sales_delivery_date');
+				}
+				if($request->getVar('amount_reduce'))
+				{
+					$data["orders_reduction"] = $request->getVar('amount_reduce');
+				}
+				$data["orders_amount"] = $request->getVar('amount');
+				$modelOrders->update($id,$data);
+
+				return $id;
 			}
 		}
 
@@ -459,14 +474,14 @@ if (!function_exists("get_assign_options_by_product")) {
 				    $modelSellDetails->insert($data);
 
 				}
-				$data = [
+				/*$data = [
 					"sell_details_amount"=>$request->getVar('montant_list')[$key],
 					"sell_details_quantity"=>$request->getVar('quantity_list')[$key],
 					"sell_details_reduction"=>$request->getVar('reduction_list')[$key],
 					"sell_details_sales_id"=>$id,
 					"sell_details_sales_options_id"=>$request->getVar('option_list')[$key],
 					"sell_details_products_id"=>$product,
-				];
+				];*/
 				if($request->getVar('delivery_man'))
 					{
 						$data["sales_deliver_man"] = $request->getVar('delivery_man');

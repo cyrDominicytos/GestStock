@@ -13,6 +13,10 @@ class OrdersDetailsModel extends Model
          'orders_details_orders_id',
          'orders_details_sales_options_id',
          'orders_details_products_id',
+
+         'orders_details_reduction',
+         'orders_default_price',
+         'orders_selling_price',    
         ];
 
     protected $validationRules    = [];
@@ -25,11 +29,14 @@ class OrdersDetailsModel extends Model
        
        return $this->db->table('orders_details')
        ->join('orders', 'orders.orders_id = orders_details.orders_details_orders_id')
+       ->join('clients', 'orders.orders_client_id = clients.clients_id')
        ->join('products', 'products.products_id = orders_details.orders_details_products_id')
+       ->join('exonerations', 'exonerations.exonerations_id = products.products_exonerations_id')
        ->join('sales_options', 'sales_options.sales_options_id = orders_details.orders_details_sales_options_id')
        ->join('product_categories', 'product_categories.product_categories_id = products.products_product_categorie_id')
        ->select('*')
        ->where('orders_id', $orderId)
+       ->whereNotIn("clients.clients_company", ["Système"])
        ->get()->getResult();
     }
 }

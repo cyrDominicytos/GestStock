@@ -11,6 +11,7 @@ use App\Models\DeliveryMenModel;
 use App\Models\SaleModel;
 use App\Models\SellDetailsModel;
 use App\Models\BillModel;
+use App\Models\OrdersModel;
 class Sell extends BaseController
 {
     public  $ionAuth = null;
@@ -33,6 +34,7 @@ class Sell extends BaseController
     protected $modelClient = null;
     protected $modelDeliveryMen = null;
     protected $modelSale = null;
+    protected $modelOrder = null;
     protected $modelSellDetails = null;
     protected $modelBill = null;
 
@@ -57,6 +59,7 @@ class Sell extends BaseController
         $this->modelSale = new SaleModel();
         $this->modelSellDetails = new SellDetailsModel();
         $this->modelBill = new BillModel();
+        $this->modelOrder = new OrdersModel();
 
         if (! empty($this->configIonAuth->templates['errors']['list']))
 		{
@@ -239,6 +242,12 @@ class Sell extends BaseController
            // dd($this->request->getPost("bill_service"));
             if($id = insertSales($this->request, $this->ionAuth))
             {
+                //delete order and details
+                $orderId = (int) $this->request->getPost("id");
+                if($orderId > 0)
+                    $this->modelOrder->delete($orderId);
+                    
+                //check if need to bill
                 if($this->request->getPost("bill_service"))
                 {
                     $bill_type = $this->request->getPost("bill_type");

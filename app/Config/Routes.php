@@ -103,6 +103,9 @@ $routes->get('/order/update/(:num)', 'Order::update/$1');
 $routes->get('/order/delete/(:num)', 'Order::delete/$1');
 $routes->post('/order/create', 'Order::create');
 $routes->post('/order/edit', 'Order::edit');
+$routes->get('/order/vue', 'Order::vue/$1');
+$routes->get('/order/sale', 'Order::sale/$1');
+
 
 //Supply management
 $routes->get('/supply/new', 'Supply::new');

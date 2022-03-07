@@ -31,7 +31,7 @@
                     </li>
                     <!--end::Item-->
                     <!--begin::Item-->
-                    <li class="breadcrumb-item text-dark"><?= isset($order) ? "Modifier une vente" : "Enregistrer une vente"?></li>
+                    <li class="breadcrumb-item text-dark"><?= isset($order) ? "Régler une commande" : "Enregistrer une vente"?></li>
                     <!--end::Item-->
                 </ul>
                 <!--end::Breadcrumb-->
@@ -57,7 +57,7 @@
                 <div class="card-header">
                     <!--begin::Card title-->
                     <div class="card-title">
-                        <h1 class="text-dark"><?= isset($order) ? "Modification" : "Enregistrement"?> d'une vente</h1>
+                        <h1 class="text-dark"><?= isset($order) ? "Règlement" : "Enregistrement"?> d'une vente</h1>
                     </div>
                     <!--end::Card title-->
                 </div>                                 
@@ -68,7 +68,7 @@
                         <!--begin::Content-->
                         <div class="flex-lg-row-fluid me-0 me-lg-20">
                             <!--begin::Form-->
-                            <form action="<?= base_url() ?><?= isset($order) ? "/sell/edit" : "/sell/create" ?>" class="form mb-15" method="post" >
+                            <form action="<?= base_url() ?><?= isset($order) ? "/sell/create" : "/sell/create" ?>" class="form mb-15" method="post" >
                                 <?php if (isset($order)): ?>
 								   <input type="hidden" name="id" value="<?=  isset($order) ? ($order->orders_id) : ("") ?>">
 								<?php endif ?>
@@ -439,20 +439,24 @@
 
             if(order_detail!== 0){
                 var indexId = product.value+sale_option.value;
-
                  order_detail.forEach(function(element) {
-                     var indexId = element['orders_details_products_id']+element['orders_details_sales_options_id'];
-                     table_unique[table_unique.length] =indexId;
-                  
+                    var indexId = element['orders_details_products_id']+element['orders_details_sales_options_id'];
+                    table_unique[table_unique.length] =indexId;
+                    montant += Number(element['orders_details_amount']);
                     var html = '';
                     html += '<tr class="text-start text-black fw-bolder fs-7">';
-                    html += '<td class="text-gray"><input type="text" required id="product_list[]" name="product_list[]" class="form-control" hidden  value='+element['orders_details_products_id']+'/><input type="text" required id="option_list[]" name="option_list[]" class="form-control" hidden  value='+element['orders_details_sales_options_id']+' /><input type="text" required id="quantity_list[]" name="quantity_list[]" class="form-control" hidden  value='+element['orders_details_quantity']+' /><input type="text" required id="montant_list[]" name="montant_list[]" class="form-control" hidden value='+element['orders_details_amount']+'/>'+element['products_name']+'</td>';
+                    html += '<td class="text-gray"><input type="text" required id="product_list[]" name="product_list[]" class="form-control" hidden  value='+element['orders_details_products_id']+'/><input type="text" required id="option_list[]" name="option_list[]" class="form-control" hidden  value='+element['orders_details_sales_options_id']+' /><input type="text" required id="quantity_list[]" name="quantity_list[]" class="form-control" hidden  value='+element['orders_details_quantity']+' /><input type="text" required id="reduction_list[]" name="reduction_list[]" class="form-control" hidden  value='+element['orders_details_reduction']+' /><input type="text" required id="montant_list[]" name="montant_list[]" class="form-control" hidden value='+element['orders_details_amount']+'/>'+element['products_name']+'</td>';
                     html += '<td class="text-gray">'+element['sales_options_name']+'</td>';
+                    html += '<td class="text-gray">'+element['orders_default_price']+'</td>';
                     html += '<td class="text-gray">'+element['orders_details_quantity']+'</td>';
+                    html += '<td class="text-gray">'+element['orders_details_reduction']+'</td>';
                     html += '<td class="text-gray">'+element['orders_details_amount']+'</td>';
                     html += '<td><button type="button" name="remove" class="btn btn-danger btn-sm remove" id="'+indexId+'"><span class="fa fa-minus"></span></button></td></tr>';
                     $('#kt_table_users').append(html);
                 },  this);
+
+                amount.value = montant
+                amount_reduce.value = montant
                               
             }
             checkForm() 
